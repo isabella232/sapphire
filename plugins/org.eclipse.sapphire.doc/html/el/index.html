@@ -78,12 +78,12 @@ language.<p>
   </ul>
   <li>Integer</li>
   <ul>
-    <li><code>IntegerLiteral ::= [‘0’-’9’]+</code></li>
+    <li><code>IntegerLiteral ::= ['0'-'9']+</code></li>
   </ul>
   <li>Floating Point</li>
   <ul>
-    <li><code>FloatingPointLiteral ::= ([‘0’-’9’])+ ‘.’ ([‘0’-’9’])* Exponent? | ‘.’ ([‘0’-’9’])+ Exponent? | ([‘0’-’9’])+ Exponent?</code></li>
-    <li><code>Exponent ::= [‘e’,’E’] ([‘+’,’-’])? ([‘0’-’9’])+</code></li>
+    <li><code>FloatingPointLiteral ::= (['0'-'9'])+ '.' (['0'-'9'])* Exponent? | '.' (['0'-'9'])+ Exponent? | (['0'-'9'])+ Exponent?</code></li>
+    <li><code>Exponent ::= ['e','E'] (['+','-'])? (['0'-'9'])+</code></li>
   </ul>
   <li>String</li>
   <ul>
@@ -472,8 +472,8 @@ Extension System</a>.</p>
   with enumerated types are included in the following section. Also, when referring
   to values that are instances of an enumerated type from within an expression, use
   the literal string value to cause coercion to happen via the below rules. For example,
-  Let’s say we have an enum called Suit that has members Heart, Diamond, Club, and
-  Spade. Furthermore, let’s say we have a reference in the expression, mySuit, that is a Spade.
+  Let's say we have an enum called Suit that has members Heart, Diamond, Club, and
+  Spade. Furthermore, let's say we have a reference in the expression, mySuit, that is a Spade.
   If you want to test for equality with the Spade enum, you would say 
   <code>${mySuit == 'Spade'}</code>. The type of the mySuit will trigger the invocation of
   <code>Enum.valueOf( Suit.class, "Spade" )</code>.</p>
