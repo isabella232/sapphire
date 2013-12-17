@@ -14,7 +14,7 @@
 <feature
       id="org.eclipse.sapphire.osgi"
       label="%featureName"
-      version="0.7.0.qualifier"
+      version="0.7.1.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -30,7 +30,7 @@
    </license>
 
    <requires>
-      <import feature="org.eclipse.sapphire" version="0.7.0"/>
+      <import feature="org.eclipse.sapphire" version="0.7.1"/>
    </requires>
 
    <plugin
