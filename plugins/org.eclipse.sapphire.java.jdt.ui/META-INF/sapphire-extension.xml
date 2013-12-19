@@ -19,7 +19,7 @@
         <impl>org.eclipse.sapphire.java.jdt.ui.internal.JavaTypeBrowseActionHandler</impl>
         <id>Sapphire.Browse.Java.Type</id>
         <description>Opens a browse dialog listing applicable Java types. Activates if the property is a reference value property from JavaTypeName to JavaType.</description>
-        <condition>org.eclipse.sapphire.java.jdt.ui.internal.JavaTypeBrowseActionHandlerCondition</condition>
+        <condition>org.eclipse.sapphire.java.jdt.ui.internal.JavaTypeBrowseActionHandler$Condition</condition>
     </action-handler>
     <action-handler>
         <action>Sapphire.Jump</action>

@@ -52,4 +52,28 @@
         <context>Sapphire</context>
         <implementation>org.eclipse.sapphire.workspace.internal.IFileToWorkspaceFileResourceStoreConversionService</implementation>
     </service>
+    <service>
+        <context>Sapphire</context>
+        <description>ConversionService implementation for WorkspaceFileResourceStore to IFile conversions.</description>
+        <id>Sapphire.ConversionService.WorkspaceFileResourceStoreToIFile</id>
+        <implementation>org.eclipse.sapphire.workspace.internal.WorkspaceFileResourceStoreToIFileConversionService</implementation>
+    </service>
+    <service>
+        <context>Sapphire</context>
+        <description>ConversionService implementation for WorkspaceFileResourceStore to File conversions via IFile.</description>
+        <id>Sapphire.ConversionService.ResourceStoreToFile</id>
+        <implementation>org.eclipse.sapphire.workspace.internal.ResourceStoreToFileConversionService</implementation>
+    </service>
+    <service>
+        <context>Sapphire</context>
+        <description>ConversionService implementation for ResourceStore to IContainer conversions via IFile.</description>
+        <id>Sapphire.ConversionService.ResourceStoreToIContainer</id>
+        <implementation>org.eclipse.sapphire.workspace.internal.ResourceStoreToIContainerConversionService</implementation>
+    </service>
+    <service>
+        <context>Sapphire</context>
+        <description>ConversionService implementation for ResourceStore to IProject conversions via IFile.</description>
+        <id>Sapphire.ConversionService.ResourceStoreToIProject</id>
+        <implementation>org.eclipse.sapphire.workspace.internal.ResourceStoreToIProjectConversionService</implementation>
+    </service>
 </extension>

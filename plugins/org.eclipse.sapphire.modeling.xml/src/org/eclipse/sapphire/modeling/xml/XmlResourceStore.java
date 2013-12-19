@@ -34,6 +34,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.eclipse.sapphire.Element;
+import org.eclipse.sapphire.MasterConversionService;
+import org.eclipse.sapphire.Sapphire;
 import org.eclipse.sapphire.modeling.ByteArrayResourceStore;
 import org.eclipse.sapphire.modeling.FileResourceStore;
 import org.eclipse.sapphire.modeling.ResourceStore;
@@ -143,14 +145,14 @@ public class XmlResourceStore extends ResourceStore
     @Override
     public <A> A adapt( final Class<A> adapterType )
     {
-        A adapter = null;
+        A result = Sapphire.service( MasterConversionService.class ).convert( this, adapterType );
         
-        if( this.base != null )
+        if( result == null && this.base != null )
         {
-            adapter = this.base.adapt( adapterType );
+            result = this.base.adapt( adapterType );
         }
         
-        return adapter;
+        return result;
     }
     
     @Override

@@ -13,8 +13,6 @@
 package org.eclipse.sapphire.ui.swt.xml.editor;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.IdentityHashMap;
@@ -23,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -52,7 +49,6 @@ import org.eclipse.sapphire.ui.SapphireEditor;
 import org.eclipse.sapphire.ui.SourceEditorService;
 import org.eclipse.sapphire.util.ListFactory;
 import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.wst.sse.core.internal.provisional.INodeAdapter;
@@ -217,44 +213,6 @@ public class XmlEditorResourceStore extends XmlResourceStore
         else if( adapterType == SourceEditorService.class )
         {
             result = adapterType.cast( this.sourceEditorService );
-        }
-        else if( adapterType == File.class )
-        {
-            final IEditorInput input = this.sourceEditor.getEditorInput();
-            
-            if( input instanceof FileEditorInput)
-            {
-                result = adapterType.cast( ( (FileEditorInput) input ).getFile().getLocation().toFile() );
-            }
-            else if( input instanceof FileStoreEditorInput )
-            {
-                //Handle files that are not part of the current workspace.
-                
-                final URI uri = ( (FileStoreEditorInput) input ).getURI();
-                result = adapterType.cast( new File( uri ) );
-            }
-        }
-        else if( adapterType == IFile.class )
-        {
-            final IEditorInput input = this.sourceEditor.getEditorInput();
-            
-            if( input instanceof FileEditorInput )
-            {
-                result = adapterType.cast( ( (FileEditorInput) input ).getFile() );
-            }
-        }
-        else if( adapterType == IProject.class )
-        {
-            final IEditorInput input = this.sourceEditor.getEditorInput();
-            
-            if( input instanceof FileEditorInput )
-            {
-                result = adapterType.cast( ( (FileEditorInput) input ).getFile().getProject() );
-            }
-        }
-        else if( adapterType == IEditorInput.class )
-        {
-        	result = adapterType.cast( this.sourceEditor.getEditorInput() );
         }
         else if( adapterType == SapphireEditor.class )
         {

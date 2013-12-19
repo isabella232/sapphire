@@ -19,7 +19,6 @@ import java.io.InputStream;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -31,10 +30,7 @@ import org.eclipse.sapphire.modeling.ValidateEditException;
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
 
-public class WorkspaceFileResourceStore
-
-    extends ByteArrayResourceStore
-    
+public class WorkspaceFileResourceStore extends ByteArrayResourceStore
 {
     private final IFile file;
     private long modStamp;
@@ -151,31 +147,6 @@ public class WorkspaceFileResourceStore
     public int hashCode()
     {
         return this.file.hashCode();
-    }
-    
-    @Override
-    public <A> A adapt( final Class<A> adapterType )
-    {
-        A result = null;
-        
-        if( adapterType == File.class )
-        {
-            result = adapterType.cast( this.file.getLocation().toFile() );
-        }
-        else if( adapterType == IFile.class )
-        {
-            result = adapterType.cast( this.file );
-        }
-        else if( adapterType == IProject.class )
-        {
-            result = adapterType.cast( this.file.getProject() );
-        }
-        else
-        {
-            result = super.adapt( adapterType );
-        }
-        
-        return result;
     }
     
     public static void create( final IContainer container ) throws CoreException

@@ -10,7 +10,7 @@
  *    Konstantin Komissarchik - [382431] Inconsistent terminology: layout storage and layout persistence
  ******************************************************************************/
 
-package org.eclipse.sapphire.workspace.ui.services.internal;
+package org.eclipse.sapphire.workspace.ui.internal;
 
 import java.io.File;
 

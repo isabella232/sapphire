@@ -9,6 +9,7 @@ Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.sapphire.modeling,
  org.eclipse.sapphire.java,
+ org.eclipse.sapphire.workspace,
  org.eclipse.jdt.core,
  org.eclipse.core.resources,
  org.eclipse.core.runtime

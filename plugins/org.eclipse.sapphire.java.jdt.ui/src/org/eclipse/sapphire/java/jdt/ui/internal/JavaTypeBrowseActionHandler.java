@@ -15,6 +15,7 @@ package org.eclipse.sapphire.java.jdt.ui.internal;
 import java.util.EnumSet;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.ui.IJavaElementSearchConstants;
@@ -24,13 +25,19 @@ import org.eclipse.sapphire.LoggingService;
 import org.eclipse.sapphire.Property;
 import org.eclipse.sapphire.Sapphire;
 import org.eclipse.sapphire.Text;
+import org.eclipse.sapphire.Value;
+import org.eclipse.sapphire.java.JavaType;
 import org.eclipse.sapphire.java.JavaTypeConstraintService;
 import org.eclipse.sapphire.java.JavaTypeKind;
+import org.eclipse.sapphire.java.JavaTypeName;
 import org.eclipse.sapphire.modeling.CapitalizationType;
+import org.eclipse.sapphire.modeling.annotations.Reference;
 import org.eclipse.sapphire.ui.Presentation;
 import org.eclipse.sapphire.ui.SapphireAction;
 import org.eclipse.sapphire.ui.def.ActionHandlerDef;
 import org.eclipse.sapphire.ui.forms.BrowseActionHandler;
+import org.eclipse.sapphire.ui.forms.PropertyEditorCondition;
+import org.eclipse.sapphire.ui.forms.PropertyEditorPart;
 import org.eclipse.sapphire.ui.forms.swt.FormComponentPresentation;
 import org.eclipse.ui.dialogs.SelectionDialog;
 
@@ -172,6 +179,29 @@ public final class JavaTypeBrowseActionHandler extends BrowseActionHandler
         }
         
         return null;
+    }
+    
+    public static final class Condition extends PropertyEditorCondition
+    {
+        @Override
+        protected boolean evaluate( final PropertyEditorPart part )
+        {
+            final Property property = part.property();
+            
+            if( property instanceof Value && property.definition().isOfType( JavaTypeName.class ) )
+            {
+                final Reference referenceAnnotation = property.definition().getAnnotation( Reference.class );
+                
+                return
+                (
+                    referenceAnnotation != null &&
+                    referenceAnnotation.target() == JavaType.class &&
+                    property.element().adapt( IJavaProject.class ) != null
+                );
+            }
+            
+            return false;
+        }
     }
 
 }

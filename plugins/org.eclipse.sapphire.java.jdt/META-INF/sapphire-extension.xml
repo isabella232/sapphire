@@ -28,4 +28,10 @@
         <description>ConversionService implementation for Element to Context conversions when the resource is inside a Java project.</description>
         <context>Sapphire</context>
     </service>
+    <service>
+        <id>Sapphire.ConversionService.ResourceStoreToIJavaProject</id>
+        <implementation>org.eclipse.sapphire.java.jdt.internal.ResourceStoreToIJavaProjectConversionService</implementation>
+        <description>ConversionService implementation for ResourceStore to IJavaProject conversions.</description>
+        <context>Sapphire</context>
+    </service>
 </extension>

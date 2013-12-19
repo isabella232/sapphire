@@ -59,7 +59,6 @@ import org.eclipse.sapphire.ReferenceValue;
 import org.eclipse.sapphire.Sapphire;
 import org.eclipse.sapphire.Text;
 import org.eclipse.sapphire.Value;
-import org.eclipse.sapphire.ValueProperty;
 import org.eclipse.sapphire.java.JavaType;
 import org.eclipse.sapphire.java.JavaTypeConstraintBehavior;
 import org.eclipse.sapphire.java.JavaTypeConstraintService;
@@ -141,7 +140,6 @@ public abstract class JavaTypeCreateActionHandler extends PropertyEditorActionHa
     }
     
     @Override
-    @SuppressWarnings( "deprecation" )
 
     protected Object run( final Presentation context )
     {
@@ -173,8 +171,7 @@ public abstract class JavaTypeCreateActionHandler extends PropertyEditorActionHa
         
         final JavaTypeConstraintService javaTypeConstraintService = javaTypeNameValue.service( JavaTypeConstraintService.class );
         
-        final IProject proj = javaTypeNameValue.element().adapt( IProject.class );
-        final IJavaProject jproj = JavaCore.create( proj );
+        final IJavaProject jproj = javaTypeNameValue.element().adapt( IJavaProject.class );
 
         JavaTypeName expectedBaseClassTemp = null;
         final List<JavaTypeName> expectedInterfaces = new ArrayList<JavaTypeName>();
@@ -332,7 +329,7 @@ public abstract class JavaTypeCreateActionHandler extends PropertyEditorActionHa
                     {
                         final IType type = cu.getType( javaTypeName.simple() );
 
-                        final ASTParser parser = ASTParser.newParser( AST.JLS3 );
+                        final ASTParser parser = createAstParser();
                         parser.setResolveBindings( true );
                         parser.setSource( cu );
                         
@@ -464,6 +461,13 @@ public abstract class JavaTypeCreateActionHandler extends PropertyEditorActionHa
         }
     }
     
+    @SuppressWarnings( "deprecation" )
+    
+    private static ASTParser createAstParser()
+    {
+        return ASTParser.newParser( AST.JLS3 );
+    }
+    
     protected static abstract class Condition extends PropertyEditorCondition
     {
         @Override
@@ -471,14 +475,17 @@ public abstract class JavaTypeCreateActionHandler extends PropertyEditorActionHa
         {
             final Property property = part.property();
             
-            if( property.definition() instanceof ValueProperty && property.definition().isOfType( JavaTypeName.class ) )
+            if( property instanceof Value && property.definition().isOfType( JavaTypeName.class ) )
             {
                 final Reference referenceAnnotation = property.definition().getAnnotation( Reference.class );
                 
-                if( referenceAnnotation != null && referenceAnnotation.target() == JavaType.class )
-                {
-                    return evaluate( property.service( JavaTypeConstraintService.class ) );
-                }
+                return
+                (
+                    referenceAnnotation != null && 
+                    referenceAnnotation.target() == JavaType.class && 
+                    evaluate( property.service( JavaTypeConstraintService.class ) ) &&
+                    property.element().adapt( IJavaProject.class ) != null
+                );
             }
             
             return false;

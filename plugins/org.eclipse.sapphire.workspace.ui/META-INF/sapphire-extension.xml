@@ -17,19 +17,31 @@
     <service>
         <id>DiagramLayoutPersistenceService.Project</id>
         <context>Sapphire.Part</context>
-        <implementation>org.eclipse.sapphire.workspace.ui.services.internal.ProjectDiagramLayoutPersistenceService</implementation>
-        <condition>org.eclipse.sapphire.workspace.ui.services.internal.ProjectDiagramLayoutPersistenceService$Condition</condition>
+        <implementation>org.eclipse.sapphire.workspace.ui.internal.ProjectDiagramLayoutPersistenceService</implementation>
+        <condition>org.eclipse.sapphire.workspace.ui.internal.ProjectDiagramLayoutPersistenceService$Condition</condition>
     </service>
     <service>
         <id>DiagramLayoutPersistenceService.SideBySide</id>
         <context>Sapphire.Part</context>
-        <implementation>org.eclipse.sapphire.workspace.ui.services.internal.SideBySideDiagramLayoutPersistenceService</implementation>
-        <condition>org.eclipse.sapphire.workspace.ui.services.internal.SideBySideDiagramLayoutPersistenceService$Condition</condition>
+        <implementation>org.eclipse.sapphire.workspace.ui.internal.SideBySideDiagramLayoutPersistenceService</implementation>
+        <condition>org.eclipse.sapphire.workspace.ui.internal.SideBySideDiagramLayoutPersistenceService$Condition</condition>
     </service>
     <service>
         <id>DiagramLayoutPersistenceService.Workspace</id>
         <context>Sapphire.Part</context>
-        <implementation>org.eclipse.sapphire.workspace.ui.services.internal.WorkspaceDiagramLayoutPersistenceService</implementation>
-        <condition>org.eclipse.sapphire.workspace.ui.services.internal.WorkspaceDiagramLayoutPersistenceService$Condition</condition>
+        <implementation>org.eclipse.sapphire.workspace.ui.internal.WorkspaceDiagramLayoutPersistenceService</implementation>
+        <condition>org.eclipse.sapphire.workspace.ui.internal.WorkspaceDiagramLayoutPersistenceService$Condition</condition>
+    </service>
+    <service>
+        <id>Sapphire.ConversionService.ResourceStoreToFile</id>
+        <implementation>org.eclipse.sapphire.workspace.ui.internal.ResourceStoreToFileConversionService</implementation>
+        <description>ConversionService implementation for ResourceStore to File conversions via FileStoreEditorInput. Used in the case where an editor is open to a file outside of the workspace.</description>
+        <context>Sapphire</context>
+    </service>
+    <service>
+        <id>Sapphire.ConversionService.ResourceStoreToIFile</id>
+        <implementation>org.eclipse.sapphire.workspace.ui.internal.ResourceStoreToIFileConversionService</implementation>
+        <description>ConversionService implementation for ResourceStore to IFile conversions via FileEditorInput.</description>
+        <context>Sapphire</context>
     </service>
 </extension>
