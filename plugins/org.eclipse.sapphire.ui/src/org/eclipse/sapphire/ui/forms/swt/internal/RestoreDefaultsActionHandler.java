@@ -135,7 +135,11 @@ public final class RestoreDefaultsActionHandler extends SapphireActionHandler
             else if( part instanceof PropertyEditorPart )
             {
                 final PropertyEditorPart editor = (PropertyEditorPart) part;
-                result.add( editor.property() );
+                
+                if( ! editor.isReadOnly() )
+                {
+                    result.add( editor.property() );
+                }
                 
                 for( SapphirePart related : editor.getRelatedContent() )
                 {
