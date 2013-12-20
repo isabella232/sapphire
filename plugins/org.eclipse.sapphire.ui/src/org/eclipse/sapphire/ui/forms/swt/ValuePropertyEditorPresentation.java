@@ -26,6 +26,8 @@ import org.eclipse.swt.widgets.Composite;
 public abstract class ValuePropertyEditorPresentation extends PropertyEditorPresentation
 {
     private final ModifyPropertyValueTask modifyPropertyTask;
+    protected boolean updatingModel;
+    protected boolean updatingEditor;
     
     public ValuePropertyEditorPresentation( final FormComponentPart part, final SwtPresentation parent, final Composite composite )
     {
@@ -45,8 +47,7 @@ public abstract class ValuePropertyEditorPresentation extends PropertyEditorPres
         setPropertyValue( value, true );
     }
     
-    protected final void setPropertyValue( final String value,
-                                           final boolean async )
+    protected final void setPropertyValue( final String value, final boolean async )
     {
         if( async )
         {
@@ -57,22 +58,31 @@ public abstract class ValuePropertyEditorPresentation extends PropertyEditorPres
         {
             boolean rollback = false;
             
+            this.updatingModel = true;
+            
             try
             {
-                property().write( value );
+                try
+                {
+                    property().write( value );
+                }
+                catch( Exception e )
+                {
+                    final EditFailedException editFailedException = EditFailedException.findAsCause( e );
+                    
+                    if( editFailedException != null )
+                    {
+                        rollback = true;
+                    }
+                    else
+                    {
+                        Sapphire.service( LoggingService.class ).log( e );
+                    }
+                }
             }
-            catch( Exception e )
+            finally
             {
-                final EditFailedException editFailedException = EditFailedException.findAsCause( e );
-                
-                if( editFailedException != null )
-                {
-                    rollback = true;
-                }
-                else
-                {
-                    Sapphire.service( LoggingService.class ).log( e );
-                }
+                this.updatingModel = false;
             }
         
             if( rollback )

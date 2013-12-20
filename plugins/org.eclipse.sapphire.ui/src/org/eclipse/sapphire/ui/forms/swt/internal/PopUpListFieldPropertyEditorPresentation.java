@@ -48,6 +48,8 @@ import org.eclipse.sapphire.ui.forms.swt.SwtPresentation;
 import org.eclipse.sapphire.ui.forms.swt.ValuePropertyEditorPresentation;
 import org.eclipse.sapphire.util.MutableReference;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.FocusAdapter;
+import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Combo;
@@ -118,17 +120,21 @@ public final class PopUpListFieldPropertyEditorPresentation extends ValuePropert
         final ValueNormalizationService valueNormalizationService = property.service( ValueNormalizationService.class );
         
         final MutableReference<List<PossibleValue>> possibleValuesRef = new MutableReference<List<PossibleValue>>();
-        final MutableReference<Boolean> updatingComboSelection = new MutableReference<Boolean>( false );
         
         final Runnable updateComboSelectionOp = new Runnable()
         {
             public void run()
             {
+                if( PopUpListFieldPropertyEditorPresentation.this.updatingModel )
+                {
+                    return;
+                }
+                
                 final String text = valueNormalizationService.normalize( property.text() );
                 
                 try
                 {
-                    updatingComboSelection.set( true );
+                    PopUpListFieldPropertyEditorPresentation.this.updatingEditor = true;
 
                     combo.setData( DATA_DEFAULT_VALUE, property.empty() );
                     
@@ -197,7 +203,7 @@ public final class PopUpListFieldPropertyEditorPresentation extends ValuePropert
                 }
                 finally
                 {
-                    updatingComboSelection.set( false );
+                    PopUpListFieldPropertyEditorPresentation.this.updatingEditor = false;
                 }
             }
         };
@@ -254,56 +260,66 @@ public final class PopUpListFieldPropertyEditorPresentation extends ValuePropert
             {
                 public void modifyText( final ModifyEvent e )
                 {
-                    if( updatingComboSelection.get() == true )
+                    if( PopUpListFieldPropertyEditorPresentation.this.updatingEditor )
                     {
                         return;
                     }
                     
-                    String value = null;
-                    
-                    final int index = combo.getSelectionIndex();
-                    
-                    if( index != -1 )
+                    try
                     {
-                        final List<PossibleValue> possible = possibleValuesRef.get();
+                        PopUpListFieldPropertyEditorPresentation.this.updatingModel = true;
                         
-                        if( index < possible.size() )
+                        String value = null;
+                        
+                        final int index = combo.getSelectionIndex();
+                        
+                        if( index != -1 )
                         {
-                            value = possible.get( index ).value();
+                            final List<PossibleValue> possible = possibleValuesRef.get();
+                            
+                            if( index < possible.size() )
+                            {
+                                value = possible.get( index ).value();
+                            }
                         }
-                    }
-                    
-                    if( value == null )
-                    {
-                        value = combo.getText().trim();
-                    }
-                    
-                    if( value != null )
-                    {
-                        if( value.length() == 0 )
+                        
+                        if( value == null )
+                        {
+                            value = combo.getText().trim();
+                        }
+                        
+                        if( value != null && value.length() == 0 )
                         {
                             value = null;
                         }
-                        else if( ( (Boolean) combo.getData( DATA_DEFAULT_VALUE ) ) == true && value.equals( property.getDefaultText() ) )
-                        {
-                            value = null;
-                        }
+    
+                        setPropertyValue( value );
                     }
-
-                    property.write( value );
-                    
-                    // If an editable pop-up list was presenting the default value and user clears it, there is
-                    // no change in the model, but we need to restore the display of the default value in the UI.
-                    
-                    // Note that the pop-up list may have been disposed due to the above model change.
-                    
-                    if( ! combo.isDisposed() )
+                    finally
                     {
-                        updateComboSelectionOp.run();
+                        PopUpListFieldPropertyEditorPresentation.this.updatingModel = false;
                     }
                 }
             }
         );
+        
+        if( this.style == PopUpListFieldStyle.EDITABLE )
+        {
+            combo.addFocusListener
+            (
+                new FocusAdapter()
+                {
+                    @Override
+                    public void focusLost( final FocusEvent event )
+                    {
+                        // If an editable pop-up list was presenting the default value and user clears it, there is
+                        // no change in the model, but we need to restore the display of the default value in the UI.
+                        
+                        updateComboSelectionOp.run();
+                    }
+                }
+            );
+        }
         
         addOnDisposeOperation
         (
