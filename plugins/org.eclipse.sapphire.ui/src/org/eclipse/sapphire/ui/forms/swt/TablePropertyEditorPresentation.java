@@ -1849,14 +1849,15 @@ public class TablePropertyEditorPresentation extends ListPropertyEditorPresentat
                    event.eventType == ColumnViewerEditorActivationEvent.TRAVERSAL;
         }
         
-        public int comparePropertyValues( final Element x,
-                                          final Element y )
+        @SuppressWarnings( { "unchecked", "rawtypes" } )
+        
+        public final int comparePropertyValues( final Element aElement, final Element bElement )
         {
-            final String a = property( x ).text();
-            final String b = property( y ).text();
+            final Value<?> aValue = property( aElement );
+            final Value<?> bValue = property( bElement );
             
-            final boolean aEmpty = ( a == null || a.trim().length() == 0 );
-            final boolean bEmpty = ( b == null || b.trim().length() == 0 );
+            final boolean aEmpty = aValue.empty();
+            final boolean bEmpty = bValue.empty();
             
             if( aEmpty && bEmpty )
             {
@@ -1872,7 +1873,30 @@ public class TablePropertyEditorPresentation extends ListPropertyEditorPresentat
             }
             else
             {
-                return this.collator.compare( a, b );
+                if( ! aValue.malformed() && ! bValue.malformed() )
+                {
+                    final Object aContent = aValue.content();
+                    final Object bContent = bValue.content();
+                    
+                    if( aContent instanceof Boolean && bContent instanceof Boolean )
+                    {
+                        // The boolean comparison is intentionally reversed so that the following
+                        // statement is true:
+                        //
+                        // compare( true, false ) == compare( true, null )
+                        
+                        return ( (Boolean) bContent ).compareTo( (Boolean) aContent );
+                    }
+                    else if( aContent instanceof Comparable && bContent instanceof Comparable )
+                    {
+                        final Comparable aComparable = (Comparable) aContent;
+                        final Comparable bComparable = (Comparable) bContent;
+                        
+                        return aComparable.compareTo( bComparable );
+                    }
+                }
+                
+                return this.collator.compare( aValue.text(), bValue.text() );
             }
         }
         
@@ -2083,27 +2107,6 @@ public class TablePropertyEditorPresentation extends ListPropertyEditorPresentat
             return false;
         }
 
-        @Override
-        public int comparePropertyValues( final Element x,
-                                          final Element y )
-        {
-            final boolean a = getPropertyValueAsBoolean( x );
-            final boolean b = getPropertyValueAsBoolean( y );
-            
-            if( a == b )
-            {
-                return 0;
-            }
-            else if( a )
-            {
-                return -1;
-            }
-            else
-            {
-                return 1;
-            }
-        }
-        
         private boolean getPropertyValueAsBoolean( final Element element )
         {
             final Boolean val = (Boolean) property( element ).content();
