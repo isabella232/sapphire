@@ -399,7 +399,7 @@
         </case>
         <case>
             <element-type>org.eclipse.sapphire.ui.forms.LineSeparatorDef</element-type>
-            <label>Line Separator</label>
+            <label>${ Label == null ? "Separator" : Label }</label>
             <image>${ Image() }</image>
             <section>
                 <content>
@@ -407,6 +407,7 @@
                     <property-editor>Label</property-editor>
                     <property-editor>VisibleWhen</property-editor>
                 </content>
+                <label>separator</label>
             </section>
             <node-include>ServiceNodeFactory</node-include>
         </case>
