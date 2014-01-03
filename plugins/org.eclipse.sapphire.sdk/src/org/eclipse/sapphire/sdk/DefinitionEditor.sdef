@@ -412,7 +412,7 @@
         </case>
         <case>
             <element-type>org.eclipse.sapphire.ui.forms.SpacerDef</element-type>
-            <label>Whitespace Separator</label>
+            <label>Spacer</label>
             <image>${ Image() }</image>
             <section>
                 <content>
