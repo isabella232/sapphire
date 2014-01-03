@@ -770,6 +770,16 @@
         </signature>
     </function>
     <function>
+        <description>Replaces all occurrences of a regular expression pattern with the provided replacement text. The full semantics are specified by Java's String.replaceAll( String, String ) function.</description>
+        <impl>org.eclipse.sapphire.modeling.el.internal.ReplaceFunction</impl>
+        <name>Replace</name>
+        <signature>
+            <parameter>java.lang.String</parameter>
+            <parameter>java.lang.String</parameter>
+            <parameter>java.lang.String</parameter>
+        </signature>
+    </function>
+    <function>
         <name>Index</name>
         <impl>org.eclipse.sapphire.modeling.el.internal.IndexFunction</impl>
         <description>Determines the index of a model element within its parent list.</description>

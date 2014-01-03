@@ -23,6 +23,7 @@ import org.eclipse.sapphire.tests.modeling.el.functions.message.MessageFunctionT
 import org.eclipse.sapphire.tests.modeling.el.functions.overloaded.OverloadedFunctionTests;
 import org.eclipse.sapphire.tests.modeling.el.functions.parent.part.PartParentFunctionTests;
 import org.eclipse.sapphire.tests.modeling.el.functions.part.PartFunctionTests;
+import org.eclipse.sapphire.tests.modeling.el.functions.replace.ReplaceFunctionTests;
 import org.eclipse.sapphire.tests.modeling.el.functions.severity.SeverityFunctionTests;
 import org.eclipse.sapphire.tests.modeling.el.functions.size.SizeFunctionTests;
 import org.eclipse.sapphire.tests.modeling.el.functions.startswith.StartsWithFunctionTests;
@@ -55,13 +56,14 @@ import org.junit.runners.Suite.SuiteClasses;
         OverloadedFunctionTests.class,
         PartParentFunctionTests.class,
         PartFunctionTests.class,
+        PartValidationFunctionTests.class,
+        PropertyValidationFunctionTests.class,
+        ReplaceFunctionTests.class,
         SeverityFunctionTests.class,
         SizeFunctionTests.class,
         StartsWithFunctionTests.class,
         TailFunctionTests.class,
         TextFunctionTests.class,
-        PartValidationFunctionTests.class,
-        PropertyValidationFunctionTests.class
     }
 )
 
