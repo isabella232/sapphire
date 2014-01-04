@@ -1,5 +1,5 @@
 /******************************************************************************
- * Copyright (c) 2013 Oracle
+ * Copyright (c) 2014 Oracle
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -105,6 +105,18 @@ public final class WithImpliedPart extends ContainerPart<FormComponentPart>
     public Element getLocalModelElement()
     {
         return this.element;
+    }
+    
+    @Override
+    
+    public boolean setFocus( final ModelPath path )
+    {
+        if( this.path.isPrefixOf( path ) )
+        {
+            super.setFocus( path.makeRelativeTo( this.path ) );
+        }
+        
+        return false;
     }
     
     @Override

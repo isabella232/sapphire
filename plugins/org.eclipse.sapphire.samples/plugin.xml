@@ -475,7 +475,7 @@
   <extension point="org.eclipse.ui.commands">
     <command
       id="org.eclipse.sapphire.samples.newfile.OpenCreateFileWizard"
-      name="File Bug Report (Dialog)"
+      name="New File Wizard (Sapphire Sample)"
       defaultHandler="org.eclipse.sapphire.samples.newfile.OpenCreateFileWizardHandler"/>
   </extension>
   
@@ -484,6 +484,28 @@
       <command
         commandId="org.eclipse.sapphire.samples.newfile.OpenCreateFileWizard"
         label="New File Wizard..."
+        style="push"/>
+    </menuContribution>
+  </extension>
+  
+  <!-- 
+    *******************************
+    * Send Postcard Wizard Sample *
+    *******************************
+  -->
+  
+  <extension point="org.eclipse.ui.commands">
+    <command
+      id="org.eclipse.sapphire.samples.postcard.SendPostcardWizard"
+      name="Send Postcard Wizard (Sapphire Sample)"
+      defaultHandler="org.eclipse.sapphire.samples.postcard.OpenSendPostcardWizardHandler"/>
+  </extension>
+  
+  <extension point="org.eclipse.ui.menus">
+    <menuContribution locationURI="menu:org.eclipse.sapphire.samples">
+      <command
+        commandId="org.eclipse.sapphire.samples.postcard.SendPostcardWizard"
+        label="Send Postcard Wizard..."
         style="push"/>
     </menuContribution>
   </extension>

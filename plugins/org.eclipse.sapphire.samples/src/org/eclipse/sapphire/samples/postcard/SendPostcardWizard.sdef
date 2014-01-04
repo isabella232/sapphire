@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ ******************************************************************************
+ * Copyright (c) 2014 Oracle
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Konstantin Komissarchik - initial implementation and ongoing maintenance
+ ******************************************************************************
+-->
+
+<definition>
+    <wizard>
+        <id>SendPostcardWizard</id>
+        <element-type>org.eclipse.sapphire.samples.postcard.SendPostcardOp</element-type>
+        <label>send postcard</label>
+        <page>
+            <id>MainPage</id>
+            <label>send postcard</label>
+            <content>
+                <split-form>
+                    <orientation>vertical</orientation>
+                    <block>
+                        <weight>5</weight>
+                        <content>
+                            <split-form>
+                                <orientation>horizontal</orientation>
+                                <scale-vertically>true</scale-vertically>
+                                <block>
+                                    <content>
+                                        <separator>
+                                            <label>sender</label>
+                                        </separator>
+                                        <with>
+                                            <case>
+                                                <content>
+                                                    <include>AddressForm</include>
+                                                </content>
+                                            </case>
+                                            <path>Sender</path>
+                                        </with>
+                                        <spacer></spacer>
+                                        <separator>
+                                            <label>recipient</label>
+                                        </separator>
+                                        <with>
+                                            <case>
+                                                <content>
+                                                    <include>AddressForm</include>
+                                                </content>
+                                            </case>
+                                            <path>Recipient</path>
+                                        </with>
+                                    </content>
+                                    <weight>5</weight>
+                                </block>
+                                <block>
+                                    <content>
+                                        <separator>
+                                            <label>message</label>
+                                        </separator>
+                                        <property-editor>
+                                            <scale-vertically>true</scale-vertically>
+                                            <property>Message</property>
+                                            <show-label>false</show-label>
+                                            <span>true</span>
+                                        </property-editor>
+                                    </content>
+                                    <weight>5</weight>
+                                </block>
+                            </split-form>
+                        </content>
+                    </block>
+                    <block>
+                        <weight>5</weight>
+                        <content>
+                            <separator>
+                                <label>postcard</label>
+                            </separator>
+                            <html>
+                                <scale-vertically>true</scale-vertically>
+                                <content>${ Postcard }</content>
+                                <show-border></show-border>
+                            </html>
+                        </content>
+                    </block>
+                    <scale-vertically>true</scale-vertically>
+                </split-form>
+            </content>
+            <width>800</width>
+            <scale-vertically>true</scale-vertically>
+            <height>800</height>
+            <initial-focus>Recipient/Name</initial-focus>
+        </page>
+    </wizard>
+    <form>
+        <id>AddressForm</id>
+        <content>
+            <property-editor>Name</property-editor>
+            <property-editor>Street</property-editor>
+            <property-editor>City</property-editor>
+            <property-editor>
+                <related-content>
+                    <property-editor>ZipCode</property-editor>
+                </related-content>
+                <property>State</property>
+                <related-content-width>60</related-content-width>
+                <style>Sapphire.PropertyEditor.PopUpListField.Strict</style>
+            </property-editor>
+        </content>
+    </form>
+</definition>
