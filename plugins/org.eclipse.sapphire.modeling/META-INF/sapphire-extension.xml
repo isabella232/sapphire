@@ -491,9 +491,38 @@
         </signature>
     </function>
     <function>
+        <description>Computes the average of numbers in a collection. Typically, this function takes the collection as the sole parameter. However, when the collection is a model element list, a second parameter may be necessary to specify the name (in the form of a string) of the list entry's value property to use in aggregation. If the the collection is a model element list and the second parameter is not specified, this function will use list entry's first value property for aggregation. An average of an empty collection is 0.</description>
+        <impl>org.eclipse.sapphire.modeling.el.AvgFunction</impl>
+        <name>Avg</name>
+    </function>
+    <function>
         <name>Concat</name>
         <impl>org.eclipse.sapphire.modeling.el.ConcatFunction</impl>
         <description>Concatenates two or more strings into a single string. Particularly useful in contexts where composite expressions cannot be used, such as where the result of concatenation needs to feed into another function or operator.</description>
+    </function>
+    <function>
+        <description>Returns the content of a value or a transient. For value properties, the default is taken into account, if applicable.</description>
+        <impl>org.eclipse.sapphire.modeling.el.internal.ContentFunction</impl>
+        <name>Content</name>
+        <signature>
+            <parameter>org.eclipse.sapphire.Property</parameter>
+        </signature>
+    </function>
+    <function>
+        <description>Returns the enablement of a property.</description>
+        <impl>org.eclipse.sapphire.modeling.el.internal.EnabledFunction</impl>
+        <name>Enabled</name>
+        <signature>
+            <parameter>org.eclipse.sapphire.Property</parameter>
+        </signature>
+    </function>
+    <function>
+        <description>Encodes text for use as XML element content or an attribute value.</description>
+        <impl>org.eclipse.sapphire.modeling.el.internal.EncodeToXmlFunction</impl>
+        <name>EncodeToXml</name>
+        <signature>
+            <parameter>java.lang.String</parameter>
+        </signature>
     </function>
     <function>
         <name>EndsWith</name>
@@ -505,6 +534,136 @@
         </signature>
     </function>
     <function>
+        <description>Breaks a string into segments using the provided separators and returns the first segment. If no separators are found in the string, the entire string is returned. This function takes two string operands. The first is the string to tokenize. The second is a sequence of characters that individually should be treated as valid separators.</description>
+        <impl>org.eclipse.sapphire.modeling.el.FirstSegmentFunction</impl>
+        <name>FirstSegment</name>
+    </function>
+    <function>
+        <description>Returns a fragment of a string. The fragment starts at the index specified by the second argument and extends to the character before the index specified by the third argument. The length of the fragment is end index minus start index. A negative start index is normalized to zero. A start index exceeding the length of the input is normalized to the length of the input. An end index exceeding the length of the input is normalized to the length of the input. An end index that is smaller than the start index is normalized to the start index.</description>
+        <impl>org.eclipse.sapphire.modeling.el.internal.FragmentFunction</impl>
+        <name>Fragment</name>
+        <signature>
+            <parameter>java.lang.String</parameter>
+            <parameter>java.lang.Integer</parameter>
+            <parameter>java.lang.Integer</parameter>
+        </signature>
+    </function>
+    <function>
+        <description>Returns a fragment of a string starting at the beginning and not exceeding the specified length. A negative fragment length is normalized to zero. A fragment length exceeding the length of the input is normalized to the length of the input.</description>
+        <impl>org.eclipse.sapphire.modeling.el.internal.HeadFunction</impl>
+        <name>Head</name>
+        <signature>
+            <parameter>java.lang.String</parameter>
+            <parameter>java.lang.Integer</parameter>
+        </signature>
+    </function>
+    <function>
+        <description>Returns the image associated with the context model element.</description>
+        <impl>org.eclipse.sapphire.modeling.el.ImageFunction</impl>
+        <name>Image</name>
+    </function>
+    <function>
+        <description>Determines the index of a model element within its parent list.</description>
+        <impl>org.eclipse.sapphire.modeling.el.internal.IndexFunction</impl>
+        <name>Index</name>
+        <signature>
+            <parameter>org.eclipse.sapphire.Element</parameter>
+        </signature>
+    </function>
+    <function>
+        <description>Determines if an object is of specified type. The object to be checked is the first operand and the type is the second operand. The type must be a fully-qualified Java class name.</description>
+        <impl>org.eclipse.sapphire.modeling.el.InstanceOfFunction</impl>
+        <name>InstanceOf</name>
+    </function>
+    <function>
+        <description>Breaks a string into segments using the provided separators and returns the last segment. If no separators are found in the string, the entire string is returned. This function takes two string operands. The first is the string to tokenize. The second is a sequence of characters that individually should be treated as valid separators.</description>
+        <impl>org.eclipse.sapphire.modeling.el.LastSegmentFunction</impl>
+        <name>LastSegment</name>
+    </function>
+    <function>
+        <description>Constructs a list from arbitrary number of operands.</description>
+        <impl>org.eclipse.sapphire.modeling.el.ListFunction</impl>
+        <name>List</name>
+    </function>
+    <function>
+        <description>Converts a string to lower case. Can be used either as LowerCase( Name ) or as Name.LowerCase().</description>
+        <impl>org.eclipse.sapphire.modeling.el.LowerCaseFunction</impl>
+        <name>LowerCase</name>
+    </function>
+    <function>
+        <description>Determines whether a string matches a regular expression. The full semantics are specified by Java's String.matches() function.</description>
+        <impl>org.eclipse.sapphire.modeling.el.internal.MatchesFunction</impl>
+        <name>Matches</name>
+        <signature>
+            <parameter>java.lang.String</parameter>
+            <parameter>java.lang.String</parameter>
+        </signature>
+    </function>
+    <function>
+        <description>Finds the largest number in a collection. Typically, this function takes the collection as the sole parameter. However, when the collection is a model element list, a second parameter may be necessary to specify the name (in the form of a string) of the list entry's value property to use in aggregation. If the the collection is a model element list and the second parameter is not specified, this function will use list entry's first value property for aggregation.</description>
+        <impl>org.eclipse.sapphire.modeling.el.MaxFunction</impl>
+        <name>Max</name>
+    </function>
+    <function>
+        <description>Returns the message from a validation result.</description>
+        <impl>org.eclipse.sapphire.modeling.el.internal.MessageFunction</impl>
+        <name>Message</name>
+        <signature>
+            <parameter>org.eclipse.sapphire.modeling.Status</parameter>
+        </signature>
+    </function>
+    <function>
+        <description>Finds the smallest number in a collection. Typically, this function takes the collection as the sole parameter. However, when the collection is a model element list, a second parameter may be necessary to specify the name (in the form of a string) of the list entry's value property to use in aggregation. If the the collection is a model element list and the second parameter is not specified, this function will use list entry's first value property for aggregation.</description>
+        <impl>org.eclipse.sapphire.modeling.el.MinFunction</impl>
+        <name>Min</name>
+    </function>
+    <function>
+        <description>Returns the parent of the current model element.</description>
+        <impl>org.eclipse.sapphire.modeling.el.ParentElementFunction</impl>
+        <name>Parent</name>
+    </function>
+    <function>
+        <description>Replaces all occurrences of a regular expression pattern with the provided replacement text. The full semantics are specified by Java's String.replaceAll( String, String ) function.</description>
+        <impl>org.eclipse.sapphire.modeling.el.internal.ReplaceFunction</impl>
+        <name>Replace</name>
+        <signature>
+            <parameter>java.lang.String</parameter>
+            <parameter>java.lang.String</parameter>
+            <parameter>java.lang.String</parameter>
+        </signature>
+    </function>
+    <function>
+        <description>Returns the root of the model.</description>
+        <impl>org.eclipse.sapphire.modeling.el.RootElementFunction</impl>
+        <name>Root</name>
+    </function>
+    <function>
+        <description>Determines whether Sapphire version matches a version constraint. A version constraint is a comma-separated list of specific versions, closed ranges (expressed using &quot;[1.2.3-4.5)&quot; syntax and open ranges (expressed using &quot;[1.2.3&quot; or &quot;4.5)&quot; syntax). The square brackets indicate that the range includes the specified version. The parenthesis indicate that the range goes up to, but does not actually include the specified version.</description>
+        <impl>org.eclipse.sapphire.modeling.el.SapphireVersionMatchesFunction</impl>
+        <name>SapphireVersionMatches</name>
+    </function>
+    <function>
+        <description>Changes the scale of a decimal.</description>
+        <impl>org.eclipse.sapphire.modeling.el.ScaleFunction</impl>
+        <name>Scale</name>
+    </function>
+    <function>
+        <description>Returns the severity of a validation result.</description>
+        <impl>org.eclipse.sapphire.modeling.el.internal.SeverityFunction</impl>
+        <name>Severity</name>
+        <signature>
+            <parameter>org.eclipse.sapphire.modeling.Status</parameter>
+        </signature>
+    </function>
+    <function>
+        <description>Determines the size of a collection, a map, an array or a string.</description>
+        <impl>org.eclipse.sapphire.modeling.el.internal.SizeFunction</impl>
+        <name>Size</name>
+        <signature>
+            <parameter>java.lang.Object</parameter>
+        </signature>
+    </function>
+    <function>
         <description>Tests if a string starts with the specified prefix.</description>
         <impl>org.eclipse.sapphire.modeling.el.internal.StartsWithFunction</impl>
         <name>StartsWith</name>
@@ -512,41 +671,6 @@
             <parameter>java.lang.String</parameter>
             <parameter>java.lang.String</parameter>
         </signature>
-    </function>
-    <function>
-        <name>FirstSegment</name>
-        <impl>org.eclipse.sapphire.modeling.el.FirstSegmentFunction</impl>
-        <description>Breaks a string into segments using the provided separators and returns the first segment. If no separators are found in the string, the entire string is returned. This function takes two string operands. The first is the string to tokenize. The second is a sequence of characters that individually should be treated as valid separators.</description>
-    </function>
-    <function>
-        <name>LastSegment</name>
-        <impl>org.eclipse.sapphire.modeling.el.LastSegmentFunction</impl>
-        <description>Breaks a string into segments using the provided separators and returns the last segment. If no separators are found in the string, the entire string is returned. This function takes two string operands. The first is the string to tokenize. The second is a sequence of characters that individually should be treated as valid separators.</description>
-    </function>
-    <function>
-        <name>Parent</name>
-        <impl>org.eclipse.sapphire.modeling.el.ParentElementFunction</impl>
-        <description>Returns the parent of the current model element.</description>
-    </function>
-    <function>
-        <name>Root</name>
-        <impl>org.eclipse.sapphire.modeling.el.RootElementFunction</impl>
-        <description>Returns the root of the model.</description>
-    </function>
-    <function>
-        <name>Image</name>
-        <impl>org.eclipse.sapphire.modeling.el.ImageFunction</impl>
-        <description>Returns the image associated with the context model element.</description>
-    </function>
-    <function>
-        <name>List</name>
-        <impl>org.eclipse.sapphire.modeling.el.ListFunction</impl>
-        <description>Constructs a list from arbitrary number of operands.</description>
-    </function>
-    <function>
-        <name>InstanceOf</name>
-        <impl>org.eclipse.sapphire.modeling.el.InstanceOfFunction</impl>
-        <description>Determines if an object is of specified type. The object to be checked is the first operand and the type is the second operand. The type must be a fully-qualified Java class name.</description>
     </function>
     <service>
         <id>Sapphire.ConversionService.StringToVersion</id>
@@ -593,39 +717,44 @@
         <condition>org.eclipse.sapphire.services.internal.StandardDerivedValueService$Condition</condition>
     </service>
     <function>
-        <name>Scale</name>
-        <impl>org.eclipse.sapphire.modeling.el.ScaleFunction</impl>
-        <description>Changes the scale of a decimal.</description>
-    </function>
-    <function>
         <name>Sum</name>
         <impl>org.eclipse.sapphire.modeling.el.SumFunction</impl>
         <description>Computes the sum of numbers in a collection. Typically, this function takes the collection as the sole parameter. However, when the collection is a model element list, a second parameter may be necessary to specify the name (in the form of a string) of the list entry's value property to use in aggregation. If the the collection is a model element list and the second parameter is not specified, this function will use list entry's first value property for aggregation. A sum of an empty collection is 0.</description>
     </function>
     <function>
-        <name>Avg</name>
-        <impl>org.eclipse.sapphire.modeling.el.AvgFunction</impl>
-        <description>Computes the average of numbers in a collection. Typically, this function takes the collection as the sole parameter. However, when the collection is a model element list, a second parameter may be necessary to specify the name (in the form of a string) of the list entry's value property to use in aggregation. If the the collection is a model element list and the second parameter is not specified, this function will use list entry's first value property for aggregation. An average of an empty collection is 0.</description>
+        <description>Returns a fragment of a string starting at the end and not exceeding the specified length. A negative fragment length is normalized to zero. A fragment length exceeding the length of the input is normalized to the length of the input.</description>
+        <impl>org.eclipse.sapphire.modeling.el.internal.TailFunction</impl>
+        <name>Tail</name>
+        <signature>
+            <parameter>java.lang.String</parameter>
+            <parameter>java.lang.Integer</parameter>
+        </signature>
     </function>
     <function>
-        <name>Min</name>
-        <impl>org.eclipse.sapphire.modeling.el.MinFunction</impl>
-        <description>Finds the smallest number in a collection. Typically, this function takes the collection as the sole parameter. However, when the collection is a model element list, a second parameter may be necessary to specify the name (in the form of a string) of the list entry's value property to use in aggregation. If the the collection is a model element list and the second parameter is not specified, this function will use list entry's first value property for aggregation.</description>
+        <description>Returns the text of a value, taking into account the default, if applicable.</description>
+        <impl>org.eclipse.sapphire.modeling.el.internal.TextFunction</impl>
+        <name>Text</name>
+        <signature>
+            <parameter>org.eclipse.sapphire.Value</parameter>
+        </signature>
     </function>
     <function>
-        <name>Max</name>
-        <impl>org.eclipse.sapphire.modeling.el.MaxFunction</impl>
-        <description>Finds the largest number in a collection. Typically, this function takes the collection as the sole parameter. However, when the collection is a model element list, a second parameter may be necessary to specify the name (in the form of a string) of the list entry's value property to use in aggregation. If the the collection is a model element list and the second parameter is not specified, this function will use list entry's first value property for aggregation.</description>
+        <description>Converts a string to upper case. Can be used either as UpperCase( Name ) or as Name.UpperCase().</description>
+        <impl>org.eclipse.sapphire.modeling.el.UpperCaseFunction</impl>
+        <name>UpperCase</name>
+    </function>
+    <function>
+        <description>Returns the validation result of a property.</description>
+        <impl>org.eclipse.sapphire.modeling.el.internal.ValidationFunction</impl>
+        <name>Validation</name>
+        <signature>
+            <parameter>org.eclipse.sapphire.Property</parameter>
+        </signature>
     </function>
     <function>
         <name>VersionMatches</name>
         <impl>org.eclipse.sapphire.modeling.el.VersionMatchesFunction</impl>
         <description>Determines whether a version matches a version constraint. A version constraint is a comma-separated list of specific versions, closed ranges (expressed using &quot;[1.2.3-4.5)&quot; syntax and open ranges (expressed using &quot;[1.2.3&quot; or &quot;4.5)&quot; syntax). The square brackets indicate that the range includes the specified version. The parenthesis indicate that the range goes up to, but does not actually include the specified version.</description>
-    </function>
-    <function>
-        <name>SapphireVersionMatches</name>
-        <impl>org.eclipse.sapphire.modeling.el.SapphireVersionMatchesFunction</impl>
-        <description>Determines whether Sapphire version matches a version constraint. A version constraint is a comma-separated list of specific versions, closed ranges (expressed using &quot;[1.2.3-4.5)&quot; syntax and open ranges (expressed using &quot;[1.2.3&quot; or &quot;4.5)&quot; syntax). The square brackets indicate that the range includes the specified version. The parenthesis indicate that the range goes up to, but does not actually include the specified version.</description>
     </function>
     <service>
         <id>Sapphire.VersionCompatibilityTargetService.Declarative</id>
@@ -649,16 +778,6 @@
         <implementation>org.eclipse.sapphire.internal.ParentBasedVersionCompatibilityService</implementation>
         <condition>org.eclipse.sapphire.internal.ParentBasedVersionCompatibilityService$Condition</condition>
     </service>
-    <function>
-        <name>UpperCase</name>
-        <impl>org.eclipse.sapphire.modeling.el.UpperCaseFunction</impl>
-        <description>Converts a string to upper case. Can be used either as UpperCase( Name ) or as Name.UpperCase().</description>
-    </function>
-    <function>
-        <name>LowerCase</name>
-        <impl>org.eclipse.sapphire.modeling.el.LowerCaseFunction</impl>
-        <description>Converts a string to lower case. Can be used either as LowerCase( Name ) or as Name.LowerCase().</description>
-    </function>
     <service>
         <id>Sapphire.MasterConversionService</id>
         <description>Converts an object to the specified type by delegating to available ConversionService and UniversalConversionService implementations. If object is null or is already of desired type, the object is returned unchanged.</description>
@@ -676,117 +795,6 @@
         <id>Sapphire.MasterVersionCompatibilityService</id>
         <implementation>org.eclipse.sapphire.MasterVersionCompatibilityService</implementation>
     </service>
-    <function>
-        <name>Text</name>
-        <impl>org.eclipse.sapphire.modeling.el.internal.TextFunction</impl>
-        <description>Returns the text of a value, taking into account the default, if applicable.</description>
-        <signature>
-            <parameter>org.eclipse.sapphire.Value</parameter>
-        </signature>
-    </function>
-    <function>
-        <name>Content</name>
-        <impl>org.eclipse.sapphire.modeling.el.internal.ContentFunction</impl>
-        <description>Returns the content of a value or a transient. For value properties, the default is taken into account, if applicable.</description>
-        <signature>
-            <parameter>org.eclipse.sapphire.Property</parameter>
-        </signature>
-    </function>
-    <function>
-        <name>Size</name>
-        <impl>org.eclipse.sapphire.modeling.el.internal.SizeFunction</impl>
-        <description>Determines the size of a collection, a map, an array or a string.</description>
-        <signature>
-            <parameter>java.lang.Object</parameter>
-        </signature>
-    </function>
-    <function>
-        <description>Returns the validation result of a property.</description>
-        <impl>org.eclipse.sapphire.modeling.el.internal.ValidationFunction</impl>
-        <name>Validation</name>
-        <signature>
-            <parameter>org.eclipse.sapphire.Property</parameter>
-        </signature>
-    </function>
-    <function>
-        <name>Severity</name>
-        <impl>org.eclipse.sapphire.modeling.el.internal.SeverityFunction</impl>
-        <description>Returns the severity of a validation result.</description>
-        <signature>
-            <parameter>org.eclipse.sapphire.modeling.Status</parameter>
-        </signature>
-    </function>
-    <function>
-        <name>Message</name>
-        <impl>org.eclipse.sapphire.modeling.el.internal.MessageFunction</impl>
-        <description>Returns the message from a validation result.</description>
-        <signature>
-            <parameter>org.eclipse.sapphire.modeling.Status</parameter>
-        </signature>
-    </function>
-    <function>
-        <name>Enabled</name>
-        <impl>org.eclipse.sapphire.modeling.el.internal.EnabledFunction</impl>
-        <description>Returns the enablement of a property.</description>
-        <signature>
-            <parameter>org.eclipse.sapphire.Property</parameter>
-        </signature>
-    </function>
-    <function>
-        <name>Fragment</name>
-        <impl>org.eclipse.sapphire.modeling.el.internal.FragmentFunction</impl>
-        <description>Returns a fragment of a string. The fragment starts at the index specified by the second argument and extends to the character before the index specified by the third argument. The length of the fragment is end index minus start index. A negative start index is normalized to zero. A start index exceeding the length of the input is normalized to the length of the input. An end index exceeding the length of the input is normalized to the length of the input. An end index that is smaller than the start index is normalized to the start index.</description>
-        <signature>
-            <parameter>java.lang.String</parameter>
-            <parameter>java.lang.Integer</parameter>
-            <parameter>java.lang.Integer</parameter>
-        </signature>
-    </function>
-    <function>
-        <name>Head</name>
-        <impl>org.eclipse.sapphire.modeling.el.internal.HeadFunction</impl>
-        <description>Returns a fragment of a string starting at the beginning and not exceeding the specified length. A negative fragment length is normalized to zero. A fragment length exceeding the length of the input is normalized to the length of the input.</description>
-        <signature>
-            <parameter>java.lang.String</parameter>
-            <parameter>java.lang.Integer</parameter>
-        </signature>
-    </function>
-    <function>
-        <name>Tail</name>
-        <impl>org.eclipse.sapphire.modeling.el.internal.TailFunction</impl>
-        <description>Returns a fragment of a string starting at the end and not exceeding the specified length. A negative fragment length is normalized to zero. A fragment length exceeding the length of the input is normalized to the length of the input.</description>
-        <signature>
-            <parameter>java.lang.String</parameter>
-            <parameter>java.lang.Integer</parameter>
-        </signature>
-    </function>
-    <function>
-        <name>Matches</name>
-        <impl>org.eclipse.sapphire.modeling.el.internal.MatchesFunction</impl>
-        <description>Determines whether a string matches a regular expression. The full semantics are specified by Java's String.matches() function.</description>
-        <signature>
-            <parameter>java.lang.String</parameter>
-            <parameter>java.lang.String</parameter>
-        </signature>
-    </function>
-    <function>
-        <description>Replaces all occurrences of a regular expression pattern with the provided replacement text. The full semantics are specified by Java's String.replaceAll( String, String ) function.</description>
-        <impl>org.eclipse.sapphire.modeling.el.internal.ReplaceFunction</impl>
-        <name>Replace</name>
-        <signature>
-            <parameter>java.lang.String</parameter>
-            <parameter>java.lang.String</parameter>
-            <parameter>java.lang.String</parameter>
-        </signature>
-    </function>
-    <function>
-        <name>Index</name>
-        <impl>org.eclipse.sapphire.modeling.el.internal.IndexFunction</impl>
-        <description>Determines the index of a model element within its parent list.</description>
-        <signature>
-            <parameter>org.eclipse.sapphire.Element</parameter>
-        </signature>
-    </function>
     <service>
         <id>Sapphire.LoggingService.Standard</id>
         <implementation>org.eclipse.sapphire.internal.StandardLoggingService</implementation>

@@ -14,6 +14,7 @@ package org.eclipse.sapphire.tests.modeling.el.functions;
 import org.eclipse.sapphire.tests.modeling.el.functions.absolute.AbsolutePathFunctionTests;
 import org.eclipse.sapphire.tests.modeling.el.functions.content.ContentFunctionTests;
 import org.eclipse.sapphire.tests.modeling.el.functions.enabled.EnabledFunctionTests;
+import org.eclipse.sapphire.tests.modeling.el.functions.encodetoxml.EncodeToXmlFunctionTests;
 import org.eclipse.sapphire.tests.modeling.el.functions.endswith.EndsWithFunctionTests;
 import org.eclipse.sapphire.tests.modeling.el.functions.fragment.FragmentFunctionTests;
 import org.eclipse.sapphire.tests.modeling.el.functions.head.HeadFunctionTests;
@@ -47,6 +48,7 @@ import org.junit.runners.Suite.SuiteClasses;
         AbsolutePathFunctionTests.class,
         ContentFunctionTests.class,
         EnabledFunctionTests.class,
+        EncodeToXmlFunctionTests.class,
         EndsWithFunctionTests.class,
         FragmentFunctionTests.class,
         HeadFunctionTests.class,
