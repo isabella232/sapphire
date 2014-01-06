@@ -78,21 +78,30 @@ public final class ModelBasedPossibleValuesService extends PossibleValuesService
             }
         };
         
-        element.attach( listener, this.path );
+        try
+        {
+            element.attach( listener, this.path );
+            
+            element.attach
+            (
+                new FilteredListener<ElementDisposeEvent>()
+                {
+                    @Override
+                    protected void handleTypedEvent( final ElementDisposeEvent event )
+                    {
+                        element.detach( listener, ModelBasedPossibleValuesService.this.path );
+                    }
+                }
+            );
+        }
+        catch( IllegalArgumentException e )
+        {
+            // Ignore exceptions caused by an invalid model path. This can happen when the element is instantiated
+            // outside its typical model context. This service is expected to gracefully degrade by returning an
+            // empty set of possible values.
+        }
         
         refresh();
-        
-        element.attach
-        (
-            new FilteredListener<ElementDisposeEvent>()
-            {
-                @Override
-                protected void handleTypedEvent( final ElementDisposeEvent event )
-                {
-                    element.detach( listener, ModelBasedPossibleValuesService.this.path );
-                }
-            }
-        );
         
         this.initialized = true;
     }
@@ -184,14 +193,9 @@ public final class ModelBasedPossibleValuesService extends PossibleValuesService
             {
                 final PossibleValues possibleValuesAnnotation = property.definition().getAnnotation( PossibleValues.class );
                 
-                if( possibleValuesAnnotation != null )
+                if( possibleValuesAnnotation != null && possibleValuesAnnotation.property().length() > 0 )
                 {
-                    final String path = possibleValuesAnnotation.property();
-                    
-                    if( path.length() > 0 && property.element().property( path ) != null )
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
             
