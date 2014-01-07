@@ -30,7 +30,7 @@ list of externalized strings so that it stays in sync with the code. Some tools 
 to make this a little easier, but two types of problems remain very common:</p>
 
 <ol>
-  <li>Strings that should be externalized are not. It’s too easy for the developer to put the string 
+  <li>Strings that should be externalized are not. It's too easy for the developer to put the string 
     directly into code and then forget to externalize it later.</li>
   <li>The string resource files get out of sync with code. The case where the resource file is 
     missing a string is easy enough to catch at runtime. The case where resource files contain 
@@ -43,7 +43,7 @@ satisfactory.</p>
 
 <p>Localizable strings largely occur in two places in Sapphire. You see them in the model 
 annotations (such as the @Label annotation) and you see them throughout the UI definition files. 
-Sapphire’s approach is to allow the developer to leave the strings in their original language at 
+Sapphire's approach is to allow the developer to leave the strings in their original language at 
 point of use. The string resource files that will be translated are created at build time. The 
 build system takes the original string and applies a function to it to generate a key for the 
 string resources file. At runtime, the system loads the original string resources file along
