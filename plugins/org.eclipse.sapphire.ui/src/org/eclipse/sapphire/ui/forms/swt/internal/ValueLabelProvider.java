@@ -16,6 +16,7 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.sapphire.ImageData;
 import org.eclipse.sapphire.LoggingService;
 import org.eclipse.sapphire.Sapphire;
+import org.eclipse.sapphire.Value;
 import org.eclipse.sapphire.ValueProperty;
 import org.eclipse.sapphire.modeling.CapitalizationType;
 import org.eclipse.sapphire.modeling.localization.LocalizationService;
@@ -28,37 +29,37 @@ import org.eclipse.swt.graphics.Image;
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
 
-@SuppressWarnings( "rawtypes" ) // ILabelProvider is parameterized since Eclipse 4.4
-
 public final class ValueLabelProvider implements ILabelProvider
 {
     private final PropertyEditorPart part;
-    private final ValueProperty property;
     private final LocalizationService localizationService;
     private final ValueLabelService valueLabelService;
     private final ValueImageService valueImageService;
     
-    public ValueLabelProvider( final PropertyEditorPart part,
-                               final ValueProperty property )
+    public ValueLabelProvider( final PropertyEditorPart part, final ValueProperty property )
+    {
+        this( part, property.service( ValueLabelService.class ), property.service( ValueImageService.class ) );
+    }
+
+    public ValueLabelProvider( final PropertyEditorPart part, final Value<?> property )
+    {
+        this( part, property.service( ValueLabelService.class ), property.service( ValueImageService.class ) );
+    }
+
+    private ValueLabelProvider( final PropertyEditorPart part, final ValueLabelService valueLabelService, final ValueImageService valueImageService )
     {
         if( part == null )
         {
             throw new IllegalArgumentException();
         }
         
-        if( property == null )
-        {
-            throw new IllegalArgumentException();
-        }
-        
         this.part = part;
-        this.property = property;
         
         this.localizationService = this.part.definition().adapt( LocalizationService.class );
-        this.valueLabelService = this.property.service( ValueLabelService.class );
-        this.valueImageService = this.property.service( ValueImageService.class );
-        
+        this.valueLabelService = valueLabelService;
+        this.valueImageService = valueImageService;
     }
+    
     public String getText( final Object element )
     {
         final String value = (String) element;

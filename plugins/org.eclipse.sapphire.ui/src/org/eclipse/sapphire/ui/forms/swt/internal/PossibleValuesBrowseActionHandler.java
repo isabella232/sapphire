@@ -13,7 +13,7 @@ package org.eclipse.sapphire.ui.forms.swt.internal;
 
 import java.util.Collection;
 
-import org.eclipse.sapphire.ValueProperty;
+import org.eclipse.sapphire.Value;
 import org.eclipse.sapphire.modeling.CapitalizationType;
 import org.eclipse.sapphire.services.PossibleValuesService;
 import org.eclipse.sapphire.ui.Presentation;
@@ -38,7 +38,7 @@ public final class PossibleValuesBrowseActionHandler extends BrowseActionHandler
     @Override
     protected String browse( final Presentation context )
     {
-        final ValueProperty property = property().definition();
+        final Value<?> property = property();
         final PossibleValuesService possibleValuesService = property().service( PossibleValuesService.class );
 
         if( possibleValuesService != null )
@@ -54,8 +54,8 @@ public final class PossibleValuesBrowseActionHandler extends BrowseActionHandler
             dialog.setIgnoreCase( ! possibleValuesService.isCaseSensitive() );
             dialog.setMultipleSelection( false );
             dialog.setHelpAvailable( false );
-            dialog.setTitle( property.getLabel( false, CapitalizationType.TITLE_STYLE, false ) );
-            dialog.setMessage( createBrowseDialogMessage( property.getLabel( true, CapitalizationType.NO_CAPS, false ) ) );
+            dialog.setTitle( property.definition().getLabel( false, CapitalizationType.TITLE_STYLE, false ) );
+            dialog.setMessage( createBrowseDialogMessage( property.definition().getLabel( true, CapitalizationType.NO_CAPS, false ) ) );
             
             dialog.open();
             
