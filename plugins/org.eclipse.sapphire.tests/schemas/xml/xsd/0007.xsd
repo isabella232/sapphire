@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ ******************************************************************************
+ * Copyright (c) 2014 Oracle
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Konstantin Komissarchik - initial implementation and ongoing maintenance
+ ******************************************************************************
+-->
+
+<schema
+    xmlns="http://www.w3.org/2001/XMLSchema" 
+    targetNamespace="http://www.eclipse.org/sapphire/tests/xml/xsd/0007"
+    elementFormDefault="qualified">
+    
+    <element name="root">
+        <complexType>
+            <all>
+                <element name="a">
+                    <complexType>
+                        <sequence>
+                            <element name="aa" type="string"/>
+                            <element name="ab" type="string"/>
+                            <element name="ac" type="string"/>
+                            <element name="ad" type="string"/>
+                        </sequence>
+                    </complexType>
+                </element>
+                <element name="b">
+                    <complexType>
+                        <sequence>
+                            <element name="ba" type="string"/>
+                            <element name="bb" type="string"/>
+                            <element name="bc" type="string"/>
+                            <element name="bd" type="string"/>
+                        </sequence>
+                    </complexType>
+                </element>
+            </all>
+        </complexType>
+    </element>
+    
+</schema>

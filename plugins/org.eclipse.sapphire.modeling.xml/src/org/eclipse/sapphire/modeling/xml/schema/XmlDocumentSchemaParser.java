@@ -204,8 +204,7 @@ public final class XmlDocumentSchemaParser
     {
         final String elname = el.getLocalName();
         
-        if( elname.equals( "complexType" ) || 
-            elname.equals( "complexContent" ) )
+        if( elname.equals( "complexType" ) || elname.equals( "complexContent" ) )
         {
             XmlContentModel.Factory contentModel = null;
             
@@ -221,13 +220,22 @@ public final class XmlDocumentSchemaParser
             
             return null;
         }
-        else if( elname.equals( "sequence" ) ||
-                 elname.equals( "choice" ) ||
-                 elname.equals( "all" ) )
+        else if( elname.equals( "all" ) || elname.equals( "sequence" ) || elname.equals( "choice" ) )
         {
-            final XmlGroupContentModel.Factory group
-                = ( elname.equals( "sequence" ) ? new XmlSequenceGroup.Factory() : 
-                	(elname.equals( "choice" ) ? new XmlChoiceGroup.Factory() : new XmlAllGroup.Factory() ) );
+            final XmlGroupContentModel.Factory group;
+            
+            if( elname.equals( "all" ) )
+            {
+                group = new XmlAllGroup.Factory();
+            }
+            else if( elname.equals( "sequence" ) )
+            {
+                group = new XmlSequenceGroup.Factory();
+            }
+            else
+            {
+                group = new XmlChoiceGroup.Factory();
+            }
             
             final String minOccursStr = el.getAttribute( "minOccurs" );
             final String maxOccursStr = el.getAttribute( "maxOccurs" );

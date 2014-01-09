@@ -12,6 +12,7 @@
 
 package org.eclipse.sapphire.tests.modeling.xml.xsd;
 
+import org.eclipse.sapphire.tests.modeling.xml.xsd.all.XmlSchemaAllGroupTests;
 import org.eclipse.sapphire.tests.modeling.xml.xsd.t0001.TestXmlXsd0001;
 import org.eclipse.sapphire.tests.modeling.xml.xsd.t0002.TestXmlXsd0002;
 import org.eclipse.sapphire.tests.modeling.xml.xsd.t0003.TestXmlXsd0003;
@@ -36,7 +37,8 @@ import org.junit.runners.Suite.SuiteClasses;
         TestXmlXsd0003.class,
         TestXmlXsd0004.class,
         TestXmlXsd0005.class,
-        TestXmlXsd0006.class
+        TestXmlXsd0006.class,
+        XmlSchemaAllGroupTests.class
     }
 )
 

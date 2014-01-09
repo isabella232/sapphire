@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="http://www.eclipse.org/sapphire/tests/xml/xsd/0007" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <b>
+        <ba>4</ba>
+        <bb>2</bb>
+        <bc>3</bc>
+        <bd>1</bd>
+    </b>
+    <a>
+        <aa>2</aa>
+        <ab>4</ab>
+        <ac>3</ac>
+        <ad>1</ad>
+    </a>
+</root>

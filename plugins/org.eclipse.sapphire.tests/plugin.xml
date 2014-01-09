@@ -94,6 +94,11 @@
     </catalogContribution>
     <catalogContribution>
       <system
+        systemId="http://www.eclipse.org/sapphire/tests/xml/xsd/0007"
+        uri="schemas/xml/xsd/0007.xsd"/>
+    </catalogContribution>
+    <catalogContribution>
+      <system
         systemId="http://www.eclipse.org/sapphire/tests/xml/binding/0003/u"
         uri="schemas/xml/binding/0003u.xsd"/>
     </catalogContribution>
