@@ -9,6 +9,7 @@
  *    Konstantin Komissarchik - initial implementation and ongoing maintenance
  *    Ling Hao - [344015] Insertion order lost if xsd includes another xsd (regression)
  *    Ling Hao - [337232] Certain schema causes elements to be out of order in corresponding xml files
+ *    Ling Hao - [424278] XML Schema all construct is not supported
  ******************************************************************************/
 
 package org.eclipse.sapphire.modeling.xml.schema;
@@ -45,6 +46,7 @@ import org.xml.sax.InputSource;
  * Parses an XML Schema into XmlDocumentSchema representation.
  * 
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:ling.hao@oracle.com">Ling Hao</a>
  */
 
 public final class XmlDocumentSchemaParser
@@ -220,10 +222,12 @@ public final class XmlDocumentSchemaParser
             return null;
         }
         else if( elname.equals( "sequence" ) ||
-                 elname.equals( "choice" ) )
+                 elname.equals( "choice" ) ||
+                 elname.equals( "all" ) )
         {
             final XmlGroupContentModel.Factory group
-                = ( elname.equals( "sequence" ) ? new XmlSequenceGroup.Factory() : new XmlChoiceGroup.Factory() );
+                = ( elname.equals( "sequence" ) ? new XmlSequenceGroup.Factory() : 
+                	(elname.equals( "choice" ) ? new XmlChoiceGroup.Factory() : new XmlAllGroup.Factory() ) );
             
             final String minOccursStr = el.getAttribute( "minOccurs" );
             final String maxOccursStr = el.getAttribute( "maxOccurs" );
