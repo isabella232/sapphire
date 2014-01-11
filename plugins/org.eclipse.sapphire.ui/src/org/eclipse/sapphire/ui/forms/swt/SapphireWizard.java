@@ -330,18 +330,16 @@ public class SapphireWizard<M extends Element> implements IWizard
         }
         
         final Status st = result[ 0 ];
-        
-        if( st.ok() )
+
+        if( st.severity() == Status.Severity.ERROR )
+        {
+            return handleFinishFailure( st );
+        }
+        else
         {
             performPostFinish();
             
             return true;
-        }
-        else
-        {
-            StatusDialog.open( getContainer().getShell(), st );
-            
-            return false;
         }
     }
     
@@ -358,6 +356,21 @@ public class SapphireWizard<M extends Element> implements IWizard
     protected void performPostFinish()
     {
         // The default implementation doesn't do anything.
+    }
+    
+    /**
+     * Called when the finish operation fails with an error status. The default implementation opens a dialog showing
+     * the failure message and leaves the wizard open.
+     * 
+     * @param status the failure status
+     * @return true, if the wizard should be closed; false, otherwise
+     */
+    
+    protected boolean handleFinishFailure( final Status status )
+    {
+        StatusDialog.open( getContainer().getShell(), status );
+        
+        return false;
     }
     
     @Override

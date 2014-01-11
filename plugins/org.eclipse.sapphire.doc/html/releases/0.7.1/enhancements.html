@@ -49,6 +49,7 @@
 <ol>
   <li><a href="#EncodeToXmlFunction">EncodeToXml Function</a></li>
   <li><a href="#ReplaceFunction">Replace Function</a></li>
+  <li><a href="#CustomizableFailureHandlingInSapphireWizard">Customizable Failure Handling in SapphireWizard</a></li>
 </ol>
 
 
@@ -67,6 +68,17 @@ are specified by Java's <nobr>String.replaceAll( String, String )</nobr> functio
 <pre class="source-code"><code>${ Message.Replace( "\n", "&lt;br/>" ) }</code></pre>
 
 <pre class="source-code"><code>${ Message.Replace( "[0-9]", "x" ) }</code></pre>
+
+
+<h2><a name="CustomizableFailureHandlingInSapphireWizard">Customizable Failure Handling in SapphireWizard</a></h2>
+
+<p>When the finish operation of a SapphireWizard fails with an error status, a dialog is opened showing the
+failure message. In some cases, customization of the failure handling behavior is desired.</p>
+
+<pre class="source-code"><code><font color="#888888">SapphireWizard
+{</font>
+    protected boolean handleFinishFailure( Status status )
+<font color="#888888">}</font></code></pre>
 
 
 <div class="copyright">Copyright (c) 2014 Oracle<br/>
