@@ -48,7 +48,7 @@ public final class FoldingXmlValueBindingImpl extends XmlValueBindingImpl
                     
                     if( propElement == null )
                     {
-                        final String propName = root.getText();
+                        final String propName = root.getText().trim();
                         
                         if( propName.length() > 0 )
                         {
@@ -68,7 +68,7 @@ public final class FoldingXmlValueBindingImpl extends XmlValueBindingImpl
                         
                         if( propElement != null )
                         {
-                            final String propName = propElement.getText();
+                            final String propName = propElement.getText().trim();
                             
                             propElement.remove();
                             
