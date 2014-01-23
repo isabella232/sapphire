@@ -129,6 +129,14 @@ public interface Element extends Observable
     void refresh();
     
     /**
+     * Determines if this element is empty. An element is empty when all of its properties are empty.
+     * 
+     * @return true if this element is empty and false otherwise
+     */
+    
+    boolean empty();
+    
+    /**
      * Clears all properties of this element.
      */
     

@@ -596,6 +596,24 @@ public abstract class ElementImpl implements Element
         }
     }
     
+    public final boolean empty()
+    {
+        synchronized( root() )
+        {
+            assertNotDisposed();
+            
+            for( final Property property : this.properties )
+            {
+                if( ! property.empty() )
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
+    
     public final void clear()
     {
         assertNotDisposed();

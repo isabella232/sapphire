@@ -49,8 +49,8 @@
 <ol>
   <li><a href="#EncodeToXmlFunction">EncodeToXml Function</a></li>
   <li><a href="#ReplaceFunction">Replace Function</a></li>
-  <li><a href="#CustomizableFailureHandlingInSapphireWizard">Customizable Failure Handling in SapphireWizard</a></li>
-  <li><a href="#PartAccessInSapphireWizard">Part Access in SapphireWizard</a></li>
+  <li><a href="#ElementEnhancements">Element Enhancements</a></li>
+  <li><a href="#SapphireWizardEnhancements">SapphireWizard Enhancements</a></li>
 </ol>
 
 
@@ -71,7 +71,17 @@ are specified by Java's <nobr>String.replaceAll( String, String )</nobr> functio
 <pre class="source-code"><code>${ Message.Replace( "[0-9]", "x" ) }</code></pre>
 
 
-<h2><a name="CustomizableFailureHandlingInSapphireWizard">Customizable Failure Handling in SapphireWizard</a></h2>
+<h2><a name="ElementEnhancements">Element Enhancements</a></h2>
+
+<p>Use the new empty function to determine if an element is empty. An element is empty when all of its properties are empty.</p>
+
+<pre class="source-code"><code><font color="#888888">Element
+{</font>
+    public boolean empty()
+<font color="#888888">}</font></code></pre>
+ 
+
+<h2><a name="SapphireWizardEnhancements">SapphireWizard Enhancements</a></h2>
 
 <p>When the finish operation of a SapphireWizard fails with an error status, a dialog is opened showing the
 failure message. In some cases, customization of the failure handling behavior is desired.</p>
@@ -81,10 +91,7 @@ failure message. In some cases, customization of the failure handling behavior i
     protected boolean handleFinishFailure( Status status )
 <font color="#888888">}</font></code></pre>
 
-
-<h2><a name="PartAccessInSapphireWizard">Part Access in SapphireWizard</a></h2>
-
-<p>Certain use cases require access to the corresponding part form a SapphireWizard instance.</p>
+<p>Certain use cases require access to the corresponding part from a SapphireWizard instance.</p>
 
 <pre class="source-code"><code><font color="#888888">SapphireWizard
 {</font>
