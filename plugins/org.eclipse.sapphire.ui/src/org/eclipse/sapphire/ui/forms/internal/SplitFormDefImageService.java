@@ -87,9 +87,12 @@ public final class SplitFormDefImageService extends ImageService
         if( this.listener != null )
         {
             final SplitFormDef def = context( SplitFormDef.class );
-            
-            def.getSections().detach( this.listener );
-            def.getOrientation().detach( this.listener );
+
+            if( ! def.disposed() )
+            {
+                def.getSections().detach( this.listener );
+                def.getOrientation().detach( this.listener );
+            }
             
             this.listener = null;
         }
