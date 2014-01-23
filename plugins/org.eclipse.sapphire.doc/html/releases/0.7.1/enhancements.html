@@ -73,11 +73,18 @@ are specified by Java's <nobr>String.replaceAll( String, String )</nobr> functio
 
 <h2><a name="ElementEnhancements">Element Enhancements</a></h2>
 
-<p>Use the new empty function to determine if an element is empty. An element is empty when all of its properties are empty.</p>
+<p>Determine if an element is empty using the new method. An element is empty when all of its properties are empty.</p>
 
 <pre class="source-code"><code><font color="#888888">Element
 {</font>
     public boolean empty()
+<font color="#888888">}</font></code></pre>
+
+<p>Find all non-empty properties in an element using the new method.</p>
+
+<pre class="source-code"><code><font color="#888888">Element
+{</font>
+    public SortedSet&lt;Property> content()
 <font color="#888888">}</font></code></pre>
  
 

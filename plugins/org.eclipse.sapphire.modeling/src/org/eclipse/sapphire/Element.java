@@ -123,6 +123,14 @@ public interface Element extends Observable
     
     <T extends Element> ElementList<T> property( ListProperty property );
     
+    /**
+     * Returns all non-empty properties of this element.
+     * 
+     * @return all non-empty properties of this element
+     */
+    
+    SortedSet<Property> content();
+    
     boolean visit( String path, PropertyVisitor visitor );
     boolean visit( ModelPath path, PropertyVisitor visitor );
 

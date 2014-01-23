@@ -405,6 +405,26 @@ public abstract class ElementImpl implements Element
         }
     }
     
+    public final SortedSet<Property> content()
+    {
+        synchronized( root() )
+        {
+            assertNotDisposed();
+            
+            final SortedSetFactory<Property> contentSetFactory = SortedSetFactory.start( PROPERTY_INSTANCE_COMPARATOR );
+            
+            for( final Property property : this.properties )
+            {
+                if( ! property.empty() )
+                {
+                    contentSetFactory.add( property );
+                }
+            }
+
+            return contentSetFactory.result();
+        }
+    }
+    
     public final boolean visit( final String path, final PropertyVisitor visitor )
     {
         if( path == null )
