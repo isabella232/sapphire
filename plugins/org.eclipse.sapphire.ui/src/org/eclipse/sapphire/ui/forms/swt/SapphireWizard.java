@@ -168,6 +168,17 @@ public class SapphireWizard<M extends Element> implements IWizard
     }
     
     /**
+     * Returns the corresponding part.
+     * 
+     * @return the corresponding part
+     */
+    
+    public final WizardPart part()
+    {
+        return this.part;
+    }
+    
+    /**
      * Returns the wizard pages. Can be overridden to add custom pages.
      * 
      * @return the wizard pages

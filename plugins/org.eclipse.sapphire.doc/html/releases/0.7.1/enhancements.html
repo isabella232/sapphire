@@ -50,6 +50,7 @@
   <li><a href="#EncodeToXmlFunction">EncodeToXml Function</a></li>
   <li><a href="#ReplaceFunction">Replace Function</a></li>
   <li><a href="#CustomizableFailureHandlingInSapphireWizard">Customizable Failure Handling in SapphireWizard</a></li>
+  <li><a href="#PartAccessInSapphireWizard">Part Access in SapphireWizard</a></li>
 </ol>
 
 
@@ -78,6 +79,16 @@ failure message. In some cases, customization of the failure handling behavior i
 <pre class="source-code"><code><font color="#888888">SapphireWizard
 {</font>
     protected boolean handleFinishFailure( Status status )
+<font color="#888888">}</font></code></pre>
+
+
+<h2><a name="PartAccessInSapphireWizard">Part Access in SapphireWizard</a></h2>
+
+<p>Certain use cases require access to the corresponding part form a SapphireWizard instance.</p>
+
+<pre class="source-code"><code><font color="#888888">SapphireWizard
+{</font>
+    public WizardPart part()
 <font color="#888888">}</font></code></pre>
 
 
