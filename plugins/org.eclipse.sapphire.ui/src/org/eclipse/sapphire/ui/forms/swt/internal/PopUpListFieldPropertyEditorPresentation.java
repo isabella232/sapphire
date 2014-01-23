@@ -125,7 +125,7 @@ public final class PopUpListFieldPropertyEditorPresentation extends ValuePropert
         {
             public void run()
             {
-                if( PopUpListFieldPropertyEditorPresentation.this.updatingModel )
+                if( PopUpListFieldPropertyEditorPresentation.this.updatingModel || combo.isDisposed() )
                 {
                     return;
                 }
@@ -214,7 +214,7 @@ public final class PopUpListFieldPropertyEditorPresentation extends ValuePropert
             
             public void run()
             {
-                if( PopUpListFieldPropertyEditorPresentation.this.updatingModel )
+                if( PopUpListFieldPropertyEditorPresentation.this.updatingModel || combo.isDisposed() )
                 {
                     return;
                 }
