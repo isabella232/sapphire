@@ -383,6 +383,10 @@
                     <value>Content</value>
                 </param>
             </node-include>
+            <node-include>ActionNodeFactory</node-include>
+            <node-include>ActionHandlerNodeFactory</node-include>
+            <node-include>ActionHandlerFactoryNodeFactory</node-include>
+            <node-include>ActionHandlerFilterNodeFactory</node-include>
             <node-include>DocumentationNode</node-include>
         </case>
         <case>
