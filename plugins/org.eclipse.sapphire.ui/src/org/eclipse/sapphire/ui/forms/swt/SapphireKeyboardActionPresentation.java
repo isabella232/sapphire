@@ -167,7 +167,7 @@ public final class SapphireKeyboardActionPresentation extends SapphireHotSpotsAc
                     
                     if( event.stateMask == expectedStateMask && event.keyCode == keySequence.getKeyCode() )
                     {
-                        final List<SapphireActionHandler> handlers = action.getActiveHandlers();
+                        final List<SapphireActionHandler> handlers = action.getEnabledHandlers();
                         
                         if( handlers.size() == 1 )
                         {

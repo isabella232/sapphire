@@ -39,6 +39,7 @@ import org.eclipse.sapphire.ui.def.PartDef;
 import org.eclipse.sapphire.ui.def.SapphireActionType;
 import org.eclipse.sapphire.ui.def.SapphireKeySequence;
 import org.eclipse.sapphire.ui.util.TopologicalSorter;
+import org.eclipse.sapphire.util.ListFactory;
 
 /**
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
@@ -535,6 +536,21 @@ public final class SapphireAction extends SapphireActionSystemPart
         return ( getFirstActiveHandler() != null );
     }
     
+    public List<SapphireActionHandler> getEnabledHandlers()
+    {
+        final ListFactory<SapphireActionHandler> enabledHandlersListFactory = ListFactory.start();
+        
+        for( final SapphireActionHandler handler : getActiveHandlers() )
+        {
+            if( handler.isEnabled() )
+            {
+                enabledHandlersListFactory.add( handler );
+            }
+        }
+        
+        return enabledHandlersListFactory.result();
+    }
+    
     public void addFilter( final SapphireActionHandlerFilter filter )
     {
         this.filters.add( filter );
@@ -565,18 +581,7 @@ public final class SapphireAction extends SapphireActionSystemPart
     
     private void refreshEnablementState()
     {
-        boolean enabled = false;
-        
-        for( SapphireActionHandler handler : getActiveHandlers() )
-        {
-            if( handler.isEnabled() )
-            {
-                enabled = true;
-                break;
-            }
-        }
-        
-        setEnabled( enabled );
+        setEnabled( ! getEnabledHandlers().isEmpty() );
     }
     
     private void refreshCheckedState()

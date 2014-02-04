@@ -69,9 +69,9 @@ public abstract class SapphireHotSpotsActionPresentation extends SapphireActionP
             this.popupMenu = null;
         }
         
-        
         this.popupMenu = new Menu( ( (SwtPresentation) getManager().context() ).shell(), SWT.POP_UP );
-        for( SapphireActionHandler handler : action.getActiveHandlers() )
+        
+        for( final SapphireActionHandler handler : action.getEnabledHandlers() )
         {
             renderMenuItem( this.popupMenu, handler );
         }
