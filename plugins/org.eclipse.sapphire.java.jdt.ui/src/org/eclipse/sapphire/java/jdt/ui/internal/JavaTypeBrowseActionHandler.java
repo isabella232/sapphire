@@ -48,8 +48,8 @@ import org.eclipse.ui.dialogs.SelectionDialog;
 
 public final class JavaTypeBrowseActionHandler extends BrowseActionHandler
 {
-    @Text( "Select" )
-    private static LocalizableText select;
+    @Text( "Select {0}" )
+    private static LocalizableText dialogTitle;
     
     @Text( "Java type kind \"{0}\" is not recognized." )
     private static LocalizableText typeKindNotRecognized;
@@ -164,8 +164,7 @@ public final class JavaTypeBrowseActionHandler extends BrowseActionHandler
             final SelectionDialog dlg 
                 = JavaUI.createTypeDialog( ( (FormComponentPresentation) context ).shell(), null, project, browseDialogStyle, false );
             
-            final String title = property.definition().getLabel( true, CapitalizationType.TITLE_STYLE, false );
-            dlg.setTitle(select + title);
+            dlg.setTitle( dialogTitle.format( property.definition().getLabel( true, CapitalizationType.TITLE_STYLE, false ) ) );
             
             if (dlg.open() == SelectionDialog.OK) {
                 Object results[] = dlg.getResult();
