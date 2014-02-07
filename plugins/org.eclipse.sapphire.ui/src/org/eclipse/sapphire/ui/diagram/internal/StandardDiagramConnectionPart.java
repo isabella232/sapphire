@@ -49,6 +49,7 @@ import org.eclipse.sapphire.ui.diagram.def.IDiagramLabelDef;
 import org.eclipse.sapphire.ui.diagram.editor.DiagramNodePart;
 import org.eclipse.sapphire.ui.diagram.editor.FunctionUtil;
 import org.eclipse.sapphire.ui.diagram.editor.SapphireDiagramEditorPagePart;
+import org.eclipse.sapphire.ui.diagram.internal.DiagramConnectionTemplate.ConnectionType;
 import org.eclipse.sapphire.ui.forms.PropertiesViewContributionManager;
 import org.eclipse.sapphire.ui.forms.PropertiesViewContributionPart;
 import org.eclipse.sapphire.ui.forms.PropertiesViewContributorPart;
@@ -198,7 +199,17 @@ public class StandardDiagramConnectionPart
     {
         final Element element = getLocalModelElement();
         final ElementList<?> list = (ElementList<?>) element.parent();
-        list.remove(element);       
+        list.remove(element);  
+        // For 1->n type connections, if the target node list is empty, we need to remove the surrounding 
+        // element. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=427710
+        if (list.isEmpty() && this.connectionTemplate.getConnectionType() == ConnectionType.OneToMany)
+        {
+        	if (list.element().parent() instanceof ElementList<?>)
+        	{
+        		ElementList<?> grandParent = (ElementList<?>)list.element().parent();
+        		grandParent.remove(list.element());
+        	}
+        }
     }
     
     public String getLabel()
