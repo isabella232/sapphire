@@ -14,7 +14,7 @@
 <feature
       id="org.eclipse.sapphire.stage2"
       label="Sapphire Build Stage 2"
-      version="0.6.7.qualifier"
+      version="0.6.8.qualifier"
       provider-name="Eclipse.org - Sapphire">
 
    <plugin

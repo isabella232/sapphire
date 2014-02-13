@@ -14,7 +14,7 @@
 <feature
       id="org.eclipse.sapphire.stage3"
       label="Sapphire Build Stage 3"
-      version="0.6.7.qualifier"
+      version="0.6.8.qualifier"
       provider-name="Eclipse.org - Sapphire">
 
    <includes
