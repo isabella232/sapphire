@@ -100,7 +100,10 @@ public class PageBookPresentation extends FormComponentPresentation
             this.currentPagePresentation.render();
         }
         
-        layout();
+        if( ! disposed() )
+        {
+            layout();
+        }
     }
     
     @Override

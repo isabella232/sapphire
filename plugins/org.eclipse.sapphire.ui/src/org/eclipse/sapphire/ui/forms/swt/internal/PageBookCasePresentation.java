@@ -53,17 +53,22 @@ public final class PageBookCasePresentation extends FormPresentation
     @Override
     public void render()
     {
-        if( part().children().visible().isEmpty() )
+        final boolean empty = part().children().visible().isEmpty();
+        
+        if( ! disposed() )
         {
-            final SapphireFormText text = new SapphireFormText( composite(), SWT.NONE );
-            text.setLayoutData( gdhindent( gdwhint( gdhspan( gdhfill(), 2 ), 100 ), 9 ) );
-            text.setText( noAdditionalPropertiesMessage.text(), false, false );
-            
-            register( text );
-        }
-        else
-        {
-            super.render();
+            if( empty )
+            {
+                final SapphireFormText text = new SapphireFormText( composite(), SWT.NONE );
+                text.setLayoutData( gdhindent( gdwhint( gdhspan( gdhfill(), 2 ), 100 ), 9 ) );
+                text.setText( noAdditionalPropertiesMessage.text(), false, false );
+                
+                register( text );
+            }
+            else
+            {
+                super.render();
+            }
         }
     }
 

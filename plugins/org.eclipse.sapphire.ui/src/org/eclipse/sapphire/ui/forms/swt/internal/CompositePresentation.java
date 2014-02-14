@@ -204,7 +204,10 @@ public class CompositePresentation extends FormComponentPresentation
         
         for( final FormComponentPresentation child : this.children )
         {
-            child.render();
+            if( ! child.disposed() )
+            {
+                child.render();
+            }
         }
     }
 
