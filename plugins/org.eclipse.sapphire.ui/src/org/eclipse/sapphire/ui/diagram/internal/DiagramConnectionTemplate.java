@@ -729,7 +729,8 @@ public class DiagramConnectionTemplate extends SapphirePart
     public static enum ConnectionType
     {
         OneToOne,
-        OneToMany
+        OneToMany,
+        Embedded
     }
     
 }

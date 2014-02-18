@@ -333,6 +333,12 @@ public class DiagramEmbeddedConnectionTemplate extends DiagramConnectionTemplate
     	}
     }
     
+    @Override
+    public ConnectionType getConnectionType()
+    {
+    	return ConnectionType.Embedded;
+    }
+    
     private void handleModelElementDispose(final ElementDisposeEvent event)
     {
         Element element = event.element();
