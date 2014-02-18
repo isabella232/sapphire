@@ -47,6 +47,9 @@ public final class SaveAsImageDiagramActionHandler extends SapphireActionHandler
 {
     @Text( "Save as Image" )
     private static LocalizableText saveAsImageMessage;
+    
+    @Text( "Diagram" )
+    private static LocalizableText defaultFileName;
 
     static
     {
@@ -61,26 +64,32 @@ public final class SaveAsImageDiagramActionHandler extends SapphireActionHandler
 
         if( diagramEditor != null )
         {
-            FileDialog dialog = new FileDialog( diagramEditor.getSite().getShell(), SWT.SAVE );
-
-            IEditorInput editorInput = diagramEditor.getPart().adapt( IEditorInput.class );
-
-            if( editorInput instanceof IFileEditorInput )
-            {
-                dialog.setFilterPath( ( (IFileEditorInput) editorInput ).getFile().getParent().getLocation().toOSString() );
-            }
-            
-            final String editorInputName = editorInput.getName();
-            final int editorInputLastDot = editorInputName.lastIndexOf( '.' );
+            final FileDialog dialog = new FileDialog( diagramEditor.getSite().getShell(), SWT.SAVE );
+            final IEditorInput editorInput = diagramEditor.getPart().adapt( IEditorInput.class );
             final StringBuilder initialFileName = new StringBuilder();
             
-            if( editorInputLastDot == -1 )
+            if( editorInput == null )
             {
-                initialFileName.append( editorInputName );
+                initialFileName.append( defaultFileName.text() );
             }
             else
             {
-                initialFileName.append( editorInputName.substring( 0, editorInputLastDot ) );
+                if( editorInput instanceof IFileEditorInput )
+                {
+                    dialog.setFilterPath( ( (IFileEditorInput) editorInput ).getFile().getParent().getLocation().toOSString() );
+                }
+                
+                final String editorInputName = editorInput.getName();
+                final int editorInputLastDot = editorInputName.lastIndexOf( '.' );
+                
+                if( editorInputLastDot == -1 )
+                {
+                    initialFileName.append( editorInputName );
+                }
+                else
+                {
+                    initialFileName.append( editorInputName.substring( 0, editorInputLastDot ) );
+                }
             }
             
             initialFileName.append( ".png" );
