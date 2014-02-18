@@ -18,6 +18,7 @@ import org.eclipse.sapphire.ListProperty;
 import org.eclipse.sapphire.Value;
 import org.eclipse.sapphire.ValueProperty;
 import org.eclipse.sapphire.modeling.annotations.Label;
+import org.eclipse.sapphire.modeling.annotations.NoDuplicates;
 import org.eclipse.sapphire.modeling.annotations.Required;
 import org.eclipse.sapphire.modeling.annotations.Type;
 import org.eclipse.sapphire.modeling.xml.annotations.XmlBinding;
@@ -36,6 +37,7 @@ public interface Table extends Element
     @XmlBinding( path = "name" )
     @Label( standard = "name" )
     @Required
+    @NoDuplicates
 
     ValueProperty PROP_NAME = new ValueProperty( TYPE, "Name" );
 
