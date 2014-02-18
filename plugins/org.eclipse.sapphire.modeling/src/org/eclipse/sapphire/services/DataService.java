@@ -83,6 +83,8 @@ public abstract class DataService<T> extends Service
     
     protected final void refresh()
     {
+        boolean broadcast = false;
+        
         synchronized( context().lock() )
         {
             if( this.refreshing )
@@ -91,8 +93,6 @@ public abstract class DataService<T> extends Service
             }
             
             this.refreshing = true;
-            
-            boolean broadcast = false;
             
             try
             {
@@ -145,11 +145,11 @@ public abstract class DataService<T> extends Service
             {
                 this.refreshing = false;
             }
-            
-            if( broadcast )
-            {
-                broadcast();
-            }
+        }
+        
+        if( broadcast )
+        {
+            broadcast();
         }
     }
 
