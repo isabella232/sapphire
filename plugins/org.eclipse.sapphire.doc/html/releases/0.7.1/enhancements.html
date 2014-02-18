@@ -47,32 +47,41 @@
 <h1>Enhancements in Sapphire 0.7.1</h1>
 
 <ol>
-  <li><a href="#EncodeToXmlFunction">EncodeToXml Function</a></li>
-  <li><a href="#ReplaceFunction">Replace Function</a></li>
-  <li><a href="#ElementEnhancements">Element Enhancements</a></li>
-  <li><a href="#SapphireWizardEnhancements">SapphireWizard Enhancements</a></li>
-  <li><a href="#LogicalStructureInDebugger">Logical Structure in the Debugger</a></li>
+  <li><a href="#Core">Core</a></li>
+  <ol type="A">
+    <li><a href="#Core-ListIndexCustomCollation">Custom Collation for List Index</a></li>
+    <li><a href="#Core-ElementEnhancements">Element Enhancements</a></li>
+  </ol>
+  <li><a href="#ExpressionLanguage">Expression Language</a></li>
+  <ol type="A">
+    <li><a href="#ExpressionLanguage-ReplaceFunction">Replace Function</a></li>
+    <li><a href="#ExpressionLanguage-EncodeToXmlFunction">EncodeToXml Function</a></li>
+  </ol>
+  <li><a href="#Forms">Forms</a></li>
+  <ol type="A">
+    <li><a href="#Forms-SapphireWizardEnhancements">SapphireWizard Enhancements</a></li>
+  </ol>
+  <li><a href="#SDK">SDK</a></li>
+  <ol type="A">
+    <li><a href="#SDK-LogicalStructureInDebugger">Logical Structure in the Debugger</a></li>
+  </ol>
 </ol>
 
 
-<h2><a name="EncodeToXmlFunction">EncodeToXml Function</a></h2>
+<h2><a name="Core"><a name="Core-ListIndexCustomCollation">Custom Collation for List Index</a></a></h2>
 
-<p>Encodes a string for use as XML element content or an attribute value.</p>
+<p>The developer can now specify a custom collation for a list index, such a collation that ignores letter case differences.</p>
 
-<pre class="source-code"><code>${ Message.EncodeToXml }</code></pre>
-
-
-<h2><a name="ReplaceFunction">Replace Function</a></h2>
-
-<p>Replaces all occurrences of a regular expression pattern with the provided replacement text. The full semantics
-are specified by Java's <nobr>String.replaceAll( String, String )</nobr> function.</p>
-
-<pre class="source-code"><code>${ Message.Replace( "\n", "&lt;br/>" ) }</code></pre>
-
-<pre class="source-code"><code>${ Message.Replace( "[0-9]", "x" ) }</code></pre>
+<pre class="source-code"><code><font color="#888888">ElementList
+{
+    Index&lt;T> index( ValueProperty property )</font>
+    Index&lt;T> index( ValueProperty property, Comparator&lt;String> comparator )
+    <font color="#888888">Index&lt;T> index( String property )</font>
+    Index&lt;T> index( String property, Comparator&lt;String> comparator )
+<font color="#888888">}</font></code></pre>
 
 
-<h2><a name="ElementEnhancements">Element Enhancements</a></h2>
+<h2><a name="Core-ElementEnhancements">Element Enhancements</a></h2>
 
 <p>Determine if an element is empty using the new method. An element is empty when all of its properties are empty.</p>
 
@@ -89,7 +98,24 @@ are specified by Java's <nobr>String.replaceAll( String, String )</nobr> functio
 <font color="#888888">}</font></code></pre>
  
 
-<h2><a name="SapphireWizardEnhancements">SapphireWizard Enhancements</a></h2>
+<h2><a name="ExpressionLanguage"><a name="ExpressionLanguage-ReplaceFunction">Replace Function</a></a></h2>
+
+<p>Replaces all occurrences of a regular expression pattern with the provided replacement text. The full semantics
+are specified by Java's <nobr>String.replaceAll( String, String )</nobr> function.</p>
+
+<pre class="source-code"><code>${ Message.Replace( "\n", "&lt;br/>" ) }</code></pre>
+
+<pre class="source-code"><code>${ Message.Replace( "[0-9]", "x" ) }</code></pre>
+
+
+<h2><a name="ExpressionLanguage-EncodeToXmlFunction">EncodeToXml Function</a></h2>
+
+<p>Encodes a string for use as XML element content or an attribute value.</p>
+
+<pre class="source-code"><code>${ Message.EncodeToXml }</code></pre>
+
+
+<h2><a name="Forms"><a name="Forms-SapphireWizardEnhancements">SapphireWizard Enhancements</a></a></h2>
 
 <p>When the finish operation of a SapphireWizard fails with an error status, a dialog is opened showing the
 failure message. In some cases, customization of the failure handling behavior is desired.</p>
@@ -107,7 +133,7 @@ failure message. In some cases, customization of the failure handling behavior i
 <font color="#888888">}</font></code></pre>
 
 
-<h2><a name="LogicalStructureInDebugger">Logical Structure in the Debugger</a></h2>
+<h2><a name="SDK"><a name="SDK-LogicalStructureInDebugger">Logical Structure in the Debugger</a></a></h2>
 
 <p>Examining a model in a debug session is difficult as the logical structure is hidden among complex
 implementation details. A debugger extension is now provided to show the logical structure of elements

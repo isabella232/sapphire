@@ -13,6 +13,7 @@ package org.eclipse.sapphire;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -25,6 +26,8 @@ import org.eclipse.sapphire.modeling.ModelPath.AllDescendentsSegment;
 import org.eclipse.sapphire.modeling.ModelPath.PropertySegment;
 import org.eclipse.sapphire.modeling.ModelPath.TypeFilterSegment;
 import org.eclipse.sapphire.services.PossibleTypesService;
+import org.eclipse.sapphire.util.EqualsFactory;
+import org.eclipse.sapphire.util.HashCodeFactory;
 
 /**
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
@@ -32,8 +35,18 @@ import org.eclipse.sapphire.services.PossibleTypesService;
 
 public final class ElementList<T extends Element> extends Property implements List<T>
 {
+    private static final Comparator<String> DEFAULT_COMPARATOR = new Comparator<String>()
+    {
+        @Override
+        public int compare( final String str1, final String str2 )
+        {
+            return str1.compareTo( str2 );
+        }
+
+    };
+    
     private List<T> content;
-    private Map<ValueProperty,Index<T>> indexes;
+    private Map<IndexCacheKey,Index<T>> indexes;
     
     public ElementList( final Element element, final ListProperty property )
     {
@@ -911,11 +924,32 @@ public final class ElementList<T extends Element> extends Property implements Li
             throw new IllegalArgumentException();
         }
         
-        return index( property.name() );
+        return index( property.name(), null );
     }
     
     /**
      * Returns an index with the specified value property as the key. The index is created if it doesn't exist already.
+     * 
+     * @param property the key property
+     * @param comparator the comparator to use when looking up elements in the index
+     * @return the index
+     * @throws IllegalArgumentException if the property is null; if the property does not belong to the list entry type
+     */
+    
+    public Index<T> index( final ValueProperty property, final Comparator<String> comparator )
+    {
+        if( property == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        
+        return index( property.name(), comparator );
+    }
+    
+    /**
+     * Returns an index with the specified value property as the key. The index is created if it doesn't exist already.
+     * 
+     * <p>The returned index will treat keys that differ only on letter case as different.</p>
      * 
      * @param property the key property
      * @return the index
@@ -924,6 +958,26 @@ public final class ElementList<T extends Element> extends Property implements Li
      */
     
     public Index<T> index( final String property )
+    {
+        if( property == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        
+        return index( property, null );
+    }
+        
+    /**
+     * Returns an index with the specified value property as the key. The index is created if it doesn't exist already.
+     * 
+     * @param property the key property
+     * @param comparator the comparator to use when looking up elements in the index
+     * @return the index
+     * @throws IllegalArgumentException if the property is null; if the property does not exist in the list entry type;
+     *   if the property is a path; if the property is not a value property
+     */
+    
+    public Index<T> index( final String property, final Comparator<String> comparator )
     {
         if( property == null )
         {
@@ -949,22 +1003,25 @@ public final class ElementList<T extends Element> extends Property implements Li
         }
         
         final ValueProperty vp = (ValueProperty) p;
+        final Comparator<String> c = ( comparator == null ? DEFAULT_COMPARATOR : comparator );
         
         synchronized( root() )
         {
             assertNotDisposed();
             
+            final IndexCacheKey key = new IndexCacheKey( vp, c );
+            
             if( this.indexes == null )
             {
-                this.indexes = new HashMap<ValueProperty,Index<T>>();
+                this.indexes = new HashMap<IndexCacheKey,Index<T>>();
             }
             
-            Index<T> index = this.indexes.get( vp );
+            Index<T> index = this.indexes.get( key );
             
             if( index == null )
             {
-                index = new Index<T>( this, vp );
-                this.indexes.put( vp, index );
+                index = new Index<T>( this, vp, c );
+                this.indexes.put( key, index );
             }
             
             return index;
@@ -1097,6 +1154,45 @@ public final class ElementList<T extends Element> extends Property implements Li
         public void set( final T object )
         {
             throw new UnsupportedOperationException();
+        }
+    }
+    
+    private static final class IndexCacheKey
+    {
+        private final ValueProperty property;
+        private final Comparator<String> comparator;
+        
+        public IndexCacheKey( final ValueProperty property, final Comparator<String> comparator )
+        {
+            this.property = property;
+            this.comparator = comparator;
+        }
+
+        @Override
+        public int hashCode()
+        {
+            return HashCodeFactory
+                    .start()
+                    .add( this.property.name() )
+                    .add( this.comparator )
+                    .result();
+        }
+
+        @Override
+        public boolean equals( final Object obj )
+        {
+            if( obj instanceof IndexCacheKey )
+            {
+                final IndexCacheKey key = (IndexCacheKey) obj;
+                
+                return EqualsFactory
+                        .start()
+                        .add( this.property, key.property )
+                        .add( this.comparator, key.comparator )
+                        .result();
+            }
+            
+            return false;
         }
     }
 

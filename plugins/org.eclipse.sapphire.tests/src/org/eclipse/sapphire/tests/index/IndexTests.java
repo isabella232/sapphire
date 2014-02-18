@@ -20,6 +20,7 @@ import org.eclipse.sapphire.tests.EventLog;
 import org.eclipse.sapphire.tests.SapphireTestCase;
 import org.eclipse.sapphire.tests.index.TestElement.ListEntry;
 import org.eclipse.sapphire.tests.index.TestElement.ListEntry.NestedListEntry;
+import org.eclipse.sapphire.util.Comparators;
 import org.junit.Test;
 
 /**
@@ -117,6 +118,59 @@ public final class IndexTests extends SapphireTestCase
             }
             
             assertSame( stringValueIndex.element( "s137" ), integerValueIndex.element( "137" ) );
+        }
+        finally
+        {
+            element.dispose();
+        }
+    }
+    
+    @Test
+    
+    public void testIndexCaseSensitivity()
+    {
+        final TestElement element = TestElement.TYPE.instantiate();
+        
+        try
+        {
+            final ElementList<ListEntry> list = element.getList();
+            
+            for( int i = 0; i < 100; i++ )
+            {
+                list.insert().setStringValue( "abc" + String.valueOf( i ) );
+            }
+            
+            final Index<ListEntry> respectCaseIndex = list.index( ListEntry.PROP_STRING_VALUE );
+            
+            assertSame( respectCaseIndex, list.index( ListEntry.PROP_STRING_VALUE ) );
+            
+            final Index<ListEntry> ignoreCaseIndex = list.index( ListEntry.PROP_STRING_VALUE, Comparators.createIgnoreCaseComparator() );
+            
+            assertSame( ignoreCaseIndex, list.index( ListEntry.PROP_STRING_VALUE, Comparators.createIgnoreCaseComparator() ) );
+            assertNotSame( ignoreCaseIndex, respectCaseIndex );
+            
+            assertEquals( 1, respectCaseIndex.elements( "abc97" ).size() );
+            assertEquals( 0, respectCaseIndex.elements( "AbC97" ).size() );
+            
+            assertEquals( 1, ignoreCaseIndex.elements( "abc97" ).size() );
+            assertEquals( 1, ignoreCaseIndex.elements( "AbC97" ).size() );
+            assertEquals( ignoreCaseIndex.elements( "abc97" ), ignoreCaseIndex.elements( "AbC97" ) );
+
+            for( int i = 0; i < 100; i++ )
+            {
+                list.insert().setStringValue( "AbC" + String.valueOf( i ) );
+            }
+            
+            assertEquals( 1, respectCaseIndex.elements( "abc97" ).size() );
+            assertEquals( 1, respectCaseIndex.elements( "AbC97" ).size() );
+            assertEquals( 0, respectCaseIndex.elements( "ABC97" ).size() );
+            assertNotEquals( respectCaseIndex.elements( "abc97" ), respectCaseIndex.elements( "AbC97" ) );
+            
+            assertEquals( 2, ignoreCaseIndex.elements( "abc97" ).size() );
+            assertEquals( 2, ignoreCaseIndex.elements( "AbC97" ).size() );
+            assertEquals( 2, ignoreCaseIndex.elements( "ABC97" ).size() );
+            assertEquals( ignoreCaseIndex.elements( "abc97" ), ignoreCaseIndex.elements( "AbC97" ) );
+            assertEquals( ignoreCaseIndex.elements( "abc97" ), ignoreCaseIndex.elements( "ABC97" ) );
         }
         finally
         {
