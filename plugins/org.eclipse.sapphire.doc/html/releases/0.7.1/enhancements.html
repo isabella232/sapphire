@@ -51,6 +51,7 @@
   <ol type="A">
     <li><a href="#Core-ListIndexCustomCollation">Custom Collation for List Index</a></li>
     <li><a href="#Core-ElementEnhancements">Element Enhancements</a></li>
+    <li><a href="#Core-ObservableCollections">Observable Collections</a></li>
   </ol>
   <li><a href="#ExpressionLanguage">Expression Language</a></li>
   <ol type="A">
@@ -96,6 +97,27 @@
 {</font>
     public SortedSet&lt;Property> content()
 <font color="#888888">}</font></code></pre>
+
+
+<h2><a name="Core-ObservableCollections">Observable Collections</a></h2>
+
+<p>Create collections that can be monitored for changes. An Observable wrapper is provided for List, Set and Map.</p>
+
+<pre class="source-code"><code>ObservableMap<String,String> map = new ObservableMap<String,String>();
+
+Listener listener = new Listener()
+{
+    public void handle( final Event event )
+    {
+        ...
+    }
+};
+    
+map.attach( listener );
+
+...
+
+map.detach( listener );</code></pre>
  
 
 <h2><a name="ExpressionLanguage"><a name="ExpressionLanguage-ReplaceFunction">Replace Function</a></a></h2>

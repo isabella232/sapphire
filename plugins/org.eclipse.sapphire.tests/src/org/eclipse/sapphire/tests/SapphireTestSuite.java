@@ -18,6 +18,7 @@ import org.eclipse.sapphire.tests.index.IndexTests;
 import org.eclipse.sapphire.tests.java.JavaTestSuite;
 import org.eclipse.sapphire.tests.misc.TestMisc;
 import org.eclipse.sapphire.tests.modeling.SapphireModelingFrameworkTests;
+import org.eclipse.sapphire.tests.observable.ObservableTests;
 import org.eclipse.sapphire.tests.path.relative.RelativePathTests;
 import org.eclipse.sapphire.tests.possible.PossibleValuesTest;
 import org.eclipse.sapphire.tests.services.ServicesTestSuite;
@@ -48,6 +49,7 @@ import org.junit.runners.Suite.SuiteClasses;
         UniqueValueTests.class,
         IndexTests.class,
         ConcurrencyTests.class,
+        ObservableTests.class,
         PossibleValuesTest.class,
         RelativePathTests.class
     }
