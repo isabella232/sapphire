@@ -17,7 +17,10 @@ import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.sapphire.Event;
+import org.eclipse.sapphire.Listener;
 import org.eclipse.sapphire.LocalizableText;
+import org.eclipse.sapphire.ObservableMap;
 import org.eclipse.sapphire.Text;
 import org.eclipse.sapphire.modeling.internal.SapphireModelingExtensionSystem;
 import org.eclipse.sapphire.modeling.localization.LocalizationService;
@@ -46,8 +49,7 @@ public class FunctionContext
         LocalizableText.init( FunctionContext.class );
     }
 
-    public FunctionResult property( final Object element,
-                                    final String name )
+    public FunctionResult property( final Object element, final String name )
     {
         if( element == null )
         {
@@ -57,40 +59,88 @@ public class FunctionContext
         {
             if( element instanceof Map )
             {
-                if( ! name.equalsIgnoreCase( "Size" ) )
+                final Map<?,?> map = (Map<?,?>) element;
+                final Function f;
+                
+                if( map instanceof ObservableMap )
                 {
-                    final Map<?,?> map = (Map<?,?>) element;
-                    final Object value = findIgnoringCase( map, name );
+                    final ObservableMap<?,?> observable = (ObservableMap<?,?>) map;
                     
-                    if( value != null )
+                    f = new Function()
                     {
-                        final Function f = new Function()
+                        @Override
+                        public String name()
                         {
-                            @Override
-                            public String name()
+                            return name;
+                        }
+    
+                        @Override
+                        public FunctionResult evaluate( final FunctionContext context )
+                        {
+                            return new FunctionResult( this, context )
                             {
-                                return name;
-                            }
-        
-                            @Override
-                            public FunctionResult evaluate( final FunctionContext context )
-                            {
-                                return new FunctionResult( this, context )
+                                private Listener listener;
+                                
+                                @Override
+                                protected void init()
                                 {
-                                    @Override
-                                    protected Object evaluate()
+                                    this.listener = new Listener()
                                     {
-                                        return value;
-                                    }
-                                };
-                            }
-                        };
-                        
-                        f.init();
-                        
-                        return f.evaluate( this );
-                    }
+                                        @Override
+                                        public void handle( final Event event )
+                                        {
+                                            refresh();
+                                        }
+                                    };
+                                    
+                                    observable.attach( this.listener );
+                                }
+
+                                @Override
+                                protected Object evaluate()
+                                {
+                                    return findIgnoringCase( observable, name );
+                                }
+                                
+                                @Override
+                                public void dispose()
+                                {
+                                    super.dispose();
+                                    
+                                    observable.detach( this.listener );
+                                }
+                            };
+                        }
+                    };
                 }
+                else
+                {
+                    f = new Function()
+                    {
+                        @Override
+                        public String name()
+                        {
+                            return name;
+                        }
+
+                        @Override
+                        public FunctionResult evaluate( final FunctionContext context )
+                        {
+                            return new FunctionResult( this, context )
+                            {
+                                @Override
+                                protected Object evaluate()
+                                {
+                                    return findIgnoringCase( map, name );
+                                }
+                            };
+                        }
+                    };
+                }
+                
+                f.init();
+                
+                return f.evaluate( this );
             }
             else
             {

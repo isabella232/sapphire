@@ -800,4 +800,10 @@
         <implementation>org.eclipse.sapphire.internal.StandardLoggingService</implementation>
         <context>Sapphire</context>
     </service>
+    <function>
+        <name>Global</name>
+        <impl>org.eclipse.sapphire.modeling.el.GlobalFunction</impl>
+        <description>Returns a map of global objects maintained through Sapphire.global() API.</description>
+        <signature></signature>
+    </function>
 </extension>

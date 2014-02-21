@@ -34,6 +34,7 @@ public final class Sapphire
     
     private static Version version;
     private static ServiceContext services;
+    private static ObservableMap<String,Object> global;
     
     /**
      * This class is not meant to be instantiated.
@@ -179,6 +180,23 @@ public final class Sapphire
         }
         
         return services;
+    }
+    
+    /**
+     * Returns a map where objects can be stored that need to be globally accessible and visible
+     * through Sapphire EL. 
+     * 
+     * @return an editable map of global objects
+     */
+    
+    public static synchronized ObservableMap<String,Object> global()
+    {
+        if( global == null )
+        {
+            global = new ObservableMap<String,Object>();
+        }
+        
+        return global;
     }
     
 }

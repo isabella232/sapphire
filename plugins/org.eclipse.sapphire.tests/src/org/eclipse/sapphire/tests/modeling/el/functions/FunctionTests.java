@@ -17,6 +17,7 @@ import org.eclipse.sapphire.tests.modeling.el.functions.enabled.EnabledFunctionT
 import org.eclipse.sapphire.tests.modeling.el.functions.encodetoxml.EncodeToXmlFunctionTests;
 import org.eclipse.sapphire.tests.modeling.el.functions.endswith.EndsWithFunctionTests;
 import org.eclipse.sapphire.tests.modeling.el.functions.fragment.FragmentFunctionTests;
+import org.eclipse.sapphire.tests.modeling.el.functions.global.GlobalFunctionTests;
 import org.eclipse.sapphire.tests.modeling.el.functions.head.HeadFunctionTests;
 import org.eclipse.sapphire.tests.modeling.el.functions.index.IndexFunctionTests;
 import org.eclipse.sapphire.tests.modeling.el.functions.matches.MatchesFunctionTests;
@@ -51,6 +52,7 @@ import org.junit.runners.Suite.SuiteClasses;
         EncodeToXmlFunctionTests.class,
         EndsWithFunctionTests.class,
         FragmentFunctionTests.class,
+        GlobalFunctionTests.class,
         HeadFunctionTests.class,
         IndexFunctionTests.class,
         MatchesFunctionTests.class,

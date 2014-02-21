@@ -57,6 +57,7 @@
   <ol type="A">
     <li><a href="#ExpressionLanguage-ReplaceFunction">Replace Function</a></li>
     <li><a href="#ExpressionLanguage-EncodeToXmlFunction">EncodeToXml Function</a></li>
+    <li><a href="#ExpressionLanguage-GlobalFunction">Global Function</a></li>
   </ol>
   <li><a href="#Forms">Forms</a></li>
   <ol type="A">
@@ -135,6 +136,15 @@ are specified by Java's <nobr>String.replaceAll( String, String )</nobr> functio
 <p>Encodes a string for use as XML element content or an attribute value.</p>
 
 <pre class="source-code"><code>${ Message.EncodeToXml }</code></pre>
+
+
+<h2><a name="ExpressionLanguage-GlobalFunction">Global Function</a></h2>
+
+<p>Returns a map of global objects maintained through Sapphire.global() API.</p>
+
+<pre class="source-code"><code>Sapphire.global().put( "User", "John" );</code></pre>
+
+<pre class="source-code"><code>${ Global.User }</code></pre>
 
 
 <h2><a name="Forms"><a name="Forms-SapphireWizardEnhancements">SapphireWizard Enhancements</a></a></h2>

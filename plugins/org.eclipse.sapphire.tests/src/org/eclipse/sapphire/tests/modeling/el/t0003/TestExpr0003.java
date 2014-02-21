@@ -123,7 +123,7 @@ public final class TestExpr0003 extends TestExpr
         
         testForExpectedValue( context, "${ List.Size }", 2 );
         testForExpectedValue( context, "${ Set.Size }", 3 );
-        testForExpectedValue( context, "${ Map.Size }", 4 );
+        testForExpectedValue( context, "${ Map.Size() }", 4 );
         testForExpectedValue( context, "${ ObjectArray.Size }", 2 );
         testForExpectedValue( context, "${ CharArray.Size }", 3 );
         testForExpectedValue( context, "${ ByteArray.Size }", 4 );
