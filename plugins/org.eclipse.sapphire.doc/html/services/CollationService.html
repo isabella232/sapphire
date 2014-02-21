@@ -1,0 +1,68 @@
+<!-- 
+ ******************************************************************************
+ * Copyright (c) 2014 Oracle
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Konstantin Komissarchik - initial implementation and ongoing maintenance
+ ******************************************************************************
+-->
+
+<html>
+
+<head>
+  <title>CollationService</title>
+  <link rel="StyleSheet" href="../style.css" TYPE="text/css"/>
+</head>
+
+<body>
+
+<h1>CollationService</h1>
+
+<p>CollationService provides a comparator that can be used for sorting or matching string values.</p>
+ 
+<p>In many situations, collation can be specified using the @Collation annotation rather than through
+a custom CollationService implementation. The annotation supports <a href="../el/index.html">Sapphire EL</a>.</p>
+
+<pre class="source-code"><font color="#888888">@NoDuplicates</font>
+@Collation( ignoreCaseDifferences = "true" )
+
+<font color="#888888">ValueProperty PROP_NAME = new ValueProperty( TYPE, "Name" );
+
+Value&lt;String> getName();
+void setName( String value );</font></code></pre>
+
+<p>When more control is necessary, a custom implementation of CollationService can be provided.</p>
+
+<pre class="source-code"><font color="#888888">@NoDuplicates</font>
+@Service( impl = ExampleCollationService.class )
+
+<font color="#888888">ValueProperty PROP_NAME = new ValueProperty( TYPE, "Name" );
+
+Value&lt;String> getName();
+void setName( String value );</font></code></pre>
+
+<pre class="source-code"><code>public class ExampleCollationService extends CollationService
+{
+    @Override
+    protected Comparator&lt;String> compute()
+    {
+        return new Comparator<String>()
+        {
+            public int compare( final String a, final String b )
+            {
+                ...
+            }
+        };
+    }
+}</code></pre>
+
+<div class="copyright">Copyright (c) 2014 Oracle<br/>
+Content made available under the terms of <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</div>
+
+</body>
+
+</html>

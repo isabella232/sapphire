@@ -806,4 +806,27 @@
         <description>Returns a map of global objects maintained through Sapphire.global() API.</description>
         <signature></signature>
     </function>
+    <service>
+        <id>Sapphire.CollationService.Default</id>
+        <implementation>org.eclipse.sapphire.internal.DefaultCollationService</implementation>
+        <context>Sapphire.Property.MetaModel</context>
+        <condition>org.eclipse.sapphire.internal.DefaultCollationService$Condition</condition>
+        <description>A CollationService implementation that is active when an explicit collation is not specified. The provided collation matches Java's default string comparison.</description>
+    </service>
+    <service>
+        <id>Sapphire.CollationService.Declarative.Global</id>
+        <implementation>org.eclipse.sapphire.internal.DeclarativeCollationService</implementation>
+        <condition>org.eclipse.sapphire.internal.DeclarativeCollationService$GlobalCondition</condition>
+        <description>A CollationService implementation that derives its behavior from @Collation annotation.</description>
+        <overrides>Sapphire.CollationService.Default</overrides>
+        <context>Sapphire.Property.MetaModel</context>
+    </service>
+    <service>
+        <condition>org.eclipse.sapphire.internal.DeclarativeCollationService$InstanceCondition</condition>
+        <description>A CollationService implementation that derives its behavior from @Collation annotation.</description>
+        <id>Sapphire.CollationService.Declarative.Instance</id>
+        <implementation>org.eclipse.sapphire.internal.DeclarativeCollationService</implementation>
+        <overrides>Sapphire.CollationService.Default</overrides>
+        <context>Sapphire.Property.Instance</context>
+    </service>
 </extension>

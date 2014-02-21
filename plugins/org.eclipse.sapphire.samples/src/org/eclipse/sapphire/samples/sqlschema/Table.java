@@ -11,6 +11,7 @@
 
 package org.eclipse.sapphire.samples.sqlschema;
 
+import org.eclipse.sapphire.Collation;
 import org.eclipse.sapphire.Element;
 import org.eclipse.sapphire.ElementList;
 import org.eclipse.sapphire.ElementType;
@@ -38,6 +39,7 @@ public interface Table extends Element
     @Label( standard = "name" )
     @Required
     @NoDuplicates
+    @Collation( ignoreCaseDifferences = "true" )
 
     ValueProperty PROP_NAME = new ValueProperty( TYPE, "Name" );
 

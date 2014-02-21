@@ -50,9 +50,13 @@ public class ModelElementFunctionContext extends FunctionContext
         this( element, SourceLanguageLocalizationService.INSTANCE );
     }
     
-    public ModelElementFunctionContext( final Element element,
-                                        final LocalizationService localizationService )
+    public ModelElementFunctionContext( final Element element, final LocalizationService localizationService )
     {
+        if( element == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        
         this.element = element;
         this.localizationService = localizationService;
     }

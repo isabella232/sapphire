@@ -11,6 +11,7 @@
 
 package org.eclipse.sapphire.internal;
 
+import org.eclipse.sapphire.CollationService;
 import org.eclipse.sapphire.Counter;
 import org.eclipse.sapphire.Element;
 import org.eclipse.sapphire.ElementList;
@@ -42,18 +43,39 @@ public final class UniqueValueValidationService extends ValidationService
         LocalizableText.init( UniqueValueValidationService.class );
     }
     
+    private CollationService collationService;
+    private Listener collationServiceListener;
     private Index<?> index;
-    private Listener listener;
+    private Listener indexListener;
     
     @Override
     protected void initValidationService()
     {
         final Value<?> value = context( Value.class );
-        final ElementList<?> list = (ElementList<?>) value.element().parent();
         
-        this.index = list.index( value.definition() );
+        this.collationService = value.service( CollationService.class );
         
-        this.listener = new Listener()
+        this.collationServiceListener = new Listener()
+        {
+            @Override
+            public void handle( final Event event )
+            {
+                synchronized( UniqueValueValidationService.this )
+                {
+                    if( UniqueValueValidationService.this.index != null )
+                    {
+                        UniqueValueValidationService.this.index.detach( UniqueValueValidationService.this.indexListener );
+                        UniqueValueValidationService.this.index = null;
+                    }
+                }
+                
+                refresh();
+            }
+        };
+        
+        this.collationService.attach( this.collationServiceListener );
+
+        this.indexListener = new Listener()
         {
             @Override
             public void handle( final Event event )
@@ -61,8 +83,6 @@ public final class UniqueValueValidationService extends ValidationService
                 refresh();
             }
         };
-        
-        this.index.attach( this.listener );
     }
 
     @Override
@@ -71,9 +91,24 @@ public final class UniqueValueValidationService extends ValidationService
         Counter.increment( UniqueValueValidationService.class );
 
         final Value<?> value = context( Value.class );
+        final Index<?> index;
+        
+        synchronized( this )
+        {
+            if( this.index == null )
+            {
+                final ElementList<?> list = (ElementList<?>) value.element().parent();
+                
+                this.index = list.index( value.definition(), this.collationService.comparator() );
+                this.index.attach( this.indexListener );
+            }
+            
+            index = this.index;
+        }
+        
         final String text = value.text();
         
-        if( text != null && this.index.elements( text ).size() > 1 )
+        if( text != null && index.elements( text ).size() > 1 )
         {
             final String label = value.definition().getLabel( true, CapitalizationType.NO_CAPS, false );
             final String msg = message.format( label, text );
@@ -86,10 +121,20 @@ public final class UniqueValueValidationService extends ValidationService
     @Override
     public void dispose()
     {
-        this.index.detach( this.listener );
+        if( this.collationService != null )
+        {
+            this.collationService.detach( this.collationServiceListener );
+            this.collationService = null;
+            this.collationServiceListener = null;
+        }
         
-        this.index = null;
-        this.listener = null;
+        if( this.index != null )
+        {
+            this.index.detach( this.indexListener );
+            this.index = null;
+        }
+        
+        this.indexListener = null;
     }
     
     public static final class Condition extends ServiceCondition

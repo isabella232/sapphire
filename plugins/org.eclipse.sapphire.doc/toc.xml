@@ -37,6 +37,7 @@
      </topic>
   </topic>
   <topic href="html/services/index.html" label="Services">
+     <topic href="html/services/CollationService.html" label="CollationService"/>
      <topic href="html/services/ConnectionService.html" label="ConnectionService"/>
      <topic href="html/services/ContentProposalService.html" label="ContentProposalService"/>
      <topic href="html/services/ConversionService.html" label="ConversionService"/>

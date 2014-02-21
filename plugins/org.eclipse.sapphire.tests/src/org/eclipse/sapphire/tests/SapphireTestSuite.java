@@ -12,6 +12,7 @@
 package org.eclipse.sapphire.tests;
 
 import org.eclipse.sapphire.tests.binding.list.LayeredListPropertyBindingTests;
+import org.eclipse.sapphire.tests.collation.CollationTests;
 import org.eclipse.sapphire.tests.concurrency.ConcurrencyTests;
 import org.eclipse.sapphire.tests.conversion.ConversionTestSuite;
 import org.eclipse.sapphire.tests.index.IndexTests;
@@ -39,6 +40,7 @@ import org.junit.runners.Suite.SuiteClasses;
 (
     {
         LayeredListPropertyBindingTests.class,
+        CollationTests.class,
         ConversionTestSuite.class,
         TestMisc.class,
         SapphireModelingFrameworkTests.class,

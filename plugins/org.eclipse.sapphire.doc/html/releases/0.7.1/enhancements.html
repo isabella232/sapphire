@@ -49,7 +49,7 @@
 <ol>
   <li><a href="#Core">Core</a></li>
   <ol type="A">
-    <li><a href="#Core-ListIndexCustomCollation">Custom Collation for List Index</a></li>
+    <li><a href="#Core-CustomCollation">Custom Collation</a></li>
     <li><a href="#Core-ElementEnhancements">Element Enhancements</a></li>
     <li><a href="#Core-ObservableCollections">Observable Collections</a></li>
   </ol>
@@ -70,7 +70,7 @@
 </ol>
 
 
-<h2><a name="Core"><a name="Core-ListIndexCustomCollation">Custom Collation for List Index</a></a></h2>
+<h2><a name="Core"><a name="Core-CustomCollation">Custom Collation</a></a></h2>
 
 <p>The developer can now specify a custom collation for a list index, such a collation that ignores letter case differences.</p>
 
@@ -81,6 +81,42 @@
     <font color="#888888">Index&lt;T> index( String property )</font>
     Index&lt;T> index( String property, Comparator&lt;String> comparator )
 <font color="#888888">}</font></code></pre>
+
+<p>The new @Collation annotation can be used to specify collation for a property. The specified collation is leveraged by various
+parts of the framework, such as the NoDuplicates annotation. The @Collation annotation supports <a href="../../el/index.html">Sapphire EL</a>.</p>
+
+<pre class="source-code"><font color="#888888">@NoDuplicates</font>
+@Collation( ignoreCaseDifferences = "true" )
+
+<font color="#888888">ValueProperty PROP_NAME = new ValueProperty( TYPE, "Name" );
+
+Value&lt;String> getName();
+void setName( String value );</font></code></pre>
+
+<p>When more control is necessary, a custom implementation of CollationService can be provided.</p>
+
+<pre class="source-code"><font color="#888888">@NoDuplicates</font>
+@Service( impl = ExampleCollationService.class )
+
+<font color="#888888">ValueProperty PROP_NAME = new ValueProperty( TYPE, "Name" );
+
+Value&lt;String> getName();
+void setName( String value );</font></code></pre>
+
+<pre class="source-code"><code>public class ExampleCollationService extends CollationService
+{
+    @Override
+    protected Comparator&lt;String> compute()
+    {
+        return new Comparator<String>()
+        {
+            public int compare( final String a, final String b )
+            {
+                ...
+            }
+        };
+    }
+}</code></pre>
 
 
 <h2><a name="Core-ElementEnhancements">Element Enhancements</a></h2>
@@ -104,7 +140,7 @@
 
 <p>Create collections that can be monitored for changes. An Observable wrapper is provided for List, Set and Map.</p>
 
-<pre class="source-code"><code>ObservableMap<String,String> map = new ObservableMap<String,String>();
+<pre class="source-code"><code>ObservableMap&lt;String,String> map = new ObservableMap&lt;String,String>();
 
 Listener listener = new Listener()
 {
