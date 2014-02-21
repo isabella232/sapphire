@@ -164,7 +164,7 @@ public final class IndexTests extends SapphireTestCase
             assertEquals( 1, respectCaseIndex.elements( "abc97" ).size() );
             assertEquals( 1, respectCaseIndex.elements( "AbC97" ).size() );
             assertEquals( 0, respectCaseIndex.elements( "ABC97" ).size() );
-            assertNotEquals( respectCaseIndex.elements( "abc97" ), respectCaseIndex.elements( "AbC97" ) );
+            assertFalse( respectCaseIndex.elements( "abc97" ).equals( respectCaseIndex.elements( "AbC97" ) ) );
             
             assertEquals( 2, ignoreCaseIndex.elements( "abc97" ).size() );
             assertEquals( 2, ignoreCaseIndex.elements( "AbC97" ).size() );
