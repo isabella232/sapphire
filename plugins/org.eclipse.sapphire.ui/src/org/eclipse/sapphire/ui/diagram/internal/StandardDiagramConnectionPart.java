@@ -200,6 +200,11 @@ public class StandardDiagramConnectionPart
         final Element element = getLocalModelElement();
         final ElementList<?> list = (ElementList<?>) element.parent();
         list.remove(element);  
+        pruneListParentIfNecessary(list);
+    }
+    
+    private void pruneListParentIfNecessary(ElementList<?> list)
+    {
         // For 1->n type connections, if the target node list is empty, we need to remove the surrounding 
         // element. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=427710
         if (list.isEmpty() && this.connectionTemplate.getConnectionType() == ConnectionType.OneToMany)
@@ -210,6 +215,7 @@ public class StandardDiagramConnectionPart
         		grandParent.remove(list.element());
         	}
         }
+    	
     }
     
     public String getLabel()
@@ -513,6 +519,8 @@ public class StandardDiagramConnectionPart
 		}
         final ElementList<?> list = (ElementList<?>) oldConnElement.parent();
         list.remove(oldConnElement);
+        pruneListParentIfNecessary(list);
+        
         return newConnPart;
     }
     
