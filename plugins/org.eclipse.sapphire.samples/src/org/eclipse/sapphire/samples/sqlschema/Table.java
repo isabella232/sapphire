@@ -18,6 +18,7 @@ import org.eclipse.sapphire.ElementType;
 import org.eclipse.sapphire.ListProperty;
 import org.eclipse.sapphire.Value;
 import org.eclipse.sapphire.ValueProperty;
+import org.eclipse.sapphire.modeling.annotations.CountConstraint;
 import org.eclipse.sapphire.modeling.annotations.Label;
 import org.eclipse.sapphire.modeling.annotations.NoDuplicates;
 import org.eclipse.sapphire.modeling.annotations.Required;
@@ -50,6 +51,7 @@ public interface Table extends Element
     
     @Type( base = Column.class )
     @XmlListBinding( mappings = @XmlListBinding.Mapping( element = "column", type = Column.class ) )
+    @CountConstraint( min = 1 )
     
     ListProperty PROP_COLUMNS = new ListProperty( TYPE, "Columns" );
     
