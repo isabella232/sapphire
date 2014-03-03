@@ -23,6 +23,7 @@ import org.eclipse.sapphire.ListProperty;
 import org.eclipse.sapphire.Listener;
 import org.eclipse.sapphire.PropertyContentEvent;
 import org.eclipse.sapphire.PropertyEvent;
+import org.eclipse.sapphire.PropertyValidationEvent;
 import org.eclipse.sapphire.java.JavaType;
 import org.eclipse.sapphire.modeling.Status;
 import org.eclipse.sapphire.ui.PartValidationEvent;
@@ -81,12 +82,19 @@ public class ShapeFactoryPart extends ShapePart
         }
         
         // Add listeners
-        this.shapePropertyListener = new FilteredListener<PropertyContentEvent>()
+        this.shapePropertyListener = new FilteredListener<PropertyEvent>()
         {
             @Override
-            protected void handleTypedEvent( final PropertyContentEvent event )
+            protected void handleTypedEvent( final PropertyEvent event )
             {
-                handleModelPropertyChange( event );
+            	if (event instanceof PropertyContentEvent)
+            	{
+            		handleModelPropertyChange( event );
+            	}
+            	else if (event instanceof PropertyValidationEvent)
+            	{
+            		refreshValidation();
+            	}
             }
         };
         this.modelElement.attach(this.shapePropertyListener, this.propertyName);
@@ -180,6 +188,7 @@ public class ShapeFactoryPart extends ShapePart
     protected Status computeValidation()
     {
         final Status.CompositeStatusFactory factory = Status.factoryForComposite();
+        factory.merge(this.modelElement.property(this.modelProperty).validation());
 
         for( SapphirePart child : this.children )
         {
