@@ -113,4 +113,14 @@
         <Bug pattern="IS2_INCONSISTENT_SYNC "/>
     </Match>
 
+    <!--
+        Methods should be verbs, in mixed case with the first letter lowercase, with the first letter of each internal word capitalized.
+        
+        IGNORE: Not interested in style checking. 
+    -->
+    
+    <Match>
+        <Bug pattern="NM_METHOD_NAMING_CONVENTION "/>
+    </Match>
+
 </FindBugsFilter>
