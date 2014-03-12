@@ -82,6 +82,7 @@ public interface ForeignKey extends Element
     
     @Type( base = ColumnAssociation.class )
     @CountConstraint( min = 1 )
+    @Service( impl = FKColumnAssociationValidator.class )
     
     ListProperty PROP_COLUMN_ASSOCIATIONS = new ListProperty( TYPE, "ColumnAssociations" );
     
