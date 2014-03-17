@@ -30,6 +30,7 @@ import org.eclipse.sapphire.modeling.CapitalizationType;
 import org.eclipse.sapphire.modeling.localization.LocalizationService;
 import org.eclipse.sapphire.ui.PartVisibilityEvent;
 import org.eclipse.sapphire.ui.SapphirePart;
+import org.eclipse.sapphire.ui.forms.ContainerPart.VisibleChildrenEvent;
 import org.eclipse.sapphire.ui.forms.PropertiesViewPagePart;
 import org.eclipse.sapphire.ui.forms.PropertiesViewContributionPart;
 import org.eclipse.sapphire.util.MutableReference;
@@ -223,7 +224,7 @@ public final class SapphirePropertySheetPage implements IPropertySheetPage
                                 list.update( index );
                             }
                         }
-                        else if( event instanceof PartVisibilityEvent )
+                        else if( event instanceof PartVisibilityEvent || event instanceof VisibleChildrenEvent )
                         {
                             refresh();
                         }
