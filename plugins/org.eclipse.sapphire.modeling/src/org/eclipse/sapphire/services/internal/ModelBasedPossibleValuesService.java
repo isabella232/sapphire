@@ -74,7 +74,10 @@ public final class ModelBasedPossibleValuesService extends PossibleValuesService
             @Override
             protected void handleTypedEvent( final PropertyContentEvent event )
             {
-                refresh();
+                if( ! property.disposed() )
+                {
+                    refresh();
+                }
             }
         };
         
