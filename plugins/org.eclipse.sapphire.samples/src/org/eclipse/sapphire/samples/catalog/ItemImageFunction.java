@@ -116,7 +116,11 @@ public final class ItemImageFunction extends Function
                             if( this.listener != null )
                             {
                                 state.detach( this.listener, MasterDetailsEditorPageState.PROP_ATTRIBUTES.name() + "/*" );
-                                element.property( Item.PROP_MANUFACTURER ).detach( this.listener );
+                                
+                                if( ! element.disposed() )
+                                {
+                                    element.property( Item.PROP_MANUFACTURER ).detach( this.listener );
+                                }
                                 
                                 this.listener = null;
                             }
