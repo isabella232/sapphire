@@ -27,7 +27,7 @@ import org.eclipse.sapphire.ui.swt.gef.figures.TextFigure;
 import org.eclipse.sapphire.ui.swt.gef.internal.DirectEditorManagerFactory;
 import org.eclipse.sapphire.ui.swt.gef.model.ShapeModel;
 import org.eclipse.sapphire.ui.swt.gef.model.TextModel;
-import org.eclipse.sapphire.ui.swt.gef.policies.ShapeLabelDirectEditPolicy;
+import org.eclipse.sapphire.ui.swt.gef.policies.NodeLabelDirectEditPolicy;
 import org.eclipse.sapphire.ui.swt.gef.tools.SapphireDragEditPartsTracker;
 
 /**
@@ -49,7 +49,7 @@ public class TextEditPart extends ShapeEditPart
 
 		if (textPart.isEditable())
 		{
-			installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new ShapeLabelDirectEditPolicy());
+			installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new NodeLabelDirectEditPolicy());
 		}
 	}
 	

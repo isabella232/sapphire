@@ -30,8 +30,13 @@ public class NodeLabelDirectEditPolicy extends DirectEditPolicy {
 	protected Command getDirectEditCommand(DirectEditRequest edit) {
 		String labelText = (String) edit.getCellEditor().getValue();
 		TextPart textPart = (TextPart)edit.getExtendedData().get(DiagramNodeEditPart.DIRECT_EDIT_REQUEST_PARAM);
-		LabelNodeCommand command = new LabelNodeCommand(textPart, labelText);
-		return command;
+		if (textPart != null)
+		{
+			LabelNodeCommand command = new LabelNodeCommand(textPart, labelText);
+			return command;
+		}
+		
+		return null;
 	}
 
 	/**

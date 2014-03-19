@@ -498,6 +498,17 @@ public class StandardDiagramConnectionPart
     
     public StandardDiagramConnectionPart reconnect(DiagramNodePart newSrcNode, DiagramNodePart newTargetNode)
     {
+    	/**
+    	 * Optimization: no need to reconnect if the connection's endpoint model 
+    	 * elements don't change. Connection listens on endpoint's ReferenceService and its
+    	 * endpoint model elements are refreshed when the attaching nodes's elements change.
+    	 */
+    	if (newSrcNode.getLocalModelElement() == getEndpoint1() && 
+    			newTargetNode.getLocalModelElement() == getEndpoint2())
+    	{
+    		return this;
+    	}
+    	
         StandardDiagramConnectionPart newConnPart = getDiagramConnectionTemplate().createNewDiagramConnection(newSrcNode, newTargetNode);
 
         final Element oldConnElement = this.getLocalModelElement();
