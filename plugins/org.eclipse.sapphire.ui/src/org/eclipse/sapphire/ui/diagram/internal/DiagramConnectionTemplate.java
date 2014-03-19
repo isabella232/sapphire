@@ -29,6 +29,7 @@ import org.eclipse.sapphire.ElementType;
 import org.eclipse.sapphire.FilteredListener;
 import org.eclipse.sapphire.ListProperty;
 import org.eclipse.sapphire.Listener;
+import org.eclipse.sapphire.PropertyContentEvent;
 import org.eclipse.sapphire.PropertyDef;
 import org.eclipse.sapphire.PropertyEvent;
 import org.eclipse.sapphire.ReferenceValue;
@@ -174,10 +175,10 @@ public class DiagramConnectionTemplate extends SapphirePart
         }
                 
         // Add model property listener
-        this.modelPropertyListener = new FilteredListener<PropertyEvent>()
+        this.modelPropertyListener = new FilteredListener<PropertyContentEvent>()
         {
             @Override
-            protected void handleTypedEvent( final PropertyEvent event )
+            protected void handleTypedEvent( final PropertyContentEvent event )
             {
                 handleModelPropertyChange( event );
             }
