@@ -156,11 +156,21 @@ public final class ManufacturersBinding extends ListPropertyBinding
             x = ( x == null ? EMPTY_STRING : x.trim() );
             y = ( y == null ? EMPTY_STRING : y.trim() );
             
-            if( x.length() == 0 )
+            final int xlen = x.length();
+            final int ylen = y.length();
+            
+            if( xlen == 0 )
             {
-                return Integer.MAX_VALUE;
+                if( ylen == 0 )
+                {
+                    return 0;
+                }
+                else
+                {
+                    return Integer.MAX_VALUE;
+                }
             }
-            else if( y.length() == 0 )
+            else if( ylen == 0 )
             {
                 return Integer.MAX_VALUE * -1;
             }
