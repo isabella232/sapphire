@@ -17,8 +17,10 @@ import org.eclipse.sapphire.ElementType;
 import org.eclipse.sapphire.Value;
 import org.eclipse.sapphire.ValueProperty;
 import org.eclipse.sapphire.modeling.annotations.DefaultValue;
+import org.eclipse.sapphire.modeling.annotations.Enablement;
 import org.eclipse.sapphire.modeling.annotations.Label;
 import org.eclipse.sapphire.modeling.annotations.NoDuplicates;
+import org.eclipse.sapphire.modeling.annotations.NumericRange;
 import org.eclipse.sapphire.modeling.annotations.Required;
 import org.eclipse.sapphire.modeling.annotations.Type;
 import org.eclipse.sapphire.modeling.xml.annotations.XmlBinding;
@@ -69,5 +71,19 @@ public interface Column extends Element
 	Value<Boolean> getIsPrimaryKey();
 	void setIsPrimaryKey( String value );
 	void setIsPrimaryKey( Boolean value );    
+	
+	// *** Size ***
+	
+	@Type( base = Integer.class )
+	@Label( standard = "size", full = "column size" )
+	@XmlBinding( path = "size" )
+	@NumericRange( min = "1" )
+	@Enablement( expr = "${ Type == 'STRING' }" )
+	
+	ValueProperty PROP_SIZE = new ValueProperty( TYPE, "Size" );
+	
+	Value<Integer> getSize();
+	void setSize( String value );
+	void setSize( Integer value );
 
 }

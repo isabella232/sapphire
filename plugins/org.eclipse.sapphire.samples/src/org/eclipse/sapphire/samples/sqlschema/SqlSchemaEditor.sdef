@@ -194,6 +194,10 @@
 						                                    <value>leading.label</value>
 						                                </hint>
 						                            </property-editor>
+                                                    <property-editor>
+                                                        <property>Size</property>
+                                                        <visible-when>${ Enabled }</visible-when>
+                                                    </property-editor>						                            
 							                    </content>
 							                </page>
 							            </properties-view>
