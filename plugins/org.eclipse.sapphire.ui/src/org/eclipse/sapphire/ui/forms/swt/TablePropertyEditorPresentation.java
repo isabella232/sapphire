@@ -673,12 +673,12 @@ public class TablePropertyEditorPresentation extends ListPropertyEditorPresentat
         
         setSelectedElements( selectionService.selection() );
         
-        final org.eclipse.sapphire.Listener selectionServiceListener = new org.eclipse.sapphire.Listener()
+        final org.eclipse.sapphire.Listener selectionServiceListener = new FilteredListener<ListSelectionChangedEvent>()
         {
             @Override
-            public void handle( final org.eclipse.sapphire.Event event )
+            protected void handleTypedEvent( final ListSelectionChangedEvent event )
             {
-                setSelectedElements( ( (ListSelectionChangedEvent) event ).after() );
+                setSelectedElements( event.after() );
             }
         };
 

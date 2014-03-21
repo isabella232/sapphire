@@ -37,7 +37,7 @@ public class ByteArrayResourceStore extends ResourceStore
     
     public ByteArrayResourceStore( final String contents )
     {
-        setContents( contents.getBytes( UTF8 ) );
+        this.contents = contents.getBytes( UTF8 );
     }
     
     public ByteArrayResourceStore( final InputStream in ) throws ResourceStoreException
@@ -47,16 +47,34 @@ public class ByteArrayResourceStore extends ResourceStore
     
     public byte[] getContents()
     {
-        return this.contents;
+        final int length = this.contents.length;
+        final byte[] copy = new byte[ length ];
+        System.arraycopy( this.contents, 0, copy, 0, length );
+        
+        return copy;
     }
 
     public void setContents( final byte[] contents )
     {
-        this.contents = contents;
+        if( contents == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        
+        final int length = contents.length;
+        final byte[] copy = new byte[ length ];
+        System.arraycopy( contents, 0, copy, 0, length );
+        
+        this.contents = copy;
     }
 
     public void setContents( final InputStream in ) throws ResourceStoreException
     {
+        if( in == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        
         try
         {
             byte[] buffer = new byte[ 16 * 1024 ];
@@ -78,7 +96,7 @@ public class ByteArrayResourceStore extends ResourceStore
             this.contents = new byte[ bufferUsedLength ];
             System.arraycopy( buffer, 0, this.contents, 0, bufferUsedLength );
         }
-        catch( IOException e )
+        catch( final IOException e )
         {
             throw new ResourceStoreException( e );
         }

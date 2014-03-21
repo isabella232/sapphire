@@ -57,9 +57,6 @@ public final class Path
     /** Constant value indicating no segments */
     private static final String[] NO_SEGMENTS = new String[0];
 
-    /** Constant value containing the empty path with no device. */
-    public static final Path EMPTY = new Path(EMPTY_STRING);
-
     /** Mask for all bits that are involved in the hash code */
     private static final int HASH_MASK = ~HAS_TRAILING;
 
@@ -68,6 +65,9 @@ public final class Path
 
     /** Constant value indicating if the current platform is Windows */
     private static final boolean WINDOWS = java.io.File.separatorChar == '\\';
+
+    /** Constant value containing the empty path with no device. */
+    public static final Path EMPTY = new Path(EMPTY_STRING);
 
     /** Constant value containing the root path with no device. */
     public static final Path ROOT = new Path(ROOT_STRING);
@@ -745,7 +745,7 @@ public final class Path
 
     public Path makeRelativeTo(Path base) {
         //can't make relative if devices are not equal
-        if (this.device != base.getDevice() && (this.device == null || !this.device.equalsIgnoreCase(base.getDevice())))
+        if (this.device == null || !this.device.equalsIgnoreCase(base.getDevice()))
             return this;
         int commonLength = matchingFirstSegments(base);
         final int differenceLength = base.segmentCount() - commonLength;

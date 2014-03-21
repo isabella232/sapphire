@@ -29,6 +29,8 @@ import java.util.TreeSet;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.sapphire.samples.internal.SapphireSamplesPlugin;
+import org.eclipse.sapphire.util.EqualsFactory;
+import org.eclipse.sapphire.util.HashCodeFactory;
 
 /**
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
@@ -179,13 +181,11 @@ public final class ZipCodeRepository
         private final String state;
         private final String city;
         
-        public IndexKey( final String zip,
-                         final String state,
-                         final String city )
+        public IndexKey( final String zip, final String state, final String city )
         {
             this.zip = zip;
-            this.state = state;
-            this.city = city;
+            this.state = ( state == null ? null : state.toLowerCase() );
+            this.city = ( city == null ? null : city.toLowerCase() );
         }
         
         public boolean equals( final Object obj )
@@ -197,33 +197,22 @@ public final class ZipCodeRepository
             
             final IndexKey k = (IndexKey) obj;
             
-            return equal( this.zip, k.zip ) && equal( this.state, k.state ) && equal( this.city, k.city );
+            return EqualsFactory
+                    .start()
+                    .add( this.zip, k.zip )
+                    .add( this.state, k.state )
+                    .add( this.city, k.city )
+                    .result();
         }
         
         public int hashCode()
         {
-            int hashCode = ( this.zip != null ? this.zip.toLowerCase().hashCode() : 1 );
-            hashCode *= ( this.state != null ? this.state.toLowerCase().hashCode() : 1 );
-            hashCode *= ( this.city != null ? this.city.toLowerCase().hashCode() : 1 );
-            
-            return hashCode;
-        }
-
-        private static boolean equal( final String obj1, 
-                                      final String obj2 )
-        {
-            boolean objectsAreEqual = false;
-            
-            if( obj1 == obj2 )
-            {
-                objectsAreEqual = true;
-            }
-            else if( obj1 != null && obj2 != null )
-            {
-                objectsAreEqual = obj1.equalsIgnoreCase( obj2 );
-            }
-
-            return objectsAreEqual;
+            return HashCodeFactory
+                    .start()
+                    .add( this.zip )
+                    .add( this.state )
+                    .add( this.city )
+                    .result();
         }
     }
 

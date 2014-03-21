@@ -76,7 +76,7 @@ public class XmlEditorResourceStore extends XmlResourceStore
     private Element rootModelElement;
     private final Map<Node,Object> xmlNodeToModelElementsMap;
     private final INodeAdapter xmlNodeListener;
-    private final Scrubber scrubber;
+    private Scrubber scrubber;
     private final XmlSourceEditorService sourceEditorService;
     
     public XmlEditorResourceStore( final SapphireEditor sapphireEditor, final StructuredTextEditor sourceEditor )
@@ -87,8 +87,6 @@ public class XmlEditorResourceStore extends XmlResourceStore
         this.sourceEditor = sourceEditor;
         this.rootModelElement = null;
         this.xmlNodeToModelElementsMap = new IdentityHashMap<Node,Object>();
-        this.scrubber = new Scrubber();
-        this.scrubber.start();
         this.sourceEditorService = new XmlSourceEditorService();
         
         final ISourceEditingTextTools sourceEditingTextTools = (ISourceEditingTextTools) this.sourceEditor.getAdapter( ISourceEditingTextTools.class );
@@ -239,6 +237,12 @@ public class XmlEditorResourceStore extends XmlResourceStore
     {
         synchronized( this.xmlNodeToModelElementsMap )
         {
+            if( this.scrubber == null )
+            {
+                this.scrubber = new Scrubber();
+                this.scrubber.start();
+            }
+            
             final Object object = this.xmlNodeToModelElementsMap.get( xmlNode );
             
             if( object == null )

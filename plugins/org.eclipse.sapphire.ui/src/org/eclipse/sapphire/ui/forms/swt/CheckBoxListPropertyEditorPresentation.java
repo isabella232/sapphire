@@ -374,12 +374,12 @@ public final class CheckBoxListPropertyEditorPresentation extends ListPropertyEd
             }
         );
         
-        final Listener selectionServiceListener = new Listener()
+        final Listener selectionServiceListener = new FilteredListener<ListSelectionChangedEvent>()
         {
             @Override
-            public void handle( final Event event )
+            protected void handleTypedEvent( final ListSelectionChangedEvent event )
             {
-                setSelectedElements( ( (ListSelectionChangedEvent) event ).after() );
+                setSelectedElements( event.after() );
             }
         };
 
