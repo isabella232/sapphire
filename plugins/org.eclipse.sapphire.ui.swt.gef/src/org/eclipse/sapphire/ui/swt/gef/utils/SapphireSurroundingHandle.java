@@ -20,7 +20,6 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.GraphicalEditPart;
-import org.eclipse.gef.editpolicies.ResizableEditPolicy;
 import org.eclipse.gef.handles.AbstractHandle;
 import org.eclipse.gef.tools.DragEditPartsTracker;
 import org.eclipse.sapphire.ui.swt.gef.DiagramConfigurationManager;
@@ -75,7 +74,7 @@ public class SapphireSurroundingHandle extends AbstractHandle
 	 *            environment.
 	 * @param supportedResizeDirections
 	 *            The supported resize directions (see
-	 *            {@link ResizableEditPolicy#getResizeDirections()})
+	 *            {@link org.eclipse.gef.editpolicies.ResizableEditPolicy#getResizeDirections()})
 	 * @param movable
 	 *            Indicates, if moving the owner edit-part via this handle is
 	 *            supported.

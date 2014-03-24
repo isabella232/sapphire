@@ -11,7 +11,6 @@
 
 package org.eclipse.sapphire.ui.swt.gef.commands;
 
-import org.eclipse.draw2d.Connection;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.sapphire.ui.diagram.ConnectionService;
 import org.eclipse.sapphire.ui.diagram.DiagramConnectionPart;
@@ -46,7 +45,7 @@ public class CreateConnectionCommand extends Command {
 	 *            details
 	 * @throws IllegalArgumentException
 	 *             if source is null
-	 * @see Connection#setLineStyle(int)
+	 * @see org.eclipse.draw2d.Connection#setLineStyle(int)
 	 */
 	public CreateConnectionCommand(DiagramNodeModel source, IDiagramConnectionDef connDef) {
 		if (source == null) {

@@ -126,7 +126,6 @@ public class SapphireStackLayout extends AbstractLayout
 	 * Sets the layout constraint of the given figure. The constraints can only
 	 * be of type {@link Rectangle}.
 	 * 
-	 * @see LayoutManager#setConstraint(IFigure, Object)
 	 * @since 2.0
 	 */
 	public void setConstraint(IFigure figure, Object newConstraint) 

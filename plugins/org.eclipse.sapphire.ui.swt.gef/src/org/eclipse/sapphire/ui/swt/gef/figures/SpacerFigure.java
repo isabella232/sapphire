@@ -12,7 +12,6 @@
 package org.eclipse.sapphire.ui.swt.gef.figures;
 
 import org.eclipse.draw2d.Figure;
-import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.sapphire.ui.Point;
 import org.eclipse.sapphire.ui.swt.gef.presentation.SpacerPresentation;
@@ -30,9 +29,6 @@ public class SpacerFigure extends Figure
 		this.spacerPresentation = spacerPresentation;
 	}
 	
-	/**
-	 * @see IFigure#getMinimumSize(int, int)
-	 */
 	public Dimension getMinimumSize(int w, int h) 
 	{
 		Point size = this.spacerPresentation.getMinimunSize();
@@ -40,9 +36,6 @@ public class SpacerFigure extends Figure
 		return d;
 	}
 
-	/**
-	 * @see IFigure#getMaximumSize()
-	 */
 	public Dimension getMaximumSize() 
 	{
 		Point size = this.spacerPresentation.getMaximumSize();
@@ -50,9 +43,6 @@ public class SpacerFigure extends Figure
 		return d;
 	}
 
-	/**
-	 * @see IFigure#getPreferredSize(int, int)
-	 */
 	public Dimension getPreferredSize(int w, int h) 
 	{
 		Point size = this.spacerPresentation.getSize();
@@ -66,9 +56,6 @@ public class SpacerFigure extends Figure
 		return d;
 	}
 
-	/**
-	 * @see IFigure#getSize(int, int)
-	 */
 	public Dimension getSize(int w, int h) 
 	{
 		return getPreferredSize(w, h);

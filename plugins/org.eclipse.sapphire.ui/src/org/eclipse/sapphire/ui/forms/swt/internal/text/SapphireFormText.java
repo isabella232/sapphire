@@ -26,7 +26,6 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.sapphire.ImageData;
 import org.eclipse.sapphire.ui.forms.swt.SwtUtil;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.SWTException;
 import org.eclipse.swt.accessibility.ACC;
 import org.eclipse.swt.accessibility.Accessible;
 import org.eclipse.swt.accessibility.AccessibleAdapter;
@@ -71,8 +70,6 @@ import org.eclipse.swt.widgets.TypedListener;
 import org.eclipse.ui.forms.HyperlinkSettings;
 import org.eclipse.ui.forms.events.HyperlinkEvent;
 import org.eclipse.ui.forms.events.IHyperlinkListener;
-import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.ui.forms.widgets.TableWrapLayout;
 import org.eclipse.ui.internal.forms.Messages;
 
 /**
@@ -164,8 +161,8 @@ import org.eclipse.ui.internal.forms.Messages;
  * Finally, if all you need is to wrap text, use SWT Label widget and create it
  * with SWT.WRAP style.
  * 
- * @see FormToolkit
- * @see TableWrapLayout
+ * @see org.eclipse.ui.forms.widgets.FormToolkit
+ * @see org.eclipse.ui.forms.widgets.TableWrapLayout
  * @author IBM Corporation
  */
 
@@ -1007,7 +1004,7 @@ public class SapphireFormText extends Canvas {
      * 
      * @param listener
      *            the listener
-     * @exception SWTException
+     * @exception org.eclipse.swt.SWTException
      *                <ul>
      *                <li>ERROR_WIDGET_DISPOSED - if the receiver has been
      *                disposed</li>
@@ -1035,7 +1032,7 @@ public class SapphireFormText extends Canvas {
      * 
      * @param listener
      *            the listener
-     * @exception SWTException
+     * @exception org.eclipse.swt.SWTException
      *                <ul>
      *                <li>ERROR_WIDGET_DISPOSED - if the receiver has been
      *                disposed</li>
@@ -1061,7 +1058,7 @@ public class SapphireFormText extends Canvas {
      * <p>
      * 
      * @return selected text, or an empty String if there is no selection.
-     * @exception SWTException
+     * @exception org.eclipse.swt.SWTException
      *                <ul>
      *                <li>ERROR_WIDGET_DISPOSED - if the receiver has been
      *                disposed</li>

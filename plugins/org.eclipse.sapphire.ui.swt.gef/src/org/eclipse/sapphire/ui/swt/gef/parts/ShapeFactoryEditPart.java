@@ -20,7 +20,6 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.GraphicalEditPart;
-import org.eclipse.gef.editparts.AbstractEditPart;
 import org.eclipse.sapphire.ui.swt.gef.DiagramConfigurationManager;
 import org.eclipse.sapphire.ui.swt.gef.model.ShapeFactoryModel;
 import org.eclipse.sapphire.ui.swt.gef.model.ShapeModel;
@@ -83,8 +82,6 @@ public class ShapeFactoryEditPart extends ShapeEditPart
 	
 	/**
 	 * Remove the child's Figure from the {@link #getContentPane() contentPane}.
-	 * 
-	 * @see AbstractEditPart#removeChildVisual(EditPart)
 	 */
 	@Override
 	protected void removeChildVisual(EditPart childEditPart) 

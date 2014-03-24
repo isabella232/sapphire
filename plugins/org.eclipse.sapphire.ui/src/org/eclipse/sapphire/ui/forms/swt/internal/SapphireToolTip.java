@@ -16,8 +16,6 @@ package org.eclipse.sapphire.ui.forms.swt.internal;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.jface.viewers.ColumnViewer;
-import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.sapphire.ui.forms.swt.Popup;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
@@ -322,8 +320,8 @@ public abstract class SapphireToolTip
      * @return the area responsible for the tooltip creation or
      *         <code>null</code> this could be any object describing the area
      *         (e.g. the {@link Control} onto which the tooltip is bound to, a
-     *         part of this area e.g. for {@link ColumnViewer} this could be a
-     *         {@link ViewerCell})
+     *         part of this area e.g. for {@link org.eclipse.jface.viewers.ColumnViewer} this could be a
+     *         {@link org.eclipse.jface.viewers.ViewerCell})
      */
     protected Object getToolTipArea(Event event) {
         return this.control;

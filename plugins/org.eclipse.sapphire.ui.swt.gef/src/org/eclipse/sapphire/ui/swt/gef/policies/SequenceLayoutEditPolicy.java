@@ -23,7 +23,6 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.RequestConstants;
-import org.eclipse.gef.editpolicies.LayoutEditPolicy;
 import org.eclipse.gef.editpolicies.OrderedLayoutEditPolicy;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gef.requests.DropRequest;
@@ -41,9 +40,6 @@ public abstract class SequenceLayoutEditPolicy extends OrderedLayoutEditPolicy {
 
 	private Polyline insertionLine;
 
-	/**
-	 * @see LayoutEditPolicy#eraseLayoutTargetFeedback(Request)
-	 */
 	protected void eraseLayoutTargetFeedback(Request request) {
 		if (insertionLine != null) {
 			removeFeedback(insertionLine);
@@ -62,8 +58,9 @@ public abstract class SequenceLayoutEditPolicy extends OrderedLayoutEditPolicy {
 	 *            the Request
 	 * @return the index for the insertion reference
 	 */
+	
 	protected int getFeedbackIndexFor(Request request) {
-		List children = getHost().getChildren();
+        List<?> children = getHost().getChildren();
 		if (children.isEmpty())
 			return -1;
 
@@ -127,11 +124,8 @@ public abstract class SequenceLayoutEditPolicy extends OrderedLayoutEditPolicy {
 		return candidate;
 	}
 
-	/**
-	 * @see OrderedLayoutEditPolicy#getInsertionReference(Request)
-	 */
 	protected EditPart getInsertionReference(Request request) {
-		List children = getHost().getChildren();
+		List<?> children = getHost().getChildren();
 
 		if (request.getType().equals(RequestConstants.REQ_CREATE)) {
 			int i = getFeedbackIndexFor(request);
@@ -142,7 +136,7 @@ public abstract class SequenceLayoutEditPolicy extends OrderedLayoutEditPolicy {
 
 		int index = getFeedbackIndexFor(request);
 		if (index != -1) {
-			List selection = getHost().getViewer().getSelectedEditParts();
+			List<?> selection = getHost().getViewer().getSelectedEditParts();
 			do {
 				EditPart editpart = (EditPart) children.get(index);
 				if (!selection.contains(editpart))
@@ -180,8 +174,6 @@ public abstract class SequenceLayoutEditPolicy extends OrderedLayoutEditPolicy {
 
 	/**
 	 * Shows an insertion line if there is one or more current children.
-	 * 
-	 * @see LayoutEditPolicy#showLayoutTargetFeedback(Request)
 	 */
 	protected void showLayoutTargetFeedback(Request request) {
 		if (getHost().getChildren().size() == 0)

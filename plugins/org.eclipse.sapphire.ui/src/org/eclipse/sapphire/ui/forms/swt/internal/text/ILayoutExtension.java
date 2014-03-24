@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.sapphire.ui.forms.swt.internal.text;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.forms.widgets.ColumnLayout;
-import org.eclipse.ui.forms.widgets.TableWrapLayout;
 /**
  * Classes that extend abstract class Layout and implement this interface can
  * take part in layout computation of the TableWrapLayout manager. This layout
@@ -20,8 +18,8 @@ import org.eclipse.ui.forms.widgets.TableWrapLayout;
  * renders tables). Custom layout managers that implement this interface will
  * allow TableWrapLayout to properly compute width hint to pass.
  * 
- * @see TableWrapLayout
- * @see ColumnLayout
+ * @see org.eclipse.ui.forms.widgets.TableWrapLayout
+ * @see org.eclipse.ui.forms.widgets.ColumnLayout
  * @since 3.0
  * @author IBM Combination
  */

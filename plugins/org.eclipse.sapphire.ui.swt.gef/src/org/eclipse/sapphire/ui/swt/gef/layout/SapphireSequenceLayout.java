@@ -16,9 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.draw2d.AbstractHintLayout;
-import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.LayoutManager;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
@@ -666,9 +664,7 @@ public class SapphireSequenceLayout extends AbstractHintLayout {
 
 	/**
 	 * Sets the layout constraint of the given figure. The constraints can only
-	 * be of type {@link GridData}.
-	 * 
-	 * @see LayoutManager#setConstraint(IFigure, Object)
+	 * be of type {@link org.eclipse.draw2d.GridData}.
 	 */
 	public void setConstraint(IFigure figure, Object newConstraint) {
 		super.setConstraint(figure, newConstraint);

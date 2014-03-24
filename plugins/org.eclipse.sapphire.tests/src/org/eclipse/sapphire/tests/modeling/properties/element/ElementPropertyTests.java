@@ -11,7 +11,6 @@
 
 package org.eclipse.sapphire.tests.modeling.properties.element;
 
-import org.eclipse.sapphire.ElementHandle;
 import org.eclipse.sapphire.ElementType;
 import org.eclipse.sapphire.tests.SapphireTestCase;
 import org.eclipse.sapphire.tests.modeling.properties.element.TestElement.Child;
@@ -58,7 +57,7 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
     
     /**
-     * Tests {@link ElementHandle#content()} method on a homogeneous element property.
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content()} method on a homogeneous element property.
      */
     
     @Test
@@ -74,7 +73,7 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean )} method on a homogeneous element property.
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean )} method on a homogeneous element property.
      */
 
     @Test
@@ -91,7 +90,7 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, ElementType )} method on a homogeneous element property.
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, ElementType )} method on a homogeneous element property.
      */
 
     @Test
@@ -108,8 +107,8 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, ElementType )} method on a homogeneous element property when the
-     * property is empty, force is allowed and the specified type is not among possible types.
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, ElementType )} method on a homogeneous element property
+     * when the property is empty, force is allowed and the specified type is not among possible types.
      */
 
     @Test( expected = IllegalArgumentException.class )
@@ -120,7 +119,8 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, ElementType )} method on a homogeneous element property with a null type.
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, ElementType )} method on a homogeneous element property
+     * with a null type.
      */
 
     @Test
@@ -133,7 +133,7 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, Class )} method on a homogeneous element property.
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, Class )} method on a homogeneous element property.
      */
 
     @Test
@@ -150,8 +150,8 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
     
     /**
-     * Tests {@link ElementHandle#content( boolean, Class )} method on a homogeneous element property when the
-     * property is empty, force is allowed and the specified type is not among possible types.
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, Class )} method on a homogeneous element property when
+     * the property is empty, force is allowed and the specified type is not among possible types.
      */
 
     @Test( expected = IllegalArgumentException.class )
@@ -162,7 +162,8 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, Class )} method on a homogeneous element property with a null type.
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, Class )} method on a homogeneous element property with
+     * a null type.
      */
 
     @Test
@@ -175,7 +176,7 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content()} method on a heterogeneous element property.
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content()} method on a heterogeneous element property.
      */
     
     @Test
@@ -191,7 +192,7 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean )} method on a heterogeneous element property.
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean )} method on a heterogeneous element property.
      */
 
     @Test( expected = IllegalArgumentException.class )
@@ -208,7 +209,7 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean )} method on a heterogeneous element property when
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean )} method on a heterogeneous element property when
      * element must be created but expected type is not specified.
      */
 
@@ -220,7 +221,7 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, ElementType )} method on a heterogeneous element property.
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, ElementType )} method on a heterogeneous element property.
      */
 
     @Test
@@ -237,8 +238,8 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, ElementType )} method on a heterogeneous element property when the
-     * property is not empty, force is not allowed and a different type is specified. 
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, ElementType )} method on a heterogeneous element property
+     * when the property is not empty, force is not allowed and a different type is specified. 
      */
 
     @Test( expected = IllegalArgumentException.class )
@@ -253,8 +254,8 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, ElementType )} method on a heterogeneous element property when the
-     * property is not empty, force is allowed and a different type is specified. 
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, ElementType )} method on a heterogeneous element property
+     * when the property is not empty, force is allowed and a different type is specified. 
      */
 
     @Test
@@ -272,8 +273,8 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, ElementType )} method on a heterogeneous element property when the
-     * property is empty, force is not allowed and a type is not specified
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, ElementType )} method on a heterogeneous element property
+     * when the property is empty, force is not allowed and a type is not specified
      */
 
     @Test
@@ -286,8 +287,8 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, ElementType )} method on a heterogeneous element property when the
-     * property is not empty, force is not allowed and a type is not specified
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, ElementType )} method on a heterogeneous element property
+     * when the property is not empty, force is not allowed and a type is not specified
      */
 
     @Test
@@ -305,8 +306,8 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, ElementType )} method on a heterogeneous element property when the
-     * property is empty, force is allowed and a type is not specified
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, ElementType )} method on a heterogeneous element property
+     * when the property is empty, force is allowed and a type is not specified
      */
 
     @Test( expected = IllegalArgumentException.class )
@@ -317,8 +318,8 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, ElementType )} method on a heterogeneous element property when the
-     * property is not empty, force is allowed and a type is not specified
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, ElementType )} method on a heterogeneous element property
+     * when the property is not empty, force is allowed and a type is not specified
      */
 
     @Test( expected = IllegalArgumentException.class )
@@ -333,8 +334,8 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, ElementType )} method on a heterogeneous element property when the
-     * property is empty, force is allowed and the specified type is not among possible types.
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, ElementType )} method on a heterogeneous element property
+     * when the property is empty, force is allowed and the specified type is not among possible types.
      */
 
     @Test( expected = IllegalArgumentException.class )
@@ -345,8 +346,8 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, Class )} method on a heterogeneous element property when the
-     * property is not empty, force is not allowed and a different type is specified. 
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, Class )} method on a heterogeneous element property when
+     * the property is not empty, force is not allowed and a different type is specified. 
      */
 
     @Test( expected = IllegalArgumentException.class )
@@ -361,8 +362,8 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, Class )} method on a heterogeneous element property when the
-     * property is not empty, force is allowed and a different type is specified. 
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, Class )} method on a heterogeneous element property when
+     * the property is not empty, force is allowed and a different type is specified. 
      */
 
     @Test
@@ -380,8 +381,8 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, Class )} method on a heterogeneous element property when the
-     * property is empty, force is not allowed and a type is not specified
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, Class )} method on a heterogeneous element property when
+     * the property is empty, force is not allowed and a type is not specified
      */
 
     @Test
@@ -394,8 +395,8 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, Class )} method on a heterogeneous element property when the
-     * property is not empty, force is not allowed and a type is not specified
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, Class )} method on a heterogeneous element property when
+     * the property is not empty, force is not allowed and a type is not specified
      */
 
     @Test
@@ -413,8 +414,8 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, Class )} method on a heterogeneous element property when the
-     * property is empty, force is allowed and a type is not specified
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, Class )} method on a heterogeneous element property when
+     * the property is empty, force is allowed and a type is not specified
      */
 
     @Test( expected = IllegalArgumentException.class )
@@ -425,8 +426,8 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, Class )} method on a heterogeneous element property when the
-     * property is not empty, force is allowed and a type is not specified
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, Class )} method on a heterogeneous element property when
+     * the property is not empty, force is allowed and a type is not specified
      */
 
     @Test( expected = IllegalArgumentException.class )
@@ -441,8 +442,8 @@ public final class ElementPropertyTests extends SapphireTestCase
     }
 
     /**
-     * Tests {@link ElementHandle#content( boolean, Class )} method on a heterogeneous element property when the
-     * property is empty, force is allowed and the specified type is not among possible types.
+     * Tests {@link org.eclipse.sapphire.ElementHandle#content( boolean, Class )} method on a heterogeneous element property when
+     * the property is empty, force is allowed and the specified type is not among possible types.
      */
 
     @Test( expected = IllegalArgumentException.class )

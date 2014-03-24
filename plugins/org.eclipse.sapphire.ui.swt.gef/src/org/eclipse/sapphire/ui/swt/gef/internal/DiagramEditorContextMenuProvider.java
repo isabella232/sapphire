@@ -19,7 +19,6 @@ import java.util.Map;
 
 import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.gef.GraphicalEditPart;
-import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
@@ -223,9 +222,6 @@ public final class DiagramEditorContextMenuProvider extends ContextMenuProvider
         }
     }
     
-	/**
-	 * @see IMenuListener#menuAboutToShow(IMenuManager)
-	 */
     @Override
 	public void menuAboutToShow(IMenuManager menu) 
     {
