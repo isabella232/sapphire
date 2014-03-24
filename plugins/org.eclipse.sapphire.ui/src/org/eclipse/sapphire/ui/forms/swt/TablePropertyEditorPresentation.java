@@ -532,8 +532,6 @@ public class TablePropertyEditorPresentation extends ListPropertyEditorPresentat
             );
         }
         
-        @SuppressWarnings( "rawtypes" ) // IStructuredContentProvider is parameterized since Eclipse 4.4
-        
         final IStructuredContentProvider contentProvider = new IStructuredContentProvider()
         {
             public Object[] getElements( final Object inputElement )
@@ -2127,8 +2125,7 @@ public class TablePropertyEditorPresentation extends ListPropertyEditorPresentat
         }
         
         @Override
-        @SuppressWarnings( "rawtypes" ) // Viewer is parameterized since Eclipse 4.4
-        
+
         public int compare( final Viewer viewer, final Object x, final Object y )
         {
             int result = this.columnHandler.comparePropertyValues( ( (TableRow) x ).element(), ( (TableRow) y ).element() );

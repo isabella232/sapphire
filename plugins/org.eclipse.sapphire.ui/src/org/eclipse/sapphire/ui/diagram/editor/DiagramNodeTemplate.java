@@ -40,12 +40,10 @@ import org.eclipse.sapphire.modeling.CapitalizationType;
 import org.eclipse.sapphire.modeling.el.FunctionResult;
 import org.eclipse.sapphire.ui.SapphireActionSystem;
 import org.eclipse.sapphire.ui.SapphirePart;
-import org.eclipse.sapphire.ui.diagram.ConnectionService;
 import org.eclipse.sapphire.ui.diagram.def.IDiagramConnectionDef;
 import org.eclipse.sapphire.ui.diagram.def.IDiagramExplicitConnectionBindingDef;
 import org.eclipse.sapphire.ui.diagram.def.IDiagramNodeDef;
 import org.eclipse.sapphire.ui.diagram.internal.DiagramEmbeddedConnectionTemplate;
-import org.eclipse.sapphire.ui.diagram.internal.StandardDiagramConnectionPart;
 import org.eclipse.sapphire.util.CollectionsUtil;
 
 /**
@@ -236,17 +234,19 @@ public final class DiagramNodeTemplate extends SapphirePart
         return ret;
     }
     
+    @SuppressWarnings( "unchecked" )
+    
     public DiagramNodePart createNewDiagramNode()
     {
     	Element newElement = null;
-		ElementList<?> list = this.modelElement.property(this.modelProperty);
+		ElementList<Element> list = this.modelElement.property(this.modelProperty);
 		if (this.modelElementType == null)
 		{
 			newElement = list.insert();
 		}
 		else
 		{
-			final Class cl = (Class<?>) this.modelElementType.artifact();
+			final Class<Element> cl = (Class<Element>) this.modelElementType.artifact();
 			if (cl != null)
 			{
 				newElement = list.insert(cl);

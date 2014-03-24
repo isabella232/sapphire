@@ -11,9 +11,9 @@
 
 package org.eclipse.sapphire.ui.swt.gef;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.geometry.Point;
@@ -31,8 +31,8 @@ import org.eclipse.sapphire.ui.swt.gef.utils.MultiValueMap;
 
 public class SapphireConnectionRouter 
 {
-	private MultiValueMap connections = new MultiValueMap();
-	private MultiValueMap connectionIndices = new MultiValueMap();
+	private MultiValueMap<HashKey,DiagramConnectionModel> connections = new MultiValueMap<HashKey,DiagramConnectionModel>();
+	private MultiValueMap<HashKey,Integer> connectionIndices = new MultiValueMap<HashKey,Integer>();
 	private HashMap<DiagramConnectionModel, Integer> connectionIndexMap = 
 					new HashMap<DiagramConnectionModel, Integer>();
 	private int separation = 30;
@@ -129,10 +129,9 @@ public class SapphireConnectionRouter
 	
 	public Point route(DiagramConnectionModel conn) 
 	{		
-		HashKey connectionKey = new HashKey(conn);
-		ArrayList connectionList = connections.get(connectionKey);
+		final HashKey connectionKey = new HashKey(conn);
 
-		if (connectionList != null) 
+		if( this.connections.containsKey( connectionKey ) ) 
 		{
 			PointList points = new PointList();
 			points.addPoint(getNodeLocation(conn.getSourceNode()));
@@ -148,6 +147,7 @@ public class SapphireConnectionRouter
 		{
 			addConnectionKey(conn, connectionKey, -1);
 		}
+		
 		return null;
 	}
 	
@@ -204,7 +204,7 @@ public class SapphireConnectionRouter
 	
 	private int getNextConnectionIndex(HashKey connectionKey)
 	{
-		ArrayList indices = connectionIndices.get(connectionKey);
+		final Set<Integer> indices = connectionIndices.get(connectionKey);
 		int[] intArr = new int[indices.size()];
 		int i = 0;
 		for (Object obj : indices)

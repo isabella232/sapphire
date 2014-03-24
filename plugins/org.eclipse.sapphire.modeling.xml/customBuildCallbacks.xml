@@ -45,6 +45,13 @@
       javacchome="${basedir}/javacc"
       static="false"/>
 
+  	<replace 
+      dir=".javacc" 
+      summary="true" 
+      includes="**/*.java" 
+      token="public class" 
+      value='@SuppressWarnings("all") public class' />  	
+    
   </target>
 
 

@@ -120,7 +120,6 @@ public final class CheckBoxListPropertyEditorPresentation extends ListPropertyEd
     }
 
     @Override
-    @SuppressWarnings( "unchecked" ) // TableViewer is parameterized since Eclipse 4.4
     
     protected void createContents( final Composite parent )
     {
@@ -206,8 +205,6 @@ public final class CheckBoxListPropertyEditorPresentation extends ListPropertyEd
                 return ( (Entry) obj ).value;
             }
         };
-        
-        @SuppressWarnings( "rawtypes" ) // IStructuredContentProvider is parameterized since Eclipse 4.4
         
         final IStructuredContentProvider contentProvider = new IStructuredContentProvider()
         {

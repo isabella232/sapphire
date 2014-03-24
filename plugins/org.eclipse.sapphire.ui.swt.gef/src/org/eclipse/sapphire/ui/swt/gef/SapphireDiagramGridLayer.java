@@ -49,14 +49,12 @@ public class SapphireDiagramGridLayer extends GridLayer
 		
 		if (gridX > 0) 
 		{
-			int c = 0;
 			int i = clip.x;
 			while (i % gridX != 0)
 				i++;
 
 			for (; i < clip.x + clip.width; i += gridX) 
 			{
-				c++;
 				prepareG(g, majorLineColor, minorLineColor, i, gridX);
 				g.drawLine(i, clip.y, i, clip.y + clip.height);
 			}
@@ -64,14 +62,12 @@ public class SapphireDiagramGridLayer extends GridLayer
 
 		if (gridY > 0)
 		{
-			int c = 0;
 			int i = clip.y;
 			while (i % gridY != 0)
 				i++;
 
 			for (; i < clip.y + clip.height; i += gridY) 
 			{
-				c++;
 				prepareG(g, majorLineColor, minorLineColor, i, gridY);
 				g.drawLine(clip.x, i, clip.x + clip.width, i);
 			}

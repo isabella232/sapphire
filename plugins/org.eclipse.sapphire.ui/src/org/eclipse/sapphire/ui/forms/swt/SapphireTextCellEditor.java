@@ -60,8 +60,6 @@ import org.eclipse.swt.widgets.Text;
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
 
-@SuppressWarnings( "rawtypes" ) // StructuredViewer is parameterized since Eclipse 4.4
-
 public final class SapphireTextCellEditor extends TextCellEditor
 {
     private final Presentation presentation;

@@ -52,6 +52,13 @@
       outputdirectory=".javacc/org/eclipse/sapphire/modeling/el/parser/internal"
       javacchome="${basedir}/javacc"
       static="false"/>
+    
+  	<replace 
+      dir=".javacc" 
+      summary="true" 
+      includes="**/*.java" 
+      token="public class" 
+      value='@SuppressWarnings("all") public class' />  	
 
   </target>
 

@@ -32,7 +32,6 @@ public class DirectEditorManagerFactory
 	{
 		Value<?> property = FunctionUtil.getFunctionProperty(textPart.getLocalModelElement(), 
 				textPart.getContentFunction());
-		PropertyDef definition = property.definition();
 		PossibleValuesService possibleValuesService = property.service(PossibleValuesService.class);
 		if (possibleValuesService != null)
 		{

@@ -82,7 +82,7 @@ public class DummyEdgeCreator
 				{
 					Node sourceNode = candidateList.getNode(index++);
 					Node targetNode = candidateList.getNode(index);
-					Edge edge = newDummyEdge(targetNode, sourceNode);
+					newDummyEdge(targetNode, sourceNode);
 				}
 			}
 		}

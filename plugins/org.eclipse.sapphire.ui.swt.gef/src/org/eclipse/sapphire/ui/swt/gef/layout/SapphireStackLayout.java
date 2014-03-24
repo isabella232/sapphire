@@ -43,11 +43,13 @@ public class SapphireStackLayout extends AbstractLayout
 		this.marginInsets = LayoutUtil.calculateMargin(def);
 	}
 	
-	@Override
+    @Override
+    @SuppressWarnings( "unchecked" )
+    
 	protected Dimension calculatePreferredSize(IFigure container, int wHint, int hHint) 
 	{
 		Insets insets = container.getInsets();
-		Dimension size = getStackedChildrenSize(container.getChildren());
+		Dimension size = getStackedChildrenSize((List<IFigure>)container.getChildren());
 		size.width += this.marginInsets.left + this.marginInsets.right;
 		size.height += this.marginInsets.top + this.marginInsets.bottom;
 		return size.expand(insets.getWidth(), insets.getHeight())
@@ -70,10 +72,10 @@ public class SapphireStackLayout extends AbstractLayout
 		return parent.getClientArea().getLocation();
 	}
 	
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings( "unchecked" )
 	public void layout(IFigure parent) 
 	{
-		List children = parent.getChildren();
+		List<IFigure> children = parent.getChildren();
 		if (children.size() == 0)
 		{
 			return;
@@ -169,7 +171,7 @@ public class SapphireStackLayout extends AbstractLayout
 		return new Point(offsetX, offsetY);
 	}
 	
-	private Dimension getStackedChildrenSize(List children)
+	private Dimension getStackedChildrenSize(List<IFigure> children)
 	{
 		Dimension size = new Dimension(0, 0);
 		for (Object child : children)

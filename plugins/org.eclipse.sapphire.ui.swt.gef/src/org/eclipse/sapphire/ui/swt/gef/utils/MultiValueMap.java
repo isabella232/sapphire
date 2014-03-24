@@ -1,103 +1,141 @@
-/*******************************************************************************
- * Copyright (c) 2000, 2010 IBM Corporation and others.
+/******************************************************************************
+ * Copyright (c) 2014 Oracle
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     IBM Corporation - initial API and implementation
- *******************************************************************************/
+ *    Konstantin Komissarchik - initial implementation and ongoing maintenance
+ ******************************************************************************/
 
 package org.eclipse.sapphire.ui.swt.gef.utils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import org.eclipse.sapphire.util.SetFactory;
 
 /**
- * @author <a href="mailto:shenxue.zhou@oracle.com">Shenxue Zhou</a>
+ * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
 
-public class MultiValueMap {
-	private HashMap map = new HashMap();
-
-	public ArrayList get(Object key) {
-		Object value = map.get(key);
-		if (value == null)
-			return null;
-
-		if (value instanceof ArrayList)
-			return (ArrayList) value;
-		ArrayList v = new ArrayList(1);
-		v.add(value);
-		return v;
-	}
-
-	public void put(Object key, Object value) {
-		Object existingValues = map.get(key);
-		if (existingValues == null) {
-			map.put(key, value);
-			return;
-		}
-		if (existingValues instanceof ArrayList) {
-			ArrayList v = (ArrayList) existingValues;
-			if (!v.contains(value))
-				v.add(value);
-			return;
-		}
-		if (existingValues != value) {
-			ArrayList v = new ArrayList(2);
-			v.add(existingValues);
-			v.add(value);
-			map.put(key, v);
-		}
-	}
-
-	public int remove(Object key, Object value) {
-		Object existingValues = map.get(key);
-		if (existingValues != null) {
-			if (existingValues instanceof ArrayList) {
-				ArrayList v = (ArrayList) existingValues;
-				int result = v.indexOf(value);
-				if (result == -1)
-					return -1;
-				v.remove(result);
-				if (v.isEmpty())
-					map.remove(key);
-				return result;
-			}
-			if (map.remove(key) != null)
-				return 0;
-		}
-		return -1;
-	}
-
-	public Object removeValue(Object value) {
-		Iterator iter = map.values().iterator();
-		Object current;
-		while (iter.hasNext()) {
-			current = iter.next();
-			if (value.equals(current)) {
-				iter.remove();
-				return value;
-			} else if (current instanceof List) {
-				if (((List) current).remove(value)) {
-					if (((List) current).isEmpty())
-						iter.remove();
-					return value;
-				}
-			}
-		}
-		return null;
-	}
-
-	public int size() {
-		return map.size();
-	}
-	
-	public void clear() {
-		map.clear();
-	}
+public final class MultiValueMap<K,V>
+{
+    private final Map<K,Object> map = new HashMap<K,Object>();
+    
+    @SuppressWarnings( "unchecked" )
+    
+    public Set<V> get( final K key )
+    {
+        if( key == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        
+        final Object value = this.map.get( key );
+        
+        if( value == null )
+        {
+            return null;
+        }
+        
+        final SetFactory<V> valueSetFactory = SetFactory.start();
+        
+        if( value instanceof Set )
+        {
+            for( final Object obj : (Set<?>) value )
+            {
+                valueSetFactory.add( (V) obj );
+            }
+        }
+        else
+        {
+            valueSetFactory.add( (V) value );
+        }
+        
+        return valueSetFactory.result();
+    }
+    
+    @SuppressWarnings( "unchecked" )
+    
+    public void put( final K key, final V value )
+    {
+        if( key == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        
+        if( value != null )
+        {
+            final Object existing = this.map.get( key );
+            
+            if( existing == null )
+            {
+                this.map.put( key, value );
+            }
+            else if( existing instanceof Set )
+            {
+                ( (Set<V>) existing ).add( value );
+            }
+            else if( ! existing.equals( value ) )
+            {
+                final Set<V> set = new HashSet<V>( 2 );
+                set.add( (V) existing );
+                set.add( value );
+                this.map.put( key, set );
+            }
+        }
+    }
+    
+    public void remove( final K key, final V value )
+    {
+        if( key == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        
+        if( value == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        
+        final Object existing = this.map.get( key );
+        
+        if( existing != null )
+        {
+            if( existing instanceof Set )
+            {
+                final Set<?> set = (Set<?>) existing;
+                
+                set.remove( value );
+                
+                if( set.isEmpty() )
+                {
+                    this.map.remove( key );
+                }
+            }
+            else if( existing.equals( value ) )
+            {
+                this.map.remove( key );
+            }
+        }
+    }
+    
+    public boolean containsKey( final K key )
+    {
+        return this.map.containsKey( key );
+    }
+    
+    public int size()
+    {
+        return this.map.size();
+    }
+    
+    public void clear()
+    {
+        this.map.clear();
+    }
 }

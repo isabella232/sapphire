@@ -33,7 +33,6 @@ import java.util.*;
 import java.math.*;
 import org.eclipse.sapphire.modeling.el.*;
 
-@SuppressWarnings( "all" )
 public class ExpressionLanguageParserImpl 
 {
 }

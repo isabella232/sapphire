@@ -33,7 +33,6 @@ package org.eclipse.sapphire.modeling.xml.dtd.internal;
 import java.util.*;
 import org.eclipse.sapphire.modeling.xml.schema.*;
 
-@SuppressWarnings( "all" )
 public class DtdParserImpl
 {
     public final XmlDocumentSchema.Factory schema = new XmlDocumentSchema.Factory();

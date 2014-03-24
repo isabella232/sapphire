@@ -470,8 +470,6 @@ public class TextFieldPropertyEditorPresentation extends ValuePropertyEditorPres
         }
     }
 
-    @SuppressWarnings( "rawtypes" ) // LabelProvider is parameterized since Eclipse 4.4
-    
     private static final class ContentProposalLabelProvider extends LabelProvider
     {
         @Override

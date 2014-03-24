@@ -34,7 +34,6 @@ import org.eclipse.sapphire.ui.swt.gef.model.DiagramModel;
 import org.eclipse.sapphire.ui.swt.gef.model.DiagramNodeModel;
 import org.eclipse.sapphire.ui.swt.gef.parts.DiagramConnectionLabelEditPart;
 import org.eclipse.sapphire.ui.swt.gef.parts.DiagramNodeEditPart;
-import org.eclipse.sapphire.ui.swt.gef.parts.IConfigurationManagerHolder;
 import org.eclipse.sapphire.ui.swt.gef.presentation.DiagramPresentation;
 
 /**
@@ -101,7 +100,6 @@ public class DiagramXYLayoutEditPolicy extends XYLayoutEditPolicy
 			rectangle = (Rectangle) getConstraintFor(request);
 			pt = new Point(rectangle.x, rectangle.y);
 		}
-		IConfigurationManagerHolder host = (IConfigurationManagerHolder)getHost();
 		if (request.getNewObjectType() == DiagramNodeTemplate.class) {
 			DiagramNodeTemplate nodeTemplate = (DiagramNodeTemplate)request.getNewObject();
 			if (nodeTemplate.getDiagramEditorPart() == this.presentation.part()) {

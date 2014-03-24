@@ -168,7 +168,6 @@ public class RelativePathBrowseActionHandler extends BrowseActionHandler
     }
     
     @Override
-    @SuppressWarnings( "rawtypes" ) // ILabelProvider is parameterized since Eclipse 4.4
     
     protected String browse( final Presentation context )
     {
@@ -532,8 +531,6 @@ public class RelativePathBrowseActionHandler extends BrowseActionHandler
         return null;
     }
     
-    @SuppressWarnings( "rawtypes" ) // Viewer is parameterized since Eclipse 4.4
-    
     public static final class ContainersOnlyViewerFilter extends ViewerFilter
     {
         public boolean select( final Viewer viewer, final Object parent, final Object element ) 
@@ -557,8 +554,6 @@ public class RelativePathBrowseActionHandler extends BrowseActionHandler
             this.extensions = new ArrayList<String>( extensions );
         }
         
-        @SuppressWarnings( "rawtypes" ) // Viewer is parameterized since Eclipse 4.4
-
         public boolean select( final Viewer viewer, final Object parent, final Object element ) 
         {
             if( element instanceof IFile || 
@@ -772,8 +767,6 @@ public class RelativePathBrowseActionHandler extends BrowseActionHandler
         }
     }
     
-    @SuppressWarnings( "rawtypes" ) // Viewer is parameterized since Eclipse 4.4
-    
     private static final class FileSystemContentProvider implements ITreeContentProvider
     {
         private final FileSystemNode[] roots;
@@ -832,8 +825,6 @@ public class RelativePathBrowseActionHandler extends BrowseActionHandler
         }
     }
     
-    @SuppressWarnings( "rawtypes" ) // LabelProvider is parameterized since Eclipse 4.4
-    
     private static final class FileSystemLabelProvider extends LabelProvider
     {
         private final FormComponentPresentation context;
@@ -865,8 +856,6 @@ public class RelativePathBrowseActionHandler extends BrowseActionHandler
     
     private static final class FileSystemNodeComparator extends ViewerComparator 
     {
-        @SuppressWarnings( "rawtypes" ) // Viewer is parameterized since Eclipse 4.4
-        
         public int compare( final Viewer viewer, final Object obj1, final Object obj2 ) 
         {
             final File f1 = ( (FileSystemNode) obj1 ).getFile();
@@ -892,8 +881,6 @@ public class RelativePathBrowseActionHandler extends BrowseActionHandler
     
     public static final class ResourceComparator extends ViewerComparator 
     {
-        @SuppressWarnings( "rawtypes" ) // Viewer is parameterized since Eclipse 4.4
-        
         public int compare( final Viewer viewer, final Object obj1, final Object obj2 ) 
         {
             final IResource r1 = (IResource) obj1;
