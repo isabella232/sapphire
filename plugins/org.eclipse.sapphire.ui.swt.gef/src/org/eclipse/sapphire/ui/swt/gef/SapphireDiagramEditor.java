@@ -821,19 +821,18 @@ public class SapphireDiagramEditor extends GraphicalEditorWithFlyoutPalette impl
 			{
 				// Force a layout first.
 				viewer.flush();
+				viewer.select(editpart);
+				viewer.reveal(editpart);
 				if (part instanceof DiagramNodePart)
-				{
-					viewer.select(editpart);
+				{					
 					getDiagramModel().handleDirectEditing((DiagramNodePart)part);
 				}
 				else if (part instanceof ShapePart)
 				{
-					viewer.select(editpart);
 					getDiagramModel().handleDirectEditing((ShapePart)part);
 				}
 				else if (part instanceof DiagramConnectionPart)
 				{
-					viewer.select(editpart);
 					getDiagramModel().handleDirectEditing((DiagramConnectionPart)part);
 				}
 				
@@ -885,34 +884,13 @@ public class SapphireDiagramEditor extends GraphicalEditorWithFlyoutPalette impl
     		boolean first = true;
     		for (ISapphirePart sapphirePart : selections)
     		{
-    			Object editpartObj = null;
-    			DiagramNodePart nodePart = null;
-    			DiagramConnectionPart connPart = null;
-    			
-    			if (sapphirePart instanceof DiagramNodePart)
-    			{
-    				nodePart = (DiagramNodePart)sapphirePart;
-    				DiagramNodeModel nodeModel = this.getDiagramModel().getDiagramNodeModel(nodePart);
-    				editpartObj = viewer.getEditPartRegistry().get(nodeModel);
-    			}
-    			else if (sapphirePart instanceof ShapePart)
-    			{
-    				nodePart = sapphirePart.nearest(DiagramNodePart.class);
-    				DiagramNodeModel nodeModel = this.getDiagramModel().getDiagramNodeModel(nodePart);
-    				ShapeModel shapeModel = ShapeModelUtil.getChildShapeModel(nodeModel.getShapeModel(), (ShapePart)sapphirePart);
-    				editpartObj = viewer.getEditPartRegistry().get(shapeModel);
-    			}
-    			else if (sapphirePart instanceof DiagramConnectionPart)
-    			{
-    				connPart = (DiagramConnectionPart)sapphirePart;
-    				DiagramConnectionModel connModel = this.getDiagramModel().getDiagramConnectionModel(connPart);
-    				editpartObj = viewer.getEditPartRegistry().get(connModel);				
-    			}
+    			Object editpartObj = getGraphicalEditPart(sapphirePart);
     			if (editpartObj != null)
     			{
     				if (first)
     				{
-    					viewer.select((EditPart)editpartObj);
+    					viewer.flush();
+    					viewer.select((EditPart)editpartObj);    					
     					first = false;
     				}
     				else
