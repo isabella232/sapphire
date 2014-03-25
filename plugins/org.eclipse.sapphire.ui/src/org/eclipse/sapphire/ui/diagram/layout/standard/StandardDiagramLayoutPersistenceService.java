@@ -34,7 +34,6 @@ import org.eclipse.sapphire.Listener;
 import org.eclipse.sapphire.LoggingService;
 import org.eclipse.sapphire.Sapphire;
 import org.eclipse.sapphire.modeling.ResourceStoreException;
-import org.eclipse.sapphire.modeling.StatusException;
 import org.eclipse.sapphire.modeling.util.MiscUtil;
 import org.eclipse.sapphire.ui.Point;
 import org.eclipse.sapphire.ui.diagram.ConnectionAddEvent;
@@ -155,7 +154,7 @@ public abstract class StandardDiagramLayoutPersistenceService extends DiagramLay
 	protected abstract StandardDiagramLayout initLayoutModel();
 	
 		
-	public void load() throws ResourceStoreException, CoreException, IOException, StatusException
+	public void load() throws ResourceStoreException, CoreException, IOException
 	{
 		this.layoutModel = initLayoutModel();
 		if (this.layoutModel == null)

@@ -18,7 +18,6 @@ import java.util.Map;
 
 import org.eclipse.draw2d.AbstractLayout;
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.LayoutManager;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Point;
@@ -105,17 +104,11 @@ public class SapphireStackLayout extends AbstractLayout
 		}
 	}
 	
-	/**
-	 * @see LayoutManager#getConstraint(IFigure)
-	 */
 	public Object getConstraint(IFigure figure) 
 	{
 		return constraints.get(figure);
 	}
 	
-	/**
-	 * @see LayoutManager#remove(IFigure)
-	 */
 	public void remove(IFigure figure) 
 	{
 		super.remove(figure);

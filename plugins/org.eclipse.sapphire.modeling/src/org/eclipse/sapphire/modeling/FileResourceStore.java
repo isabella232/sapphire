@@ -11,6 +11,8 @@
 
 package org.eclipse.sapphire.modeling;
 
+import static org.eclipse.sapphire.FileUtil.mkdirs;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,23 +20,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.eclipse.sapphire.modeling.util.internal.FileUtil;
-
 /**
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
 
-public class FileResourceStore
-
-    extends ByteArrayResourceStore
-    
+public class FileResourceStore extends ByteArrayResourceStore
 {
     private final File file;
     
-    public FileResourceStore( final File file )
-    
-        throws ResourceStoreException
-        
+    public FileResourceStore( final File file ) throws ResourceStoreException
     {
         this.file = file;
 
@@ -57,7 +51,7 @@ public class FileResourceStore
                     catch( IOException e ) {}
                 }
             }
-            catch( IOException e )
+            catch( final IOException e )
             {
                 throw new ResourceStoreException( e );
             }
@@ -70,18 +64,15 @@ public class FileResourceStore
     }
 
     @Override
-    public void save() 
-    
-        throws ResourceStoreException
-        
+    public void save() throws ResourceStoreException
     {
         validateSave();
 
         try
         {
-            FileUtil.mkdirs( this.file.getParentFile() );
+            mkdirs( this.file.getParentFile() );
         }
-        catch( StatusException e )
+        catch( final IOException e )
         {
             throw new ResourceStoreException( e );
         }
@@ -104,7 +95,7 @@ public class FileResourceStore
                 catch( IOException e ) {}
             }
         }
-        catch( IOException e )
+        catch( final IOException e )
         {
             throw new ResourceStoreException( e );
         }

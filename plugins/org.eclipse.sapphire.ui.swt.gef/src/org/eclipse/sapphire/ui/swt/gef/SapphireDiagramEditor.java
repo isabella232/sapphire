@@ -744,7 +744,9 @@ public class SapphireDiagramEditor extends GraphicalEditorWithFlyoutPalette impl
 	}
 	
 	@Override 
-	public Object getAdapter(Class type)
+	@SuppressWarnings( "rawtypes" )
+	
+    public Object getAdapter(Class type)
 	{
 		if (type == IContentOutlinePage.class)
 		{

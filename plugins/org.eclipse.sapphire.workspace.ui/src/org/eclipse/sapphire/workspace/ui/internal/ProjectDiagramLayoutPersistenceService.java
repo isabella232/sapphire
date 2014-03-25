@@ -13,6 +13,8 @@
 
 package org.eclipse.sapphire.workspace.ui.internal;
 
+import static org.eclipse.sapphire.FileUtil.mkdirs;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -23,9 +25,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.sapphire.LoggingService;
 import org.eclipse.sapphire.Sapphire;
-import org.eclipse.sapphire.modeling.StatusException;
 import org.eclipse.sapphire.modeling.util.MiscUtil;
-import org.eclipse.sapphire.modeling.util.internal.FileUtil;
 import org.eclipse.sapphire.modeling.xml.RootXmlResource;
 import org.eclipse.sapphire.modeling.xml.XmlResourceStore;
 import org.eclipse.sapphire.services.ServiceCondition;
@@ -89,7 +89,7 @@ public class ProjectDiagramLayoutPersistenceService extends StandardDiagramLayou
 		return layoutModel;
 	}
 
-	protected IFile getLayoutPersistenceFile(String fileName) throws StatusException, CoreException
+	protected IFile getLayoutPersistenceFile(String fileName) throws IOException, CoreException
 	{
 		if (this.editorInput instanceof IFileEditorInput)
 		{
@@ -101,7 +101,7 @@ public class ProjectDiagramLayoutPersistenceService extends StandardDiagramLayou
 				File layoutFolder = layoutIFolder.getLocation().toFile();
 	            if (!layoutFolder.exists())
 	            {
-	                FileUtil.mkdirs(layoutFolder);
+	                mkdirs(layoutFolder);
 	                layoutIFolder.refreshLocal(IResource.DEPTH_ONE, null);
 	            }
 	            IFile layoutFile = layoutIFolder.getFile(fileName);

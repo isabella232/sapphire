@@ -90,13 +90,13 @@
   </extension>
   
     <extension point="org.eclipse.jdt.debug.javaLogicalStructures">
-        <javaLogitalStructure type="org.eclipse.sapphire.Element" subtypes="true" description="Sapphire Element">
+        <javaLogicalStructure type="org.eclipse.sapphire.Element" subtypes="true" description="Sapphire Element">
             <variable name="type" value="return type().getQualifiedName();"/>
             <variable name="empty" value="return empty();"/>
             <variable name="content" value="return content().toArray();"/>
             <variable name="properties" value="return properties().toArray();"/>
-        </javaLogitalStructure>
-        <javaLogitalStructure type="org.eclipse.sapphire.Value" subtypes="true" description="Sapphire Value Property">
+        </javaLogicalStructure>
+        <javaLogicalStructure type="org.eclipse.sapphire.Value" subtypes="true" description="Sapphire Value Property">
             <variable name="name" value="return name();"/>
             <variable name="element" value="return definition().getModelElementType().getQualifiedName();"/>
             <variable name="text" value="return text( false );"/>
@@ -105,24 +105,24 @@
             <variable name="enabled" value="return enabled();"/>
             <variable name="validation" value="return validation().toString();"/>
             <variable name="malformed" value="return malformed();"/>
-        </javaLogitalStructure>
-        <javaLogitalStructure type="org.eclipse.sapphire.Transient" subtypes="true" description="Sapphire Transient Property">
+        </javaLogicalStructure>
+        <javaLogicalStructure type="org.eclipse.sapphire.Transient" subtypes="true" description="Sapphire Transient Property">
             <variable name="name" value="return name();"/>
             <variable name="element" value="return definition().getModelElementType().getQualifiedName();"/>
             <variable name="content" value="return content();"/>
             <variable name="empty" value="return empty();"/>
             <variable name="enabled" value="return enabled();"/>
             <variable name="validation" value="return validation().toString();"/>
-        </javaLogitalStructure>
-        <javaLogitalStructure type="org.eclipse.sapphire.ElementHandle" subtypes="true" description="Sapphire Element Property">
+        </javaLogicalStructure>
+        <javaLogicalStructure type="org.eclipse.sapphire.ElementHandle" subtypes="true" description="Sapphire Element Property">
             <variable name="name" value="return name();"/>
             <variable name="element" value="return definition().getModelElementType().getQualifiedName();"/>
             <variable name="content" value="return content();"/>
             <variable name="empty" value="return empty();"/>
             <variable name="enabled" value="return enabled();"/>
             <variable name="validation" value="return validation().toString();"/>
-        </javaLogitalStructure>
-        <javaLogitalStructure type="org.eclipse.sapphire.ElementList" subtypes="true" description="Sapphire List Property">
+        </javaLogicalStructure>
+        <javaLogicalStructure type="org.eclipse.sapphire.ElementList" subtypes="true" description="Sapphire List Property">
             <variable name="name" value="return name();"/>
             <variable name="element" value="return definition().getModelElementType().getQualifiedName();"/>
             <variable name="content" value="return toArray();"/>
@@ -130,7 +130,7 @@
             <variable name="size" value="return size();"/>
             <variable name="enabled" value="return enabled();"/>
             <variable name="validation" value="return validation().toString();"/>
-        </javaLogitalStructure>
+        </javaLogicalStructure>
     </extension>
 
 </plugin>

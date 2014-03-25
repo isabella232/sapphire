@@ -18,8 +18,9 @@ import java.util.Set;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
-import org.eclipse.draw2d.geometry.Ray;
+import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.geometry.Vector;
 import org.eclipse.sapphire.ui.Bounds;
 import org.eclipse.sapphire.ui.swt.gef.model.DiagramConnectionModel;
 import org.eclipse.sapphire.ui.swt.gef.model.DiagramNodeModel;
@@ -166,34 +167,42 @@ public class SapphireConnectionRouter
 	
 	private Point handleCollision(PointList points, int index) 
 	{
-		Point start = points.getFirstPoint();
-		Point end = points.getLastPoint();
+		PrecisionPoint start = new PrecisionPoint( points.getFirstPoint() );
+		PrecisionPoint end = new PrecisionPoint( points.getLastPoint() );
 
 		if (start.equals(end))
 			return null;
 
 		Point midPoint = new Point((end.x + start.x) / 2, (end.y + start.y) / 2);
 		int position = end.getPosition(start);
-		Ray ray;
+		Vector vector;
 		if (position == PositionConstants.SOUTH
 				|| position == PositionConstants.EAST)
-			ray = new Ray(start, end);
+			vector = new Vector(start, end);
 		else
-			ray = new Ray(end, start);
-		double length = ray.length();
+			vector = new Vector(end, start);
+		double length = vector.getLength();
 
-		double xSeparation = getSeparation() * ray.x / length;
-		double ySeparation = getSeparation() * ray.y / length;
+		double xSeparation = getSeparation() * vector.x / length;
+		double ySeparation = getSeparation() * vector.y / length;
 
 		Point bendPoint;
 
-		if (index % 2 == 0) {
-			bendPoint = new Point(
-					midPoint.x + ((double)index / 2) * (-1 * ySeparation), midPoint.y
-							+ ((double)index / 2) * xSeparation);
-		} else {
-			bendPoint = new Point(midPoint.x + ((double)index / 2) * ySeparation,
-					midPoint.y + ((double)index / 2) * (-1 * xSeparation));
+		if (index % 2 == 0)
+		{
+			bendPoint = new Point
+			(
+				(int) ( midPoint.x + ( (double) index / 2 ) * ( -1 * ySeparation ) ),
+				(int) ( midPoint.y + ( (double) index / 2 ) * xSeparation )
+			);
+		}
+		else
+		{
+			bendPoint = new Point
+			(
+			    (int) ( midPoint.x + ( (double) index / 2 ) * ySeparation ),
+			    (int) ( midPoint.y + ( (double) index / 2 ) * ( -1 * xSeparation ) )
+			);
 		}
 		if (!bendPoint.equals(midPoint)) {
 			return bendPoint;

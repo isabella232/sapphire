@@ -12,15 +12,16 @@
 
 package org.eclipse.sapphire.workspace.ui.internal;
 
+import static org.eclipse.sapphire.FileUtil.mkdirs;
+
 import java.io.File;
+import java.io.IOException;
 
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.sapphire.LoggingService;
 import org.eclipse.sapphire.Sapphire;
 import org.eclipse.sapphire.modeling.FileResourceStore;
-import org.eclipse.sapphire.modeling.StatusException;
-import org.eclipse.sapphire.modeling.util.internal.FileUtil;
 import org.eclipse.sapphire.modeling.xml.RootXmlResource;
 import org.eclipse.sapphire.modeling.xml.XmlResourceStore;
 import org.eclipse.sapphire.services.ServiceCondition;
@@ -63,14 +64,14 @@ public class WorkspaceDiagramLayoutPersistenceService extends
 		return layoutModel;
 	}
 	
-	private File getLayoutPersistenceFile(String fileName) throws StatusException
+	private File getLayoutPersistenceFile(String fileName) throws IOException
 	{
 		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
         File layoutFolder = workspaceRoot.getLocation().toFile();
         layoutFolder = new File(layoutFolder, WORKSPACE_LAYOUT_FOLDER);
         if (!layoutFolder.exists())
         {
-        	FileUtil.mkdirs(layoutFolder);
+        	mkdirs(layoutFolder);
         }
         File layoutFile = new File (layoutFolder, fileName);
         return layoutFile;

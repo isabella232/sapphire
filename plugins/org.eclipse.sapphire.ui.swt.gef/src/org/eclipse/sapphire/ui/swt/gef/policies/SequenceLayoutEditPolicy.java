@@ -266,7 +266,7 @@ public abstract class SequenceLayoutEditPolicy extends OrderedLayoutEditPolicy {
 	private boolean isLayoutHorizontal(Request request) 
 	{
 		ChangeBoundsRequest cbReq = (ChangeBoundsRequest)request;
-		List editParts = cbReq.getEditParts();
+		List<?> editParts = cbReq.getEditParts();
 		GraphicalEditPart shapeEditPart = (GraphicalEditPart)editParts.get(0);		
 		IFigure figure = shapeEditPart.getContentPane().getParent();
 		return ((SapphireSequenceLayout) figure.getLayoutManager()).isHorizontal();

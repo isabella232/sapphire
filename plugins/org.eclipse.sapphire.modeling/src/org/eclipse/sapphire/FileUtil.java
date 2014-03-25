@@ -9,14 +9,10 @@
  *    Konstantin Komissarchik - initial implementation and ongoing maintenance
  ******************************************************************************/
 
-package org.eclipse.sapphire.modeling.util.internal;
+package org.eclipse.sapphire;
 
 import java.io.File;
-
-import org.eclipse.sapphire.LocalizableText;
-import org.eclipse.sapphire.Text;
-import org.eclipse.sapphire.modeling.Status;
-import org.eclipse.sapphire.modeling.StatusException;
+import java.io.IOException;
 
 /**
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
@@ -35,14 +31,13 @@ public final class FileUtil
         LocalizableText.init( FileUtil.class );
     }
 
-    public static void mkdirs( final File f ) throws StatusException
+    public static void mkdirs( final File f ) throws IOException
     {
         if( f.exists() )
         {
             if( f.isFile() )
             {
-                final String msg = locationIsFile.format( f.getAbsolutePath() );
-                throw new StatusException( Status.createErrorStatus( msg ) );
+                throw new IOException( locationIsFile.format( f.getAbsolutePath() ) );
             }
         }
         else
@@ -53,8 +48,7 @@ public final class FileUtil
             
             if( ! isSuccessful )
             {
-                final String msg = failedToCreateDirectory.format( f.getAbsolutePath() );
-                throw new StatusException( Status.createErrorStatus( msg ) );
+                throw new IOException( failedToCreateDirectory.format( f.getAbsolutePath() ) );
             }
         }
     }
