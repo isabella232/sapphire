@@ -58,6 +58,16 @@
 
 <p>Sapphire Wizard Page's label and description are now using expressions and their content can be controlled dynamically.</p>
 
+<p style="margin-left: 20px;"><b>Example</b></p>
+
+<pre class="source-code"><code><font color="#888888">&lt;wizard>
+    &lt;page>Occupation</font>       
+       &lt;label>${ Spouse.Name.First }'s occupation&lt;/label>
+       &lt;description>${ Spouse.Name.First }'s job description&lt;/description>
+       <font color="#888888">...
+    &lt;/page>
+&lt;/wizard></font></code></pre>
+
 
 <div class="copyright">Copyright (c) 2014 Oracle<br/>
 Content made available under the terms of <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</div>
