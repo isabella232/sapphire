@@ -1069,6 +1069,14 @@ public abstract class SapphirePart implements ISapphirePart
         }
     }
 
+    public static final class DescriptionChangedEvent extends PartEvent
+    {
+        public DescriptionChangedEvent( final SapphirePart part )
+        {
+            super( part );
+        }
+    }
+
     public static final class ImageChangedEvent extends PartEvent
     {
         public ImageChangedEvent( final SapphirePart part )

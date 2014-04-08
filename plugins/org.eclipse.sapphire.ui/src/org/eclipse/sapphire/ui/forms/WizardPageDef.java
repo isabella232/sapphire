@@ -43,17 +43,20 @@ public interface WizardPageDef extends CompositeDef
     
     // *** Label ***
     
+    @Type( base = Function.class )
     @Label( standard = "label" )
     @Localizable
     @XmlBinding( path = "label" )
     
     ValueProperty PROP_LABEL = new ValueProperty( TYPE, "Label" );
     
-    Value<String> getLabel();
+    Value<Function> getLabel();
     void setLabel( String label );
+    void setLabel( Function label );
     
     // *** Description ***
     
+    @Type( base = Function.class )
     @Label( standard = "description" )
     @LongString
     @Localizable
@@ -61,8 +64,9 @@ public interface WizardPageDef extends CompositeDef
     
     ValueProperty PROP_DESCRIPTION = new ValueProperty( TYPE, "Description" );
     
-    Value<String> getDescription();
+    Value<Function> getDescription();
     void setDescription( String description );
+    void setDescription( Function description );
     
     // *** Image ***
     

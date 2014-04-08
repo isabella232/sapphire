@@ -14,6 +14,7 @@ package org.eclipse.sapphire.ui.forms;
 import org.eclipse.sapphire.ImageData;
 import org.eclipse.sapphire.modeling.CapitalizationType;
 import org.eclipse.sapphire.modeling.el.FunctionResult;
+import org.eclipse.sapphire.modeling.localization.LocalizationService;
 import org.eclipse.sapphire.ui.forms.swt.FormComponentPresentation;
 import org.eclipse.sapphire.ui.forms.swt.SwtPresentation;
 import org.eclipse.swt.widgets.Composite;
@@ -25,6 +26,8 @@ import org.eclipse.swt.widgets.Composite;
 public final class WizardPagePart extends CompositePart
 {
     private FunctionResult imageFunctionResult;
+    private FunctionResult labelFunctionResult;
+    private FunctionResult descriptionFunctionResult;
     
     @Override
     protected void init()
@@ -46,6 +49,32 @@ public final class WizardPagePart extends CompositePart
                 }
             }
         );
+        this.labelFunctionResult = initExpression
+        (
+            def.getLabel().content(),
+            String.class,
+            null,
+            new Runnable()
+            {
+                public void run()
+                {
+                    broadcast( new LabelChangedEvent( WizardPagePart.this ) );
+                }
+            }
+        );
+        this.descriptionFunctionResult = initExpression
+        (
+            def.getDescription().content(),
+            String.class,
+            null,
+            new Runnable()
+            {
+                public void run()
+                {
+                    broadcast( new DescriptionChangedEvent( WizardPagePart.this ) );
+                }
+            }
+        );
     }
 
     @Override
@@ -56,12 +85,14 @@ public final class WizardPagePart extends CompositePart
     
     public String getLabel()
     {
-        return definition().getLabel().localized( CapitalizationType.TITLE_STYLE, false );
+    	final LocalizationService localizationService = definition().adapt( LocalizationService.class );
+    	return localizationService.text( (String)this.labelFunctionResult.value(), CapitalizationType.TITLE_STYLE, false );
     }
     
     public String getDescription()
     {
-        return definition().getDescription().localized( CapitalizationType.NO_CAPS, false );
+    	final LocalizationService localizationService = definition().adapt( LocalizationService.class );
+    	return localizationService.text( (String)this.descriptionFunctionResult.value(), CapitalizationType.NO_CAPS, false );
     }
     
     public ImageData getImage()
@@ -83,6 +114,14 @@ public final class WizardPagePart extends CompositePart
         if( this.imageFunctionResult != null )
         {
             this.imageFunctionResult.dispose();
+        }
+        if( this.labelFunctionResult != null )
+        {
+            this.labelFunctionResult.dispose();
+        }
+        if( this.descriptionFunctionResult != null )
+        {
+            this.descriptionFunctionResult.dispose();
         }
     }
     
