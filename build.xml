@@ -147,7 +147,7 @@
             pluginsDirectory="${build.dir}/repository/temp">
             <exclude id=".*\.source"/>
             <rule bundle="org.junit" expr="[M1.M2.M3,5.0.0)"/>
-			<rule bundle="org.objectweb.asm" expr="[4.0.0,5.0.0)"/>
+			<rule bundle="org.objectweb.asm" expr="[4.0.0,6.0.0)"/>
             <rule bundle="org.eclipse.sapphire*" expr="[M1.M2.M3,T1.T2.T3+1)"/>
             <rule bundle="*" expr="[M1.M2.M3,T1+1.0.0)"/>
           </set-bundle-version-constraints>
@@ -204,7 +204,7 @@
           <with-target-platform configuration="${configuration.recommended}">
             <copy todir="${build.dir}/repository/plugins">
               <fileset dir="${.target.platform}/plugins">
-                <include name="org.objectweb.asm_4.0.0.*.jar"/>
+                <include name="org.objectweb.asm_5.*.jar"/>
               </fileset>
             </copy>
           </with-target-platform>
