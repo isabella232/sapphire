@@ -26,6 +26,8 @@ import org.eclipse.sapphire.modeling.Status;
 import org.eclipse.sapphire.ui.PartValidationEvent;
 import org.eclipse.sapphire.ui.Presentation;
 import org.eclipse.sapphire.ui.SapphirePart;
+import org.eclipse.sapphire.ui.SapphirePart.DescriptionChangedEvent;
+import org.eclipse.sapphire.ui.SapphirePart.LabelChangedEvent;
 import org.eclipse.sapphire.ui.def.ISapphireDocumentation;
 import org.eclipse.sapphire.ui.def.ISapphireDocumentationDef;
 import org.eclipse.sapphire.ui.def.ISapphireDocumentationRef;
@@ -65,6 +67,14 @@ public class SapphireWizardPage extends WizardPage
                 else if( event instanceof PartValidationEvent )
                 {
                     refreshValidation();
+                }
+                else if( event instanceof LabelChangedEvent )
+                {
+                	refreshTitle();
+                }
+                else if( event instanceof DescriptionChangedEvent )
+                {
+                	refreshDescription();
                 }
             }
         };
@@ -162,6 +172,15 @@ public class SapphireWizardPage extends WizardPage
         setImageDescriptor( toImageDescriptor( this.part.getImage() ) );
     }
     
+    private final void refreshTitle()
+    {
+    	setTitle( this.part.getLabel() );
+    }
+    
+    private final void refreshDescription()
+    {
+    	setDescription( this.part.getDescription() );
+    }
     private final void refreshValidation()
     {
         final Status st = this.part.validation();
