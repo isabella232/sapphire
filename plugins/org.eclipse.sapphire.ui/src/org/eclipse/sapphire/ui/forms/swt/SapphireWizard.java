@@ -30,8 +30,10 @@ import org.eclipse.jface.wizard.IWizard;
 import org.eclipse.jface.wizard.IWizardContainer;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.sapphire.Element;
 import org.eclipse.sapphire.ElementType;
+import org.eclipse.sapphire.Event;
 import org.eclipse.sapphire.ExecutableElement;
 import org.eclipse.sapphire.FilteredListener;
 import org.eclipse.sapphire.Listener;
@@ -41,8 +43,9 @@ import org.eclipse.sapphire.modeling.ProgressMonitor;
 import org.eclipse.sapphire.modeling.Status;
 import org.eclipse.sapphire.ui.DelayedTasksExecutor;
 import org.eclipse.sapphire.ui.PartVisibilityEvent;
-import org.eclipse.sapphire.ui.SapphirePart;
+import org.eclipse.sapphire.ui.SapphirePart.DescriptionChangedEvent;
 import org.eclipse.sapphire.ui.SapphirePart.ImageChangedEvent;
+import org.eclipse.sapphire.ui.SapphirePart.LabelChangedEvent;
 import org.eclipse.sapphire.ui.def.DefinitionLoader;
 import org.eclipse.sapphire.ui.forms.WizardDef;
 import org.eclipse.sapphire.ui.forms.WizardPagePart;
@@ -125,12 +128,23 @@ public class SapphireWizard<M extends Element> implements IWizard
         
         this.part.attach
         (
-            new FilteredListener<SapphirePart.ImageChangedEvent>()
+            new Listener()
             {
                 @Override
-                protected void handleTypedEvent( final ImageChangedEvent event )
+                public void handle( final Event event )
                 {
-                    refreshImage();
+                	if (event instanceof ImageChangedEvent)
+                	{
+                		refreshImage();
+                	}
+                    else if( event instanceof LabelChangedEvent )
+                    {
+                    	refreshTitle();
+                    }
+                    else if( event instanceof DescriptionChangedEvent )
+                    {
+                    	refreshDescription();
+                    }                	
                 }
             }
         );
@@ -525,6 +539,24 @@ public class SapphireWizard<M extends Element> implements IWizard
         {
             this.defaultPageImageDescriptor = JFaceResources.getImageRegistry().getDescriptor( Wizard.DEFAULT_IMAGE );
         }
+    }
+    
+    private final void refreshTitle()
+    {
+    	if (getContainer() instanceof WizardDialog)
+    	{
+    		((WizardDialog)getContainer()).setTitle(part().getLabel());
+    	}
+    	getContainer().updateWindowTitle();
+    }
+
+    private final void refreshDescription()
+    {
+    	if (getContainer() instanceof WizardDialog)
+    	{
+    		((WizardDialog)getContainer()).setMessage(part().getDescription());
+    	}
+    	getContainer().updateMessage();
     }
 
     @Override

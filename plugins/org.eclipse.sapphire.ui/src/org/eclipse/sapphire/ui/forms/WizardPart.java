@@ -17,6 +17,7 @@ import org.eclipse.sapphire.Element;
 import org.eclipse.sapphire.ImageData;
 import org.eclipse.sapphire.modeling.CapitalizationType;
 import org.eclipse.sapphire.modeling.el.FunctionResult;
+import org.eclipse.sapphire.modeling.localization.LocalizationService;
 import org.eclipse.sapphire.ui.SapphirePart;
 import org.eclipse.sapphire.util.ListFactory;
 
@@ -27,6 +28,8 @@ import org.eclipse.sapphire.util.ListFactory;
 public final class WizardPart extends SapphirePart
 {
     private FunctionResult imageFunctionResult;
+    private FunctionResult labelFunctionResult;
+    private FunctionResult descriptionFunctionResult;
     private List<WizardPagePart> pages;
     
     @Override
@@ -50,6 +53,33 @@ public final class WizardPart extends SapphirePart
                 }
             }
         );
+        this.labelFunctionResult = initExpression
+        (
+            def.getLabel().content(),
+            String.class,
+            null,
+            new Runnable()
+            {
+                public void run()
+                {
+                    broadcast( new LabelChangedEvent( WizardPart.this ) );
+                }
+            }
+        );
+        this.descriptionFunctionResult = initExpression
+        (
+            def.getDescription().content(),
+            String.class,
+            null,
+            new Runnable()
+            {
+                public void run()
+                {
+                    broadcast( new DescriptionChangedEvent( WizardPart.this ) );
+                }
+            }
+        );
+        
         
         final ListFactory<WizardPagePart> pagesListFactory = ListFactory.start();
         
@@ -66,15 +96,17 @@ public final class WizardPart extends SapphirePart
     {
         return (WizardDef) super.definition();
     }
-    
+        
     public String getLabel()
     {
-        return definition().getLabel().localized( CapitalizationType.TITLE_STYLE, false );
+    	final LocalizationService localizationService = definition().adapt( LocalizationService.class );
+    	return localizationService.text( (String)this.labelFunctionResult.value(), CapitalizationType.TITLE_STYLE, false );
     }
     
     public String getDescription()
     {
-        return definition().getDescription().localized( CapitalizationType.NO_CAPS, false );
+    	final LocalizationService localizationService = definition().adapt( LocalizationService.class );
+    	return localizationService.text( (String)this.descriptionFunctionResult.value(), CapitalizationType.NO_CAPS, false );
     }
     
     public ImageData getImage()
@@ -93,6 +125,14 @@ public final class WizardPart extends SapphirePart
         if( this.imageFunctionResult != null )
         {
             this.imageFunctionResult.dispose();
+        }
+        if( this.labelFunctionResult != null )
+        {
+            this.labelFunctionResult.dispose();
+        }
+        if( this.descriptionFunctionResult != null )
+        {
+            this.descriptionFunctionResult.dispose();
         }
         
         for( WizardPagePart page : this.pages )
