@@ -26,6 +26,8 @@
   
   <property name="Signing.Library" value="sign-local.xml"/>
   <import file="${Signing.Library}"/>
+  
+  <echo message="Java Version: ${java.version}"/>
 
 
   <target name="init" depends="init-library,init-jdk-16">
