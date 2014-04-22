@@ -23,6 +23,7 @@ import org.eclipse.sapphire.modeling.annotations.PossibleValues;
 import org.eclipse.sapphire.modeling.annotations.Reference;
 import org.eclipse.sapphire.modeling.annotations.Required;
 import org.eclipse.sapphire.modeling.annotations.Service;
+import org.eclipse.sapphire.modeling.annotations.Services;
 import org.eclipse.sapphire.modeling.annotations.Type;
 import org.eclipse.sapphire.modeling.xml.annotations.XmlBinding;
 
@@ -60,7 +61,7 @@ public interface ForeignKey extends Element
         @Required
         @MustExist
         @PossibleValues( property = "../../Columns/Name" )
-        @Service( impl = ColumnReferenceService.class )
+        @Services( { @Service( impl = ColumnReferenceService.class ), @Service( impl = FKColumnAssociationValidator.class ) } )
         
         ValueProperty PROP_LOCAL_COLUMN = new ValueProperty( TYPE, "LocalColumn" );
         
@@ -72,7 +73,7 @@ public interface ForeignKey extends Element
         @Reference( target = Column.class )
         @Required
         @MustExist
-        @Service( impl = ForeignKeyColumnReferenceService.class )
+        @Services( { @Service( impl = ForeignKeyColumnReferenceService.class ), @Service( impl = FKColumnAssociationValidator.class ) } )
         
         ValueProperty PROP_REFERENCED_COLUMN = new ValueProperty( TYPE, "ReferencedColumn" );
         
@@ -82,7 +83,6 @@ public interface ForeignKey extends Element
     
     @Type( base = ColumnAssociation.class )
     @CountConstraint( min = 1 )
-    @Service( impl = FKColumnAssociationValidator.class )
     
     ListProperty PROP_COLUMN_ASSOCIATIONS = new ListProperty( TYPE, "ColumnAssociations" );
     

@@ -6,116 +6,141 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Shenxue Zhou - initial implementation and ongoing maintenance
+ *    Konstantin Komissarchik - initial implementation and ongoing maintenance
  ******************************************************************************/
 
 package org.eclipse.sapphire.samples.sqlschema;
 
+import org.eclipse.sapphire.Event;
 import org.eclipse.sapphire.FilteredListener;
 import org.eclipse.sapphire.Listener;
 import org.eclipse.sapphire.LocalizableText;
 import org.eclipse.sapphire.PropertyContentEvent;
+import org.eclipse.sapphire.ReferenceValue;
 import org.eclipse.sapphire.Text;
 import org.eclipse.sapphire.modeling.Status;
+import org.eclipse.sapphire.samples.sqlschema.ForeignKey.ColumnAssociation;
+import org.eclipse.sapphire.services.ReferenceService;
 import org.eclipse.sapphire.services.ValidationService;
 
 /**
- * @author <a href="mailto:shenxue.zhou@oracle.com">Shenxue Zhou</a>
+ * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
 
-public class FKColumnAssociationValidator extends ValidationService 
+public final class FKColumnAssociationValidator extends ValidationService 
 {
-    @Text( "Foreign key column types do not match. Column \"{0}\" is type \"{1}\". Reference Column \"{2}\" is type \"{3}\"" )
-    private static LocalizableText invalidTypes;
+    @Text( "Foreign key column types do not match" )
+    private static LocalizableText error;
     
     static
     {
         LocalizableText.init( FKColumnAssociationValidator.class );
     }
-	
-	private Listener listener;
-	private Table referencedTable;
+    
+    private ColumnAssociation association;
+    private ReferenceService localColumnReferenceService;
+    private Column localColumn;
+    private ReferenceService referencedColumnReferenceService;
+    private Column referencedColumn;
+    private Listener referenceServiceListener;
+    private Listener columnTypeListener;
 
     @Override
     protected void initValidationService()
     {
-		this.listener = new FilteredListener<PropertyContentEvent>()
-		{
-			@Override
-			protected void handleTypedEvent( final PropertyContentEvent event )
-			{
-				refresh();
-			}
-		};
-    	
-        Table table = context( Table.class );
-        table.attach(this.listener, "Columns/Type");
-        
-        ForeignKey fkey = context(ForeignKey.class);
-        fkey.attach(listener, "ColumnAssociations/*");
-                
-        fkey.getReferencedTable().attach
-        (
-            new FilteredListener<PropertyContentEvent>()
+        this.referenceServiceListener = new Listener()
+        {
+            @Override
+            public void handle( final Event event )
             {
-                @Override
-                protected void handleTypedEvent( final PropertyContentEvent event )
-                {
-                    Table refTable = context(ForeignKey.class).getReferencedTable().resolve();
-                    if (refTable != null && refTable != referencedTable)
-                    {
-                    	if (referencedTable != null)
-                    	{
-                    		referencedTable.detach(listener, "Columns/Type");
-                    	}
-                    	referencedTable = refTable;
-                    	referencedTable.attach(listener, "Columns/Type");
-                    	refresh();
-                    }
-                }
+                refresh();
             }
-        );
-        Table refTable = fkey.getReferencedTable().resolve();
-        if (refTable != null)
+        };
+        
+        this.columnTypeListener = new FilteredListener<PropertyContentEvent>()
         {
-        	refTable.attach(this.listener, "Columns/Type");
+            @Override
+            protected void handleTypedEvent( final PropertyContentEvent event )
+            {
+                refresh();
+            }
+        };
+        
+        this.association = context( ColumnAssociation.class );
+        
+        this.localColumnReferenceService = this.association.getLocalColumn().service( ReferenceService.class );
+        this.localColumnReferenceService.attach( this.referenceServiceListener );
+        
+        this.referencedColumnReferenceService = this.association.getReferencedColumn().service( ReferenceService.class );
+        this.referencedColumnReferenceService.attach( this.referenceServiceListener );
+    }
+    
+    @Override
+    protected Status compute() 
+    {
+        this.localColumn = column( this.association.getLocalColumn(), this.localColumn );
+        this.referencedColumn = column( this.association.getReferencedColumn(), this.referencedColumn );
+        
+        if( this.localColumn != null && this.referencedColumn != null )
+        {
+            final ColumnType localColumnType = this.localColumn.getType().content();
+            final ColumnType referencedColumnType = this.referencedColumn.getType().content();
+            
+            if( localColumnType != null && referencedColumnType != null && localColumnType != referencedColumnType )
+            {
+                return Status.createErrorStatus( error.text() );
+            }
         }
         
+        return Status.createOkStatus();
     }
-	
-	@Override
-	protected Status compute() 
-	{
-		ForeignKey fkey = context(ForeignKey.class);
-		final Status.CompositeStatusFactory factory = Status.factoryForComposite();
-		for (ForeignKey.ColumnAssociation columnAssociation : fkey.getColumnAssociations())
-		{
-			Column localCol = columnAssociation.getLocalColumn().resolve();
-			Column referencedCol = columnAssociation.getReferencedColumn().resolve();
-			if (localCol != null && referencedCol != null)
-			{
-				ColumnType localType = localCol.getType().content();
-				ColumnType referredType = referencedCol.getType().content();
-				if (localType != referredType)
-				{
-					String msg = invalidTypes.format(localCol.getName().content(), localCol.getType().content(), 
-							referencedCol.getName().content(), referencedCol.getType().content());
-					factory.merge(Status.createErrorStatus(msg));
-				}
-			}
-		}
-		return factory.create();
-	}
 
-	@Override
-	public void dispose()
-	{
-        Table table = context( Table.class );
-        if (!table.disposed())
+    private Column column( final ReferenceValue<String,Column> property, final Column cached )
+    {
+        final Column current = property.resolve();
+        
+        if( cached != current )
         {
-        	table.detach(this.listener, "Columns/Type");
+            if( cached != null && ! cached.disposed() )
+            {
+                cached.getType().detach( this.columnTypeListener );
+            }
+            
+            if( current != null )
+            {
+                current.getType().attach( this.columnTypeListener );
+            }
         }
-        super.dispose();
-	}
+        
+        return current;
+    }
+
+    @Override
+    public void dispose()
+    {
+        this.association = null;
+        
+        this.localColumnReferenceService.detach( this.referenceServiceListener );
+        this.localColumnReferenceService = null;
+        
+        this.referencedColumnReferenceService.detach( this.referenceServiceListener );
+        this.referencedColumnReferenceService = null;
+        
+        this.referenceServiceListener = null;
+        
+        if( this.localColumn != null && ! this.localColumn.disposed() )
+        {
+            this.localColumn.getType().detach( this.columnTypeListener );
+            this.localColumn = null;
+        }
+        
+        if( this.referencedColumn != null && ! this.referencedColumn.disposed() )
+        {
+            this.referencedColumn.getType().detach( this.columnTypeListener );
+            this.referencedColumn = null;
+        }
+        
+        this.columnTypeListener = null;
+    }
 
 }
