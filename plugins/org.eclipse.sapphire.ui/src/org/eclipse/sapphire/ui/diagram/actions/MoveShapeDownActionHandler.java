@@ -76,7 +76,7 @@ public class MoveShapeDownActionHandler extends SapphireActionHandler
         final ISapphirePart part = getPart();
     	ShapeFactoryPart shapeFactory = (ShapeFactoryPart)part.parent();
     	Element element = part.getLocalModelElement();
-    	ElementList<Element> list = shapeFactory.getModelElementList();
+    	ElementList<?> list = shapeFactory.getModelElementList();
 		list.moveDown(element);
 		SapphireDiagramEditorPagePart editorPart = part.nearest(SapphireDiagramEditorPagePart.class);
 		editorPart.setSelections(Collections.singletonList(part), true);

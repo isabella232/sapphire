@@ -47,9 +47,7 @@ import org.eclipse.sapphire.util.CollectionsUtil;
 public class ShapeFactoryPart extends ShapePart 
 {
 	private ShapeFactoryDef shapeFactoryDef;
-	private Element modelElement;	
-	private ListProperty modelProperty;
-	private String propertyName;
+	private ElementList<?> list;
 	private List<ShapePart> children;
 	private Listener shapePropertyListener;
 	private ShapePart separator;
@@ -58,13 +56,15 @@ public class ShapeFactoryPart extends ShapePart
     protected void init()
     {
         super.init();
-        this.modelElement = getModelElement();
+        
         this.shapeFactoryDef = (ShapeFactoryDef)super.definition;
         this.children = new ArrayList<ShapePart>();
+
+        final Element element = getModelElement();
+        final String propertyName = this.shapeFactoryDef.getProperty().content();
+        final ListProperty property = (ListProperty) resolve( element, propertyName );
+        this.list = element.property( property );
         
-        this.propertyName = this.shapeFactoryDef.getProperty().content();
-        this.modelProperty = (ListProperty)resolve(this.modelElement, this.propertyName);
-        ElementList<?> list = this.modelElement.property(this.modelProperty);
         for( Element listEntryModelElement : list )
         {
         	ShapeFactoryCaseDef shapeFactoryCase = getShapeFactoryCase(listEntryModelElement);
@@ -78,7 +78,7 @@ public class ShapeFactoryPart extends ShapePart
         // Separator
         if (this.shapeFactoryDef.getSeparator().content() != null)
         {
-        	this.separator = createShapePart(this.shapeFactoryDef.getSeparator().content(), this.modelElement);
+        	this.separator = createShapePart(this.shapeFactoryDef.getSeparator().content(), element);
         }
         
         // Add listeners
@@ -97,7 +97,7 @@ public class ShapeFactoryPart extends ShapePart
             	}
             }
         };
-        this.modelElement.attach(this.shapePropertyListener, this.propertyName);
+        this.list.attach(this.shapePropertyListener);
         
         refreshValidation();
         
@@ -120,23 +120,20 @@ public class ShapeFactoryPart extends ShapePart
 		return this.separator;
 	}
 
-    public ElementList<Element> getModelElementList()
+    public ElementList<?> getModelElementList()
     {
-    	ElementList<Element> list = this.modelElement.property(this.modelProperty);
-    	return list;
+        return this.list;
     }
     
     public void moveChild(ShapePart childPart, int newIndex)
     {
-    	ElementList<Element> list = this.modelElement.property(this.modelProperty);
-    	int oldIndex = list.indexOf(childPart.getLocalModelElement());
-    	this.modelElement.detach(this.shapePropertyListener, this.propertyName);
+    	int oldIndex = this.list.indexOf(childPart.getLocalModelElement());
+    	this.list.detach(this.shapePropertyListener);
     	
     	int newNewIndex = newIndex == -1 ? this.children.size() : newIndex;
     	
     	if (oldIndex < newNewIndex)
     	{
-    		
     		for (int i = oldIndex; i < newNewIndex; i++)
     		{
     			list.moveDown(childPart.getLocalModelElement());
@@ -149,7 +146,7 @@ public class ShapeFactoryPart extends ShapePart
     			list.moveUp(childPart.getLocalModelElement());
     		}
     	}
-    	this.modelElement.attach(this.shapePropertyListener, this.propertyName);
+    	this.list.attach(this.shapePropertyListener);
     	this.children.remove(childPart);
     	if (newIndex == -1) {
         	this.children.add(childPart);
@@ -163,7 +160,7 @@ public class ShapeFactoryPart extends ShapePart
     public void dispose()
     {
         super.dispose();
-        this.modelElement.detach(this.shapePropertyListener, this.propertyName);
+        this.list.detach(this.shapePropertyListener);
         List<ShapePart> shapeParts = getChildren();
         for (ShapePart shapePart : shapeParts)
         {
@@ -188,7 +185,7 @@ public class ShapeFactoryPart extends ShapePart
     protected Status computeValidation()
     {
         final Status.CompositeStatusFactory factory = Status.factoryForComposite();
-        factory.merge(this.modelElement.property(this.modelProperty).validation());
+        factory.merge(this.list.validation());
 
         for( SapphirePart child : this.children )
         {
