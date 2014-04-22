@@ -59,6 +59,11 @@ public abstract class LocalizationService
                              final CapitalizationType capitalizationType,
                              final boolean includeMnemonic )
     {
+        if( string == null )
+        {
+            return null;
+        }
+        
         final StringBuilder result = new StringBuilder( string );
         
         final int mnemonicDesignatorPos = string.indexOf( '&' );
