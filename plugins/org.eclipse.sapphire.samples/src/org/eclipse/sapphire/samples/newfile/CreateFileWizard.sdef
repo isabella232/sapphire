@@ -33,7 +33,7 @@
                 <show-label>false</show-label>
                 <style>Sapphire.PropertyEditor.RadioButtonGroup.Vertical</style>
                 <hint>
-                    <name>aux.text.JAVA</name>
+                    <name>aux.text.Java</name>
                     <value>Java programming language source file</value>
                 </hint>
                 <hint>
@@ -41,7 +41,7 @@
                     <value>Extensible Markup Language file for configuration, data exchange or storage</value>
                 </hint>
                 <hint>
-                    <name>aux.text.TEXT</name>
+                    <name>aux.text.text</name>
                     <value>Plain file suitable for any textual content</value>
                 </hint>
             </property-editor>
@@ -50,7 +50,7 @@
     </dialog>
     <wizard>
         <id>CreateFileWizard</id>
-        <label>New File (Sapphire Sample)</label>
+        <label>new ${ Type } file (Sapphire Sample)</label>
         <page>
             <id>CreateWorkspaceFileWizard.MainPage</id>
             <label>File (Sapphire Sample)</label>

@@ -30,7 +30,6 @@ import org.eclipse.jface.wizard.IWizard;
 import org.eclipse.jface.wizard.IWizardContainer;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.sapphire.Element;
 import org.eclipse.sapphire.ElementType;
 import org.eclipse.sapphire.Event;
@@ -43,7 +42,6 @@ import org.eclipse.sapphire.modeling.ProgressMonitor;
 import org.eclipse.sapphire.modeling.Status;
 import org.eclipse.sapphire.ui.DelayedTasksExecutor;
 import org.eclipse.sapphire.ui.PartVisibilityEvent;
-import org.eclipse.sapphire.ui.SapphirePart.DescriptionChangedEvent;
 import org.eclipse.sapphire.ui.SapphirePart.ImageChangedEvent;
 import org.eclipse.sapphire.ui.SapphirePart.LabelChangedEvent;
 import org.eclipse.sapphire.ui.def.DefinitionLoader;
@@ -133,18 +131,14 @@ public class SapphireWizard<M extends Element> implements IWizard
                 @Override
                 public void handle( final Event event )
                 {
-                	if (event instanceof ImageChangedEvent)
-                	{
-                		refreshImage();
-                	}
+                    if (event instanceof ImageChangedEvent)
+                    {
+                        refreshImage();
+                    }
                     else if( event instanceof LabelChangedEvent )
                     {
-                    	refreshTitle();
+                        refreshTitle();
                     }
-                    else if( event instanceof DescriptionChangedEvent )
-                    {
-                    	refreshDescription();
-                    }                	
                 }
             }
         );
@@ -543,22 +537,7 @@ public class SapphireWizard<M extends Element> implements IWizard
     
     private final void refreshTitle()
     {
-    	IWizardContainer container = getContainer();
-    	if (container instanceof WizardDialog)
-    	{
-    		((WizardDialog)container).setTitle(part().getLabel());
-    		container.updateWindowTitle();
-    	}    	
-    }
-
-    private final void refreshDescription()
-    {
-    	IWizardContainer container = getContainer();
-    	if (container instanceof WizardDialog)
-    	{
-    		((WizardDialog)container).setMessage(part().getDescription());
-    		container.updateMessage();
-    	}  	
+        getContainer().updateWindowTitle();
     }
 
     @Override

@@ -47,14 +47,23 @@
 <h1>Enhancements in Sapphire 0.7.2</h1>
 
 <ol>
-  <li><a href="#Forms">Forms</a></li>
+  <li><a href="#ExpressionLanguage">Expression Language</a></li>
   <ol type="A">
-    <li><a href="#Forms-SapphireWizardEnhancements">SapphireWizard Enhancements</a></li>
+    <li><a href="#ExpressionLanguage-UseInWizardLabel">Use EL in Wizard Label</a></li>
+    <li><a href="#ExpressionLanguage-UseInWizardPageLabelDescription">Use EL in Wizard Page Label and Description</a></li>
   </ol>
 </ol>
 
+<h2><a name="ExpressionLanguage"><a name="ExpressionLanguage-UseInWizardLabel">Use EL in Wizard Label</a></a></h2>
 
-<h2><a name="Forms"><a name="Forms-SapphireWizardEnhancements">SapphireWizard Enhancements</a></a></h2>
+<p>Use the expression language when defining the wizard label (window title).</p>
+
+<pre class="source-code"><code><font color="#888888">&lt;wizard></font>
+    &lt;label>new ${ Type } file&lt;/label>
+<font color="#888888">&lt;/wizard></font></code></pre>
+
+
+<h2><a name="ExpressionLanguage-UseInWizardPageLabelDescription">Use EL in Wizard Page Label and Description</a></h2>
 
 <p>Sapphire Wizard Page's label and description are now using expressions and their content can be controlled dynamically.</p>
 

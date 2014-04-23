@@ -15,6 +15,7 @@ import org.eclipse.sapphire.ElementType;
 import org.eclipse.sapphire.Value;
 import org.eclipse.sapphire.ValueProperty;
 import org.eclipse.sapphire.modeling.annotations.DefaultValue;
+import org.eclipse.sapphire.modeling.annotations.EnumSerialization;
 import org.eclipse.sapphire.modeling.annotations.FileExtensions;
 import org.eclipse.sapphire.modeling.annotations.Image;
 import org.eclipse.sapphire.modeling.annotations.Label;
@@ -36,16 +37,19 @@ public interface CreateFileOp extends CreateWorkspaceFileOp
     enum FileType
     {
         @Label( standard = "Java" )
+        @EnumSerialization( primary = "Java" )
         @Image( path = "JavaFile.png" )
         
         JAVA,
         
         @Label( standard = "XML" )
+        @EnumSerialization( primary = "XML" )
         @Image( path = "XmlFile.png" )
         
         XML,
         
         @Label( standard = "text" )
+        @EnumSerialization( primary = "text" )
         @Image( path = "TextFile.png" )
         
         TEXT

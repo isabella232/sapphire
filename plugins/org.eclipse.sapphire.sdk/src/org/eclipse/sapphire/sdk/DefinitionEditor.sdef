@@ -557,7 +557,6 @@
                     <include>PartId</include>
                     <property-editor>ElementType</property-editor>
                     <property-editor>Label</property-editor>
-                    <property-editor>Description</property-editor>
                     <property-editor>Image</property-editor>
                 </content>
             </section>

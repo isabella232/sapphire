@@ -18,7 +18,6 @@ import org.eclipse.sapphire.Value;
 import org.eclipse.sapphire.ValueProperty;
 import org.eclipse.sapphire.modeling.annotations.Image;
 import org.eclipse.sapphire.modeling.annotations.Label;
-import org.eclipse.sapphire.modeling.annotations.LongString;
 import org.eclipse.sapphire.modeling.annotations.Required;
 import org.eclipse.sapphire.modeling.annotations.Type;
 import org.eclipse.sapphire.modeling.el.Function;
@@ -58,20 +57,6 @@ public interface WizardDef extends PartDef
     void setLabel( String label );
     void setLabel( Function label );
     
-    // *** Description ***
-    
-    @Type( base = Function.class )
-    @Label( standard = "description" )
-    @LongString
-    @Localizable
-    @XmlBinding( path = "description" )
-    
-    ValueProperty PROP_DESCRIPTION = new ValueProperty( TYPE, "Description" );
-    
-    Value<Function> getDescription();
-    void setDescription( String description );
-    void setDescription( Function description );    
-
     // *** Image ***
     
     @Type( base = Function.class )
