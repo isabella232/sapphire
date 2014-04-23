@@ -328,8 +328,14 @@ public class XmlEditorResourceStore extends XmlResourceStore
     public void dispose()
     {
         super.dispose();
+        
         detachXmlNodeListener();
-        this.scrubber.dispose();
+        
+        if( this.scrubber != null )
+        {
+            this.scrubber.dispose();
+            this.scrubber = null;
+        }
     }
 
     @SuppressWarnings( "unchecked" )
