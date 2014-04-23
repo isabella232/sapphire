@@ -131,7 +131,7 @@ public class SapphireWizard<M extends Element> implements IWizard
                 @Override
                 public void handle( final Event event )
                 {
-                    if (event instanceof ImageChangedEvent)
+                    if( event instanceof ImageChangedEvent )
                     {
                         refreshImage();
                     }
@@ -537,10 +537,12 @@ public class SapphireWizard<M extends Element> implements IWizard
     
     private final void refreshTitle()
     {
-    	if (getContainer() != null)
-    	{
-            getContainer().updateWindowTitle();
-    	}
+        final IWizardContainer container = getContainer();
+        
+        if( container != null )
+        {
+            container.updateWindowTitle();
+        }
     }
 
     @Override
