@@ -537,7 +537,10 @@ public class SapphireWizard<M extends Element> implements IWizard
     
     private final void refreshTitle()
     {
-        getContainer().updateWindowTitle();
+    	if (getContainer() != null)
+    	{
+            getContainer().updateWindowTitle();
+    	}
     }
 
     @Override
