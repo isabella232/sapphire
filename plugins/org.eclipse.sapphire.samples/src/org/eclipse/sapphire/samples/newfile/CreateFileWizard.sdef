@@ -53,8 +53,8 @@
         <label>new ${ Type } file (Sapphire Sample)</label>
         <page>
             <id>CreateWorkspaceFileWizard.MainPage</id>
-            <label>File (Sapphire Sample)</label>
-            <description>Create a file.</description>
+            <label>${ Type } file (Sapphire Sample)</label>
+            <description>Create ${ Type == &quot;XML&quot; ? &quot;an&quot; : &quot;a&quot; } ${Type} file.</description>
             <content>
                 <include>CreateWorkspaceFileForm</include>
             </content>

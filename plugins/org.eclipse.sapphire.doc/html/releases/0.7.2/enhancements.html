@@ -54,38 +54,29 @@
   </ol>
 </ol>
 
+
 <h2><a name="ExpressionLanguage"><a name="ExpressionLanguage-UseInWizardLabel">Use EL in Wizard Label</a></a></h2>
 
 <p>Use the expression language when defining the wizard label (window title).</p>
 
-<pre class="source-code"><code><font color="#888888">&lt;wizard></font>
-    &lt;label>new ${ Type } file&lt;/label>
-<font color="#888888">&lt;/wizard></font></code></pre>
+<pre class="source-code"><code><font color="#888888">&lt;wizard>
+    &lt;label></font>new ${ Type } file<font color="#888888">&lt;/label>
+&lt;/wizard></font></code></pre>
 
 
 <h2><a name="ExpressionLanguage-UseInWizardPageLabelDescription">Use EL in Wizard Page Label and Description</a></h2>
 
-<p>Sapphire Wizard Page's label and description are now using expressions and their content can be controlled dynamically.</p>
+<p>Use the expression language when defining the wizard page label and description.</p>
 
 <p style="margin-left: 20px;"><b>Example</b></p>
 
 <pre class="source-code"><code><font color="#888888">&lt;wizard>
-    &lt;page>Occupation</font>       
-       &lt;label>${ Spouse.Name.First }'s occupation&lt;/label>
-       &lt;description>${ Spouse.Name.First }'s job description&lt;/description>
-       <font color="#888888">...
+    &lt;page>
+        &lt;label></font>${ Type } file<font color="#888888">&lt;/label>
+        &lt;description></font>Create ${ Type == "XML" ? "an" : "a" } ${Type} file.<font color="#888888">&lt;/description>
     &lt;/page>
 &lt;/wizard></font></code></pre>
 
-<p>Similiarly, Sapphire Wizard's label and description are also using expressions and their content can be controlled dynamically.</p>
-
-<p style="margin-left: 20px;"><b>Example</b></p>
-
-<pre class="source-code"><code><font color="#888888">&lt;wizard></font>
-    &lt;label>${ Contact.Name }'s task&lt;/label>
-    &lt;description>${ Contact.Name }'s todo list&lt;/description>
-    <font color="#888888">...
-&lt;/wizard></font></code></pre>
 
 <div class="copyright">Copyright (c) 2014 Oracle<br/>
 Content made available under the terms of <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</div>

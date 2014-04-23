@@ -49,6 +49,7 @@ public final class WizardPagePart extends CompositePart
                 }
             }
         );
+        
         this.labelFunctionResult = initExpression
         (
             def.getLabel().content(),
@@ -62,6 +63,7 @@ public final class WizardPagePart extends CompositePart
                 }
             }
         );
+        
         this.descriptionFunctionResult = initExpression
         (
             def.getDescription().content(),
@@ -85,14 +87,14 @@ public final class WizardPagePart extends CompositePart
     
     public String getLabel()
     {
-    	final LocalizationService localizationService = definition().adapt( LocalizationService.class );
-    	return localizationService.text( (String)this.labelFunctionResult.value(), CapitalizationType.TITLE_STYLE, false );
+        final LocalizationService localizationService = definition().adapt( LocalizationService.class );
+        return localizationService.text( (String)this.labelFunctionResult.value(), CapitalizationType.TITLE_STYLE, false );
     }
     
     public String getDescription()
     {
-    	final LocalizationService localizationService = definition().adapt( LocalizationService.class );
-    	return localizationService.text( (String)this.descriptionFunctionResult.value(), CapitalizationType.NO_CAPS, false );
+        final LocalizationService localizationService = definition().adapt( LocalizationService.class );
+        return localizationService.text( (String)this.descriptionFunctionResult.value(), CapitalizationType.NO_CAPS, false );
     }
     
     public ImageData getImage()
