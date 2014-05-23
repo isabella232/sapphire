@@ -1101,7 +1101,7 @@ Fragment-Host: @{Bundle}
                         <then>
                           <trycatch>
                             <try>
-                              <get src="http://www.eclipse.org/downloads/sums.php?file=@{file}&amp;type=md5" dest="${downloads}/content-checksum.txt"/>
+                              <get src="http://www.eclipse.org/downloads/sums.php?file=@{file}&amp;type=sha512" dest="${downloads}/content-checksum.txt"/>
                             </try>
                             <catch>
                               <echo message="Failed to retrieve the checksum on try @{retry}."/>
@@ -1118,7 +1118,7 @@ Fragment-Host: @{Bundle}
                   
                   <!-- Verify the local file againsted the expected checksum. -->
                   
-                  <checksum file="${downloads}/${.url.checksum}" property=".content.checksum.actual"/>
+                  <checksum file="${downloads}/${.url.checksum}" property=".content.checksum.actual" algorithm="SHA-512"/>
                       
                   <if>
                     <equals arg1="${.content.checksum}" arg2="${.content.checksum.actual}"/>
