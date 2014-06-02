@@ -1019,7 +1019,26 @@ Fragment-Host: @{Bundle}
                 
                   <!-- Download the expected checksum. -->
                   
-                  <get src="http://www.eclipse.org/downloads/sums.php?file=@{file}&amp;type=md5" dest="${downloads}/content-checksum.txt"/>
+                  <delete file="${downloads}/content-checksum.txt" quiet="true"/>
+                  
+                  <for list="1,2,3,4,5" param="retry">
+                    <sequential>
+                      <if>
+                        <not><available file="${downloads}/content-checksum.txt"/></not>
+                        <then>
+                          <trycatch>
+                            <try>
+                              <get src="http://www.eclipse.org/downloads/sums.php?file=@{file}&amp;type=md5" dest="${downloads}/content-checksum.txt"/>
+                            </try>
+                            <catch>
+                              <echo message="Failed to retrieve the checksum on try @{retry}."/>
+                            </catch>
+                           </trycatch>
+                        </then>
+                      </if>
+                    </sequential>
+                  </for>
+                    
                   <loadfile srcfile="${downloads}/content-checksum.txt" property=".content.checksum"/>
                   <delete file="${downloads}/content-checksum.txt"/>
                   <propertyregex property=".content.checksum" override="true" input="${.content.checksum}" regexp="([^ ]*).*" select="\1"/>
