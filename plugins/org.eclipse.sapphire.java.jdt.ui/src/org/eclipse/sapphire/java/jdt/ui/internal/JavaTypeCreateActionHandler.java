@@ -489,7 +489,8 @@ public abstract class JavaTypeCreateActionHandler extends PropertyEditorActionHa
     {
         try
         {
-            return ( AST.class.getField( "JLS" + String.valueOf( version ) ) != null );
+            AST.class.getField( "JLS" + String.valueOf( version ) );
+            return true;
         }
         catch( final NoSuchFieldException e )
         {
