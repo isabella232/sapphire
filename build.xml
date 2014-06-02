@@ -674,7 +674,20 @@
   <target name="create-dev-target" depends="build-repository">
 
     <property name="dev.target.dir" value="${root.dir}/dev-target"/>
-    <install-eclipse dest="${dev.target.dir}" extensions="${iu.sapphire.dev.target}"/>
+    
+    <if>
+      <isset property="iu.sapphire.dev.target.${configuration.recommended}"/>
+      <then>
+        <propertycopy property=".extensions" from="iu.sapphire.dev.target.${configuration.recommended}" override="true"/>
+      </then>
+      <else>
+        <var name=".extensions" value="${iu.sapphire.dev.target}"/>
+      </else>
+    </if>
+    
+    <install-eclipse dest="${dev.target.dir}" extensions="${.extensions}"/>
+
+    <var name=".extensions" unset="true"/>
 
   </target>
 

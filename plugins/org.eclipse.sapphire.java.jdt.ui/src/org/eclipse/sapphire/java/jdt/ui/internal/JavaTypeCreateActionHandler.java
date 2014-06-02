@@ -461,11 +461,40 @@ public abstract class JavaTypeCreateActionHandler extends PropertyEditorActionHa
         }
     }
     
-    @SuppressWarnings( "deprecation" )
-    
     private static ASTParser createAstParser()
     {
-        return ASTParser.newParser( AST.JLS3 );
+        final int level;
+        
+        if( isJavaLanguageSpecSupported( 8 ) )
+        {
+            // Kepler SR2 with Java 8 Patch; Luna or newer
+            
+            level = 8;
+        }
+        else if( isJavaLanguageSpecSupported( 4 ) )
+        {
+            // Indigo SR1 or newer
+            
+            level = 4;
+        }
+        else
+        {
+            level = 3;
+        }
+
+        return ASTParser.newParser( level );
+    }
+    
+    private static boolean isJavaLanguageSpecSupported( final int version )
+    {
+        try
+        {
+            return ( AST.class.getField( "JLS" + String.valueOf( version ) ) != null );
+        }
+        catch( final NoSuchFieldException e )
+        {
+            return false;
+        }
     }
     
     protected static abstract class Condition extends PropertyEditorCondition
