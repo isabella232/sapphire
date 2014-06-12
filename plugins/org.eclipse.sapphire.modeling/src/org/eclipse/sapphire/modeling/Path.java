@@ -743,10 +743,19 @@ public final class Path
         return new Path(this.device, this.segments, this.separators & HAS_TRAILING);
     }
 
-    public Path makeRelativeTo(Path base) {
-        //can't make relative if devices are not equal
-        if (this.device == null || !this.device.equalsIgnoreCase(base.getDevice()))
+    public Path makeRelativeTo( final Path base )
+    {
+        // Cannot make a relative path if devices are not equal. Note that paths may not have a device on
+        // some operating systems.
+        
+        final String baseDevice = base.getDevice();
+        
+        if( ( this.device != null || baseDevice != null ) &&
+            ( this.device == null || ! this.device.equalsIgnoreCase( baseDevice ) ) )
+        {
             return this;
+        }
+        
         int commonLength = matchingFirstSegments(base);
         final int differenceLength = base.segmentCount() - commonLength;
         final int newSegmentLength = differenceLength + segmentCount() - commonLength;
