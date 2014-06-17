@@ -465,6 +465,78 @@
 
   </target>
 
+  
+  <!--
+    *************************************************************************************************
+    * Documentation                                                                                 *
+    *************************************************************************************************
+  -->
+
+  <target name="export-documentation" depends="build-repository">
+
+    <delete dir="${build.dir}/documentation" quiet="true"/>
+    <mkdir dir="${build.dir}/documentation"/>
+    
+    <install-eclipse dest="${build.dir}/documentation/eclipse" extensions="${iu.sapphire.doc.export}"/>
+    
+    <stop-help-server eclipse="${build.dir}/documentation/eclipse"/>
+        
+    <parallel failonany="true">
+      <start-help-server eclipse="${build.dir}/documentation/eclipse"/>
+      <sequential>
+        <sleep seconds="30"/>
+        <export-documentation server="http://127.0.0.1:12345" dest="${build.dir}/documentation/exported"/>
+        <stop-help-server eclipse="${build.dir}/documentation/eclipse"/>
+      </sequential>
+    </parallel>
+    
+    <zip destfile="${build.dir}/packages/sapphire-documentation-${sapphire.version}.zip">
+      <fileset dir="${build.dir}/documentation/exported" includes="**/*"/>
+    </zip>
+    
+    <delete dir="${build.dir}/documentation" quiet="true"/>
+
+  </target>
+  
+  
+  <macrodef name="start-help-server">
+    <attribute name="eclipse"/>
+    <attribute name="port" default="65332"/>
+    <sequential>
+    
+      <echo message="Starting Eclipse help server on port @{port}..."/>
+      
+      <java classname="org.eclipse.help.standalone.Help" fork="true" dir="@{eclipse}">
+        <arg value="-command"/>
+        <arg value="start"/>
+        <arg value="-port"/>
+        <arg value="@{port}"/>
+        <classpath>
+          <fileset dir="@{eclipse}/plugins" includes="org.eclipse.help.base_*.jar"/>
+        </classpath>
+      </java>
+
+    </sequential>
+  </macrodef>
+  
+  
+  <macrodef name="stop-help-server">
+    <attribute name="eclipse"/>
+    <sequential>
+    
+      <echo message="Stopping Eclipse help server..."/>
+      
+      <java classname="org.eclipse.help.standalone.Help" fork="true" dir="@{eclipse}">
+        <arg value="-command"/>
+        <arg value="shutdown"/>
+        <classpath>
+          <fileset dir="@{eclipse}/plugins" includes="org.eclipse.help.base_*.jar"/>
+        </classpath>
+      </java>
+
+    </sequential>
+  </macrodef>
+  
 
   <!--
     *************************************************************************************************

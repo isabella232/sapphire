@@ -24,4 +24,7 @@
   <taskdef name="set-export-package-version"
            classname="org.eclipse.sapphire.releng.ant.SetExportPackageVersionTask"/>
     
+  <taskdef name="export-documentation"
+           classname="org.eclipse.sapphire.releng.ant.ExportDocumentationTask"/>
+    
 </antlib> 
