@@ -482,10 +482,10 @@
     <stop-help-server eclipse="${build.dir}/documentation/eclipse"/>
         
     <parallel failonany="true">
-      <start-help-server eclipse="${build.dir}/documentation/eclipse"/>
+      <start-help-server eclipse="${build.dir}/documentation/eclipse" port="65332"/>
       <sequential>
         <sleep seconds="30"/>
-        <export-documentation server="http://127.0.0.1:12345" dest="${build.dir}/documentation/exported"/>
+        <export-documentation server="http://127.0.0.1:65332" dest="${build.dir}/documentation/exported"/>
         <stop-help-server eclipse="${build.dir}/documentation/eclipse"/>
       </sequential>
     </parallel>
@@ -501,7 +501,7 @@
   
   <macrodef name="start-help-server">
     <attribute name="eclipse"/>
-    <attribute name="port" default="65332"/>
+    <attribute name="port"/>
     <sequential>
     
       <echo message="Starting Eclipse help server on port @{port}..."/>
