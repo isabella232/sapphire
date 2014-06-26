@@ -42,7 +42,7 @@ public final class ArithmeticNegationOperatorTests extends AbstractOperatorTests
 
     public void testArithmeticNegationOperator3()
     {
-        test( "${ -Integer3 }", new Integer( "-3" ) );
+        test( "${ -Integer3 }", Integer.valueOf( "-3" ) );
     }
 
 }

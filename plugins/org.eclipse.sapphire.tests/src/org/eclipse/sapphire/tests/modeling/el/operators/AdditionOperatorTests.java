@@ -63,7 +63,7 @@ public final class AdditionOperatorTests extends AbstractOperatorTests
     
     public void testAdditionOperator6()
     {
-        test( "${ Integer3 + Integer5 }", new Long( "8" ) );
+        test( "${ Integer3 + Integer5 }", Long.valueOf( "8" ) );
     }
 
 }

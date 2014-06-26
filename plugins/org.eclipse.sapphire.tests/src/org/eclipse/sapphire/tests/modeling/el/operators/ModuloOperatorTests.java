@@ -48,7 +48,7 @@ public final class ModuloOperatorTests extends AbstractOperatorTests
     
     public void testModuloOperator4()
     {
-        test( "${ Integer3 % Integer5 }", new Long( "3" ) );
+        test( "${ Integer3 % Integer5 }", Long.valueOf( "3" ) );
     }
 
 }

@@ -63,7 +63,7 @@ public final class SubtractionOperatorTests extends AbstractOperatorTests
     
     public void testSubtractionOperator6()
     {
-        test( "${ Integer3 - Integer5 }", new Long( "-2" ) );
+        test( "${ Integer3 - Integer5 }", Long.valueOf( "-2" ) );
     }
 
 }

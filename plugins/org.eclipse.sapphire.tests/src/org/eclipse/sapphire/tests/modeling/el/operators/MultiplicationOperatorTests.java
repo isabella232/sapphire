@@ -70,7 +70,7 @@ public final class MultiplicationOperatorTests extends AbstractOperatorTests
     
     public void testMultiplicationOperator7()
     {
-        test( "${ Integer3 * Integer5 }", new Long( "15" ) );
+        test( "${ Integer3 * Integer5 }", Long.valueOf( "15" ) );
     }
 
 }
