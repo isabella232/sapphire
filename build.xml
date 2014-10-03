@@ -605,7 +605,7 @@
   -->
 
   
-  <target name="findbugs" depends="init">
+  <target name="findbugs" depends="init" unless="skip.findbugs">
     <findbugs/>
   </target>
 
