@@ -17,6 +17,7 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.jface.action.IMenuManager;
@@ -80,22 +81,49 @@ public final class DiagramEditorContextMenuProvider extends ContextMenuProvider
 			if( editPart instanceof SapphireDiagramEditorPageEditPart )
 			{
 				context = SapphireActionSystem.CONTEXT_DIAGRAM_EDITOR;
-				presentation = ((SapphireDiagramEditorPageEditPart)editPart).getPresentation();
+				presentation = this.editor.getDiagramPresentation();
 			}
 			else if( editPart instanceof DiagramNodeEditPart )
 			{
-				context = SapphireActionSystem.CONTEXT_DIAGRAM_NODE;
-				presentation = ((DiagramNodeEditPart)editPart).getPresentation();
+				DiagramNodeEditPart nodePart = (DiagramNodeEditPart)editPart;
+				if (isMouseOnEditPart(nodePart))
+				{
+					context = SapphireActionSystem.CONTEXT_DIAGRAM_NODE;
+					presentation = ((DiagramNodeEditPart)editPart).getPresentation();
+				}
+				else
+				{
+					context = SapphireActionSystem.CONTEXT_DIAGRAM_EDITOR;
+					presentation = this.editor.getDiagramPresentation();
+				}
 			}
 			else if (editPart instanceof ShapeEditPart)
 			{
-				context = SapphireActionSystem.CONTEXT_DIAGRAM_NODE_SHAPE;
-				presentation = ((ShapeEditPart)editPart).getShapePresentation();
+				DiagramNodeEditPart nodePart = ((ShapeEditPart)editPart).getNodeEditPart();
+				if (isMouseOnEditPart(nodePart))
+				{
+					context = SapphireActionSystem.CONTEXT_DIAGRAM_NODE_SHAPE;
+					presentation = ((ShapeEditPart)editPart).getShapePresentation();
+				}
+				else
+				{
+					context = SapphireActionSystem.CONTEXT_DIAGRAM_EDITOR;
+					presentation = this.editor.getDiagramPresentation();
+				}
 			}
 			else if( editPart instanceof DiagramConnectionEditPart )
 			{
-				context = SapphireActionSystem.CONTEXT_DIAGRAM_CONNECTION;
-				presentation = ((DiagramConnectionEditPart)editPart).getPresentation();
+				if (isMouseOnEditPart(editPart))
+				{
+					context = SapphireActionSystem.CONTEXT_DIAGRAM_CONNECTION;
+					presentation = ((DiagramConnectionEditPart)editPart).getPresentation();
+				}
+				else
+				{
+					context = SapphireActionSystem.CONTEXT_DIAGRAM_EDITOR;
+					presentation = this.editor.getDiagramPresentation();
+				}
+				
 			}
 			else if( editPart instanceof DiagramConnectionLabelEditPart )
 			{
@@ -110,9 +138,16 @@ public final class DiagramEditorContextMenuProvider extends ContextMenuProvider
 		}
 		else if( selection.size() > 1 )
 		{
+			if (isMouseOnEditParts(selection))
+			{
+			    context = SapphireActionSystem.CONTEXT_DIAGRAM_MULTIPLE_PARTS;
+			}
+			else
+			{
+				context = SapphireActionSystem.CONTEXT_DIAGRAM_EDITOR;				
+			}
 			presentation = this.editor.getDiagramPresentation();
-		    part = this.editor.getPart();
-		    context = SapphireActionSystem.CONTEXT_DIAGRAM_MULTIPLE_PARTS;
+		    part = this.editor.getPart();			
 		}
 		else
 		{
@@ -229,5 +264,23 @@ public final class DiagramEditorContextMenuProvider extends ContextMenuProvider
 		this.editor.getContextButtonManager().hideContextButtonsInstantly();
 	}
     
+    private boolean isMouseOnEditPart(GraphicalEditPart editPart)
+    {
+    	Point p = this.editor.getMouseLocation();
+    	return editPart.getFigure().containsPoint(p);
+    }
+    
+    private boolean isMouseOnEditParts(List<GraphicalEditPart> editParts)
+    {
+    	Point p = this.editor.getMouseLocation();
+    	for (GraphicalEditPart editPart : editParts)
+    	{
+    		if (editPart.getFigure().containsPoint(p))
+    		{
+    			return true;
+    		}
+    	}
+    	return false;
+    }
 
 }
