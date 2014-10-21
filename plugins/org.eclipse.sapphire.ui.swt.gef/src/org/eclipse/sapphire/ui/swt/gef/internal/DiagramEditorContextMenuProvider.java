@@ -12,6 +12,7 @@
 
 package org.eclipse.sapphire.ui.swt.gef.internal;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.List;
@@ -73,6 +74,8 @@ public final class DiagramEditorContextMenuProvider extends ContextMenuProvider
         final String context;
 
         final List<GraphicalEditPart> selection = this.editor.getSelectedEditParts();
+        
+        List<ISapphirePart> emptySelection = new ArrayList<ISapphirePart>();
 		
 		if( selection.size() == 1 )
 		{
@@ -93,6 +96,7 @@ public final class DiagramEditorContextMenuProvider extends ContextMenuProvider
 				}
 				else
 				{
+					this.editor.selectParts(emptySelection);
 					context = SapphireActionSystem.CONTEXT_DIAGRAM_EDITOR;
 					presentation = this.editor.getDiagramPresentation();
 				}
@@ -107,6 +111,7 @@ public final class DiagramEditorContextMenuProvider extends ContextMenuProvider
 				}
 				else
 				{
+					this.editor.selectParts(emptySelection);
 					context = SapphireActionSystem.CONTEXT_DIAGRAM_EDITOR;
 					presentation = this.editor.getDiagramPresentation();
 				}
@@ -120,6 +125,7 @@ public final class DiagramEditorContextMenuProvider extends ContextMenuProvider
 				}
 				else
 				{
+					this.editor.selectParts(emptySelection);
 					context = SapphireActionSystem.CONTEXT_DIAGRAM_EDITOR;
 					presentation = this.editor.getDiagramPresentation();
 				}
@@ -144,6 +150,7 @@ public final class DiagramEditorContextMenuProvider extends ContextMenuProvider
 			}
 			else
 			{
+				this.editor.selectParts(emptySelection);
 				context = SapphireActionSystem.CONTEXT_DIAGRAM_EDITOR;				
 			}
 			presentation = this.editor.getDiagramPresentation();

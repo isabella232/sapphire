@@ -881,6 +881,12 @@ public class SapphireDiagramEditor extends GraphicalEditorWithFlyoutPalette impl
     	{
     		GraphicalViewer viewer = this.getGraphicalViewer();
     		
+    		if (selections.isEmpty())
+    		{
+    			viewer.flush();
+    			viewer.deselectAll();
+    			return;
+    		}
     		boolean first = true;
     		for (ISapphirePart sapphirePart : selections)
     		{
