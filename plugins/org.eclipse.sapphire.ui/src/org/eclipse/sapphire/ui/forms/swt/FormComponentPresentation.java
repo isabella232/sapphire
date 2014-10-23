@@ -18,6 +18,8 @@ import java.util.List;
 import org.eclipse.sapphire.Property;
 import org.eclipse.sapphire.ui.SapphireHelpContext;
 import org.eclipse.sapphire.ui.forms.FormComponentPart;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.HelpEvent;
@@ -25,6 +27,7 @@ import org.eclipse.swt.events.HelpListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.ScrollBar;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.widgets.SharedScrolledComposite;
 
@@ -115,14 +118,37 @@ public abstract class FormComponentPresentation extends SwtPresentation
         
         composite.getShell().layout( true, true );
         
-        while( composite != null && ! ( composite instanceof SharedScrolledComposite ) )
+        while( composite != null && ! ( composite instanceof ScrolledComposite ) )
         {
             composite = composite.getParent();
         }
         
-        if( composite != null )
+        if( composite instanceof SharedScrolledComposite )
         {
             ( (SharedScrolledComposite) composite ).reflow( true );
+        }
+        else if( composite instanceof ScrolledComposite )
+        {
+            final ScrolledComposite scrolledComposite = (ScrolledComposite) composite;
+            scrolledComposite.setMinSize( scrolledComposite.getContent().computeSize( SWT.DEFAULT, SWT.DEFAULT ) );
+            updatePageIncrement( scrolledComposite );
+        }
+    }
+    
+    private static void updatePageIncrement( final ScrolledComposite scomp )
+    {
+        final ScrollBar vbar = scomp.getVerticalBar();
+        
+        if( vbar != null )
+        {
+            vbar.setPageIncrement( scomp.getClientArea().height - 5 );
+        }
+        
+        final ScrollBar hbar = scomp.getHorizontalBar();
+        
+        if( hbar != null )
+        {
+            hbar.setPageIncrement( scomp.getClientArea().width - 5 );
         }
     }
     
