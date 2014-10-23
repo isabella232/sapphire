@@ -123,15 +123,18 @@ public abstract class FormComponentPresentation extends SwtPresentation
             composite = composite.getParent();
         }
         
-        if( composite instanceof SharedScrolledComposite )
+        if( composite != null )
         {
-            ( (SharedScrolledComposite) composite ).reflow( true );
-        }
-        else if( composite instanceof ScrolledComposite )
-        {
-            final ScrolledComposite scrolledComposite = (ScrolledComposite) composite;
-            scrolledComposite.setMinSize( scrolledComposite.getContent().computeSize( SWT.DEFAULT, SWT.DEFAULT ) );
-            updatePageIncrement( scrolledComposite );
+            if( composite instanceof SharedScrolledComposite )
+            {
+                ( (SharedScrolledComposite) composite ).reflow( true );
+            }
+            else
+            {
+                final ScrolledComposite scrolledComposite = (ScrolledComposite) composite;
+                scrolledComposite.setMinSize( scrolledComposite.getContent().computeSize( SWT.DEFAULT, SWT.DEFAULT ) );
+                updatePageIncrement( scrolledComposite );
+            }
         }
     }
     
