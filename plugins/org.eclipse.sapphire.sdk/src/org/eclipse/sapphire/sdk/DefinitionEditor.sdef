@@ -1622,6 +1622,7 @@
                     </property-editor>
                 </content>
             </section>
+            <node-include>PropertiesViewContributionNodeFactory</node-include>
         </case>
         <case>
             <element-type>ImageDef</element-type>
@@ -1638,6 +1639,7 @@
             <node-include>ActionHandlerNodeFactory</node-include>
             <node-include>ActionHandlerFactoryNodeFactory</node-include>
             <node-include>ActionHandlerFilterNodeFactory</node-include>
+            <node-include>PropertiesViewContributionNodeFactory</node-include>
         </case>
         <case>
             <element-type>ValidationMarkerDef</element-type>
@@ -1795,6 +1797,7 @@
             <node-include>ActionHandlerFactoryNodeFactory</node-include>
             <node-include>ActionHandlerFilterNodeFactory</node-include>
             <image>${ Image() }</image>
+            <node-include>PropertiesViewContributionNodeFactory</node-include>
         </case>
         <case>
             <element-type>LineShapeDef</element-type>
@@ -1894,7 +1897,6 @@
                 </node-include>
                 <image>Separator.png</image>
             </node>
-            <node-include>PropertiesViewContributionNodeFactory</node-include>
         </case>
         <case>
             <element-type>SpacerDef</element-type>
