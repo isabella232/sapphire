@@ -40,7 +40,7 @@ public final class SqlSchemaConnectionService extends StandardConnectionService
         {
             for( final Column column : referencedTable.getColumns() )
             {
-                if( column.getIsPrimaryKey().content() )
+                if( column.isPartOfPrimaryKey().content() )
                 {
                     fk.getColumnAssociations().insert().setReferencedColumn( column.getName().content() );
                 }

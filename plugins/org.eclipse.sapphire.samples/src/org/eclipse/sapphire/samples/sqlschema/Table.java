@@ -7,13 +7,16 @@
  *
  * Contributors:
  *    Shenxue Zhou - initial implementation and ongoing maintenance
+ *    Konstantin Komissarchik - improved handling of primary and foreign keys
  ******************************************************************************/
 
 package org.eclipse.sapphire.samples.sqlschema;
 
 import org.eclipse.sapphire.Collation;
 import org.eclipse.sapphire.Element;
+import org.eclipse.sapphire.ElementHandle;
 import org.eclipse.sapphire.ElementList;
+import org.eclipse.sapphire.ElementProperty;
 import org.eclipse.sapphire.ElementType;
 import org.eclipse.sapphire.ListProperty;
 import org.eclipse.sapphire.Unique;
@@ -28,6 +31,7 @@ import org.eclipse.sapphire.modeling.xml.annotations.XmlListBinding;
 
 /**
  * @author <a href="mailto:shenxue.zhou@oracle.com">Shenxue Zhou</a>
+ * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
 
 public interface Table extends Element 
@@ -56,6 +60,14 @@ public interface Table extends Element
     ListProperty PROP_COLUMNS = new ListProperty( TYPE, "Columns" );
     
     ElementList<Column> getColumns();    
+
+    // *** PrimaryKey ***
+    
+    @Type( base = PrimaryKey.class )
+    
+    ElementProperty PROP_PRIMARY_KEY = new ElementProperty( TYPE, "PrimaryKey" );
+    
+    ElementHandle<PrimaryKey> getPrimaryKey();
 
     // *** ForeignKeys ***
     

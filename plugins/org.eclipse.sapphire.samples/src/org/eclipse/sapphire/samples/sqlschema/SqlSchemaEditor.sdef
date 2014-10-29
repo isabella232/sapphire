@@ -127,12 +127,12 @@
                                                 <visible-when>${Part.Parent.Validation.Severity == 'ok' }</visible-when>
                                             </spacer>
                                             <image>
-                                                <path>PrimaryKey.gif</path>
+                                                <path>${ PartOfPrimaryKey ? &quot;PrimaryKey.gif&quot; : &quot;ForeignKey.gif&quot; }</path>
                                                 <sequence-layout-constraint>
                                                     <margin-right>8</margin-right>
                                                     <expand-vertically>false</expand-vertically>
                                                 </sequence-layout-constraint>
-                                                <visible-when>${ IsPrimaryKey }</visible-when>
+                                                <visible-when>${ PartOfPrimaryKey || PartOfForeignKey }</visible-when>
                                             </image>
                                             <spacer>
                                                 <sequence-layout-constraint>
@@ -142,10 +142,10 @@
                                                     <max-height>16</max-height>
                                                     <expand-vertically>false</expand-vertically>
                                                 </sequence-layout-constraint>
-                                                <visible-when>${ ! IsPrimaryKey }</visible-when>
+                                                <visible-when>${ ! PartOfPrimaryKey &amp;&amp; ! PartOfForeignKey }</visible-when>
                                             </spacer>
                                             <text>
-                                                <content>${ Name == null ? &quot;&lt;column&gt;&quot; : Name }:</content>
+                                                <content>${ Name == null ? &quot;&lt;column&gt;&quot; : Name }</content>
                                                 <truncatable>true</truncatable>
                                                 <sequence-layout-constraint>                            						
                                                 	<horizontal-alignment>left</horizontal-alignment>
@@ -163,37 +163,19 @@
                                                     <margin-right>10</margin-right>
                                                     <expand-vertically>false</expand-vertically>
                                                 </sequence-layout-constraint>
-                                                <color>#333399</color>
+                                                <color>#957d47</color>
                                             </text>
                                         </content>
                                         <sequence-layout-constraint>
                                             <horizontal-alignment>left</horizontal-alignment>
                                             <expand-horizontally>true</expand-horizontally>
                                         </sequence-layout-constraint>
-                                        <action>
-                                            <id>SqlSchemaEditor.TogglePrimaryKey</id>
-                                            <label>toggle primary key</label>
-                                            <context>Sapphire.Diagram.Node.Shape</context>
-                                            <image>org/eclipse/sapphire/samples/sqlschema/PrimaryKey.gif</image>
-                                        </action>
-                                        <action-handler>
-                                            <action>SqlSchemaEditor.TogglePrimaryKey</action>
-                                            <id>SqlSchemaEditor.TogglePrimaryKey</id>
-                                            <impl>org.eclipse.sapphire.samples.sqlschema.TogglePrimaryKeyActionHandler</impl>
-                                        </action-handler>
 							            <properties-view>
 							                <page>
 							                    <label>Column</label>
 							                    <content>
 							                        <property-editor>Name</property-editor>
 							                        <property-editor>Type</property-editor>
-						                            <property-editor>
-						                                <property>IsPrimaryKey</property>
-						                                <hint>
-						                                    <name>checkbox.layout</name>
-						                                    <value>leading.label</value>
-						                                </hint>
-						                            </property-editor>
                                                     <property-editor>
                                                         <property>Size</property>
                                                         <visible-when>${ Enabled }</visible-when>
@@ -240,10 +222,32 @@
             <properties-view>
                 <page>
                     <label>table</label>
-                    <image>Table.gif</image>
                     <content>
                         <property-editor>Name</property-editor>
                     </content>
+                </page>
+                <page>
+                    <content>
+                        <with>
+                            <case>
+                                <content>
+                                    <property-editor>
+                                        <hint>
+                                            <name>show.header</name>
+                                            <value>false</value>
+                                        </hint>
+                                        <property>Columns</property>
+                                        <scale-vertically>true</scale-vertically>
+                                    </property-editor>
+                                </content>
+                                <element-type>org.eclipse.sapphire.samples.sqlschema.PrimaryKey</element-type>
+                            </case>
+                            <path>PrimaryKey</path>
+                            <scale-vertically>true</scale-vertically>
+                            <show-label>true</show-label>
+                        </with>
+                    </content>
+                    <label>primary key</label>
                 </page>
                 <page>
                     <label>foreign keys</label>
@@ -272,7 +276,6 @@
                             <scale-vertically>true</scale-vertically>
                         </detail-section>
                     </content>
-                    <image>ForeignKey.gif</image>
                 </page>
             </properties-view>
         </node>
@@ -293,7 +296,6 @@
                                 <property>ColumnAssociations</property>
                             </property-editor>
                         </content>
-                        <image>ForeignKey.gif</image>
                     </page>
                 </properties-view>
             

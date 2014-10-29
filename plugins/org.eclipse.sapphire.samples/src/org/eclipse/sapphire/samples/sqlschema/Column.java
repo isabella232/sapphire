@@ -7,6 +7,7 @@
  *
  * Contributors:
  *    Shenxue Zhou - initial implementation and ongoing maintenance
+ *    Konstantin Komissarchik - improved handling of primary and foreign keys
  ******************************************************************************/
 
 package org.eclipse.sapphire.samples.sqlschema;
@@ -17,16 +18,20 @@ import org.eclipse.sapphire.ElementType;
 import org.eclipse.sapphire.Unique;
 import org.eclipse.sapphire.Value;
 import org.eclipse.sapphire.ValueProperty;
-import org.eclipse.sapphire.modeling.annotations.DefaultValue;
+import org.eclipse.sapphire.modeling.annotations.Derived;
 import org.eclipse.sapphire.modeling.annotations.Enablement;
 import org.eclipse.sapphire.modeling.annotations.Label;
 import org.eclipse.sapphire.modeling.annotations.NumericRange;
 import org.eclipse.sapphire.modeling.annotations.Required;
+import org.eclipse.sapphire.modeling.annotations.Service;
 import org.eclipse.sapphire.modeling.annotations.Type;
 import org.eclipse.sapphire.modeling.xml.annotations.XmlBinding;
+import org.eclipse.sapphire.samples.sqlschema.internal.PartOfForeignKeyDerivedValueService;
+import org.eclipse.sapphire.samples.sqlschema.internal.PartOfPrimaryKeyDerivedValueService;
 
 /**
  * @author <a href="mailto:shenxue.zhou@oracle.com">Shenxue Zhou</a>
+ * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
 
 public interface Column extends Element 
@@ -59,19 +64,6 @@ public interface Column extends Element
     void setType( String value );
     void setType( ColumnType value );
     
-    // *** IsPrimaryKey ***
-    
-	@Type( base = Boolean.class )
-	@Label( standard = "primary key" )
-	@XmlBinding( path = "is-primary-key" )
-	@DefaultValue(text = "false")
-	
-	ValueProperty PROP_IS_PRIMARY_KEY = new ValueProperty( TYPE, "IsPrimaryKey" );
-	
-	Value<Boolean> getIsPrimaryKey();
-	void setIsPrimaryKey( String value );
-	void setIsPrimaryKey( Boolean value );    
-	
     // *** Size ***
     
 	@Type( base = Integer.class )
@@ -86,5 +78,25 @@ public interface Column extends Element
 	Value<Integer> getSize();
 	void setSize( String value );
 	void setSize( Integer value );
+	
+    // *** PartOfPrimaryKey ***
+    
+    @Type( base = Boolean.class )
+    @Derived
+    @Service( impl = PartOfPrimaryKeyDerivedValueService.class )    
+
+    ValueProperty PROP_PART_OF_PRIMARY_KEY = new ValueProperty( TYPE, "PartOfPrimaryKey" );
+    
+    Value<Boolean> isPartOfPrimaryKey();
+	
+    // *** PartOfForeignKey ***
+    
+    @Type( base = Boolean.class )
+    @Derived
+    @Service( impl = PartOfForeignKeyDerivedValueService.class )    
+
+    ValueProperty PROP_PART_OF_FOREIGN_KEY = new ValueProperty( TYPE, "PartOfForeignKey" );
+    
+    Value<Boolean> isPartOfForeignKey();
 
 }
