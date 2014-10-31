@@ -340,7 +340,7 @@
                                     <property>Columns</property>
                                     <child-property>Name</child-property>
                                     <child-property>Type</child-property>
-                                    <child-property>IsPrimaryKey</child-property>
+                                    <child-property>PartOfPrimaryKey</child-property>
                                     <hint>
                                         <name>column.widths</name>
                                         <value>100:40,100:40,100:20</value>
