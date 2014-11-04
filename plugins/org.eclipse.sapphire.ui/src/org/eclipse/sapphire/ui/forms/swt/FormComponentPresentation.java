@@ -132,8 +132,13 @@ public abstract class FormComponentPresentation extends SwtPresentation
             else
             {
                 final ScrolledComposite scrolledComposite = (ScrolledComposite) composite;
-                scrolledComposite.setMinSize( scrolledComposite.getContent().computeSize( SWT.DEFAULT, SWT.DEFAULT ) );
-                updatePageIncrement( scrolledComposite );
+                final Control scrolledCompositeContent = scrolledComposite.getContent();
+                
+                if( scrolledCompositeContent != null )
+                {
+                	scrolledComposite.setMinSize( scrolledCompositeContent.computeSize( SWT.DEFAULT, SWT.DEFAULT ) );
+                	updatePageIncrement( scrolledComposite );
+                }
             }
         }
     }
