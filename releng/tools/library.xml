@@ -1,0 +1,66 @@
+<!-- 
+ ******************************************************************************
+ * Copyright (c) 2014 Oracle
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Konstantin Komissarchik - initial implementation and ongoing maintenance
+ ******************************************************************************
+-->
+
+<project name="sapphire-releng-tools">
+
+  <target name="init-releng-tools" unless="init.releng.tools.completed">
+
+    <dirname property=".base.dir" file="${ant.file.sapphire-releng-tools}"/>
+  	
+    <taskdef resource="net/sf/antcontrib/antlib.xml">
+      <classpath>
+        <pathelement location="${.base.dir}/../ant-contrib/ant-contrib-1.0b3.jar"/>
+      </classpath>
+    </taskdef>
+
+    <property name=".src.dir" value="${.base.dir}/src"/>
+    <property name=".classes.dir" value="${.base.dir}/bin"/>
+    <property name=".tools.jar" value="${.base.dir}/sapphire-releng-tools.jar"/>
+    
+    <if>
+      <uptodate targetfile="${.tools.jar}">
+        <srcfiles dir="${.src.dir}" includes="**/*"/>
+      </uptodate>
+      <then>
+      	<echo message="Found an up-to-date version of Sapphire releng tools. Skipping build..."/>
+      </then>
+      <else>
+      	<echo message="Building Sapphire releng tools..."/>
+        <delete dir="${.classes.dir}" quiet="true"/>
+        <mkdir dir="${.classes.dir}"/>
+        <javac debug="true" destdir="${.classes.dir}" classpath="${ant.home}/lib/ant.jar" includeAntRuntime="false" source="1.6" target="1.6">
+          <src path="${.src.dir}"/>
+        </javac>
+        <jar destfile="${.tools.jar}">
+          <fileset dir="${.classes.dir}"/>
+          <fileset dir="${.src.dir}" excludes="**/*.java"/>
+        </jar>
+      </else>
+    </if>
+  	
+    <taskdef resource="org/eclipse/sapphire/releng/antlib.xml">
+      <classpath>
+        <pathelement location="${.tools.jar}"/>
+      </classpath>
+    </taskdef>
+  	
+  	<var name=".base.dir" unset="true"/>
+    <var name=".src.dir" unset="true"/>
+    <var name=".classes.dir" unset="true"/>
+    <var name=".tools.jar" unset="true"/>
+
+    <property name="init.releng.tools.completed" value="true"/>
+
+  </target>
+  
+</project>
