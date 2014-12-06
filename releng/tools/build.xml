@@ -13,8 +13,6 @@
 
 <project name="sapphire-releng-tools-build">
     
-    <import file="sapphire-releng-tools.xml"/>
-
     <dirname property="basedir.sapphire-releng-tools-build" file="${ant.file.sapphire-releng-tools-build}"/>
     <property name="sapphire.releng.tools.jar" value="${basedir.sapphire-releng-tools-build}/sapphire-releng-tools.jar"/>
     
@@ -50,7 +48,11 @@
             </else>
         </if>
         
-        <runtarget target="init-sapphire-releng-tools"/>
+        <taskdef resource="org/eclipse/sapphire/releng/antlib.xml">
+            <classpath>
+                <pathelement location="${basedir.sapphire-releng-tools-build}/sapphire-releng-tools.jar"/>
+            </classpath>
+        </taskdef>
         
         <var name=".src.dir" unset="true"/>
         <var name=".classes.dir" unset="true"/>
@@ -62,6 +64,17 @@
     <target name="clean-sapphire-releng-tools">
         <delete file="${sapphire.releng.tools.jar}" quiet="true"/>
         <var name="build.sapphire.releng.tools.completed" unset="true"/>
+    </target>
+
+    <target name="gen-folder-listing" depends="build-sapphire-releng-tools">
+        <fail unless="folder" message="Property &quot;folder&quot; must be specified."/>
+        <gen-folder-listing folder="${folder}"/>
+    </target>
+
+    <target name="gen-repository-landing" depends="build-sapphire-releng-tools">
+        <fail unless="repository" message="Property &quot;repository&quot; must be specified."/>
+        <fail unless="name" message="Property &quot;name&quot; must be specified."/>
+        <gen-repository-landing repository="${repository}" name="${name}"/>
     </target>
 
 </project>
