@@ -15,10 +15,10 @@
 
 <antlib>
 
-  <taskdef name="GenRepositoryLanding"
-           classname="org.eclipse.sapphire.releng.landing.GenRepositoryLandingTask"/>
+    <taskdef name="gen-repository-landing"
+             classname="org.eclipse.sapphire.releng.landing.GenRepositoryLandingTask"/>
 
-  <taskdef name="GenFolderListing"
-           classname="org.eclipse.sapphire.releng.listing.GenFolderListingTask"/>
+    <taskdef name="gen-folder-listing"
+             classname="org.eclipse.sapphire.releng.listing.GenFolderListingTask"/>
     
 </antlib> 
