@@ -23,15 +23,15 @@
   <property environment="env"/>
   
   <import file="releng/ant-library/library.xml"/>
-  <import file="releng/tools/library.xml"/>
+  <import file="releng/tools/build.xml"/>
 	
   <property name="Signing.Library" value="sign-local.xml"/>
   <import file="${Signing.Library}"/>
   
   <echo message="Java Version: ${java.version}"/>
+  
 
-
-  <target name="init" depends="init-library,init-releng-tools,init-jdk-16">
+  <target name="init" depends="init-library,build-sapphire-releng-tools,init-jdk-16">
 
     <dirname property="root.dir" file="${ant.file.sapphire}"/>
     <property name="releng.dir" value="${root.dir}/releng"/>
@@ -228,7 +228,7 @@
 
           <load-build-repository url="file:${build.dir}/repository"/>
         	
-          <GenRepositoryLanding repository="${build.dir}/repository" name="Sapphire ${sapphire.version} Repository"/>
+          <gen-repository-landing repository="${build.dir}/repository" name="Sapphire ${sapphire.version} Repository"/>
 
           <property name="build.repository.completed" value="true"/>
 
