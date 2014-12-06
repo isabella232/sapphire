@@ -13,21 +13,20 @@
 
 <project name="sapphire-releng-tools">
 
-    <target name="init-sapphire-releng-tools">
-        <dirname property="basedir.sapphire-releng-tools" file="${ant.file.sapphire-releng-tools}"/>
-        <taskdef resource="org/eclipse/sapphire/releng/antlib.xml">
-            <classpath>
-                <pathelement location="${basedir.sapphire-releng-tools}/sapphire-releng-tools.jar"/>
-            </classpath>
-        </taskdef>
-    </target>
+    <dirname property="basedir.sapphire-releng-tools" file="${ant.file.sapphire-releng-tools}"/>
+    
+    <taskdef resource="org/eclipse/sapphire/releng/antlib.xml">
+        <classpath>
+            <pathelement location="${basedir.sapphire-releng-tools}/sapphire-releng-tools.jar"/>
+        </classpath>
+    </taskdef>
 
-    <target name="gen-folder-listing" depends="init-sapphire-releng-tools">
+    <target name="gen-folder-listing">
         <fail unless="folder" message="Property &quot;folder&quot; must be specified."/>
         <gen-folder-listing folder="${folder}"/>
     </target>
 
-    <target name="gen-repository-landing" depends="init-sapphire-releng-tools">
+    <target name="gen-repository-landing">
         <fail unless="repository" message="Property &quot;repository&quot; must be specified."/>
         <fail unless="name" message="Property &quot;name&quot; must be specified."/>
         <gen-repository-landing repository="${repository}" name="${name}"/>
