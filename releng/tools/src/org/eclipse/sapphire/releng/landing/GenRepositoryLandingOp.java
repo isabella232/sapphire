@@ -26,6 +26,8 @@ import org.eclipse.sapphire.releng.listing.GenFolderListingOp;
 
 public final class GenRepositoryLandingOp extends Operation
 {
+    private static final String NL = System.getProperty( "line.separator" );
+    
     private static final ClassResourceLoader RESOURCE_LOADER = new ClassResourceLoader( GenRepositoryLandingOp.class );
     private static final String LANDING_PAGE_TEMPLATE = RESOURCE_LOADER.resource( "LandingPageTemplate.txt" ).text();
 
@@ -83,7 +85,8 @@ public final class GenRepositoryLandingOp extends Operation
         RESOURCE_LOADER.resource( "InstallDialog.png" ).copy( imagesFolder );
         
         final String text = LANDING_PAGE_TEMPLATE
-            .replace( "${repository-name}", this.name );
+            .replace( "${repository-name}", this.name )
+            .replace( "\n", NL );
         
         FileWriter writer = null;
         
