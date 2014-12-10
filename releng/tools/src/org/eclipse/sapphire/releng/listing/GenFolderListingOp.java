@@ -35,6 +35,8 @@ public final class GenFolderListingOp extends Operation
     private static final long MB = KB * 1024;
     private static final long GB = MB * 1024;
     
+    private static final String NL = System.getProperty( "line.separator" );
+    
     private static final ClassResourceLoader RESOURCE_LOADER = new ClassResourceLoader( GenFolderListingOp.class );
     private static final String LISTING_PAGE_TEMPLATE = RESOURCE_LOADER.resource( "ListingPageTemplate.txt" ).text();
     private static final String LISTING_ENTRY_TEMPLATE = RESOURCE_LOADER.resource( "ListingEntryTemplate.txt" ).text();
@@ -172,7 +174,8 @@ public final class GenFolderListingOp extends Operation
         
         final String text = LISTING_PAGE_TEMPLATE
             .replace( "${listing}", listing.toString() )
-            .replace( "${summary}", summary.toString() );
+            .replace( "${summary}", summary.toString() )
+            .replace( "\n", NL );
         
         FileWriter writer = null;
         
