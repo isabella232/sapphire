@@ -16,6 +16,7 @@ import java.io.File;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.eclipse.sapphire.releng.AntTaskOperationContext;
+import org.eclipse.sapphire.releng.FileSystemExcludes;
 
 /**
  * @author <a href="konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
@@ -25,6 +26,7 @@ public final class GenRepositoryLandingTask extends Task
 {
     private File repository;
     private String name;
+    private final FileSystemExcludes excludes = new FileSystemExcludes();
     
     public void setRepository( final File repository )
     {
@@ -34,6 +36,11 @@ public final class GenRepositoryLandingTask extends Task
     public void setName( final String name )
     {
         this.name = name;
+    }
+    
+    public FileSystemExcludes createExcludes()
+    {
+        return this.excludes;
     }
     
     @Override
@@ -47,6 +54,7 @@ public final class GenRepositoryLandingTask extends Task
         final GenRepositoryLandingOp op = new GenRepositoryLandingOp();
         op.setRepository( this.repository );
         op.setName( this.name );
+        op.getExcludes().addAll( this.excludes.list() );
         op.execute( new AntTaskOperationContext( this ) );
     }
     
