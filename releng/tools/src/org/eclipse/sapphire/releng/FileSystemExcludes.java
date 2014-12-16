@@ -13,6 +13,7 @@ package org.eclipse.sapphire.releng;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.tools.ant.types.Resource;
@@ -38,8 +39,10 @@ public final class FileSystemExcludes
         
         for( final ResourceCollection rc : this.rcs )
         {
-            for( final Resource resource : rc )
+            for( final Iterator<Resource> itr = rc.iterator(); itr.hasNext(); )
             {
+                final Resource resource = itr.next();
+                
                 if( resource instanceof FileResource )
                 {
                     list.add( ( (FileResource) resource ).getFile() );
