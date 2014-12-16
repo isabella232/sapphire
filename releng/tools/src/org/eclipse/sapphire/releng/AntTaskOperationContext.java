@@ -17,7 +17,7 @@ import org.apache.tools.ant.Task;
  * @author <a href="konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
 
-public final class AntTaskOperationContext implements OperationContext
+public final class AntTaskOperationContext extends OperationContext
 {
     private final Task task;
     

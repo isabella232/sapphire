@@ -19,7 +19,7 @@ public abstract class Operation
 {
     public final void execute()
     {
-        execute( new StandardOperationContext() );
+        execute( new OperationContext() );
     }
     
     public abstract void execute( OperationContext context );
