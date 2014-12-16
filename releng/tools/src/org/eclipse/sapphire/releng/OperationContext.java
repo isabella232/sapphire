@@ -11,12 +11,22 @@
 
 package org.eclipse.sapphire.releng;
 
+import java.io.File;
+
 /**
  * @author <a href="konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
 
-public interface OperationContext
+public class OperationContext
 {
-    void log( String message );
+    public void log( final String message )
+    {
+        System.err.println( message );
+    }
+    
+    public File file( final File file )
+    {
+        return file;
+    }
     
 }

@@ -16,6 +16,7 @@ import java.io.File;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.eclipse.sapphire.releng.AntTaskOperationContext;
+import org.eclipse.sapphire.releng.FileSystemExcludes;
 
 /**
  * @author <a href="konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
@@ -24,10 +25,16 @@ import org.eclipse.sapphire.releng.AntTaskOperationContext;
 public final class GenFolderListingTask extends Task
 {
     private File folder;
+    private final FileSystemExcludes excludes = new FileSystemExcludes();
     
     public void setFolder( final File folder )
     {
         this.folder = folder;
+    }
+    
+    public FileSystemExcludes createExcludes()
+    {
+        return this.excludes;
     }
     
     @Override
@@ -40,6 +47,7 @@ public final class GenFolderListingTask extends Task
         
         final GenFolderListingOp op = new GenFolderListingOp();
         op.setFolder( this.folder );
+        op.getExcludes().addAll( this.excludes.list() );
         op.execute( new AntTaskOperationContext( this ) );
     }
     
