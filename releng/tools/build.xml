@@ -68,13 +68,17 @@
 
     <target name="gen-folder-listing" depends="build-sapphire-releng-tools">
         <fail unless="folder" message="Property &quot;folder&quot; must be specified."/>
-        <gen-folder-listing folder="${folder}"/>
+        <gen-folder-listing folder="${folder}">
+            <excludes><path><pathelement path="${excludes}"/></path></excludes>
+        </gen-folder-listing>
     </target>
 
     <target name="gen-repository-landing" depends="build-sapphire-releng-tools">
         <fail unless="repository" message="Property &quot;repository&quot; must be specified."/>
         <fail unless="name" message="Property &quot;name&quot; must be specified."/>
-        <gen-repository-landing repository="${repository}" name="${name}"/>
+        <gen-repository-landing repository="${repository}" name="${name}">
+            <excludes><path><pathelement path="${excludes}"/></path></excludes>
+        </gen-repository-landing>
     </target>
 
 </project>
