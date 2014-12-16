@@ -12,11 +12,9 @@
 package org.eclipse.sapphire.releng;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.Reader;
 import java.net.URL;
 
@@ -94,30 +92,7 @@ public final class Resource
         try
         {
             in = this.url.openStream();
-            
-            final OutputStream out = new FileOutputStream( new File( folder, this.name ) );
-            
-            try
-            {
-                byte[] buffer = new byte[ 4 * 1024 ];
-                int count = 0;
-                
-                while( ( count = in.read( buffer ) ) != -1 )
-                {
-                    out.write( buffer, 0, count );
-                }
-            }
-            finally
-            {
-                if( out != null )
-                {
-                    try
-                    {
-                        out.close();
-                    }
-                    catch( final IOException e ) {}
-                }
-            }
+            FileUtil.write( new File( folder, this.name ), in );
         }
         catch( final IOException e )
         {
