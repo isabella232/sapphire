@@ -12,16 +12,18 @@
 package org.eclipse.sapphire.releng.listing;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.sapphire.releng.ClassResourceLoader;
+import org.eclipse.sapphire.releng.FileUtil;
 import org.eclipse.sapphire.releng.Operation;
 import org.eclipse.sapphire.releng.OperationContext;
 
@@ -44,6 +46,7 @@ public final class GenFolderListingOp extends Operation
     private static final String SUMMARY_ENTRY_TEMPLATE = RESOURCE_LOADER.resource( "SummaryEntryTemplate.txt" ).text();
     
     private File folder;
+    private final Set<File> excludes = new HashSet<File>();
     
     public File getFolder()
     {
@@ -55,13 +58,18 @@ public final class GenFolderListingOp extends Operation
         this.folder = folder;
     }
     
+    public final Set<File> getExcludes()
+    {
+        return this.excludes;
+    }
+    
     @Override
     public void execute( final OperationContext context )
     {
         generate( context, this.folder );
     }
     
-    private static Entry generate( final OperationContext context, final File target )
+    private Entry generate( final OperationContext context, final File target )
     {
         context.log( "Generating listing for " + target.getPath() );
         
@@ -79,7 +87,7 @@ public final class GenFolderListingOp extends Operation
             final boolean isDirectory = f.isDirectory();
             final String name = f.getName();
             
-            if( ( isFile || isDirectory ) && ! name.equals( "index.html" ) )
+            if( ( isFile || isDirectory ) && ! name.equals( "index.html" ) && ! this.excludes.contains( f ) )
             {
                 final Entry entry;
                 
@@ -177,24 +185,13 @@ public final class GenFolderListingOp extends Operation
             .replace( "${summary}", summary.toString() )
             .replace( "\n", NL );
         
-        FileWriter writer = null;
-        
         try
         {
-            writer = new FileWriter( new File( target, "index.html" ) );
-            writer.write( text );
+            FileUtil.write( context.file( new File( target, "index.html" ) ), text );
         }
         catch( final IOException e )
         {
             throw new RuntimeException( e );
-        }
-        finally
-        {
-            try
-            {
-                writer.close();
-            }
-            catch( final IOException e ) {}
         }
         
         return new Entry( target.getName(), overallDateModified, totalSize, true );
@@ -313,6 +310,16 @@ public final class GenFolderListingOp extends Operation
         final GenFolderListingOp op = new GenFolderListingOp();
         
         op.setFolder( new File( args[ 0 ] ) );
+        
+        final String excludes = System.getProperty( "excludes" );
+        
+        if( excludes != null )
+        {
+            for( final String exclude : excludes.split( ";" ) )
+            {
+                op.getExcludes().add( new File( exclude ) );
+            }
+        }
         
         op.execute();
     }

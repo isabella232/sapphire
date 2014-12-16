@@ -11,16 +11,29 @@
 
 package org.eclipse.sapphire.releng;
 
+import java.io.File;
+
 /**
  * @author <a href="konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
 
-public final class StandardOperationContext implements OperationContext
+public class DelegatingOperationContext extends OperationContext
 {
-    @Override
+    private final OperationContext delegate;
+    
+    public DelegatingOperationContext( final OperationContext delegate )
+    {
+        this.delegate = delegate;
+    }
+    
     public void log( final String message )
     {
-        System.err.println( message );
+        this.delegate.log( message );
+    }
+    
+    public File file( final File file )
+    {
+        return this.delegate.file( file );
     }
     
 }
