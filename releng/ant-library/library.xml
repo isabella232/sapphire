@@ -112,23 +112,8 @@
   </target>
 
 
-  <target name="init-jdk-17" depends="init-library">
-    <init-jdk version="7"/>
-  </target>
-
-
-  <target name="init-jdk-16" depends="init-library">
+  <target name="init-jdk" depends="init-library">
     <init-jdk version="6"/>
-  </target>
-
-
-  <target name="init-jdk-15" depends="init-library">
-    <init-jdk version="5"/>
-  </target>
-
-
-  <target name="init-jdk-14" depends="init-library">
-    <init-jdk version="4"/>
   </target>
 
 
@@ -171,8 +156,8 @@
       <property name="${.prefix}.compiler.path" value="${.compiler.path}"/>
       <property name="${.prefix}.system.classpath" value="${.system.classpath}"/>
 
-      <echo message="Java 1.@{version} Compiler Path : ${.compiler.path}"/>
-      <echo message="Java 1.@{version} System Classpath : ${.system.classpath}"/>
+      <echo message="Java @{version} Compiler Path : ${.compiler.path}"/>
+      <echo message="Java @{version} System Classpath : ${.system.classpath}"/>
 
       <var name=".location" unset="true"/>
       <var name=".prefix" unset="true"/>
@@ -409,9 +394,7 @@
         <arg value="-DindividualSourceBundles=true"/>
         <arg value="-DallowBinaryCycles=true" />
         <arg value="-DcompilerArg=${pde.build.compiler.arg}"/>
-        <arg value="-DJ2SE-1.4=${java.14.system.classpath}"/>
-        <arg value="-DJ2SE-1.5=${java.15.system.classpath}"/>
-        <arg value="-DJavaSE-1.6=${java.16.system.classpath}"/>
+        <arg value="-DJavaSE-1.6=${java.6.system.classpath}"/>
         <arg value="-DjavacFailOnError=true"/>
         <arg value="-DjavacVerbose=${javacVerbose}"/>
         <arg value="-DjavacDebugInfo=true"/>
