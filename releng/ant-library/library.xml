@@ -137,9 +137,9 @@
     <sequential>
 
       <if>
-        <not><isset property="env.JDK_1@{version}_HOME"/></not>
+        <not><isset property="env.JDK_@{version}_HOME"/></not>
         <then>
-          <fail message="Could not locate JDK 1.@{version}. Environment variable JDK_1@{version}_HOME not set."/>
+          <fail message="Could not locate JDK @{version}. Environment variable JDK_@{version}_HOME not set."/>
         </then>
       </if>
 
@@ -148,8 +148,8 @@
       <var name=".compiler.path" unset="true"/>
       <var name=".system.classpath" unset="true"/>
 
-      <propertycopy property=".location" from="env.JDK_1@{version}_HOME"/>
-      <property name=".prefix" value="java.1@{version}"/>
+      <propertycopy property=".location" from="env.JDK_@{version}_HOME"/>
+      <property name=".prefix" value="java.@{version}"/>
 
       <if>
         <os family="windows"/>
