@@ -31,7 +31,7 @@
   <echo message="Java Version: ${java.version}"/>
   
 
-  <target name="init" depends="init-library,build-sapphire-releng-tools,init-jdk-16">
+  <target name="init" depends="init-library,build-sapphire-releng-tools,init-jdk">
 
     <dirname property="root.dir" file="${ant.file.sapphire}"/>
     <property name="releng.dir" value="${root.dir}/releng"/>
