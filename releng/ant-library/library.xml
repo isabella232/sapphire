@@ -391,7 +391,7 @@
         <arg value="-DallowBinaryCycles=true" />
         <arg value="-DcompilerArg=${pde.build.compiler.arg}"/>
         <arg value="-DJ2SE-1.5=${java.5.system.classpath}"/>
-        <arg value="-DJavaSE-1.6=${java.6.system.classpath}"/>
+        <arg value="-DJavaSE-1.6=NULL"/>
         <arg value="-DjavacFailOnError=true"/>
         <arg value="-DjavacVerbose=${javacVerbose}"/>
         <arg value="-DjavacDebugInfo=true"/>
