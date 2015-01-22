@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.sapphire.ui
-Bundle-Version: 8.1.1.qualifier
+Bundle-Version: 8.1.2.qualifier
 Bundle-Vendor: %providerName
 Bundle-Localization: bundle
 Export-Package: org.eclipse.sapphire.ui,
