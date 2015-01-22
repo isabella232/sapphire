@@ -1856,10 +1856,7 @@ public final class MasterDetailsEditorPage extends SapphireEditorFormPage implem
     	return null;
     }
     
-    private final class RootSection 
-    
-        extends MasterDetailsBlock
-        
+    private final class RootSection extends MasterDetailsBlock
     {
         private MasterSection masterSection;
         private List<IDetailsPage> detailsSections;
@@ -1883,6 +1880,22 @@ public final class MasterDetailsEditorPage extends SapphireEditorFormPage implem
                 final Field field = this.detailsPart.getClass().getDeclaredField( "pageBook" );
                 field.setAccessible( true );
                 this.detailsSectionControl = (Control) field.get( this.detailsPart );
+                
+                // Force focus to contained controls if the page book receives focus due to
+                // keyboard traversal.
+                
+                this.detailsSectionControl.addListener
+                (
+                    SWT.FocusIn,
+                    new org.eclipse.swt.widgets.Listener()
+                    {
+                        @Override
+                        public void handleEvent( final Event event )
+                        {
+                            RootSection.this.detailsSectionControl.setFocus();;
+                        }
+                    }
+                );
             }
             catch( Exception e )
             {
