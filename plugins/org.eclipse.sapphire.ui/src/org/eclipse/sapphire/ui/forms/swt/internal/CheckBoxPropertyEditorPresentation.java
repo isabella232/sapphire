@@ -165,7 +165,7 @@ public final class CheckBoxPropertyEditorPresentation extends ValuePropertyEdito
                 @Override
                 public void getName( final AccessibleEvent event )
                 {
-                    event.result = property().definition().getLabel( true, CapitalizationType.NO_CAPS, true );
+                    event.result = property().definition().getLabel( true, CapitalizationType.NO_CAPS, false );
                 }
             }
         );
