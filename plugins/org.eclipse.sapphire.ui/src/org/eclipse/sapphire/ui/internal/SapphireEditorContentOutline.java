@@ -175,6 +175,11 @@ public final class SapphireEditorContentOutline
     
     public void refresh()
     {
+        if( this.pagebook == null )
+        {
+            return;
+        }
+        
         IContentOutlinePage page = this.editor.getContentOutlineForActivePage();
         
         if( page == null )
@@ -191,11 +196,6 @@ public final class SapphireEditorContentOutline
         page.addSelectionChangedListener( this );
         
         this.currentPage = page;
-        
-        if( this.pagebook == null )
-        {
-            return;
-        }
         
         Control control = page.getControl();
         
