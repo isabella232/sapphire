@@ -33,8 +33,6 @@ import org.eclipse.sapphire.ui.forms.swt.PropertyEditorPresentationFactory;
 import org.eclipse.sapphire.ui.forms.swt.SwtPresentation;
 import org.eclipse.sapphire.ui.forms.swt.ValuePropertyEditorPresentation;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.accessibility.AccessibleAdapter;
-import org.eclipse.swt.accessibility.AccessibleEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Button;
@@ -158,17 +156,7 @@ public final class CheckBoxPropertyEditorPresentation extends ValuePropertyEdito
             deprecationMarker.setLayoutData( gdhindent( gdhfill(), 3 ) );
         }
         
-        this.checkbox.getAccessible().addAccessibleListener
-        (
-            new AccessibleAdapter()
-            {
-                @Override
-                public void getName( final AccessibleEvent event )
-                {
-                    event.result = property().definition().getLabel( true, CapitalizationType.NO_CAPS, false );
-                }
-            }
-        );
+        attachAccessibleName( this.checkbox );
         
         this.checkbox.addSelectionListener
         (

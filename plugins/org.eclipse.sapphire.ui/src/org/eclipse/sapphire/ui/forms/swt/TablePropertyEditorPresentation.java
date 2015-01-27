@@ -125,8 +125,6 @@ import org.eclipse.sapphire.ui.forms.swt.internal.PopUpListFieldStyle;
 import org.eclipse.sapphire.util.ListFactory;
 import org.eclipse.sapphire.util.MutableReference;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.accessibility.AccessibleAdapter;
-import org.eclipse.swt.accessibility.AccessibleEvent;
 import org.eclipse.swt.dnd.DND;
 import org.eclipse.swt.dnd.DragSource;
 import org.eclipse.swt.dnd.DragSourceEvent;
@@ -332,17 +330,7 @@ public class TablePropertyEditorPresentation extends ListPropertyEditorPresentat
             }
         );
         
-        this.table.getAccessible().addAccessibleListener
-        (
-            new AccessibleAdapter()
-            {
-                @Override
-                public void getName( final AccessibleEvent event )
-                {
-                    event.result = property().definition().getLabel( true, CapitalizationType.NO_CAPS, false );
-                }
-            }
-        );
+        attachAccessibleName( this.table );
         
         this.refreshOperation = new Runnable()
         {

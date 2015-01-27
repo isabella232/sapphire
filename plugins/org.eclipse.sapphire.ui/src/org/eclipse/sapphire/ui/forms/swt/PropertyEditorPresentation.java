@@ -55,6 +55,8 @@ import org.eclipse.sapphire.ui.forms.PropertyEditorDef;
 import org.eclipse.sapphire.ui.forms.PropertyEditorPart;
 import org.eclipse.sapphire.util.ListFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.accessibility.AccessibleAdapter;
+import org.eclipse.swt.accessibility.AccessibleEvent;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.graphics.Point;
@@ -79,6 +81,9 @@ public abstract class PropertyEditorPresentation extends PropertyEditorPresentat
     
     @Text( "(deprecated)" )
     private static LocalizableText deprecatedLabelText;
+
+    @Text( "deprecated" )
+    private static LocalizableText deprecatedAccessibleText;
 
     static
     {
@@ -576,6 +581,33 @@ public abstract class PropertyEditorPresentation extends PropertyEditorPresentat
     protected final void addOnDisposeOperation( final Runnable op )
     {
         this.onDisposeOperations.add( op );
+    }
+    
+    protected final void attachAccessibleName( final Control control )
+    {
+        final StringBuilder buf = new StringBuilder();
+        
+        buf.append( property().definition().getLabel( true, CapitalizationType.NO_CAPS, false ) );
+        
+        if( property().definition().hasAnnotation( Deprecated.class ) )
+        {
+            buf.append( ' ' );
+            buf.append( deprecatedAccessibleText.text() );
+        }
+        
+        final String name = buf.toString();
+        
+        control.getAccessible().addAccessibleListener
+        (
+            new AccessibleAdapter()
+            {
+                @Override
+                public void getName( final AccessibleEvent event )
+                {
+                    event.result = name;
+                }
+            }
+        );
     }
     
     @Override

@@ -45,7 +45,6 @@ import org.eclipse.sapphire.Sapphire;
 import org.eclipse.sapphire.Serialization;
 import org.eclipse.sapphire.Value;
 import org.eclipse.sapphire.ValueProperty;
-import org.eclipse.sapphire.modeling.CapitalizationType;
 import org.eclipse.sapphire.modeling.annotations.LongString;
 import org.eclipse.sapphire.modeling.annotations.SensitiveData;
 import org.eclipse.sapphire.services.ContentProposal;
@@ -64,8 +63,6 @@ import org.eclipse.sapphire.ui.forms.swt.internal.TextFieldBinding;
 import org.eclipse.sapphire.ui.forms.swt.internal.TextOverlayPainter;
 import org.eclipse.sapphire.ui.listeners.ValuePropertyEditorListener;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.accessibility.AccessibleAdapter;
-import org.eclipse.swt.accessibility.AccessibleEvent;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.ModifyEvent;
@@ -263,17 +260,7 @@ public class TextFieldPropertyEditorPresentation extends ValuePropertyEditorPres
             );
         }
         
-        this.textField.getAccessible().addAccessibleListener
-        (
-            new AccessibleAdapter()
-            {
-                @Override
-                public void getName( final AccessibleEvent event )
-                {
-                    event.result = property().definition().getLabel( true, CapitalizationType.NO_CAPS, false );
-                }
-            }
-        );
+        attachAccessibleName( this.textField );
         
         final List<Control> relatedControls = new ArrayList<Control>();
         this.textField.setData( RELATED_CONTROLS, relatedControls );

@@ -36,7 +36,6 @@ import org.eclipse.sapphire.Property;
 import org.eclipse.sapphire.PropertyContentEvent;
 import org.eclipse.sapphire.Value;
 import org.eclipse.sapphire.ValueProperty;
-import org.eclipse.sapphire.modeling.CapitalizationType;
 import org.eclipse.sapphire.modeling.Status.Severity;
 import org.eclipse.sapphire.services.ValueNormalizationService;
 import org.eclipse.sapphire.ui.assist.internal.PropertyEditorAssistDecorator;
@@ -49,8 +48,6 @@ import org.eclipse.sapphire.ui.forms.swt.SwtPresentation;
 import org.eclipse.sapphire.ui.forms.swt.ValuePropertyEditorPresentation;
 import org.eclipse.sapphire.util.MutableReference;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.accessibility.AccessibleAdapter;
-import org.eclipse.swt.accessibility.AccessibleEvent;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.ModifyEvent;
@@ -105,17 +102,7 @@ public final class PopUpListFieldPropertyEditorPresentation extends ValuePropert
         combo.setLayoutData( gdhfill() );
         combo.setVisibleItemCount( 10 );
         
-        combo.getAccessible().addAccessibleListener
-        (
-            new AccessibleAdapter()
-            {
-                @Override
-                public void getName( final AccessibleEvent event )
-                {
-                    event.result = property().definition().getLabel( true, CapitalizationType.NO_CAPS, false );
-                }
-            }
-        );
+        attachAccessibleName( combo );
         
         decorator.addEditorControl( combo, true );
         addControl( combo );
