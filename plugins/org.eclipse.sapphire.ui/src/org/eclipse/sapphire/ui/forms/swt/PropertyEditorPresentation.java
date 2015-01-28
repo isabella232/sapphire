@@ -585,18 +585,21 @@ public abstract class PropertyEditorPresentation extends PropertyEditorPresentat
     
     protected final void attachAccessibleName( final Control control )
     {
-        final StringBuilder buf = new StringBuilder();
+        final StringBuilder name = new StringBuilder();
         
-        buf.append( property().definition().getLabel( true, CapitalizationType.NO_CAPS, false ) );
+        name.append( property().definition().getLabel( true, CapitalizationType.NO_CAPS, false ) );
         
         if( property().definition().hasAnnotation( Deprecated.class ) )
         {
-            buf.append( ' ' );
-            buf.append( deprecatedAccessibleText.text() );
+            name.append( ' ' );
+            name.append( deprecatedAccessibleText.text() );
         }
         
-        final String name = buf.toString();
-        
+        attachAccessibleName( control, name.toString() );
+    }
+    
+    protected final void attachAccessibleName( final Control control, final String name )
+    {
         control.getAccessible().addAccessibleListener
         (
             new AccessibleAdapter()

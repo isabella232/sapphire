@@ -44,6 +44,8 @@ import org.eclipse.sapphire.ui.forms.swt.PropertyEditorPresentationFactory;
 import org.eclipse.sapphire.ui.forms.swt.SwtPresentation;
 import org.eclipse.sapphire.ui.forms.swt.ValuePropertyEditorPresentation;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.FocusAdapter;
+import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -155,14 +157,14 @@ public final class NamedValuesPropertyEditorPresentation extends ValuePropertyEd
         this.radioButtonGroup = new ArrayList<Button>();
         
         final String arbitraryValueLabel 
-            = property.getLocalizationService().text( namedValuesAnnotation.arbitraryValueLabel(), CapitalizationType.FIRST_WORD_ONLY, true ) + ":";
+            = property.getLocalizationService().text( namedValuesAnnotation.arbitraryValueLabel(), CapitalizationType.FIRST_WORD_ONLY, true );
     
-        this.arbitraryValueRadioButton = createRadioButton( radioButtonsComposite, arbitraryValueLabel );
+        this.arbitraryValueRadioButton = createRadioButton( radioButtonsComposite, arbitraryValueLabel, true );
         this.arbitraryValueRadioButton.setLayoutData( gd() );
         this.arbitraryValueRadioButton.addSelectionListener( selectionListener );
         this.radioButtonGroup.add( this.arbitraryValueRadioButton );
         decorator.addEditorControl( this.arbitraryValueRadioButton );
-
+        
         this.arbitraryValueTextField = new Text( radioButtonsComposite, SWT.BORDER );
         this.arbitraryValueTextField.setLayoutData( gdwhint( gd(), 150 ) );
         decorator.addEditorControl( this.arbitraryValueTextField );
@@ -189,17 +191,44 @@ public final class NamedValuesPropertyEditorPresentation extends ValuePropertyEd
     
         TextOverlayPainter.install( this.arbitraryValueTextField, textOverlayPainterController );
         
+        final StringBuilder arbitraryValueAccessibleName = new StringBuilder();
+        
+        arbitraryValueAccessibleName.append( property().definition().getLabel( true, CapitalizationType.NO_CAPS, false ) );
+        arbitraryValueAccessibleName.append( ' ' );
+        arbitraryValueAccessibleName.append( arbitraryValueLabel );
+        
+        attachAccessibleName( this.arbitraryValueTextField, arbitraryValueAccessibleName.toString() );
+        
         this.namedValuesRadioButtons = new Button[ this.namedValues.length ];
         
         for( int i = 0; i < this.namedValues.length; i++ )
         {
-            final Button rb = createRadioButton( radioButtonsComposite, this.namedValues[ i ].valueName );
+            final Button rb = createRadioButton( radioButtonsComposite, this.namedValues[ i ].valueName, false );
             rb.addSelectionListener( selectionListener );
             decorator.addEditorControl( rb );
             this.namedValuesRadioButtons[ i ] = rb;
             this.radioButtonGroup.add( rb );
         }
         
+        this.rootComposite.addFocusListener
+        (
+            new FocusAdapter()
+            {
+                @Override
+                public void focusGained( final FocusEvent event )
+                {
+                    for( final Button radioButton : NamedValuesPropertyEditorPresentation.this.radioButtonGroup )
+                    {
+                        if( radioButton.getSelection() == true )
+                        {
+                            radioButton.setFocus();
+                            return;
+                        }
+                    }
+                }
+            }
+        );
+
         this.rootComposite.setData( "peditor", this );
         
         this.binding = new NamedValuesBinding();
@@ -209,12 +238,19 @@ public final class NamedValuesPropertyEditorPresentation extends ValuePropertyEd
         addControl( this.rootComposite );
     }
     
-    private Button createRadioButton( final Composite parent, 
-                                      final String label ) 
+    private Button createRadioButton( final Composite parent, final String label, final boolean arbitrary ) 
     {
         final Button b = new Button( parent, SWT.RADIO );
         b.setLayoutData( gdhspan( gd(), 2 ) );
-        b.setText( label );
+        b.setText( label + ( arbitrary ? ":" : "" ) );
+        
+        final StringBuilder buf = new StringBuilder();
+        
+        buf.append( property().definition().getLabel( true, CapitalizationType.NO_CAPS, false ) );
+        buf.append( ' ' );
+        buf.append( label );
+        
+        attachAccessibleName( b, buf.toString() );
         
         return b;
     }
