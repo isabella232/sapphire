@@ -553,6 +553,8 @@ public abstract class PropertyEditorPresentation extends PropertyEditorPresentat
         this.actionPresentationKeyboard.attach( control );
         
         attachHelp( control, property );
+        
+        register( control );
     }
     
     protected void handlePropertyChangedEvent()

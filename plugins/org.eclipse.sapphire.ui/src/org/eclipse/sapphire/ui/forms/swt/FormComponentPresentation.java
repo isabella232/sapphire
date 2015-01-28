@@ -108,6 +108,8 @@ public abstract class FormComponentPresentation extends SwtPresentation
         }
         
         this.controls.add( control );
+        
+        control.setData( "Sapphire.Part", part() );
     }
     
     // TODO: Make protected once binding concept is completely removed.

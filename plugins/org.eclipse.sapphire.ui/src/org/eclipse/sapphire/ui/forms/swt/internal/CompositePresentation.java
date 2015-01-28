@@ -22,6 +22,8 @@ import static org.eclipse.sapphire.ui.forms.swt.GridLayoutUtil.glayout;
 import java.util.List;
 
 import org.eclipse.sapphire.FilteredListener;
+import org.eclipse.sapphire.ui.ISapphirePart;
+import org.eclipse.sapphire.ui.SapphirePart;
 import org.eclipse.sapphire.ui.def.ISapphireDocumentation;
 import org.eclipse.sapphire.ui.def.ISapphireDocumentationDef;
 import org.eclipse.sapphire.ui.def.ISapphireDocumentationRef;
@@ -40,6 +42,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 
 /**
@@ -214,8 +217,16 @@ public class CompositePresentation extends FormComponentPresentation
     @Override
     public void refresh()
     {
-        boolean needToLayout = false;
+        final Control previousFocusControl = Display.getCurrent().getFocusControl();
+        SapphirePart previousFocusPart = null;
         
+        if( contains( this.innerComposite, previousFocusControl ) )
+        {
+    		previousFocusPart = (SapphirePart) previousFocusControl.getData( "Sapphire.Part" );
+        }
+        
+        boolean needToLayout = false;
+
         if( this.children != null )
         {
             for( final FormComponentPresentation child : this.children )
@@ -234,6 +245,11 @@ public class CompositePresentation extends FormComponentPresentation
         
         renderChildren( this.innerComposite );
         
+        if( previousFocusPart != null && previousFocusPart.visible() && contains( part(), previousFocusPart ) )
+        {
+        	previousFocusPart.setFocus();
+        }
+        
         if( this.scrolledComposite != null )
         {
             this.scrolledComposite.setMinSize( this.innerComposite.computeSize( SWT.DEFAULT, SWT.DEFAULT ) );
@@ -243,6 +259,40 @@ public class CompositePresentation extends FormComponentPresentation
         {
             layout();
         }
+    }
+    
+    private static final boolean contains( final ISapphirePart container, final ISapphirePart part )
+    {
+    	if( part == null )
+    	{
+    		return false;
+    	}
+    	
+    	final ISapphirePart parent = part.parent();
+    	
+    	if( parent == container )
+    	{
+    		return true;
+    	}
+    	
+    	return contains( container, parent ); 
+    }
+    
+    private static final boolean contains( final Composite composite, final Control control )
+    {
+    	if( control == null )
+    	{
+    		return false;
+    	}
+    	
+    	final Composite parent = control.getParent();
+    	
+    	if( parent == composite )
+    	{
+    		return true;
+    	}
+    	
+    	return contains( composite, parent );
     }
     
     @Override
