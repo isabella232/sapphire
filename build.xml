@@ -228,7 +228,7 @@
 
           <load-build-repository url="file:${build.dir}/repository"/>
         	
-          <gen-repository-landing repository="${build.dir}/repository" name="Sapphire ${sapphire.version} Repository"/>
+          <gen-repository-landing repository="${build.dir}/repository" name="Sapphire ${sapphire.version}"/>
 
           <property name="build.repository.completed" value="true"/>
 
