@@ -860,7 +860,7 @@
     *************************************************************************************************
   -->
 
-  <target name="hudson-build" depends="clean,build,build-alt-configurations,run-tests,findbugs,prune-downloads-from-eclipse">
+  <target name="hudson-build" depends="clean,build,build-alt-configurations,export-documentation,run-tests,findbugs,prune-downloads-from-eclipse">
     
     <echo file="${build.dir}/version.txt">${sapphire.version}</echo>
     
