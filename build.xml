@@ -1463,6 +1463,7 @@
                 <mapper type="regexp" from="^eclipse/(.*)$$" to="\1"/>
               </untar>
               <delete file="${.download}.tar"/>
+              <chmod file="@{dest}/eclipse" perm="777"/>
             </else>
           </if>
         </with-download-from-eclipse>
