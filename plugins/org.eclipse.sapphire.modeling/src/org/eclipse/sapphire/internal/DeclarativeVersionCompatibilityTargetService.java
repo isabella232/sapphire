@@ -152,11 +152,11 @@ public final class DeclarativeVersionCompatibilityTargetService extends VersionC
             }
         }
 
-        if( this.versionFunctionResult != null )
+        if( this.versionedFunctionResult != null )
         {
             try
             {
-                this.versionFunctionResult.dispose();
+                this.versionedFunctionResult.dispose();
             }
             catch( Exception e )
             {
