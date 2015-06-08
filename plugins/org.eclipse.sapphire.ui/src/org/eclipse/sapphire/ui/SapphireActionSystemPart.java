@@ -359,6 +359,11 @@ public abstract class SapphireActionSystemPart implements Disposable
             this.labelFunctionResult.dispose();
         }
         
+        if( this.toolTipFunctionResult != null )
+        {
+            this.toolTipFunctionResult.dispose();
+        }
+        
         broadcast( new DisposeEvent() );
     }
     
