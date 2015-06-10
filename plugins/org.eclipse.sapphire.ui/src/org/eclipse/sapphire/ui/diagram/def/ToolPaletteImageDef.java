@@ -16,6 +16,7 @@ import org.eclipse.sapphire.ElementType;
 import org.eclipse.sapphire.Type;
 import org.eclipse.sapphire.Value;
 import org.eclipse.sapphire.ValueProperty;
+import org.eclipse.sapphire.modeling.annotations.Required;
 import org.eclipse.sapphire.modeling.el.Function;
 import org.eclipse.sapphire.modeling.xml.annotations.XmlBinding;
 
@@ -30,6 +31,7 @@ public interface ToolPaletteImageDef extends Element
     // *** ToolPaletteImage ***
 
     @Type( base = Function.class )
+    @Required
     @XmlBinding( path = "" )
 
     ValueProperty PROP_TOOL_PALETTE_IMAGE = new ValueProperty( TYPE, "ToolPaletteImage" );

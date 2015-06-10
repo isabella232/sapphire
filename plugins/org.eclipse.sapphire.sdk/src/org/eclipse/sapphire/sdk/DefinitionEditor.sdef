@@ -1204,11 +1204,10 @@
                                         <name>show.header</name>
                                         <value>false</value>
                                     </hint>
-                                    <height>50</height>
                                 </property-editor>
                                 <property-editor>
                                     <property>ToolPaletteDescription</property>
-                                    <height>90</height>
+                                    <height>100</height>
                                 </property-editor>
                             </content>
                         </section>
@@ -1352,11 +1351,10 @@
                                         <name>show.header</name>
                                         <value>false</value>
                                     </hint>
-                                    <height>50</height>
                                 </property-editor>
                                 <property-editor>
                                     <property>ToolPaletteDescription</property>
-                                    <height>90</height>
+                                    <height>100</height>
                                 </property-editor>
                             </content>
                         </section>
