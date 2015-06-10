@@ -60,19 +60,19 @@
     <li><a href="#AutoCloseable-SapphireCondition">SapphireCondition</a></li>
     <li><a href="#AutoCloseable-SapphirePart">SapphirePart</a></li>
   </ol>
-  <li><a href="#Core">Core</a></li>
+  <li><a href="#Repeatable">Repeatable</a></li>
   <ol type="A">
-    <li><a href="#Core-TransparentReferenceSetting">Transparent Reference Setting</a></li>
-    <li><a href="#Core-RepeatableFact">Repeatable @Fact</a></li>
-    <li><a href="#Core-RepeatableService">Repeatable @Service</a></li>
-    <li><a href="#Core-RepeatableValidation">Repeatable @Validation</a></li>
-    <li><a href="#Core-RepeatableXmlNamespace">Repeatable @XmlNamespace</a></li>
-    <li><a href="#Core-RepeatableXmlSchema">Repeatable @XmlSchema</a></li>
-    <li><a href="#Core-OrderedPossibleTypes">Ordered Possible Types</a></li>
+    <li><a href="#Repeatable-Fact">@Fact</a></li>
+    <li><a href="#Repeatable-Service">@Service</a></li>
+    <li><a href="#Repeatable-Validation">@Validation</a></li>
+    <li><a href="#Repeatable-XmlNamespace">@XmlNamespace</a></li>
+    <li><a href="#Repeatable-XmlSchema">@XmlSchema</a></li>
   </ol>
-  <li><a href="#Diagram">Diagram</a></li>
+  <li><a href="#Miscellaneous">Miscellaneous</a></li>
   <ol type="A">
-    <li><a href="#DiagramPaletteImage">Diagram Editor Palette Icons</a></li>
+    <li><a href="#Miscellaneous-TransparentReferenceSetting">Transparent Reference Setting</a></li>
+    <li><a href="#Miscellaneous-OrderedPossibleTypes">Ordered Possible Types</a></li>
+    <li><a href="#Miscellaneous-DiagramPaletteIcons">Diagram Palette Icons</a></li>
   </ol>  
 </ol>
 
@@ -143,7 +143,98 @@ AutoCloseable, so it can be used in the try-with-resources construct.</p>
 }</code></pre>
 
 
-<h2><a name="Core"><a name="Core-TransparentReferenceSetting">Transparent Reference Setting</a></a></h2>
+<h2><a name="Repeatable"><a name="Repeatable-Fact">Repeatable @Fact</a></a></h2>
+
+<p>Taking advantage of Java 8, @Fact annotation is now repeatable, saving user the trouble of manually wrapping @Facts
+container annotation around multiple @Fact annotations present at a single site.</p>
+
+<pre class="source-code"><code>@Fact( statement = "First fact" )
+@Fact( statement = "Second fact" )
+@Fact( statement = "Third fact" )
+
+<span class="unaffected">ValueProperty PROP_EXAMPLE = new ValueProperty( TYPE, "Example" );
+
+Value&lt;String> getExample();
+void setExample( String value );
+</span></code></pre>
+
+
+<h2><a name="Repeatable-Service">Repeatable @Service</a></h2>
+
+<p>Taking advantage of Java 8, @Service annotation is now repeatable, saving user the trouble of manually wrapping @Services
+container annotation around multiple @Service annotations present at a single site.</p>
+
+<pre class="source-code"><code><span class="unaffected">@Type( base = Path.class )
+@Reference( target = IContainer.class )
+@ValidFileSystemResourceType( FileSystemResourceType.FOLDER )</span>
+@Service( impl = FolderReferenceService.class )
+@Service( impl = FolderValidationService.class )
+@Service( impl = FolderInitialValueService.class )
+
+<span class="unaffected">ValueProperty PROP_FOLDER = new ValueProperty( TYPE, "Folder" );
+    
+ReferenceValue&lt;Path,IContainer> getFolder();
+void setFolder( String value );
+void setFolder( Path value );
+void setFolder( IContainer value );</span></code></pre>
+
+
+<h2><a name="Repeatable-Validation">Repeatable @Validation</a></h2>
+
+<p>Taking advantage of Java 8, @Validation annotation is now repeatable, saving user the trouble of manually wrapping @Validations
+container annotation around multiple @Validation annotations present at a single site.</p>
+
+<pre class="source-code"><code><span class="unaffected">@Type( base = Integer.class )
+@DefaultValue( text = "0" )</span>
+@Validation( rule = "${ Max >= Min }", message = "Must not be smaller than min" )
+@Validation( rule = "${ Max &lt;= 100 }", message = "Must be less than or equal to 100", severity = Status.Severity.WARNING )
+    
+<span class="unaffected">ValueProperty PROP_MAX = new ValueProperty( TYPE, "Max" );
+    
+Value&lt;Integer> getMax();
+void setMax( String value );
+void setMax( Integer value );</span></code></pre>
+
+
+<h2><a name="Repeatable-XmlNamespace">Repeatable @XmlNamespace</a></h2>
+
+<p>Taking advantage of Java 8, @XmlNamespace annotation is now repeatable, saving user the trouble of manually wrapping @XmlNamespaces
+container annotation around multiple @XmlNamespace annotations present at a single site.</p>
+
+<pre class="source-code"><code>@XmlNamespace( uri = "http://www.eclipse.org/sapphire/example/x", prefix = "x" )
+@XmlNamespace( uri = "http://www.eclipse.org/sapphire/example/y", prefix = "y" )
+@XmlNamespace( uri = "http://www.eclipse.org/sapphire/example/z", prefix = "" )
+<span class="unaffected">@XmlSchema( namespace="http://www.eclipse.org/sapphire/example/x", location="http://www.eclipse.org/sapphire/example/x/1.0" )
+@XmlSchema( namespace="http://www.eclipse.org/sapphire/example/y", location="http://www.eclipse.org/sapphire/example/y/1.0" )
+@XmlSchema( namespace="http://www.eclipse.org/sapphire/example/z", location="http://www.eclipse.org/sapphire/example/z/1.0" )
+@XmlBinding( path = "example" )
+
+public interface ExampleElement extends Element
+{
+    ...
+}</span></code></pre>
+
+
+<h2><a name="Repeatable-XmlSchema">Repeatable @XmlSchema</a></h2>
+
+<p>Taking advantage of Java 8, @XmlSchema annotation is now repeatable, saving user the trouble of manually wrapping @XmlSchemas
+container annotation around multiple @XmlSchema annotations present at a single site.</p>
+
+<pre class="source-code"><code><span class="unaffected">@XmlNamespace( uri = "http://www.eclipse.org/sapphire/example/x", prefix = "x" )
+@XmlNamespace( uri = "http://www.eclipse.org/sapphire/example/y", prefix = "y" )
+@XmlNamespace( uri = "http://www.eclipse.org/sapphire/example/z", prefix = "" )</span>
+@XmlSchema( namespace="http://www.eclipse.org/sapphire/example/x", location="http://www.eclipse.org/sapphire/example/x/1.0" )
+@XmlSchema( namespace="http://www.eclipse.org/sapphire/example/y", location="http://www.eclipse.org/sapphire/example/y/1.0" )
+@XmlSchema( namespace="http://www.eclipse.org/sapphire/example/z", location="http://www.eclipse.org/sapphire/example/z/1.0" )
+<span class="unaffected">@XmlBinding( path = "example" )
+
+public interface ExampleElement extends Element
+{
+    ...
+}</span></code></pre>
+
+
+<h2><a name="Miscellaneous"><a name="Miscellaneous-TransparentReferenceSetting">Transparent Reference Setting</a></a></h2>
 
 <p>Set a reference property to the target object and let the system figure out the key to write to the model. This facility
 is made possible by a new API in ReferenceService.</p>
@@ -194,98 +285,7 @@ void setTable( Table value );</code></pre>
 element.setTable( table );</code></pre>
 
 
-<h2><a name="Core-RepeatableFact">Repeatable @Fact</a></h2>
-
-<p>Taking advantage of Java 8, @Fact annotation is now repeatable, saving user the trouble of manually wrapping @Facts
-container annotation around multiple @Fact annotations present at a single site.</p>
-
-<pre class="source-code"><code>@Fact( statement = "First fact" )
-@Fact( statement = "Second fact" )
-@Fact( statement = "Third fact" )
-
-<span class="unaffected">ValueProperty PROP_EXAMPLE = new ValueProperty( TYPE, "Example" );
-
-Value&lt;String> getExample();
-void setExample( String value );
-</span></code></pre>
-
-
-<h2><a name="Core-RepeatableService">Repeatable @Service</a></h2>
-
-<p>Taking advantage of Java 8, @Service annotation is now repeatable, saving user the trouble of manually wrapping @Services
-container annotation around multiple @Service annotations present at a single site.</p>
-
-<pre class="source-code"><code><span class="unaffected">@Type( base = Path.class )
-@Reference( target = IContainer.class )
-@ValidFileSystemResourceType( FileSystemResourceType.FOLDER )</span>
-@Service( impl = FolderReferenceService.class )
-@Service( impl = FolderValidationService.class )
-@Service( impl = FolderInitialValueService.class )
-
-<span class="unaffected">ValueProperty PROP_FOLDER = new ValueProperty( TYPE, "Folder" );
-    
-ReferenceValue&lt;Path,IContainer> getFolder();
-void setFolder( String value );
-void setFolder( Path value );
-void setFolder( IContainer value );</span></code></pre>
-
-
-<h2><a name="Core-RepeatableValidation">Repeatable @Validation</a></h2>
-
-<p>Taking advantage of Java 8, @Validation annotation is now repeatable, saving user the trouble of manually wrapping @Validations
-container annotation around multiple @Validation annotations present at a single site.</p>
-
-<pre class="source-code"><code><span class="unaffected">@Type( base = Integer.class )
-@DefaultValue( text = "0" )</span>
-@Validation( rule = "${ Max >= Min }", message = "Must not be smaller than min" )
-@Validation( rule = "${ Max &lt;= 100 }", message = "Must be less than or equal to 100", severity = Status.Severity.WARNING )
-    
-<span class="unaffected">ValueProperty PROP_MAX = new ValueProperty( TYPE, "Max" );
-    
-Value&lt;Integer> getMax();
-void setMax( String value );
-void setMax( Integer value );</span></code></pre>
-
-
-<h2><a name="Core-RepeatableXmlNamespace">Repeatable @XmlNamespace</a></h2>
-
-<p>Taking advantage of Java 8, @XmlNamespace annotation is now repeatable, saving user the trouble of manually wrapping @XmlNamespaces
-container annotation around multiple @XmlNamespace annotations present at a single site.</p>
-
-<pre class="source-code"><code>@XmlNamespace( uri = "http://www.eclipse.org/sapphire/example/x", prefix = "x" )
-@XmlNamespace( uri = "http://www.eclipse.org/sapphire/example/y", prefix = "y" )
-@XmlNamespace( uri = "http://www.eclipse.org/sapphire/example/z", prefix = "" )
-<span class="unaffected">@XmlSchema( namespace="http://www.eclipse.org/sapphire/example/x", location="http://www.eclipse.org/sapphire/example/x/1.0" )
-@XmlSchema( namespace="http://www.eclipse.org/sapphire/example/y", location="http://www.eclipse.org/sapphire/example/y/1.0" )
-@XmlSchema( namespace="http://www.eclipse.org/sapphire/example/z", location="http://www.eclipse.org/sapphire/example/z/1.0" )
-@XmlBinding( path = "example" )
-
-public interface ExampleElement extends Element
-{
-    ...
-}</span></code></pre>
-
-
-<h2><a name="Core-RepeatableXmlSchema">Repeatable @XmlSchema</a></h2>
-
-<p>Taking advantage of Java 8, @XmlSchema annotation is now repeatable, saving user the trouble of manually wrapping @XmlSchemas
-container annotation around multiple @XmlSchema annotations present at a single site.</p>
-
-<pre class="source-code"><code><span class="unaffected">@XmlNamespace( uri = "http://www.eclipse.org/sapphire/example/x", prefix = "x" )
-@XmlNamespace( uri = "http://www.eclipse.org/sapphire/example/y", prefix = "y" )
-@XmlNamespace( uri = "http://www.eclipse.org/sapphire/example/z", prefix = "" )</span>
-@XmlSchema( namespace="http://www.eclipse.org/sapphire/example/x", location="http://www.eclipse.org/sapphire/example/x/1.0" )
-@XmlSchema( namespace="http://www.eclipse.org/sapphire/example/y", location="http://www.eclipse.org/sapphire/example/y/1.0" )
-@XmlSchema( namespace="http://www.eclipse.org/sapphire/example/z", location="http://www.eclipse.org/sapphire/example/z/1.0" )
-<span class="unaffected">@XmlBinding( path = "example" )
-
-public interface ExampleElement extends Element
-{
-    ...
-}</span></code></pre>
-
-
-<h2><a name="Core-OrderedPossibleTypes">Ordered Possible Types</a></h2>
+<h2><a name="Miscellaneous-OrderedPossibleTypes">Ordered Possible Types</a></h2>
 
 <p>Typically, possible types have no particular order and it is desirable to present them sorted by the type name. In some cases,
 the order is significant. New API allows these cases to be differentiated.</p>
@@ -304,15 +304,13 @@ PossibleTypesService
 <font color="#888888">}</font></code></pre>
 
 
+<h2><a name="Miscellaneous-DiagramPaletteIcons">Diagram Editor Palette Icons</a></h2>
 
-<h2><a name="Diagram"><a name="DiagramPaletteImage">Diagram Editor Palette Icons</a></a></h2>
-
-<p>Developers can specify up to two icons for a node or connection to be used in diagram editor's palette.
-It compares the icon size and passes the small/large icons respectively to GEF to switch between them using GEF palette's "Use Large Icon"
-context menu.</p>
+<p>Developers can now specify up to two icons for a node or a connection to be used in a diagram editor's palette.
+Sapphire will choose an appropriate icon based on the palette's "Use Large Icons" setting.</p>
 
 <pre class="source-code"><code><span class="unaffected">&lt;tool-palette-image&gt;DependsOn-16.png&lt;/tool-palette-image&gt;</span>
-&lt;tool-palette-image&gt;DependsOn-large.png&lt;/tool-palette-image&gt;</code></pre>
+&lt;tool-palette-image&gt;DependsOn-32.png&lt;/tool-palette-image&gt;</code></pre>
 
 
 <div class="copyright">Copyright (c) 2015 Oracle<br/>
