@@ -25,7 +25,7 @@ import org.junit.Test;
 
 public final class TestMisc0001 extends SapphireTestCase
 {
-    private static final String EXPECTED_VERSION_CONSTRAINT = "[9.0-9.0.1)";
+    private static final String EXPECTED_VERSION_CONSTRAINT = "[9.0.1-9.0.2)";
 
     @Test
     
