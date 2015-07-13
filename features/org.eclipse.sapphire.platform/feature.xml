@@ -30,8 +30,8 @@
    </license>
 
    <requires>
-      <import feature="org.eclipse.sapphire" version="8.2.1"/>
-      <import feature="org.eclipse.sapphire.osgi" version="8.2.1"/>
+      <import feature="org.eclipse.sapphire" version="8.2.1" match="compatible"/>
+      <import feature="org.eclipse.sapphire.osgi" version="8.2.1" match="compatible"/>
    </requires>
 
    <plugin

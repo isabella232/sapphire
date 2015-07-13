@@ -30,13 +30,13 @@
    </license>
 
    <requires>
-      <import feature="org.eclipse.sapphire" version="8.2.1"/>
-      <import feature="org.eclipse.sapphire.modeling.xml" version="8.2.1"/>
-      <import feature="org.eclipse.sapphire.ui" version="8.2.1"/>
-      <import feature="org.eclipse.sapphire.ui.swt.gef" version="8.2.1"/>
-      <import feature="org.eclipse.sapphire.ui.swt.xml.editor" version="8.2.1"/>
-      <import feature="org.eclipse.sapphire.osgi" version="8.2.1"/>
-      <import feature="org.eclipse.sapphire.platform" version="8.2.1"/>
+      <import feature="org.eclipse.sapphire" version="8.2.1" match="compatible"/>
+      <import feature="org.eclipse.sapphire.modeling.xml" version="8.2.1" match="compatible"/>
+      <import feature="org.eclipse.sapphire.ui" version="8.2.1" match="compatible"/>
+      <import feature="org.eclipse.sapphire.ui.swt.gef" version="8.2.1" match="compatible"/>
+      <import feature="org.eclipse.sapphire.ui.swt.xml.editor" version="8.2.1" match="compatible"/>
+      <import feature="org.eclipse.sapphire.osgi" version="8.2.1" match="compatible"/>
+      <import feature="org.eclipse.sapphire.platform" version="8.2.1" match="compatible"/>
    </requires>
 
    <plugin
