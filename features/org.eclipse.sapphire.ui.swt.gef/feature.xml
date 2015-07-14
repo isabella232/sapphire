@@ -30,7 +30,7 @@
    </license>
 
    <requires>
-      <import feature="org.eclipse.sapphire.ui" version="9.0.1"/>
+      <import feature="org.eclipse.sapphire.ui" version="9.0.1" match="compatible"/>
    </requires>
 
    <plugin
