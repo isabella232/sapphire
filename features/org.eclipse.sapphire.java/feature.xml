@@ -14,7 +14,7 @@
 <feature
       id="org.eclipse.sapphire.java"
       label="%featureName"
-      version="9.0.1.qualifier"
+      version="10.0.0.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -30,7 +30,7 @@
    </license>
 
    <requires>
-      <import feature="org.eclipse.sapphire" version="9.0.1" match="compatible"/>
+      <import feature="org.eclipse.sapphire" version="10.0.0" match="compatible"/>
    </requires>
 
    <plugin
