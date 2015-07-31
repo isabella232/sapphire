@@ -38,6 +38,8 @@ import org.eclipse.ui.forms.widgets.SharedScrolledComposite;
 
 public abstract class FormComponentPresentation extends SwtPresentation
 {
+    static final String DATA_LAYOUT_ROOT = "Sapphire.LayoutRoot";
+    
     private Composite composite;
     private DisposeListener compositeDisposeListener;
     private List<Control> controls;
@@ -117,29 +119,52 @@ public abstract class FormComponentPresentation extends SwtPresentation
     public void layout()
     {
         Composite composite = composite();
+        Composite layoutRootComposite = null;
+        ScrolledComposite firstScrolledComposite = null;
         
-        composite.getShell().layout( true, true );
-        
-        while( composite != null && ! ( composite instanceof ScrolledComposite ) )
+        while( composite != null )
         {
+            if( layoutRootComposite == null && Boolean.TRUE.equals( composite.getData( DATA_LAYOUT_ROOT ) ) )
+            {
+                layoutRootComposite = composite;
+            }
+            
+            if( firstScrolledComposite == null && composite instanceof ScrolledComposite )
+            {
+                firstScrolledComposite = (ScrolledComposite) composite;
+            }
+            
+            if( layoutRootComposite != null && firstScrolledComposite != null )
+            {
+                break;
+            }
+            
             composite = composite.getParent();
         }
         
-        if( composite != null )
+        if( layoutRootComposite == null )
         {
-            if( composite instanceof SharedScrolledComposite )
+            composite().getShell().layout( true, true );
+        }
+        else
+        {
+            layoutRootComposite.layout( true, true );
+        }
+        
+        if( firstScrolledComposite != null )
+        {
+            if( firstScrolledComposite instanceof SharedScrolledComposite )
             {
-                ( (SharedScrolledComposite) composite ).reflow( true );
+                ( (SharedScrolledComposite) firstScrolledComposite ).reflow( true );
             }
             else
             {
-                final ScrolledComposite scrolledComposite = (ScrolledComposite) composite;
-                final Control scrolledCompositeContent = scrolledComposite.getContent();
+                final Control scrolledCompositeContent = firstScrolledComposite.getContent();
                 
                 if( scrolledCompositeContent != null )
                 {
-                	scrolledComposite.setMinSize( scrolledCompositeContent.computeSize( SWT.DEFAULT, SWT.DEFAULT ) );
-                	updatePageIncrement( scrolledComposite );
+                    firstScrolledComposite.setMinSize( scrolledCompositeContent.computeSize( SWT.DEFAULT, SWT.DEFAULT ) );
+                	updatePageIncrement( firstScrolledComposite );
                 }
             }
         }
