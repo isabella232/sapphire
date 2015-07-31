@@ -92,6 +92,7 @@ public final class FormEditorPage extends SapphireEditorFormPage
             @Override
             public void render()
             {
+                body.setData( FormComponentPresentation.DATA_LAYOUT_ROOT, Boolean.TRUE );
                 body.setBackground( getPart().getSwtResourceCache().color( Color.WHITE ) );
                 body.setBackgroundMode( SWT.INHERIT_DEFAULT );
                 
