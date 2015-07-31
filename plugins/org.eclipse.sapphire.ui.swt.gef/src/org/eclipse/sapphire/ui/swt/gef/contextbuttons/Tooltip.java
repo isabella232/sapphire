@@ -8,6 +8,7 @@
  * Contributors:
  *    SAP - initial implementation
  *    Shenxue Zhou - adaptation for Sapphire and ongoing maintenance
+ *    Konstantin Komissarchik - [473945] Diagram node action button tooltips are not readable on Ubuntu
  ******************************************************************************/
 
 package org.eclipse.sapphire.ui.swt.gef.contextbuttons;
@@ -26,6 +27,7 @@ import org.eclipse.swt.widgets.Display;
 /**
  * @author SAP
  * @author <a href="mailto:shenxue.zhou@oracle.com">Shenxue Zhou</a>
+ * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
 
 public class Tooltip extends FlowPage {
@@ -41,18 +43,17 @@ public class Tooltip extends FlowPage {
 	private String descriptionText;
 
 	public Tooltip() {
-		setForegroundColor(ColorConstants.tooltipBackground);
 		setBackgroundColor(ColorConstants.tooltipBackground);
 		setOpaque(true);
 		setBorder(TOOLTIP_BORDER);
 
 		header = new TextFlow();
-		header.setForegroundColor(ColorConstants.darkGray);
+		header.setForegroundColor(ColorConstants.tooltipForeground);
 		header.setFont(getBoldFont());
 		add(header);
 
 		description = new TextFlow();
-		description.setForegroundColor(ColorConstants.darkGray);
+		description.setForegroundColor(ColorConstants.tooltipForeground);
 		add(description);
 	}
 
