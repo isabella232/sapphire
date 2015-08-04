@@ -44,6 +44,7 @@ import org.eclipse.sapphire.ValueProperty;
 import org.eclipse.sapphire.modeling.CapitalizationType;
 import org.eclipse.sapphire.modeling.annotations.LongString;
 import org.eclipse.sapphire.modeling.util.MiscUtil;
+import org.eclipse.sapphire.ui.DelayedTasksExecutor;
 import org.eclipse.sapphire.ui.Presentation;
 import org.eclipse.sapphire.ui.SapphireActionGroup;
 import org.eclipse.sapphire.ui.SapphirePart.FocusReceivedEvent;
@@ -618,6 +619,8 @@ public abstract class PropertyEditorPresentation extends PropertyEditorPresentat
     @Override
     public void dispose()
     {
+        DelayedTasksExecutor.sweep();
+        
         for( Runnable op : this.onDisposeOperations )
         {
             try
