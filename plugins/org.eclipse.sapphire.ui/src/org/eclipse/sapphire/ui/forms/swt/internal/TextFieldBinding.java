@@ -57,8 +57,11 @@ public class TextFieldBinding extends AbstractBinding
             
             public void run()
             {
-                updateModel();
-                updateTargetAttributes();
+                if( ! property().disposed() )
+                {
+                    updateModel();
+                    updateTargetAttributes();
+                }
             }
         };
         
