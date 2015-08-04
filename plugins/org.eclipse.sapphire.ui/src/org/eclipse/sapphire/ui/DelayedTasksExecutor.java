@@ -18,7 +18,6 @@ import java.util.Set;
 
 import org.eclipse.sapphire.LoggingService;
 import org.eclipse.sapphire.Sapphire;
-import org.eclipse.sapphire.util.MutableReference;
 import org.eclipse.swt.widgets.Display;
 
 /**
@@ -34,131 +33,119 @@ public final class DelayedTasksExecutor
     
     private static final Set<Task> tasks = new LinkedHashSet<Task>();
     private static long timeOfLastAddition = 0;
+    private static long timeOfLastWork = System.currentTimeMillis();
     private static WorkerThread workerThread = null;
     
     public static void schedule( final Task task )
     {
-        schedule( task, false );
-    }
-    
-    private static void schedule( final Task task,
-                                  final boolean doNotDelay )
-    {
-        synchronized( tasks )
-        {
-            boolean taskScheduled = false;
-            
-            for( Task t : tasks )
+        syncExec
+        (
+            new Runnable()
             {
-                if( t.subsumes( task ) )
+                public void run()
                 {
-                    taskScheduled = true;
-                    break;
-                }
-                else if( task.subsumes( t ) )
-                {
-                    tasks.remove( t );
-                    break;
-                }
-            }
-            
-            if( ! taskScheduled )
-            {
-                tasks.add( task );
-            }
-            
-            timeOfLastAddition = ( doNotDelay ? 0 : System.currentTimeMillis() );
-            
-            if( workerThread == null || ! workerThread.isAlive() )
-            {
-                workerThread = new WorkerThread();
-                workerThread.start();
-            }
-            else
-            {
-                if( doNotDelay )
-                {
-                    workerThread.interrupt();
+                    boolean taskScheduled = false;
+                    
+                    for( Task t : tasks )
+                    {
+                        if( t.subsumes( task ) )
+                        {
+                            taskScheduled = true;
+                            break;
+                        }
+                        else if( task.subsumes( t ) )
+                        {
+                            tasks.remove( t );
+                            break;
+                        }
+                    }
+                    
+                    if( ! taskScheduled )
+                    {
+                        tasks.add( task );
+                    }
+                    
+                    timeOfLastAddition = System.currentTimeMillis();
+                    
+                    if( workerThread == null || ! workerThread.isAlive() )
+                    {
+                        workerThread = new WorkerThread();
+                        workerThread.start();
+                    }
                 }
             }
-        }
+        );
     }
     
     public static void sweep()
     {
-        final MutableReference<Boolean> sweeperCompletionResult = new MutableReference<Boolean>( false );
-        
-        final Task sweeper = new Task()
-        {
-            @Override
-            public int getPriority()
-            {
-                return Integer.MIN_VALUE;
-            }
+        process( true );
+    }
 
-            public void run()
+    private static void process( final boolean doNotDelay )
+    {
+        syncExec
+        (
+            new Runnable()
             {
-                synchronized( sweeperCompletionResult )
+                public void run()
                 {
-                    sweeperCompletionResult.set( true );
-                    sweeperCompletionResult.notifyAll();
+                    Task[] tasksToProcess = NO_TASKS;
+                    
+                    if( ! tasks.isEmpty() )
+                    {
+                        boolean process = doNotDelay;
+                        
+                        if( ! process )
+                        {
+                            final long now = System.currentTimeMillis();
+                            final long diff = now - timeOfLastAddition;
+                            
+                            process = ( diff >= DELAY );
+                        }
+                        
+                        if( process )
+                        {
+                            tasksToProcess = tasks.toArray( new Task[ tasks.size() ] );
+                            tasks.clear();
+                            timeOfLastAddition = 0;
+                        }
+                    }
+                    
+                    if( tasksToProcess.length > 0 )
+                    {
+                        Arrays.sort( tasksToProcess, TASK_PRIORITY_COMPARATOR );
+                        
+                        for( final Runnable task : tasksToProcess )
+                        {
+                            try
+                            {
+                                task.run();
+                            }
+                            catch( Exception e )
+                            {
+                                Sapphire.service( LoggingService.class ).log( e );
+                            }
+                        }
+                        
+                        timeOfLastWork = System.currentTimeMillis();
+                    }
                 }
             }
-        };
-        
-        schedule( sweeper, true );
-        
+        );
+    }
+    
+    private static void syncExec( final Runnable op )
+    {
         final Display display = Display.getDefault();
         
-        if( display.getThread() == Thread.currentThread() )
+        if( Thread.currentThread() == display.getThread() )
         {
-            while( sweeperCompletionResult.get() == false )
-            {
-                if( ! display.readAndDispatch() )
-                {
-                    display.sleep();
-                }
-            }
+            op.run();
         }
         else
         {
-            synchronized( sweeperCompletionResult )
-            {
-                try
-                {
-                    synchronized( sweeperCompletionResult )
-                    {
-                        while( sweeperCompletionResult.get() == false )
-                        {
-                            sweeperCompletionResult.wait();
-                        }
-                    }
-                }
-                catch( InterruptedException e ) {}
-            }
-        }
-    }
-    
-    private static Task[] getTasksToRun()
-    {
-        synchronized( tasks )
-        {
-            Task[] result = NO_TASKS;
-            
-            if( ! tasks.isEmpty() )
-            {
-                final long now = System.currentTimeMillis();
-                final long diff = now - timeOfLastAddition;
-                
-                if( diff >= DELAY )
-                {
-                    result = tasks.toArray( new Task[ tasks.size() ] );
-                    tasks.clear();
-                    timeOfLastAddition = 0;
-                }
-            }
-            
-            return result;
+            display.syncExec( op );
         }
     }
     
@@ -177,8 +164,7 @@ public final class DelayedTasksExecutor
     
     private static final class TaskPriorityComparator implements Comparator<Task>
     {
-        public int compare( final Task t1,
-                            final Task t2 )
+        public int compare( final Task t1, final Task t2 )
         {
             return t2.getPriority() - t1.getPriority();
         }
@@ -186,48 +172,20 @@ public final class DelayedTasksExecutor
     
     private static final class WorkerThread extends Thread
     {
-        private long timeOfLastWork = System.currentTimeMillis();
+        public WorkerThread()
+        {
+            super( "Sapphire Delayed Tasks Executor" );
+        }
         
         public void run()
         {
             while( true )
             {
-                Task[] tasks = getTasksToRun();
+                process( false );
                 
-                if( tasks.length > 0 )
+                if( System.currentTimeMillis() - timeOfLastWork >= WORKER_THREAD_SHUTDOWN_DELAY )
                 {
-                    final Task[] tasksToRun = tasks;
-                    Arrays.sort( tasksToRun, TASK_PRIORITY_COMPARATOR );
-                    
-                    Display.getDefault().syncExec
-                    (
-                        new Runnable()
-                        {
-                            public void run()
-                            {
-                                for( Runnable task : tasksToRun )
-                                {
-                                    try
-                                    {
-                                        task.run();
-                                    }
-                                    catch( Exception e )
-                                    {
-                                        Sapphire.service( LoggingService.class ).log( e );
-                                    }
-                                }
-                            }
-                        }
-                    );
-                    
-                    this.timeOfLastWork = System.currentTimeMillis();
-                }
-                else
-                {
-                    if( System.currentTimeMillis() - this.timeOfLastWork >= WORKER_THREAD_SHUTDOWN_DELAY )
-                    {
-                        return;
-                    }
+                    return;
                 }
                 
                 try
