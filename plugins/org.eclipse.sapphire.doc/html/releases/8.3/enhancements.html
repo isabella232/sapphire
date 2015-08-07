@@ -1,0 +1,167 @@
+<!-- 
+ ******************************************************************************
+ * Copyright (c) 2015 Oracle
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Konstantin Komissarchik - initial implementation and ongoing maintenance
+ ******************************************************************************
+-->
+
+<html>
+
+<head>
+  <title>Enhancements in Sapphire 8.3</title>
+  <link rel="StyleSheet" href="../../style.css" TYPE="text/css"/>
+  <style type="text/css">
+    pre.source-code-compare 
+    {
+      font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace; 
+      color: #000000;
+      background-color: #ffffff;
+      font-size: 12px;
+      border: 0px;
+      line-height: 14px;
+      padding: 5px;
+      margin-left: 0px;
+      margin-right: 0px;
+      overflow: auto
+    }
+    .unaffected
+    {
+      color: #888888
+    }
+    .comment
+    {
+      color: #006600;
+      font-style: italic
+    }
+    .javadoc
+    {
+      color: #7F7F9F
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Enhancements in Sapphire 8.3</h1>
+
+<ol>
+  <li><a href="#SapphireDialog">SapphireDialog</a></li>
+</ol>
+
+
+<h2><a name="SapphireDialog">SapphireDialog</a></h2>
+
+<p>SapphireDialog has been enhanced with some of the features already present in SapphireWizard. In particular, the model's
+execute method is now called when the dialog is closed if the root model element is an ExecutableElement and a dialog can now
+be constructed with a model element type instead of a model instance, thus delegating to the dialog the job of disposing of the model.</p>
+
+<pre class="source-code"><code><span class="unaffected">public class SapphireDialog extends Dialog
+{</span>
+    <span class="javadoc">/**
+     * Constructs a new SapphireDialog instance. Use the open method to actually open the dialog.
+     * 
+     * &lt;p>The model will be instantiated when the dialog is constructed and disposed when the dialog is closed. To avoid
+     * resource leaks, the open method must be called if this constructor is used.&lt;/p>
+     * 
+     * @param shell the shell
+     * @param type the root model element type
+     * @param definition the dialog definition
+     */</span>
+    
+    public SapphireDialog( Shell shell, ElementType type, DefinitionLoader.Reference&lt;DialogDef> definition )
+
+    <span class="unaffected">/**
+     * Constructs a new SapphireDialog instance. Use the open method to actually open the dialog.
+     * 
+     * @param shell the shell
+     * @param element the root model element
+     * @param definition the dialog definition
+     */
+     
+    public SapphireDialog( Shell shell, Element element, DefinitionLoader.Reference&lt;DialogDef> definition )</span>
+    
+    <span class="javadoc">/**
+     * Initializes the dialog. This method is called from the constructors. It can be overridden by extenders.
+     * 
+     * @param element the root model element
+     * @param definition the dialog definition
+     */</span>
+    
+    protected void init( Element element, DefinitionLoader.Reference&lt;DialogDef> definition )
+
+    <span class="unaffected">/**
+     * Performs tasks that need to run when user closes the dialog by pressing on the ok button.</span> <span class="javadoc"><b>The default implementation</b></span>
+     <span class="unaffected">*</span> <span class="javadoc"><b>invokes the execute method on the associated model element if this element is an ExecutableElement.</b></span> 
+     <span class="unaffected">*  
+     * @return true if the dialog can be dismissed or false if an issue was encountered that requires user's attention
+     */
+    
+    protected boolean performOkOperation()</span>
+
+    <span class="javadoc">/**
+     * Called when the execute operation fails with an error status. This is only applicable if the associated model element
+     * is an ExecutableElement. The default implementation opens a dialog showing the failure message and leaves the dialog open.
+     * 
+     * @param status the failure status
+     * @return true, if the dialog should be closed; false, otherwise
+     */</span>
+    
+    protected boolean handleExecuteFailure( Status status )
+<span class="unaffected">}</span></code></pre>
+
+<p>In the following example, a dialog is used to ask the user for their name. The answer is used to print
+a personalized message to the console.</p>
+
+<pre class="source-code"><code>public interface ExampleOp extends ExecutableElement
+{
+    ElementType TYPE = new ElementType( ExampleOp.class );
+    
+    // *** Name ***
+    
+    @Required
+    
+    ValueProperty PROP_NAME = new ValueProperty( TYPE, "Name" );
+    
+    Value&lt;String> getName();
+    void setName( String value );
+    
+    // *** execute ***
+    
+    @DelegateImplementation( ExampleExecuteMethodDelegate.class )
+        
+    Status execute( ProgressMonitor monitor );
+}</code></pre>
+
+<pre class="source-code"><code>public final class ExampleExecuteMethodDelegate
+{
+    public static Status execute( final ExampleOp op, final ProgressMonitor monitor )
+    {
+        System.err.println( "Hello, " + op.getName().text() + "!" );
+    }
+}</code></pre>
+        
+<pre class="source-code"><code>&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;definition>
+    &lt;dialog>
+        &lt;label>example dialog&lt;/label>
+        &lt;content>
+            &lt;property-editor>Name&lt;/property-editor>
+        &lt;/content>
+    &lt;/dialog>
+&lt;/definition></code></pre>
+
+<pre class="source-code"><code>new SapphireDialog( shell, ExampleOp.TYPE, DefinitionLoader.sdef( ExampleOp.class ).dialog() ).open();</code></pre>
+
+
+<div class="copyright">Copyright (c) 2015 Oracle<br/>
+Content made available under the terms of <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</div>
+
+</body>
+
+</html>
