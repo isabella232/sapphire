@@ -72,6 +72,14 @@
      </topic>
   </topic>
   <topic href="html/releases/index.html" label="Releases">
+    <topic href="html/releases/8.3/index.html" label="8.3">
+       <topic href="html/releases/8.3/enhancements.html" label="Enhancements">
+       </topic>
+    </topic>
+    <topic href="html/releases/8.2/index.html" label="8.2">
+       <topic href="html/releases/8.2/enhancements.html" label="Enhancements">
+       </topic>
+    </topic>
     <topic href="html/releases/8.1/index.html" label="8.1">
        <topic href="html/releases/8.1/enhancements.html" label="Enhancements">
        </topic>

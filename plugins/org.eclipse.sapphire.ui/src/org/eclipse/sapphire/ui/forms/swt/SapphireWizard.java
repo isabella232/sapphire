@@ -75,11 +75,30 @@ public class SapphireWizard<M extends Element> implements IWizard, Disposable
     private ImageDescriptor defaultPageImageDescriptor;
     private Image defaultPageImage;
     
+    /**
+     * Constructs a new SapphireWizard instance. Use WizardDialog actually open the wizard.
+     * 
+     * <p>The model will be instantiated when the wizard is constructed and disposed when the wizard is disposed. To avoid
+     * resource leaks, the wizard's dispose method must be called if this constructor is used.</p>
+     * 
+     * @param shell the shell
+     * @param type the root model element type
+     * @param definition the wizard definition
+     */
+    
     public SapphireWizard( final ElementType type, final DefinitionLoader.Reference<WizardDef> definition )
     {
         init( type, definition );
     }
 
+    /**
+     * Constructs a new SapphireWizard instance. Use WizardDialog actually open the wizard.
+     * 
+     * @param shell the shell
+     * @param element the root model element
+     * @param definition the wizard definition
+     */
+    
     public SapphireWizard( final M element, final DefinitionLoader.Reference<WizardDef> definition )
     {
         init( element, definition );
@@ -89,14 +108,16 @@ public class SapphireWizard<M extends Element> implements IWizard, Disposable
     {
     }
     
+    /**
+     * Initializes the wizard. This method is called from the constructors. It can be overridden by extenders.
+     * 
+     * @param type the root model element type
+     * @param definition the wizard definition
+     */
+    
     protected void init( final ElementType type, final DefinitionLoader.Reference<WizardDef> definition )
     {
         if( type == null )
-        {
-            throw new IllegalArgumentException();
-        }
-        
-        if( definition == null )
         {
             throw new IllegalArgumentException();
         }
@@ -105,6 +126,13 @@ public class SapphireWizard<M extends Element> implements IWizard, Disposable
         
         init( type.instantiate(), definition );
     }
+    
+    /**
+     * Initializes the wizard. This method is called from the constructors. It can be overridden by extenders.
+     * 
+     * @param element the root model element
+     * @param definition the wizard definition
+     */
     
     protected void init( final Element element, final DefinitionLoader.Reference<WizardDef> definition )
     {

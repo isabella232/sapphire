@@ -19,7 +19,10 @@ import java.util.Collections;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.sapphire.Element;
+import org.eclipse.sapphire.ElementType;
+import org.eclipse.sapphire.ExecutableElement;
 import org.eclipse.sapphire.FilteredListener;
+import org.eclipse.sapphire.modeling.ProgressMonitor;
 import org.eclipse.sapphire.modeling.Status;
 import org.eclipse.sapphire.ui.DelayedTasksExecutor;
 import org.eclipse.sapphire.ui.PartValidationEvent;
@@ -27,6 +30,7 @@ import org.eclipse.sapphire.ui.Presentation;
 import org.eclipse.sapphire.ui.def.DefinitionLoader;
 import org.eclipse.sapphire.ui.forms.DialogDef;
 import org.eclipse.sapphire.ui.forms.DialogPart;
+import org.eclipse.sapphire.ui.forms.swt.internal.StatusDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
@@ -42,16 +46,60 @@ import org.eclipse.swt.widgets.Shell;
 public class SapphireDialog extends Dialog
 {
     private Element element;
+    private boolean elementInstantiatedLocally;
     private DefinitionLoader.Reference<DialogDef> definition;
     private DialogPart part;
     private Button okButton;
     
-    public SapphireDialog( final Shell shell,
-                           final Element element,
-                           final DefinitionLoader.Reference<DialogDef> definition )
+    /**
+     * Constructs a new SapphireDialog instance. Use the open method to actually open the dialog.
+     * 
+     * <p>The model will be instantiated when the dialog is constructed and disposed when the dialog is closed. To avoid
+     * resource leaks, the open method must be called if this constructor is used.</p>
+     * 
+     * @param shell the shell
+     * @param type the root model element type
+     * @param definition the dialog definition
+     */
+    
+    public SapphireDialog( final Shell shell, final ElementType type, final DefinitionLoader.Reference<DialogDef> definition )
     {
         super( shell );
         
+        if( type == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        
+        this.elementInstantiatedLocally = true;
+        
+        init( type.instantiate(), definition );
+    }
+
+    /**
+     * Constructs a new SapphireDialog instance. Use the open method to actually open the dialog.
+     * 
+     * @param shell the shell
+     * @param element the root model element
+     * @param definition the dialog definition
+     */
+    
+    public SapphireDialog( final Shell shell, final Element element, final DefinitionLoader.Reference<DialogDef> definition )
+    {
+        super( shell );
+        
+        init( element, definition );
+    }
+    
+    /**
+     * Initializes the dialog. This method is called from the constructors. It can be overridden by extenders.
+     * 
+     * @param element the root model element
+     * @param definition the dialog definition
+     */
+    
+    protected void init( final Element element, final DefinitionLoader.Reference<DialogDef> definition )
+    {
         if( element == null )
         {
             throw new IllegalArgumentException();
@@ -81,6 +129,7 @@ public class SapphireDialog extends Dialog
     }
     
     @Override
+    
     protected Control createDialogArea( final Composite parent )
     {
         final Shell shell = getShell();
@@ -127,6 +176,7 @@ public class SapphireDialog extends Dialog
     }
 
     @Override
+    
     protected Control createContents( final Composite parent )
     {
         final Composite composite = (Composite) super.createContents( parent );
@@ -138,6 +188,7 @@ public class SapphireDialog extends Dialog
     }
 
     @Override
+    
     protected Control createButtonBar( final Composite parent )
     {
         final Composite composite = (Composite) super.createButtonBar( parent );
@@ -149,6 +200,7 @@ public class SapphireDialog extends Dialog
             new FilteredListener<PartValidationEvent>()
             {
                 @Override
+                
                 protected void handleTypedEvent( PartValidationEvent event )
                 {
                     updateOkButtonEnablement();
@@ -162,12 +214,14 @@ public class SapphireDialog extends Dialog
     }
     
     @Override
+    
     protected boolean isResizable()
     {
         return true;
     }
     
     @Override
+    
     protected final void okPressed()
     {
         DelayedTasksExecutor.sweep();
@@ -184,17 +238,40 @@ public class SapphireDialog extends Dialog
     }
     
     /**
-     * Performs any custom tasks that need to run when user closes the dialog by pressing on the ok button. The default
-     * implementation does nothing. 
+     * Performs tasks that need to run when user closes the dialog by pressing on the ok button. The default implementation
+     * invokes the execute method on the associated model element if this element is an ExecutableElement. 
      *  
      * @return true if the dialog can be dismissed or false if an issue was encountered that requires user's attention
      */
     
     protected boolean performOkOperation()
     {
-        // The default implementation does nothing.
+        if( this.element instanceof ExecutableElement )
+        {
+            final Status status = ( (ExecutableElement) this.element ).execute( new ProgressMonitor() );
+            
+            if( status.severity() == Status.Severity.ERROR )
+            {
+                return handleExecuteFailure( status );
+            }
+        }
         
         return true;
+    }
+    
+    /**
+     * Called when the execute operation fails with an error status. This is only applicable if the associated model element
+     * is an ExecutableElement. The default implementation opens a dialog showing the failure message and leaves the dialog open.
+     * 
+     * @param status the failure status
+     * @return true, if the dialog should be closed; false, otherwise
+     */
+    
+    protected boolean handleExecuteFailure( final Status status )
+    {
+        StatusDialog.open( getShell(), status );
+        
+        return false;
     }
 
     private void updateOkButtonEnablement()
@@ -209,6 +286,21 @@ public class SapphireDialog extends Dialog
                 this.okButton.setEnabled( expected );
             }
         }
+    }
+
+    @Override
+    
+    public int open()
+    {
+        final int code = super.open();
+        
+        if( this.elementInstantiatedLocally )
+        {
+            this.element.dispose();
+            this.element = null;
+        }
+        
+        return code;
     }
     
 }
