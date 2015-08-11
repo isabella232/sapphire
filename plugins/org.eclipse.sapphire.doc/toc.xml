@@ -57,6 +57,7 @@
      <topic href="html/services/PossibleTypesService.html" label="PossibleTypesService"/>
      <topic href="html/services/ProblemsTraversalService.html" label="ProblemsTraversalService"/>
      <topic href="html/services/RequiredConstraintService.html" label="RequiredConstraintService"/>
+     <topic href="html/services/TextSelectionService.html" label="TextSelectionService"/>
      <topic href="html/services/UniversalConversionService.html" label="UniversalConversionService"/>
      <topic href="html/services/VersionCompatibilityService.html" label="VersionCompatibilityService"/>
      <topic href="html/services/VersionCompatibilityTargetService.html" label="VersionCompatibilityTargetService"/>

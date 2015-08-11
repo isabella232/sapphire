@@ -6,6 +6,7 @@ Bundle-Version: 9.1.0.qualifier
 Bundle-Vendor: %providerName
 Bundle-Localization: bundle
 Export-Package: org.eclipse.sapphire.ui,
+ org.eclipse.sapphire.ui.actions,
  org.eclipse.sapphire.ui.assist,
  org.eclipse.sapphire.ui.assist.internal;x-internal:=true,
  org.eclipse.sapphire.ui.def,

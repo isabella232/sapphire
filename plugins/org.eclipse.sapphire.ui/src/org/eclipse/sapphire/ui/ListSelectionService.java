@@ -23,8 +23,10 @@ import org.eclipse.sapphire.services.ServiceEvent;
 import org.eclipse.sapphire.util.ListFactory;
 
 /**
- * Serves as a conduit between the presentation layer and anything that may want 
- * to see or change the selection.
+ * ListSelectionService is a conduit between the presentation layer and anything that needs 
+ * to observe or change the selection in a list property editor.
+ * 
+ * <p>This service is not intended to be implemented by adopters.</p>
  * 
  * @author <a href="mailto:gregory.amerson@liferay.com">Gregory Amerson</a>
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
