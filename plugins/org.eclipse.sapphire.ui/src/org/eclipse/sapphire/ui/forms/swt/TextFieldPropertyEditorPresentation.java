@@ -41,6 +41,7 @@ import org.eclipse.jface.fieldassist.IContentProposalProvider;
 import org.eclipse.jface.fieldassist.TextContentAdapter;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.sapphire.Event;
+import org.eclipse.sapphire.FilteredListener;
 import org.eclipse.sapphire.Length;
 import org.eclipse.sapphire.Listener;
 import org.eclipse.sapphire.LoggingService;
@@ -57,6 +58,8 @@ import org.eclipse.sapphire.ui.SapphireActionHandler;
 import org.eclipse.sapphire.ui.SapphireActionHandler.PostExecuteEvent;
 import org.eclipse.sapphire.ui.SapphireActionHandlerFilter;
 import org.eclipse.sapphire.ui.SapphirePart;
+import org.eclipse.sapphire.ui.TextSelectionService;
+import org.eclipse.sapphire.ui.TextSelectionService.TextSelectionEvent;
 import org.eclipse.sapphire.ui.assist.internal.PropertyEditorAssistDecorator;
 import org.eclipse.sapphire.ui.forms.FormComponentPart;
 import org.eclipse.sapphire.ui.forms.JumpActionHandler;
@@ -72,6 +75,7 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
@@ -235,7 +239,6 @@ public class TextFieldPropertyEditorPresentation extends ValuePropertyEditorPres
                     if( ! TextFieldPropertyEditorPresentation.this.textField.isDisposed() )
                     {
                         TextFieldPropertyEditorPresentation.this.textField.setFocus();
-                        TextFieldPropertyEditorPresentation.this.textField.setSelection( 0, TextFieldPropertyEditorPresentation.this.textField.getText().length() );
                     }
                 }
             }
@@ -309,6 +312,56 @@ public class TextFieldPropertyEditorPresentation extends ValuePropertyEditorPres
             addControl( textCapacityFeedback );
             decorator.addEditorControl( textCapacityFeedback );
         }
+        
+        // Integrate with TextSelectionService
+        
+        final TextSelectionService textSelectionService = part.service( TextSelectionService.class );
+        final TextSelectionService.Range initialTextSelectionRange = textSelectionService.selection();
+        
+        this.textField.setSelection( initialTextSelectionRange.start(), initialTextSelectionRange.end() );
+        
+        final org.eclipse.swt.widgets.Listener textFieldSelectionListener = new org.eclipse.swt.widgets.Listener()
+        {
+            @Override
+            
+            public void handleEvent( final org.eclipse.swt.widgets.Event event )
+            {
+                final Point selection = TextFieldPropertyEditorPresentation.this.textField.getSelection();
+                textSelectionService.select( selection.x, selection.y );
+            }
+        };
+        
+        this.textField.addListener( SWT.MouseUp, textFieldSelectionListener );
+        this.textField.addListener( SWT.KeyUp, textFieldSelectionListener );
+        
+        final Listener textSelectionServiceListener = new FilteredListener<TextSelectionService.TextSelectionEvent>()
+        {
+            @Override
+            
+            protected void handleTypedEvent( final TextSelectionEvent event )
+            {
+                final Point current = TextFieldPropertyEditorPresentation.this.textField.getSelection();
+                final TextSelectionService.Range selection = event.after();
+                
+                if( ! ( current.x == selection.start() && current.y == selection.end() ) )
+                {
+                    TextFieldPropertyEditorPresentation.this.textField.setSelection( selection.start(), selection.end() );
+                }
+            }
+        };
+        
+        textSelectionService.attach( textSelectionServiceListener );
+        
+        this.textField.addDisposeListener
+        (
+            new DisposeListener()
+            {
+                public void widgetDisposed( final DisposeEvent event )
+                {
+                    textSelectionService.detach( textSelectionServiceListener );
+                }
+            }
+        );
         
         // Hookup property editor listeners.
         

@@ -617,6 +617,14 @@
         <context>Sapphire.Part</context>
         <implementation>org.eclipse.sapphire.ui.ListSelectionService</implementation>
         <condition>org.eclipse.sapphire.ui.internal.ListSelectionServiceCondition</condition>
+        <description>ListSelectionService is a conduit between the presentation layer and anything that needs to observe or change the selection in a list property editor.</description>
+    </service>
+    <service>
+        <condition>org.eclipse.sapphire.ui.internal.TextSelectionServiceCondition</condition>
+        <context>Sapphire.Part</context>
+        <id>Sapphire.TextSelectionService</id>
+        <implementation>org.eclipse.sapphire.ui.TextSelectionService</implementation>
+        <description>TextSelectionService is a conduit between the presentation layer and anything that needs to observe or change the selection in a text property editor.</description>
     </service>
     <service>
         <id>Sapphire.ProblemsTraversalService</id>
