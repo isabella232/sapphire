@@ -39,10 +39,6 @@
       color: #006600;
       font-style: italic
     }
-    .javadoc
-    {
-      color: #7F7F9F
-    }
   </style>
 </head>
 
@@ -52,6 +48,7 @@
 
 <ol>
   <li><a href="#SapphireDialog">SapphireDialog</a></li>
+  <li><a href="#TextSelectionService">TextSelectionService</a></li>
 </ol>
 
 
@@ -157,6 +154,147 @@ a personalized message to the console.</p>
 &lt;/definition></code></pre>
 
 <pre class="source-code"><code>new SapphireDialog( shell, ExampleOp.TYPE, DefinitionLoader.sdef( ExampleOp.class ).dialog() ).open();</code></pre>
+
+
+<h2><a name="TextSelectionService">TextSelectionService</a></h2>
+
+<p>TextSelectionService is a conduit between the presentation layer and anything that needs to observe or change the selection
+in a text property editor.</p>
+
+<pre class="source-code"><code>public final class TextSelectionService extends Service
+{
+    <span class="javadoc">/**
+     * Returns the current text selection.
+     */</span>
+    
+    public Range selection()
+
+    <span class="javadoc">/**
+     * Places the caret at the specified position. This is equivalent to setting the selection to a zero-length
+     * range starting at this position. If selection changes, TextSelectionEvent will be fired.
+     * 
+     * @param position the desired caret position
+     */</span>
+    
+    public void select( int position )
+
+    <span class="javadoc">/**
+     * Selects a text range. If selection changes, TextSelectionEvent will be fired.
+     * 
+     * @param start the starting position of the text range
+     * @param end the ending position of the text range (non-inclusive)
+     */</span>
+    
+    public void select( int start, int end )
+    
+    <span class="javadoc">/**
+     * Selects a text range. If selection changes, TextSelectionEvent will be fired.
+     * 
+     * @param start the starting position of the text range
+     * @param end the ending position of the text range (non-inclusive)
+     */</span>
+    
+    public void select( Range range )
+    
+    <span class="javadoc">/**
+     * Represents an immutable range of characters defined by a starting and an ending position.
+     */</span>
+    
+    public static final class Range
+    {
+        <span class="javadoc">/**
+         * Constructs a new Range object.
+         * 
+         * @param start the starting position of the text range
+         * @param end the ending position of the text range (non-inclusive)
+         */</span>
+        
+        public Range( int start, int end )
+        
+        <span class="javadoc">/**
+         * Returns the starting position of the text range.
+         */</span>
+
+        public int start()
+        
+        <span class="javadoc">/**
+         * Returns the ending position of the text range.
+         */</span>
+        
+        public int end()
+        
+        <span class="javadoc">/**
+         * Returns the length of the text range.
+         */</span>
+        
+        public int length()
+    }
+    
+    <span class="javadoc">/**
+     * The event that is fired when text selection changes.
+     */</span>
+
+    public static final class TextSelectionEvent extends ServiceEvent
+    {
+        <span class="javadoc">/**
+         * Returns the text selection before the selection was changed.
+         */</span>
+
+        public Range before()
+        
+        <span class="javadoc">/**
+         * Returns the text selection after the selection was changed.
+         */</span>
+
+        public Range after()
+    }
+}</code></pre>
+
+<p>In this example, an action handler inserts a variable that user chooses at the text selection point. This example and others are
+available in runnable form in the samples project.</p>
+
+<pre class="source-code"><code>public abstract class InsertVariableActionHandler extends SapphireActionHandler
+{
+    @Override
+    
+    protected final Object run( final Presentation context )
+    {
+        final String variable = choose();
+        
+        if( variable != null )
+        {
+            final PropertyEditorPart part = (PropertyEditorPart) context.part();
+            final Value&lt;?> property = (Value&lt;?>) part.property();
+            final TextSelectionService textSelectionService = part.service( TextSelectionService.class );
+            final TextSelectionService.Range initialSelection = textSelectionService.selection();
+            final String initialText = property.text();
+            
+            final StringBuilder modifiedText = new StringBuilder();
+            
+            if( initialText != null )
+            {
+                modifiedText.append( initialText.substring( 0, initialSelection.start() ) );
+            }
+            
+            modifiedText.append( "${" );
+            modifiedText.append( variable );
+            modifiedText.append( '}' );
+            
+            if( initialText != null )
+            {
+                modifiedText.append( initialText.substring( initialSelection.end() ) );
+            }
+            
+            property.write( modifiedText.toString() );
+            
+            textSelectionService.select( initialSelection.start() + variable.length() + 3 );
+        }
+        
+        return null;
+    }
+    
+    protected abstract String choose();
+}</code></pre>
 
 
 <div class="copyright">Copyright (c) 2015 Oracle<br/>

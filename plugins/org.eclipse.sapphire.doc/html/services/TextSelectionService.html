@@ -1,0 +1,304 @@
+<!-- 
+ ******************************************************************************
+ * Copyright (c) 2015 Oracle and Liferay
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Konstantin Komissarchik - initial implementation and ongoing maintenance
+ *    Gregory Amerson - [358295] Need access to selection in list property editor
+ ******************************************************************************
+-->
+
+<html>
+
+<head>
+  <title>TextSelectionService</title>
+  <link rel="StyleSheet" href="../style.css" TYPE="text/css"/>
+</head>
+
+<body>
+
+<h1>TextSelectionService</h1>
+
+<p>TextSelectionService is a conduit between the presentation layer and anything that needs to observe or change the selection
+in a text property editor. The presentation layer pushes selection changes made by the user to TextSelectionService and at
+the same time listens for changes to selection coming from TextSelectionService.</p>
+
+<p>This service is not intended to be implemented by adopters.</p>
+
+<pre class="source-code"><code>public final class TextSelectionService extends Service
+{
+    <span class="javadoc">/**
+     * Returns the current text selection.
+     */</span>
+    
+    public Range selection()
+
+    <span class="javadoc">/**
+     * Places the caret at the specified position. This is equivalent to setting the selection to a zero-length
+     * range starting at this position. If selection changes, TextSelectionEvent will be fired.
+     * 
+     * @param position the desired caret position
+     */</span>
+    
+    public void select( int position )
+
+    <span class="javadoc">/**
+     * Selects a text range. If selection changes, TextSelectionEvent will be fired.
+     * 
+     * @param start the starting position of the text range
+     * @param end the ending position of the text range (non-inclusive)
+     */</span>
+    
+    public void select( int start, int end )
+    
+    <span class="javadoc">/**
+     * Selects a text range. If selection changes, TextSelectionEvent will be fired.
+     * 
+     * @param start the starting position of the text range
+     * @param end the ending position of the text range (non-inclusive)
+     */</span>
+    
+    public void select( Range range )
+    
+    <span class="javadoc">/**
+     * Represents an immutable range of characters defined by a starting and an ending position.
+     */</span>
+    
+    public static final class Range
+    {
+        <span class="javadoc">/**
+         * Constructs a new Range object.
+         * 
+         * @param start the starting position of the text range
+         * @param end the ending position of the text range (non-inclusive)
+         */</span>
+        
+        public Range( int start, int end )
+        
+        <span class="javadoc">/**
+         * Returns the starting position of the text range.
+         */</span>
+
+        public int start()
+        
+        <span class="javadoc">/**
+         * Returns the ending position of the text range.
+         */</span>
+        
+        public int end()
+        
+        <span class="javadoc">/**
+         * Returns the length of the text range.
+         */</span>
+        
+        public int length()
+    }
+    
+    <span class="javadoc">/**
+     * The event that is fired when text selection changes.
+     */</span>
+
+    public static final class TextSelectionEvent extends ServiceEvent
+    {
+        <span class="javadoc">/**
+         * Returns the text selection before the selection was changed.
+         */</span>
+
+        public Range before()
+        
+        <span class="javadoc">/**
+         * Returns the text selection after the selection was changed.
+         */</span>
+
+        public Range after()
+    }
+}</code></pre>
+
+<p>The following examples are available in runnable form in the samples project.</p> 
+
+<p>In the first example, TextSelectionService is used to implement action handlers to move text selection
+to the left or to the right. The implementation listens to TextSelectionService to update the action handler's enablement state
+when selection changes and calls into TextSelectionService to update the selection when the action is invoked.</p> 
+
+<pre class="source-code"><code>public abstract class MoveActionHandler extends SapphireActionHandler
+{
+    private PropertyEditorPart part;
+    private Value&lt;?> property;
+    private TextSelectionService textSelectionService;
+    
+    @Override
+    
+    public final void init( final SapphireAction action, final ActionHandlerDef def )
+    {
+        super.init( action, def );
+        
+        this.part = (PropertyEditorPart) action.getPart();
+        this.property = (Value&lt;?>) this.part.property();
+        this.textSelectionService = this.part.service( TextSelectionService.class );
+
+        refreshEnablement();
+        
+        final Listener textSelectionServiceListener = new Listener()
+        {
+            @Override
+            
+            public void handle( final Event event )
+            {
+                refreshEnablement();
+            }
+        };
+        
+        this.textSelectionService.attach( textSelectionServiceListener );
+        
+        final Listener propertyContentListener = new FilteredListener&lt;PropertyContentEvent>()
+        {
+            @Override
+            
+            protected void handleTypedEvent( final PropertyContentEvent event )
+            {
+                refreshEnablement();
+            }
+        };
+        
+        this.property.attach( propertyContentListener );
+        
+        attach
+        (
+            new FilteredListener&lt;DisposeEvent>()
+            {
+                @Override
+                
+                protected void handleTypedEvent( final DisposeEvent event )
+                {
+                    MoveActionHandler.this.textSelectionService.detach( textSelectionServiceListener );
+                    MoveActionHandler.this.part.detach( propertyContentListener );
+                }
+            }
+        );
+    }
+    
+    private void refreshEnablement()
+    {
+        refreshEnablement( text(), this.textSelectionService.selection() );
+    }
+    
+    protected abstract void refreshEnablement( String text, TextSelectionService.Range selection );
+    
+    @Override
+    
+    protected final Object run( final Presentation context )
+    {
+        run( text(), this.textSelectionService );
+        
+        return null;
+    }
+    
+    protected abstract void run( String text, TextSelectionService textSelectionService );
+    
+    private String text()
+    {
+        final String text = this.property.text();
+        return ( text != null ? text : "" );
+    }
+}
+
+public final class MoveLeftActionHandler extends MoveActionHandler
+{
+    @Override
+    
+    protected void refreshEnablement( final String text, final Range selection )
+    {
+        setEnabled( selection.end() > 0 );
+    }
+
+    @Override
+    
+    protected void run( final String text, final TextSelectionService textSelectionService )
+    {
+        final TextSelectionService.Range selection = textSelectionService.selection();
+        
+        if( selection.end() > 0 )
+        {
+            textSelectionService.select( max( 0, selection.start() - 1 ), selection.end() - 1 );
+        }
+    }
+}
+
+public final class MoveRightActionHandler extends MoveActionHandler
+{
+    @Override
+    
+    protected void refreshEnablement( final String text, final Range selection )
+    {
+        setEnabled( selection.start() &lt; text.length() );
+    }
+
+    @Override
+    
+    protected void run( final String text, final TextSelectionService textSelectionService )
+    {
+        final TextSelectionService.Range selection = textSelectionService.selection();
+        
+        if( selection.start() &lt; text.length() )
+        {
+            textSelectionService.select( selection.start() + 1, min( selection.end() + 1, text.length() ) );
+        }
+    }
+}</code></pre>
+
+<p>In the second example, an action handler inserts a variable that user chooses at the 
+text selection point.</p>
+
+<pre class="source-code"><code>public abstract class InsertVariableActionHandler extends SapphireActionHandler
+{
+    @Override
+    
+    protected final Object run( final Presentation context )
+    {
+        final String variable = choose();
+        
+        if( variable != null )
+        {
+            final PropertyEditorPart part = (PropertyEditorPart) context.part();
+            final Value&lt;?> property = (Value&lt;?>) part.property();
+            final TextSelectionService textSelectionService = part.service( TextSelectionService.class );
+            final TextSelectionService.Range initialSelection = textSelectionService.selection();
+            final String initialText = property.text();
+            
+            final StringBuilder modifiedText = new StringBuilder();
+            
+            if( initialText != null )
+            {
+                modifiedText.append( initialText.substring( 0, initialSelection.start() ) );
+            }
+            
+            modifiedText.append( "${" );
+            modifiedText.append( variable );
+            modifiedText.append( '}' );
+            
+            if( initialText != null )
+            {
+                modifiedText.append( initialText.substring( initialSelection.end() ) );
+            }
+            
+            property.write( modifiedText.toString() );
+            
+            textSelectionService.select( initialSelection.start() + variable.length() + 3 );
+        }
+        
+        return null;
+    }
+    
+    protected abstract String choose();
+}</code></pre>
+
+<div class="copyright">Copyright (c) 2015 Oracle and Liferay<br/>
+Content made available under the terms of <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</div>
+
+</body>
+
+</html>

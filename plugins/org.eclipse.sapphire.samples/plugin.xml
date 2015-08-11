@@ -518,4 +518,26 @@
     </menuContribution>
   </extension>
   
+  <!-- 
+    *******************************
+    * TextSelectionService Sample *
+    *******************************
+  -->
+  
+  <extension point="org.eclipse.ui.commands">
+    <command
+      id="org.eclipse.sapphire.samples.textSelectionService.TextSelectionServiceSample"
+      name="TextSelectionService"
+      defaultHandler="org.eclipse.sapphire.samples.textSelectionService.TextSelectionServiceSample$OpenSampleHandler"/>
+  </extension>
+  
+  <extension point="org.eclipse.ui.menus">
+    <menuContribution locationURI="menu:org.eclipse.sapphire.samples">
+      <command
+        commandId="org.eclipse.sapphire.samples.textSelectionService.TextSelectionServiceSample"
+        label="TextSelectionService"
+        style="push"/>
+    </menuContribution>
+  </extension>
+
 </plugin>
