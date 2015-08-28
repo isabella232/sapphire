@@ -75,8 +75,8 @@
     <topic href="html/releases/9/index.html" label="9">
        <topic href="html/releases/9/enhancements.html" label="Enhancements">
        </topic>
-       <!-- <topic href="html/releases/9/migration.html" label="Migration Guide">
-       </topic> -->
+       <topic href="html/releases/9/migration.html" label="Migration Guide">
+       </topic>
     </topic>
     <topic href="html/releases/8.1/index.html" label="8.1">
        <topic href="html/releases/8.1/enhancements.html" label="Enhancements">
