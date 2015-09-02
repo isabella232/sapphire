@@ -234,7 +234,7 @@
             <replacefilter token="##version##" value="${sapphire.version}"/>
           </replace>
 
-          <p2.publish.UpdateSite location="${build.dir}/repository"/>
+          <p2.publish.UpdateSite location="${build.dir}/repository" name="Sapphire ${sapphire.version.no.qualifier}"/>
 
           <delete file="${build.dir}/repository/site.xml"/>
 
