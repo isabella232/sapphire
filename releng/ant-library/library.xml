@@ -306,10 +306,13 @@
 
   <macrodef name="p2.publish.FeaturesAndBundles">
     <attribute name="location"/>
+    <attribute name="name" default="repository"/>
     <sequential>
       <eclipse location="${bootstrap.platform}" application="org.eclipse.equinox.p2.publisher.FeaturesAndBundlesPublisher">
         <arg line="-metadataRepository file:@{location}"/>
         <arg line="-artifactRepository file:@{location}"/>
+        <arg line="-metadataRepositoryName &quot;@{name}&quot;"/>
+        <arg line="-artifactRepositoryName &quot;@{name}&quot;"/>
         <arg line="-source @{location}"/>
         <arg line="-compress"/>
         <arg line="-publishArtifacts"/>
@@ -321,10 +324,13 @@
 
   <macrodef name="p2.publish.UpdateSite">
     <attribute name="location"/>
+    <attribute name="name" default="repository"/>
     <sequential>
       <eclipse location="${bootstrap.platform}" application="org.eclipse.equinox.p2.publisher.UpdateSitePublisher">
         <arg line="-metadataRepository file:@{location}"/>
         <arg line="-artifactRepository file:@{location}"/>
+        <arg line="-metadataRepositoryName &quot;@{name}&quot;"/>
+        <arg line="-artifactRepositoryName &quot;@{name}&quot;"/>
         <arg line="-source @{location}"/>
         <arg line="-compress"/>
         <arg line="-publishArtifacts"/>
