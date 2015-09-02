@@ -314,6 +314,7 @@
         <arg line="-source @{location}"/>
         <arg line="-compress"/>
         <arg line="-publishArtifacts"/>
+        <arg line="-reusePack200Files"/>
       </eclipse>
     </sequential>
   </macrodef>
@@ -328,6 +329,7 @@
         <arg line="-source @{location}"/>
         <arg line="-compress"/>
         <arg line="-publishArtifacts"/>
+        <arg line="-reusePack200Files"/>
       </eclipse>
     </sequential>
   </macrodef>

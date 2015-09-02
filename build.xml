@@ -173,6 +173,24 @@
 
           <!-- Stage 6 -->
             
+          <echo message="Mirroring ASM..."/>
+
+          <with-target-platform configuration="${configuration.recommended}">
+            <copy todir="${build.dir}/repository/plugins">
+              <fileset dir="${.target.platform}/plugins">
+                <include name="org.objectweb.asm_5.*.jar"/>
+              </fileset>
+            </copy>
+          </with-target-platform>
+		  
+		  <!-- Stage 7 -->
+		  
+          <echo message="Conditioning repository archives..."/>
+		  
+          <condition-jars folder="${build.dir}/repository"/>
+
+          <!-- Stage 8 -->
+            
           <property-from-set property=".sapphire.feature">
             <fileset dir="${build.dir}/repository/features" includes="org.eclipse.sapphire.modeling_*.jar"/>
           </property-from-set>
@@ -200,19 +218,13 @@
             </then>
           </if>
             
-          <!-- Stage 7 -->
-            
-          <echo message="Mirroring ASM..."/>
+		  <!-- Stage 9 -->
+		  
+          <echo message="Packing repository archives..."/>
+		  
+          <pack-jars folder="${build.dir}/repository"/>
 
-          <with-target-platform configuration="${configuration.recommended}">
-            <copy todir="${build.dir}/repository/plugins">
-              <fileset dir="${.target.platform}/plugins">
-                <include name="org.objectweb.asm_5.*.jar"/>
-              </fileset>
-            </copy>
-          </with-target-platform>
-
-          <!-- Stage 8 -->
+          <!-- Stage 10 -->
 
           <echo message="Packaging the repository..."/>
 
@@ -1556,6 +1568,59 @@
       </if>
     </sequential>
   </macrodef>
+
+
+  <macrodef name="condition-jars">
+    <attribute name="folder"/>
+    <sequential>
+      <for param="jar">
+        <path>
+          <fileset dir="@{folder}" includes="**/*.jar"/>
+        </path>
+        <sequential>
+          <basename property=".filename" file="@{jar}"/>
+          <echo message="Conditioning ${.filename}"/>
+          <exec executable="pack200">
+            <arg value="-r"/>
+            <arg value="@{jar}"/>
+          </exec>
+          <var name=".filename" unset="true"/>
+        </sequential>
+      </for>
+    </sequential>
+  </macrodef>
+
+  <target name="condition-jars" depends="init">
+    <fail unless="folder" message="The &quot;folder&quot; property must be specified."/>
+    <condition-jars folder="${folder}"/>
+  </target>
+
+
+  <macrodef name="pack-jars">
+    <attribute name="folder"/>
+    <sequential>
+      <for param="jar">
+        <path>
+          <fileset dir="@{folder}" includes="**/*.jar"/>
+        </path>
+        <sequential>
+          <basename property=".filename" file="@{jar}"/>
+          <echo message="Packing ${.filename}"/>
+          <exec executable="pack200">
+            <arg value="-E9"/>
+            <arg value="@{jar}.pack.gz"/>
+            <arg value="@{jar}"/>
+          </exec>
+          <var name=".filename" unset="true"/>
+        </sequential>
+      </for>
+    </sequential>
+  </macrodef>
+
+  <target name="pack-jars" depends="init">
+    <fail unless="folder" message="The &quot;folder&quot; property must be specified."/>
+    <pack-jars folder="${folder}"/>
+  </target>
 
 
 </project>
