@@ -48,6 +48,7 @@
 
 <ol>
   <li><a href="#SapphireDialog">SapphireDialog</a></li>
+  <li><a href="#SapphirePreferencePage">SapphirePreferencePage</a></li>
   <li><a href="#TextSelectionService">TextSelectionService</a></li>
 </ol>
 
@@ -119,7 +120,7 @@ a personalized message to the console.</p>
 {
     ElementType TYPE = new ElementType( ExampleOp.class );
     
-    // *** Name ***
+    <span class="comment">// *** Name ***</span>
     
     @Required
     
@@ -128,7 +129,7 @@ a personalized message to the console.</p>
     Value&lt;String> getName();
     void setName( String value );
     
-    // *** execute ***
+    <span class="comment">// *** execute ***</span>
     
     @DelegateImplementation( ExampleExecuteMethodDelegate.class )
         
@@ -154,6 +155,36 @@ a personalized message to the console.</p>
 &lt;/definition></code></pre>
 
 <pre class="source-code"><code>new SapphireDialog( shell, ExampleOp.TYPE, DefinitionLoader.sdef( ExampleOp.class ).dialog() ).open();</code></pre>
+
+
+<h2><a name="SapphirePreferencePage">SapphirePreferencePage</a></h2>
+
+<p>Creating a preference page using Sapphire is now simpler with the new SapphirePreferencePage class. This class complements 
+SapphirePropertyPage, which exists in previous releases.</p>
+
+<pre class="source-code"><code>public final class ExamplePreferencePage extends SapphirePreferencePage
+{
+    private ExamplePreferences preferences;
+
+    public ExamplePreferences()
+    {
+        <span class="comment">// Instantiate the model that is able to read and write preferences on disk</span>
+        
+        this.preferences = ...;
+        
+        <span class="comment">// Initialize the page with the model and the UI definition</span>
+        
+        init( this.preferences, DefinitionLoader.sdef( ExamplePreferencePage.class ).form() );
+    }
+    
+    @Override
+    
+    public void dispose()
+    {
+        this.preferences.dispose();
+        super.dispose();
+    }
+}</code></pre>
 
 
 <h2><a name="TextSelectionService">TextSelectionService</a></h2>
