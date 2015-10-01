@@ -11,196 +11,60 @@
 
 package org.eclipse.sapphire.ui.forms.swt;
 
-import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.sapphire.Element;
 import org.eclipse.sapphire.ElementType;
-import org.eclipse.sapphire.FilteredListener;
-import org.eclipse.sapphire.LocalizableText;
-import org.eclipse.sapphire.Text;
-import org.eclipse.sapphire.modeling.ResourceStoreException;
-import org.eclipse.sapphire.modeling.Status;
-import org.eclipse.sapphire.ui.PartValidationEvent;
 import org.eclipse.sapphire.ui.def.DefinitionLoader;
 import org.eclipse.sapphire.ui.forms.FormComponentDef;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
-import org.eclipse.ui.dialogs.PropertyPage;
+import org.eclipse.ui.IWorkbenchPropertyPage;
 
 /**
+ * A property page implementation that uses Sapphire to display and edit content.
+ * 
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
 
-public class SapphirePropertyPage extends PropertyPage
+public class SapphirePropertyPage extends SapphirePreferencePage implements IWorkbenchPropertyPage
 {
-    @Text( "Error" )
-    private static LocalizableText errorDialogTitle;
-    
-    static
+    public SapphirePropertyPage( final ElementType type, final DefinitionLoader.Reference<FormComponentDef> definition )
     {
-        LocalizableText.init( SapphirePropertyPage.class );
-    }
-    
-    private Element element;
-    private boolean elementInstantiatedLocally;
-    private DefinitionLoader.Reference<FormComponentDef> definition;
-    
-    public SapphirePropertyPage( final ElementType type,
-                                 final DefinitionLoader.Reference<FormComponentDef> definition )
-    {
-        init( type, definition );
+        super( type, definition );
     }
 
-    public SapphirePropertyPage( final Element element,
-                                 final DefinitionLoader.Reference<FormComponentDef> definition )
+    public SapphirePropertyPage( final Element element, final DefinitionLoader.Reference<FormComponentDef> definition )
     {
-        init( element, definition );
+        super( element, definition );
     }
 
     protected SapphirePropertyPage()
     {
+        super();
     }
     
-    protected void init( final ElementType type,
-                         final DefinitionLoader.Reference<FormComponentDef> definition )
-    {
-        if( type == null )
-        {
-            throw new IllegalArgumentException();
-        }
-        
-        if( definition == null )
-        {
-            throw new IllegalArgumentException();
-        }
-        
-        this.elementInstantiatedLocally = true;
-        
-        init( type.instantiate(), definition );
-    }
+    private IAdaptable object;
+
+    /**
+     * Returns the object that owns the properties shown on this page.
+     */
     
-    protected void init( final Element element,
-                         final DefinitionLoader.Reference<FormComponentDef> definition )
-    {
-        if( element == null )
-        {
-            throw new IllegalArgumentException();
-        }
-        
-        if( definition == null )
-        {
-            throw new IllegalArgumentException();
-        }
-        
-        this.element = element;
-        this.definition = definition;
-    }
+    @Override
     
-    public final Element element()
+    public IAdaptable getElement()
     {
-        return this.element;
-    }
-    
-    public final FormComponentDef definition()
-    {
-        return this.definition.resolve();
+        return object;
     }
 
-    @Override
-    public void createControl( final Composite parent )
-    {
-        super.createControl( parent );
-        getDefaultsButton().setVisible( false );
-        parent.layout( true, true );
-    }
-
-    protected Control createContents( final Composite parent ) 
-    {
-        final SapphireForm form = new SapphireForm( parent, this.element, this.definition );
-        
-        final Runnable messageUpdateOperation = new Runnable()
-        {
-            public void run()
-            {
-                final Status st = form.part().validation();
-                
-                if( st.severity() == Status.Severity.ERROR )
-                {
-                    setMessage( st.message(), ERROR );
-                    setValid( false );
-                }
-                else if( st.severity() == Status.Severity.WARNING )
-                {
-                    setMessage( st.message(), WARNING );
-                    setValid( true );
-                }
-                else
-                {
-                    setMessage( null );
-                    setValid( true );
-                }
-            }
-        };
-        
-        messageUpdateOperation.run();
-        
-        form.part().attach
-        (
-            new FilteredListener<PartValidationEvent>()
-            {
-                @Override
-                protected void handleTypedEvent( PartValidationEvent event )
-                {
-                    messageUpdateOperation.run();
-                }
-            }
-        );
-        
-        return form;
-    }
+    /**
+     * Sets the object that owns the properties shown on this page.
+     *
+     * @param element the element
+     */
     
     @Override
-    public boolean performOk() 
-    {
-        try
-        {
-            this.element.resource().save();
-            
-            return true;
-        }
-        catch( ResourceStoreException e )
-        {
-            MessageDialog.openError( getShell(), errorDialogTitle.text(), e.getMessage() );
-            
-            return false;
-        }
-    }
     
-    @Override
-    protected void performApply() 
+    public void setElement( final IAdaptable element )
     {
-        performOk();
-    }
-    
-    @Override
-    public void dispose()
-    {
-        super.dispose();
-        
-        if( this.element != null )
-        {
-            if( this.elementInstantiatedLocally )
-            {
-                this.element.dispose();
-            }
-
-            this.element = null;
-        }
-        
-        if( this.definition != null )
-        {
-            this.definition.dispose();
-            this.definition = null;
-        }
+        this.object = element;
     }
     
 }
