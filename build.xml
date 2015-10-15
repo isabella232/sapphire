@@ -182,21 +182,18 @@
 		  
 		  <!-- Stage 7 -->
 		  
-          <echo message="Conditioning repository archives..."/>
-		  
-          <condition-jars folder="${build.dir}/repository"/>
+          <for param="jar">
+            <path>
+              <fileset dir="${build.dir}/repository" includes="**/*.jar"/>
+            </path>
+            <sequential>
+              <condition jar="@{jar}"/>
+              <sign jar="@{jar}"/>
+              <pack jar="@{jar}"/>
+            </sequential>
+          </for>
 
           <!-- Stage 8 -->
-            
-          <sign-jars folder="${build.dir}/repository"/>
-            
-		  <!-- Stage 9 -->
-		  
-          <echo message="Packing repository archives..."/>
-		  
-          <pack-jars folder="${build.dir}/repository"/>
-
-          <!-- Stage 10 -->
 
           <echo message="Packaging the repository..."/>
 
@@ -1552,87 +1549,56 @@
   </macrodef>
 
 
-  <macrodef name="condition-jars">
-    <attribute name="folder"/>
+  <macrodef name="condition">
+    <attribute name="jar"/>
     <sequential>
-      <for param="jar">
-        <path>
-          <fileset dir="@{folder}" includes="**/*.jar"/>
-        </path>
-        <sequential>
-          <basename property=".filename" file="@{jar}"/>
-          <echo message="Conditioning ${.filename}"/>
-          <exec executable="pack200">
-            <arg value="-r"/>
-            <arg value="@{jar}"/>
-          </exec>
-          <var name=".filename" unset="true"/>
-        </sequential>
-      </for>
+      <basename property=".filename" file="@{jar}"/>
+      <echo message="Conditioning ${.filename}"/>
+      <exec executable="pack200">
+        <arg value="-r"/>
+        <arg value="@{jar}"/>
+      </exec>
+      <var name=".filename" unset="true"/>
     </sequential>
   </macrodef>
 
-  <target name="condition-jars" depends="init">
-    <fail unless="folder" message="The &quot;folder&quot; property must be specified."/>
-    <condition-jars folder="${folder}"/>
-  </target>
 
-
-  <macrodef name="pack-jars">
-    <attribute name="folder"/>
+  <macrodef name="pack">
+    <attribute name="jar"/>
     <sequential>
-      <for param="jar">
-        <path>
-          <fileset dir="@{folder}" includes="**/*.jar"/>
-        </path>
-        <sequential>
-          <basename property=".filename" file="@{jar}"/>
-          <echo message="Packing ${.filename}"/>
-          <exec executable="pack200">
-            <arg value="-E9"/>
-            <arg value="@{jar}.pack.gz"/>
-            <arg value="@{jar}"/>
-          </exec>
-          <var name=".filename" unset="true"/>
-        </sequential>
-      </for>
+      <basename property=".filename" file="@{jar}"/>
+      <echo message="Packing ${.filename}"/>
+      <exec executable="pack200">
+        <arg value="-E9"/>
+        <arg value="@{jar}.pack.gz"/>
+        <arg value="@{jar}"/>
+      </exec>
+      <var name=".filename" unset="true"/>
     </sequential>
   </macrodef>
 
-  <target name="pack-jars" depends="init">
-    <fail unless="folder" message="The &quot;folder&quot; property must be specified."/>
-    <pack-jars folder="${folder}"/>
-  </target>
 
-
-  <macrodef name="sign-jars">
-    <attribute name="folder"/>
+  <macrodef name="sign">
+    <attribute name="jar"/>
     <sequential>
       <if>
         <istrue value="${sign}"/>
         <then>
-          <for param="jar">
-            <path>
-              <fileset dir="@{folder}" includes="**/*.jar"/>
-            </path>
-            <sequential>
-              <basename property=".filename" file="@{jar}"/>
-              <dirname property=".dirname" file="@{jar}"/>
-              <echo message="Signing ${.filename}"/>
-              <exec dir="${.dirname}" executable="curl">
-                <arg value="--output"/>
-                <arg value="${.filename}"/>
-                <arg value="--form"/>
-                <arg value="filedata=@${.filename}"/>
-                <arg value="--silent"/>
-                <arg value="--show-error"/>
-                <arg value="--fail"/>
-                <arg value="http://build.eclipse.org:31338/sign"/>
-              </exec>
-              <var name=".filename" unset="true"/>
-              <var name=".dirname" unset="true"/>
-            </sequential>
-          </for>
+          <basename property=".filename" file="@{jar}"/>
+          <dirname property=".dirname" file="@{jar}"/>
+          <echo message="Signing ${.filename}"/>
+          <exec dir="${.dirname}" executable="curl">
+            <arg value="--output"/>
+            <arg value="${.filename}"/>
+            <arg value="--form"/>
+            <arg value="filedata=@${.filename}"/>
+            <arg value="--silent"/>
+            <arg value="--show-error"/>
+            <arg value="--fail"/>
+            <arg value="http://build.eclipse.org:31338/sign"/>
+          </exec>
+          <var name=".filename" unset="true"/>
+          <var name=".dirname" unset="true"/>
         </then>
       </if>
     </sequential>
