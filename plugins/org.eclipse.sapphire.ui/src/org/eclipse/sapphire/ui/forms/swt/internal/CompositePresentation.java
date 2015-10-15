@@ -215,6 +215,7 @@ public class CompositePresentation extends FormComponentPresentation
     }
 
     @Override
+    
     public void refresh()
     {
         final Control previousFocusControl = Display.getCurrent().getFocusControl();
@@ -238,6 +239,11 @@ public class CompositePresentation extends FormComponentPresentation
             needToLayout = true;
         }
         
+    	if( disposed() )
+    	{
+    		return;
+    	}
+    	
         for( final Control control : this.innerComposite.getChildren() )
         {
             control.dispose();
