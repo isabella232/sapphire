@@ -14,7 +14,7 @@
 <feature
       id="org.eclipse.sapphire.ui.swt.xml.editor"
       label="%featureName"
-      version="9.0.1.qualifier"
+      version="9.0.2.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -30,11 +30,11 @@
    </license>
 
    <requires>
-      <import feature="org.eclipse.sapphire" version="9.0.1" match="compatible"/>
-      <import feature="org.eclipse.sapphire.modeling.xml" version="9.0.1" match="compatible"/>
-      <import feature="org.eclipse.sapphire.ui" version="9.0.1" match="compatible"/>
-      <import feature="org.eclipse.sapphire.osgi" version="9.0.1" match="compatible"/>
-      <import feature="org.eclipse.sapphire.platform" version="9.0.1" match="compatible"/>
+      <import feature="org.eclipse.sapphire" version="9.0.2" match="compatible"/>
+      <import feature="org.eclipse.sapphire.modeling.xml" version="9.0.2" match="compatible"/>
+      <import feature="org.eclipse.sapphire.ui" version="9.0.2" match="compatible"/>
+      <import feature="org.eclipse.sapphire.osgi" version="9.0.2" match="compatible"/>
+      <import feature="org.eclipse.sapphire.platform" version="9.0.2" match="compatible"/>
    </requires>
 
    <plugin

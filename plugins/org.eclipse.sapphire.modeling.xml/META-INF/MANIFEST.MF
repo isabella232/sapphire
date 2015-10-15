@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.sapphire.modeling.xml
-Bundle-Version: 9.0.1.qualifier
+Bundle-Version: 9.0.2.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Localization: bundle
 Export-Package: org.eclipse.sapphire.modeling.xml,
