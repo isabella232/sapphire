@@ -90,7 +90,7 @@ The following instructions are for Ant-based builds:
       <copy file="@{File}" tofile="${.Sign.Work.Folder}/${.Sign.FileName}"/>
       
       <exec dir="${.Sign.Work.Folder}" executable="/bin/bash" output="signing.txt">
-        <arg line="/usr/bin/sign ${.Sign.Work.Folder}/${.Sign.FileName} nomail ${.Sign.Work.Folder}/output"/>
+        <arg line="/usr/bin/sign ${.Sign.Work.Folder}/${.Sign.FileName} nomail ${.Sign.Work.Folder}/output skiprepack"/>
       </exec>
       
       <waitfor maxwait="60" maxwaitunit="minute" checkevery="1" checkeveryunit="second">
