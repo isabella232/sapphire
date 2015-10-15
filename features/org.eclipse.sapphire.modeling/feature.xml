@@ -14,7 +14,7 @@
 <feature
       id="org.eclipse.sapphire.modeling"
       label="%featureName"
-      version="8.2.1.qualifier"
+      version="8.2.2.qualifier"
       provider-name="%providerName">
 
    <description>
