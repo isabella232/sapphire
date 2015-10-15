@@ -24,9 +24,6 @@
   
   <import file="releng/ant-library/library.xml"/>
   <import file="releng/tools/build.xml"/>
-	
-  <property name="Signing.Library" value="sign-local.xml"/>
-  <import file="${Signing.Library}"/>
   
   <echo message="Java Version: ${java.version}"/>
   
@@ -191,32 +188,7 @@
 
           <!-- Stage 8 -->
             
-          <property-from-set property=".sapphire.feature">
-            <fileset dir="${build.dir}/repository/features" includes="org.eclipse.sapphire.modeling_*.jar"/>
-          </property-from-set>
-
-          <var name="sapphire.version" unset="true"/>
-          <propertyregex property="sapphire.version" input="${.sapphire.feature}" regexp=".*_([0-9]*.[0-9]*.[0-9]*.[0-9]*).jar" select="\1"/>
-            
-          <var name="sapphire.version.no.qualifier" unset="true"/>
-          <propertyregex property="sapphire.version.no.qualifier" input="${sapphire.version}" regexp="([0-9]*.[0-9]*.[0-9]*).[0-9]*" select="\1"/>
-
-          <if>
-            <istrue value="${sign}"/>
-            <then>
-               
-              <echo message="Signing features and plugins..."/>
-                
-              <zip destfile="${build.dir}/repository.zip" basedir="${build.dir}/repository"/>
-              <delete dir="${build.dir}/repository"/>
-            
-              <Sign Project="sapphire" Job="${sapphire.version.no.qualifier}" File="${build.dir}/repository.zip" Output="${build.dir}/repository.zip"/>
-            
-              <unzip src="${build.dir}/repository.zip" dest="${build.dir}/repository"/>
-              <delete file="${build.dir}/repository.zip"/>
-                
-            </then>
-          </if>
+          <sign-jars folder="${build.dir}/repository"/>
             
 		  <!-- Stage 9 -->
 		  
@@ -227,6 +199,16 @@
           <!-- Stage 10 -->
 
           <echo message="Packaging the repository..."/>
+
+          <property-from-set property=".sapphire.feature">
+            <fileset dir="${build.dir}/repository/features" includes="org.eclipse.sapphire.modeling_*.jar"/>
+          </property-from-set>
+
+          <var name="sapphire.version" unset="true"/>
+          <propertyregex property="sapphire.version" input="${.sapphire.feature}" regexp=".*_([0-9]*.[0-9]*.[0-9]*.[0-9]*).jar" select="\1"/>
+            
+          <var name="sapphire.version.no.qualifier" unset="true"/>
+          <propertyregex property="sapphire.version.no.qualifier" input="${sapphire.version}" regexp="([0-9]*.[0-9]*.[0-9]*).[0-9]*" select="\1"/>
 
           <copy file="${releng.dir}/site.xml" tofile="${build.dir}/repository/site.xml"/>
 
@@ -1621,6 +1603,40 @@
     <fail unless="folder" message="The &quot;folder&quot; property must be specified."/>
     <pack-jars folder="${folder}"/>
   </target>
+
+
+  <macrodef name="sign-jars">
+    <attribute name="folder"/>
+    <sequential>
+      <if>
+        <istrue value="${sign}"/>
+        <then>
+          <for param="jar">
+            <path>
+              <fileset dir="@{folder}" includes="**/*.jar"/>
+            </path>
+            <sequential>
+              <basename property=".filename" file="@{jar}"/>
+              <dirname property=".dirname" file="@{jar}"/>
+              <echo message="Signing ${.filename}"/>
+              <exec dir="${.dirname}" executable="curl">
+                <arg value="--output"/>
+                <arg value="${.filename}"/>
+                <arg value="--form"/>
+                <arg value="filedata=@${.filename}"/>
+                <arg value="--silent"/>
+                <arg value="--show-error"/>
+                <arg value="--fail"/>
+                <arg value="http://build.eclipse.org:31338/sign"/>
+              </exec>
+              <var name=".filename" unset="true"/>
+              <var name=".dirname" unset="true"/>
+            </sequential>
+          </for>
+        </then>
+      </if>
+    </sequential>
+  </macrodef>
 
 
 </project>
