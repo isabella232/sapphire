@@ -7,6 +7,7 @@
  *
  * Contributors:
  *    Konstantin Komissarchik - initial implementation and ongoing maintenance
+ *    Danny Ju - [257456} DelayedTasksExecutor does not restart
  ******************************************************************************/
 
 package org.eclipse.sapphire.ui;
@@ -22,6 +23,7 @@ import org.eclipse.swt.widgets.Display;
 
 /**
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:danny.ju@oracle.com">Danny Ju</a>
  */
 
 public final class DelayedTasksExecutor
@@ -69,6 +71,7 @@ public final class DelayedTasksExecutor
                     
                     if( workerThread == null || ! workerThread.isAlive() )
                     {
+                        timeOfLastWork = System.currentTimeMillis();
                         workerThread = new WorkerThread();
                         workerThread.start();
                     }
