@@ -14,7 +14,7 @@
 <feature
       id="org.eclipse.sapphire.modeling.xml"
       label="%featureName"
-      version="8.2.3.qualifier"
+      version="8.2.4.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -30,7 +30,7 @@
    </license>
 
    <requires>
-      <import feature="org.eclipse.sapphire" version="8.2.3" match="compatible"/>
+      <import feature="org.eclipse.sapphire" version="8.2.4" match="compatible"/>
    </requires>
 
    <plugin
