@@ -18,7 +18,7 @@
     <property environment="env"/>
   
     <dirname property=".base.dir" file="${ant.file.sapphire-releng-antlib}"/>
-  	
+    
     <taskdef resource="net/sf/antcontrib/antlib.xml">
       <classpath>
         <pathelement location="${.base.dir}/../ant-contrib/ant-contrib-1.0b3.jar"/>
@@ -34,10 +34,10 @@
         <srcfiles dir="${.src.dir}" includes="**/*"/>
       </uptodate>
       <then>
-      	<echo message="Found an up-to-date version of Sapphire releng Ant library. Skipping build..."/>
+        <echo message="Found an up-to-date version of Sapphire releng Ant library. Skipping build..."/>
       </then>
       <else>
-      	<echo message="Building Sapphire releng Ant library..."/>
+        <echo message="Building Sapphire releng Ant library..."/>
         <delete dir="${.classes.dir}" quiet="true"/>
         <mkdir dir="${.classes.dir}"/>
         <javac debug="true" destdir="${.classes.dir}" source="1.8" target="1.8">
@@ -49,7 +49,7 @@
         </jar>
       </else>
     </if>
-  	
+    
     <taskdef resource="org/eclipse/sapphire/releng/ant/library.xml">
       <classpath>
         <pathelement location="${.antlib.jar}"/>
@@ -289,16 +289,81 @@
     <attribute name="resultproperty" default=""/>
     <element name="args" optional="true" implicit="true"/>
     <sequential>
+      <find-eclipse-plugins-folder eclipse="@{location}" property=".eclipse.plugins.folder"/>
+      <if>
+        <os family="mac"/>
+        <then>
+          <var name=".jvmargs" value="-Xmx1024m -XstartOnFirstThread"/>
+        </then>
+        <else>
+          <var name=".jvmargs" value="-Xmx1024m"/>
+        </else>
+      </if>
       <java classname="org.eclipse.core.launcher.Main" fork="true" failonerror="@{failonerror}" resultproperty="@{resultproperty}">
         <classpath>
-          <fileset dir="@{location}/plugins">
+          <fileset dir="${.eclipse.plugins.folder}">
             <include name="**/org.eclipse.equinox.launcher_*.jar"/>
           </fileset>
         </classpath>
-        <jvmarg value="-Xmx1024m"/>
+        <jvmarg line="${.jvmargs}"/>
         <arg line="-application @{application}"/>
         <args/>
       </java>
+      <var name=".eclipse.plugins.folder" unset="true"/>
+      <var name=".jvmargs" unset="true"/>
+    </sequential>
+  </macrodef>
+
+
+  <macrodef name="find-eclipse-home-folder">
+    <attribute name="eclipse"/>
+    <attribute name="property"/>
+    <sequential>
+      <if>
+        <available file="@{eclipse}/plugins" type="dir"/>
+        <then>
+          <var name="@{property}" value="@{eclipse}"/>
+        </then>
+        <else>
+          <if>
+            <available file="@{eclipse}/Eclipse.app/Contents/Eclipse/plugins" type="dir"/>
+            <then>
+              <var name="@{property}" value="@{eclipse}/Eclipse.app/Contents/Eclipse"/>
+            </then>
+            <else>
+              <fail message="Could not locate Eclipse home in @{install}"/>
+            </else>
+          </if>
+        </else>
+      </if>
+    </sequential>
+  </macrodef>
+
+
+  <macrodef name="find-eclipse-plugins-folder">
+    <attribute name="eclipse"/>
+    <attribute name="property"/>
+    <sequential>
+      <find-eclipse-home-folder eclipse="@{eclipse}" property=".eclipse.home.folder"/>
+      <var name="@{property}" value="${.eclipse.home.folder}/plugins"/>
+      <var name=".eclipse.home.folder" unset="true"/>
+    </sequential>
+  </macrodef>
+  
+
+  <macrodef name="find-eclipse-executable-folder">
+    <attribute name="eclipse"/>
+    <attribute name="property"/>
+    <sequential>
+      <if>
+        <available file="@{eclipse}/Eclipse.app/Contents/MacOS" type="dir"/>
+        <then>
+          <var name="@{property}" value="@{eclipse}/Eclipse.app/Contents/MacOS"/>
+        </then>
+        <else>
+          <var name="@{property}" value="@{eclipse}"/>
+        </else>
+      </if>
     </sequential>
   </macrodef>
 
@@ -344,15 +409,19 @@
     <attribute name="build.id"/>
     <attribute name="eclipse"/>
     <attribute name="feature"/>
-  	<attribute name="warnings" default="false"/>
+    <attribute name="warnings" default="false"/>
     <element name="java-args" optional="true" implicit="true"/>
     <sequential>
 
       <clean-pde-build root.dir="@{root.dir}"/>
+      
+      <find-eclipse-plugins-folder eclipse="@{eclipse}" property=".eclipse.plugins.folder"/>
 
       <property-from-set property=".pdeBuildDir">
-        <dirset dir="@{eclipse}/plugins" includes="org.eclipse.pde.build_*"/>
+        <dirset dir="${.eclipse.plugins.folder}" includes="org.eclipse.pde.build_*"/>
       </property-from-set>
+      
+      <var name=".eclipse.plugins.folder" unset="true"/>
 
       <delete dir="@{root.dir}/build/pde" quiet="true"/>
       <delete dir="@{root.dir}/build/compilelogs" quiet="true"/>
@@ -370,10 +439,10 @@
           overwrite="true"/>
 
       <if>
-      	<and>
-      	  <istrue value="@{warnings}"/>
+        <and>
+          <istrue value="@{warnings}"/>
           <istrue value="${warnings}"/>
-      	</and>
+        </and>
         <then>
           <property name="pde.build.compiler.arg" value=""/>
         </then>
@@ -382,6 +451,8 @@
         </else>
       </if>
 
+      <find-eclipse-home-folder eclipse="@{eclipse}" property=".target"/>
+      
       <eclipse location="@{eclipse}" application="org.eclipse.ant.core.antRunner">
         <arg line="-clean"/>
         <arg line="-data @{root.dir}/build/pde/workspace"/>
@@ -389,7 +460,7 @@
         <arg line="-buildfile ${.pdeBuildDir}/scripts/build.xml"/>
         <arg value="-DtopLevelElementId=@{feature}"/>
         <arg value="-DarchivePrefix=eclipse"/>
-        <arg value="-DbaseLocation=@{eclipse}"/>
+        <arg value="-DbaseLocation=${.target}"/>
         <arg value="-DbuildDirectory=@{root.dir}"/>
         <arg value="-Dbuilder=@{root.dir}/build/pde/builder"/>
         <arg value="-DcollectingFolder=collecting"/>
@@ -410,6 +481,7 @@
 
       <var name="pde.build.compiler.arg" unset="true"/>
       <var name=".pdeBuildDir" unset="true"/>
+      <var name=".target" unset="true"/>
 
       <delete dir="@{root.dir}/build/pde" quiet="true"/>
       <delete dir="@{root.dir}/build/compilelogs" quiet="true"/>
