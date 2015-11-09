@@ -50,6 +50,8 @@
         <install-eclipse dest="${bootstrap.platform}"/>
       </then>
     </if>
+    
+    <find-eclipse-plugins-folder eclipse="${bootstrap.platform}" property="bootstrap.platform.plugins"/>
 
   </target>
 
@@ -128,7 +130,7 @@
           <with-target-platform configuration="${configuration.min}">
             <create-inventory dest="${build.dir}/repository/temp/min-platform-inventory.txt">
               <plugins>
-                <pathelement location="${.target.platform}/plugins"/>
+                <pathelement location="${.target.platform.plugins}"/>
               </plugins>
             </create-inventory>
           </with-target-platform>
@@ -136,7 +138,7 @@
           <with-target-platform configuration="${configuration.max}">
             <create-inventory dest="${build.dir}/repository/temp/max-platform-inventory.txt">
               <plugins>
-                <pathelement location="${.target.platform}/plugins"/>
+                <pathelement location="${.target.platform.plugins}"/>
               </plugins>
             </create-inventory>
           </with-target-platform>
@@ -174,14 +176,14 @@
 
           <with-target-platform configuration="${configuration.recommended}">
             <copy todir="${build.dir}/repository/plugins">
-              <fileset dir="${.target.platform}/plugins">
+              <fileset dir="${.target.platform.plugins}">
                 <include name="org.objectweb.asm_5.*.jar"/>
               </fileset>
             </copy>
           </with-target-platform>
-		  
-		  <!-- Stage 7 -->
-		  
+          
+          <!-- Stage 7 -->
+          
           <for param="jar">
             <path>
               <fileset dir="${build.dir}/repository" includes="**/*.jar"/>
@@ -218,7 +220,7 @@
           <delete file="${build.dir}/repository/site.xml"/>
 
           <load-build-repository url="file:${build.dir}/repository"/>
-        	
+          
           <gen-repository-landing repository="${build.dir}/repository" name="Sapphire ${sapphire.version}"/>
 
           <property name="build.repository.completed" value="true"/>
@@ -500,15 +502,21 @@
     
       <echo message="Starting Eclipse help server on port @{port}..."/>
       
-      <java classname="org.eclipse.help.standalone.Help" fork="true" dir="@{eclipse}">
+      <find-eclipse-executable-folder eclipse="@{eclipse}" property=".eclipse.executable.folder"/>
+      <find-eclipse-plugins-folder eclipse="@{eclipse}" property=".eclipse.plugins.folder"/>
+      
+      <java classname="org.eclipse.help.standalone.Help" fork="true" dir="${.eclipse.executable.folder}">
         <arg value="-command"/>
         <arg value="start"/>
         <arg value="-port"/>
         <arg value="@{port}"/>
         <classpath>
-          <fileset dir="@{eclipse}/plugins" includes="org.eclipse.help.base_*.jar"/>
+          <fileset dir="${.eclipse.plugins.folder}" includes="org.eclipse.help.base_*.jar"/>
         </classpath>
       </java>
+
+      <var name=".eclipse.executable.folder" unset="true"/>
+      <var name=".eclipse.plugins.folder" unset="true"/>
 
     </sequential>
   </macrodef>
@@ -520,13 +528,19 @@
     
       <echo message="Stopping Eclipse help server..."/>
       
-      <java classname="org.eclipse.help.standalone.Help" fork="true" dir="@{eclipse}">
+      <find-eclipse-executable-folder eclipse="@{eclipse}" property=".eclipse.executable.folder"/>
+      <find-eclipse-plugins-folder eclipse="@{eclipse}" property=".eclipse.plugins.folder"/>
+      
+      <java classname="org.eclipse.help.standalone.Help" fork="true" dir="${.eclipse.executable.folder}">
         <arg value="-command"/>
         <arg value="shutdown"/>
         <classpath>
-          <fileset dir="@{eclipse}/plugins" includes="org.eclipse.help.base_*.jar"/>
+          <fileset dir="${.eclipse.plugins.folder}" includes="org.eclipse.help.base_*.jar"/>
         </classpath>
       </java>
+      
+      <var name=".eclipse.executable.folder" unset="true"/>
+      <var name=".eclipse.plugins.folder" unset="true"/>
 
     </sequential>
   </macrodef>
@@ -659,7 +673,7 @@
           <with-target-platform configuration="${configuration.recommended}">
             <pathconvert property=".aux.xml" pathsep="&lt;/AuxClasspathEntry&gt;&#xA;&lt;AuxClasspathEntry&gt;">
               <path>
-                <fileset dir="${.target.platform}/plugins">
+                <fileset dir="${.target.platform.plugins}">
                   <include name="**/*.jar"/>
                 </fileset>
               </path>
@@ -937,8 +951,10 @@
 
       <create-target-platform configuration="@{configuration}"/>
       <propertycopy property=".target.platform" from="target-@{configuration}" override="true"/>
+      <find-eclipse-plugins-folder eclipse="${.target.platform}" property=".target.platform.plugins"/>
       <body/>
       <var name=".target.platform" unset="true"/>
+      <var name=".target.platform.plugins" unset="true"/>
 
     </sequential>
   </macrodef>
@@ -1469,6 +1485,13 @@
       </if>
 
       <adjust-eclipse-ini install="@{dest}" platform="@{platform}"/>
+      
+      <if>
+        <available file="@{dest}/Eclipse.app"/>
+        <then>
+          <chmod file="@{dest}/Eclipse.app/Contents/MacOS/eclipse" perm="777"/>
+        </then>
+      </if>
 
     </sequential>
   </macrodef>
@@ -1479,6 +1502,7 @@
     <attribute name="configuration" default="${configuration.recommended}"/>
     <attribute name="extensions"/>
     <sequential>
+      <find-eclipse-home-folder eclipse="@{dest}" property=".dest"/>
       <with-configuration name="@{configuration}">
         <if>
           <isset property="build.repositories"/>
@@ -1486,15 +1510,16 @@
             <append property=".repositories" value="${build.repositories}"/>
           </then>
         </if>
+        <find-eclipse-plugins-folder eclipse="${bootstrap.platform}" property="bootstrap.platform.plugins"/>
         <java classname="org.eclipse.core.launcher.Main" fork="true" failonerror="true">
           <classpath>
-            <fileset dir="${bootstrap.platform}/plugins">
+            <fileset dir="${bootstrap.platform.plugins}">
               <include name="**/org.eclipse.equinox.launcher_*.jar"/>
             </fileset>
           </classpath>
           <arg line="-application org.eclipse.equinox.p2.director"/>
           <arg line="-repository ${.repositories}"/>
-          <arg line="-destination @{dest}"/>
+          <arg line="-destination ${.dest}"/>
           <arg line="-installIU @{extensions}"/>
           <arg line="-vmargs"/>
           <arg line="-Declipse.p2.data.area=@{dest}/p2"/>
@@ -1503,47 +1528,47 @@
       </with-configuration>
     </sequential>
   </macrodef>
-
-
+  
+  
   <macrodef name="adjust-eclipse-ini">
     <attribute name="install"/>
     <attribute name="platform"/>
     <sequential>
-      <var name=".eclipse.ini" value="@{install}/eclipse.ini"/>
+      <find-eclipse-home-folder eclipse="@{install}" property=".eclipse.home.folder"/>
+      <var name=".eclipse.ini" value="${.eclipse.home.folder}/eclipse.ini"/>
+      <var name=".eclipse.home.folder" unset="true"/>
       <if>
         <not><available file="${.eclipse.ini}"/></not>
         <then>
-          <var name=".eclipse.ini" value="@{install}/Eclipse.app/Contents/MacOS/eclipse.ini"/>
+          <var name=".eclipse.ini" value="@{install}/eclipse.app/Contents/MacOS/eclipse.ini"/>   <!-- Mac OS X layout prior to Mars -->
         </then>
       </if>
       <if>
-        <available file="${.eclipse.ini}"/>
+        <not><available file="${.eclipse.ini}"/></not>
         <then>
-          <if>
-            <contains string="@{platform}" substring="win32"/>
-            <then>
-              <var name=".nl" value="&#13;&#10;"/>
-            </then>
-            <else>
-              <var name=".nl" value="&#10;"/>
-            </else>
-          </if>
-          <if>
-            <contains string="@{platform}" substring="x86_64"/>
-            <then>
-              <replaceregexp file="${.eclipse.ini}" match="([\n|\r]*)-Xmx[0-9]*m" replace="\1-Xmx1024m\1${.nl}-Djava.net.preferIPv4Stack=true"/>
-            </then>
-            <else>
-              <replaceregexp file="${.eclipse.ini}" match="([\n|\r]*)-Xmx[0-9]*m" replace="\1-Xmx512m\1${.nl}-Djava.net.preferIPv4Stack=true"/>
-            </else>
-          </if>
-          <var name=".eclipse.ini" unset="true"/>
-          <var name=".nl" unset="true"/>
+          <fail message="Could not locate eclipse.ini file in @{install}"/>
+        </then>
+      </if>
+      <if>
+        <contains string="@{platform}" substring="win32"/>
+        <then>
+          <var name=".nl" value="&#13;&#10;"/>
         </then>
         <else>
-          <fail message="Could not locate eclipse.ini file in @{install}"/>
+          <var name=".nl" value="&#10;"/>
         </else>
       </if>
+      <if>
+        <contains string="@{platform}" substring="x86_64"/>
+        <then>
+          <replaceregexp file="${.eclipse.ini}" match="([\n|\r]*)-Xmx[0-9]*m" replace="\1-Xmx1024m\1${.nl}-Djava.net.preferIPv4Stack=true"/>
+        </then>
+        <else>
+          <replaceregexp file="${.eclipse.ini}" match="([\n|\r]*)-Xmx[0-9]*m" replace="\1-Xmx512m\1${.nl}-Djava.net.preferIPv4Stack=true"/>
+        </else>
+      </if>
+      <var name=".eclipse.ini" unset="true"/>
+      <var name=".nl" unset="true"/>
     </sequential>
   </macrodef>
 
