@@ -153,6 +153,9 @@
           <include name="lib/*.jar"/>
           <include name="jre/lib/*.jar"/>
         </fileset>
+        <fileset dir="${.location}/..">   <!-- Accounts for Java 6 layout on Mac OS X -->
+          <include name="Classes/*.jar"/>
+        </fileset>
       </pathconvert>
 
       <property name="${.prefix}.compiler.path" value="${.compiler.path}"/>
@@ -417,14 +420,10 @@
 
       <clean-pde-build root.dir="@{root.dir}"/>
       
-      <find-eclipse-plugins-folder eclipse="@{eclipse}" property=".eclipse.plugins.folder"/>
-
       <property-from-set property=".pdeBuildDir">
-        <dirset dir="${.eclipse.plugins.folder}" includes="org.eclipse.pde.build_*"/>
+        <dirset dir="${bootstrap.platform.plugins}" includes="org.eclipse.pde.build_*"/>
       </property-from-set>
       
-      <var name=".eclipse.plugins.folder" unset="true"/>
-
       <delete dir="@{root.dir}/build/pde" quiet="true"/>
       <delete dir="@{root.dir}/build/compilelogs" quiet="true"/>
 
@@ -455,7 +454,7 @@
 
       <find-eclipse-home-folder eclipse="@{eclipse}" property=".target"/>
       
-      <eclipse location="@{eclipse}" application="org.eclipse.ant.core.antRunner">
+      <eclipse location="${bootstrap.platform}" application="org.eclipse.ant.core.antRunner">
         <arg line="-clean"/>
         <arg line="-data @{root.dir}/build/pde/workspace"/>
         <arg line="-configuration @{root.dir}/build/pde/configuration"/>
