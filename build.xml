@@ -47,7 +47,7 @@
     <if>
       <not><available file="${bootstrap.platform}"/></not>
       <then>
-        <install-eclipse dest="${bootstrap.platform}"/>
+        <install-eclipse dest="${bootstrap.platform}" extensions="${iu.jdt},${iu.pde}"/>
       </then>
     </if>
     
