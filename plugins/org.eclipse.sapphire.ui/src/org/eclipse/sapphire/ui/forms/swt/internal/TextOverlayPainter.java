@@ -11,6 +11,8 @@
 
 package org.eclipse.sapphire.ui.forms.swt.internal;
 
+import static org.eclipse.sapphire.ui.forms.swt.SwtUtil.runOnDisplayThread;
+
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.JFaceColors;
 import org.eclipse.sapphire.FilteredListener;
@@ -178,9 +180,19 @@ public final class TextOverlayPainter
         final FilteredListener<PropertyDefaultEvent> propertyListener = new FilteredListener<PropertyDefaultEvent>()
         {
             @Override
-            protected void handleTypedEvent( PropertyDefaultEvent event )
+            
+            protected void handleTypedEvent( final PropertyDefaultEvent event )
             {
-                TextOverlayPainter.this.textControl.redraw();
+                runOnDisplayThread
+                (
+                    new Runnable()
+                    {
+                        public void run()
+                        {
+                            TextOverlayPainter.this.textControl.redraw();
+                        }
+                    }
+                );
             }
         };
         
