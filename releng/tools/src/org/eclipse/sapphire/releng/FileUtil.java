@@ -63,12 +63,8 @@ public final class FileUtil
             
             if( file.length() == length )
             {
-                InputStream in = null;
-                
-                try
+                try( InputStream in = new FileInputStream( file ) )
                 {
-                    in = new FileInputStream( file );
-                    
                     byte[] buffer = new byte[ 4 * 1024 ];
                     int count = 0;
                     int position = 0;
@@ -85,39 +81,14 @@ public final class FileUtil
                         }
                     }
                 }
-                finally
-                {
-                    if( in != null )
-                    {
-                        try
-                        {
-                            in.close();
-                        }
-                        catch( final IOException e ) {}
-                    }
-                }
             }
         }
         
         if( write )
         {
-            OutputStream out = null;
-            
-            try
+            try( OutputStream out = new FileOutputStream( file ) )
             {
-                out = new FileOutputStream( file );
                 out.write( content );
-            }
-            finally
-            {
-                if( out != null )
-                {
-                    try
-                    {
-                        out.close();
-                    }
-                    catch( final IOException e ) {}
-                }
             }
         }
     }

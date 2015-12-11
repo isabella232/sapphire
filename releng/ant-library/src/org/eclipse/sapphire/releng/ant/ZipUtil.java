@@ -51,7 +51,7 @@ public final class ZipUtil
         }
     }
 
-    public static ZipEntry getZipEntry( final ZipFile zip,
+    public static ZipEntry getZipEntry( ZipFile zip,
                                         final String name )
     
         throws IOException

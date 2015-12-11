@@ -71,14 +71,9 @@ public final class BundleInventory
         this.bundles.add( bundle );
     }
     
-    public void write( final File f )
-    
-        throws IOException 
-        
+    public void write( final File f ) throws IOException 
     {
-        final BufferedWriter w = new BufferedWriter( new FileWriter( f ) );
-        
-        try
+        try( BufferedWriter w = new BufferedWriter( new FileWriter( f ) ) )
         {
             for( BundleInfo bundle : this.bundles )
             {
@@ -90,26 +85,13 @@ public final class BundleInventory
             
             w.flush();
         }
-        finally
-        {
-            try
-            {
-                w.close();
-            }
-            catch( IOException e ) {}
-        }
     }
     
-    public void read( final File f )
-    
-        throws IOException
-        
+    public void read( final File f ) throws IOException
     {
         this.bundles.clear();
         
-        final BufferedReader r = new BufferedReader( new FileReader( f ) );
-        
-        try
+        try( BufferedReader r = new BufferedReader( new FileReader( f ) ) )
         {
             for( String line = r.readLine(); line != null; line = r.readLine() )
             {
@@ -119,14 +101,6 @@ public final class BundleInventory
                 
                 this.bundles.add( new BundleInfo( id, version ) );
             }
-        }
-        finally
-        {
-            try
-            {
-                r.close();
-            }
-            catch( IOException e ) {}
         }
     }
 

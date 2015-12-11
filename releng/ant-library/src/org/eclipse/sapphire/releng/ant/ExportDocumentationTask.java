@@ -13,7 +13,6 @@ package org.eclipse.sapphire.releng.ant;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -83,9 +82,8 @@ public final class ExportDocumentationTask extends AbstractTask
         }
         
         final URLConnection connection = ( new URL( url ) ).openConnection();
-        final InputStream stream = connection.getInputStream();
         
-        try
+        try( InputStream stream = connection.getInputStream() )
         {
             if( connection.getContentType().equals( "text/html" ) )
             {
@@ -138,26 +136,14 @@ public final class ExportDocumentationTask extends AbstractTask
                     export( url( urlParent, ref ), base, destination, captured );
                 }
                 
-                final OutputStreamWriter fw = new OutputStreamWriter( new FileOutputStream( f ), "UTF-8" );
-                
-                try
+                try( OutputStreamWriter fw = new OutputStreamWriter( new FileOutputStream( f ), "UTF-8" ) )
                 {
                     fw.write( html );
-                }
-                finally
-                {
-                    try
-                    {
-                        fw.close();
-                    }
-                    catch( final IOException e ) {}
                 }
             }
             else
             {
-                final FileOutputStream fout = new FileOutputStream( f );
-                
-                try
+                try( FileOutputStream fout = new FileOutputStream( f ) )
                 {
                     byte[] buffer = new byte[ 1024 ];
                     
@@ -166,23 +152,7 @@ public final class ExportDocumentationTask extends AbstractTask
                         fout.write( buffer, 0, count );
                     }
                 }
-                finally
-                {
-                    try
-                    {
-                        fout.close();
-                    }
-                    catch( final IOException e ) {}
-                }
             }
-        }
-        finally
-        {
-            try
-            {
-                stream.close();
-            }
-            catch( final IOException e ) {}
         }
     }
     

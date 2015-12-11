@@ -45,12 +45,8 @@ public final class Resource
     
     public String text()
     {
-        Reader reader = null;
-        
-        try
+        try( Reader reader = new InputStreamReader( this.url.openStream(), "UTF-8" ) )
         {
-            reader = new InputStreamReader( this.url.openStream(), "UTF-8" );
-            
             final StringBuilder content = new StringBuilder();
             
             char[] buffer = new char[ 1024 ];
@@ -67,17 +63,6 @@ public final class Resource
         {
             throw new RuntimeException( e );
         }
-        finally
-        {
-            if( reader != null )
-            {
-                try
-                {
-                    reader.close();
-                }
-                catch( final IOException e ) {}
-            }
-        }
     }
     
     public void copy( final File folder )
@@ -87,27 +72,13 @@ public final class Resource
             throw new IllegalArgumentException();
         }
         
-        InputStream in = null;
-        
-        try
+        try( InputStream in = this.url.openStream() )
         {
-            in = this.url.openStream();
             FileUtil.write( new File( folder, this.name ), in );
         }
         catch( final IOException e )
         {
             throw new RuntimeException( e );
-        }
-        finally
-        {
-            if( in != null )
-            {
-                try
-                {
-                    in.close();
-                }
-                catch( final IOException e ) {}
-            }
         }
     }
     

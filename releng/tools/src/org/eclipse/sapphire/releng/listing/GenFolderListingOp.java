@@ -247,12 +247,12 @@ public final class GenFolderListingOp extends Operation
         private final boolean folder;
         private final Date dateModified;
         
-        public Entry( final String name, final Date dateModified, final long size )
+        public Entry( String name, final Date dateModified, final long size )
         {
             this( name, dateModified, size, false );
         }
         
-        public Entry( final String name, final Date dateModified, final long size, final boolean folder )
+        public Entry( String name, final Date dateModified, final long size, final boolean folder )
         {
             if( name == null )
             {
