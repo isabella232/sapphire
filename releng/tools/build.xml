@@ -38,7 +38,7 @@
                 <echo message="Building Sapphire releng tools..."/>
                 <delete dir="${.classes.dir}" quiet="true"/>
                 <mkdir dir="${.classes.dir}"/>
-                <javac debug="true" destdir="${.classes.dir}" classpath="${ant.home}/lib/ant.jar" includeAntRuntime="false" source="1.6" target="1.6">
+                <javac debug="true" destdir="${.classes.dir}" classpath="${ant.home}/lib/ant.jar" includeAntRuntime="false" source="1.8" target="1.8">
                     <src path="${.src.dir}"/>
                 </javac>
                 <jar destfile="${sapphire.releng.tools.jar}">

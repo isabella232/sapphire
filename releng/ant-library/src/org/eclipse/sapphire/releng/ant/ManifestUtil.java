@@ -18,7 +18,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -55,19 +54,9 @@ public final class ManifestUtil
     {
         if( location.isFile() )
         {
-            final ZipFile zip = ZipUtil.open( location );
-            
-            try
+            try( ZipFile zip = ZipUtil.open( location ) )
             {
                 return readManifest( zip );
-            }
-            finally
-            {
-                try
-                {
-                    zip.close();
-                }
-                catch( IOException e ) {}
             }
         }
         else
@@ -76,19 +65,9 @@ public final class ManifestUtil
             
             if( manifestFile.exists() )
             {
-                final InputStream in = new FileInputStream( manifestFile );
-                
-                try
+                try( InputStream in = new FileInputStream( manifestFile ) )
                 {
                     return readManifest( new BufferedInputStream( in ) );
-                }
-                finally
-                {
-                    try
-                    {
-                        in.close();
-                    }
-                    catch( IOException e ) {}
                 }
             }
             else
@@ -98,7 +77,7 @@ public final class ManifestUtil
         }
     }
     
-    public static String readManifestEntry( final File location,
+    public static String readManifestEntry( File location,
                                             final String key )
     
         throws IOException
@@ -123,19 +102,9 @@ public final class ManifestUtil
         
         if( zipentry != null )
         {
-            final InputStream in = zip.getInputStream( zipentry );
-            
-            try
+            try( InputStream in = zip.getInputStream( zipentry ) )
             {
                 return readManifest( in );
-            }
-            finally
-            {
-                try
-                {
-                    in.close();
-                }
-                catch( IOException e ) {}
             }
         }
         else
@@ -193,7 +162,7 @@ public final class ManifestUtil
         return manifestClasspath;
     }
 
-    public static void setManifestEntry( final File manifestFile,
+    public static void setManifestEntry( File manifestFile,
                                          final String entryKey,
                                          final String entryValue )
     
@@ -213,19 +182,9 @@ public final class ManifestUtil
         
         if( manifestFile.exists() )
         {
-            final InputStream in = new FileInputStream( manifestFile );
-            
-            try
+            try( InputStream in = new FileInputStream( manifestFile ) )
             {
                 manifest.read( new BufferedInputStream( in ) );
-            }
-            finally
-            {
-                try
-                {
-                    in.close();
-                }
-                catch( IOException e ) {}
             }
         }
         
@@ -236,21 +195,10 @@ public final class ManifestUtil
             mainAttributes.putValue( entry.getKey(), entry.getValue() );
         }
         
-        final OutputStream out = new FileOutputStream( manifestFile );
-        
-        try
+        try( BufferedOutputStream out = new BufferedOutputStream( new FileOutputStream( manifestFile ) ) )
         {
-            final BufferedOutputStream bout = new BufferedOutputStream( out );
-            manifest.write( bout );
-            bout.flush();
-        }
-        finally
-        {
-            try
-            {
-                out.close();
-            }
-            catch( IOException e ) {}
+            manifest.write( out );
+            out.flush();
         }
     }
     

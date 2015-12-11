@@ -11,11 +11,12 @@
 
 package org.eclipse.sapphire.releng.ant;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
 import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.types.Path;
 
 /**
  * @author <a href="konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
@@ -23,59 +24,71 @@ import org.apache.tools.ant.types.Path;
 
 public final class CreateInventoryTask extends AbstractTask
 {
-    private Path pluginSearchPath = null;
+    private static final String BUNDLES_INFO_PATH = "configuration/org.eclipse.equinox.simpleconfigurator/bundles.info";
+    
+    private File eclipse = null;
     private File destination = null;
+    
+    public void setEclipse( final File eclipse )
+    {
+        this.eclipse = eclipse;
+    }
     
     public void setDest( final File destination )
     {
         this.destination = destination;
     }
     
-    public Path createPlugins()
-    {
-        this.pluginSearchPath = new Path( getProject() );
-        return this.pluginSearchPath.createPath();
-    }
-    
     @Override
+    
     public void execute()
-
-        throws BuildException
-
     {
+        File root = this.eclipse;
+        File bundlesInfoFile = new File( root, BUNDLES_INFO_PATH );
+        
+        if( ! bundlesInfoFile.exists() )
+        {
+            root = new File( this.eclipse, "Eclipse.app/Contents/Eclipse" );
+            bundlesInfoFile = new File( root, BUNDLES_INFO_PATH );
+        }
+        
+        if( ! bundlesInfoFile.exists() )
+        {
+            throw new BuildException( "Could not find bundles.info in " + this.eclipse );
+        }
+        
         final BundleInventory inventory = new BundleInventory();
         
-        for( String path : this.pluginSearchPath.list() )
+        try
         {
-            final File dir = new File( path );
-            
-            if( ! dir.exists() )
+            try( BufferedReader bundlesInfoReader = new BufferedReader( new FileReader( bundlesInfoFile ) ) )
             {
-                fail( path + " does not exist!" );
-            }
-            
-            if( dir.exists() )
-            {
-                for( File location : dir.listFiles() )
+                for( String line = bundlesInfoReader.readLine(); line != null; line = bundlesInfoReader.readLine() )
                 {
-                    if( BundleInfo.isValidBundle( location ) )
+                    line = line.trim();
+                    
+                    if( line.length() != 0 && ! line.startsWith( "#" ) )
                     {
-                    	try{
-                    		inventory.addBundle( new BundleInfo( location ) );
-                    	}catch(Exception e){
-                    		if( "true".equals( System.getProperty("debug") ))
-                   				e.printStackTrace();
-                    	}
+                        final String[] segments = line.split( "," );
+                        
+                        if( segments.length == 5 )
+                        {
+                            inventory.addBundle( new BundleInfo( new File( root, segments[ 2 ] ) ) );
+                        }
                     }
                 }
             }
+        }
+        catch( final Exception e )
+        {
+            throw new BuildException( e );
         }
         
         try
         {
             inventory.write( this.destination );
         }
-        catch( IOException e )
+        catch( final IOException e )
         {
             throw new BuildException( e );
         }

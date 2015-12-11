@@ -24,7 +24,7 @@ public final class ManifestBundlesListEntry
     private String bundleId;
     private final List<String> attributes = new CopyOnWriteArrayList<String>();
     
-    public ManifestBundlesListEntry( final String bundleId,
+    public ManifestBundlesListEntry( String bundleId,
                                      final List<String> attributes )
     {
         this.bundleId = bundleId;
