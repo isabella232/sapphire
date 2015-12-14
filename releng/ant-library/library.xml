@@ -249,7 +249,7 @@
     <if>
       <not><available file="${builder}"/></not>
       <then>
-        <install-eclipse dest="${builder}" extensions="${iu.jdt},${iu.pde}"/>
+        <install-eclipse dest="${builder}" extensions="${iu.pde}"/>
       </then>
     </if>
 
