@@ -39,8 +39,8 @@ either lists the URL of the repository (for finished releases) or includes a lin
 
 The build is easy to run on a local machine.
 
- 1. Make sure that you have JDK 8 and Ant installed. Both should be on the path.
- 2. Set `JDK_8_HOME` environment variable to point to your JDK 8 install.
+ 1. Make sure that you have JDK 6, 7 and 8, as well as Ant installed. JDK 8 and Ant should be on the path.
+ 2. Set `JDK_6_HOME`, `JDK_7_HOME` and `JDK_8_HOME` environment variables to point to the corresponding JDK installs.
  3. Clone the Sapphire Git repository and pick the desired branch.
  4. Open a shell to the Git workspace and execute `ant dev-build`.
 
