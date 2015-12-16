@@ -1232,6 +1232,7 @@
           <include name="final*.*"/>
           <include name="package*.*"/>
           <include name="assemble*.*"/>
+          <include name="nestedJars/**"/>
         </fileset>
         <fileset dir="${root.dir}/plugins">
           <include name="**/javaCompiler.*.args"/>
