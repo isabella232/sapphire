@@ -13,414 +13,96 @@
 
 <project name="sapphire" default="full-build">
 
-
-  <!--
-    *************************************************************************************************
-    * Initialization                                                                                *
-    *************************************************************************************************
-  -->
-
-  <property environment="env"/>
-  
-  <import file="releng/ant-library/library.xml"/>
-  <import file="releng/tools/build.xml"/>
-  
-  <echo message="Java Version: ${java.version}"/>
-  
-
-  <target name="init" depends="init-library,build-sapphire-releng-tools,init-jdk">
-  </target>
-  
-  
-  <!--
-    *************************************************************************************************
-    * Repository Build                                                                              *
-    *************************************************************************************************
-  -->
-
-  <target name="build-repository" depends="install-builder">
-    <build-repository/>
-  </target>
-
-
-  <macrodef name="build-repository">
-    <sequential>
-
-      <if>
-        <not><isset property="build.repository.completed"/></not>
-        <then>
-          <if>
-            <available file="${build.dir}/repository"/>
-            <then>
-              <echo message="Found existing Sapphire repository..."/>
-              <var name="build.repository.completed" value="true"/>
-              <load-build-repository url="file:${build.dir}/repository"/>
-            </then>
-          </if>
-        </then>
-      </if>
-
-      <if>
-        <not><isset property="build.repository.completed"/></not>
-        <then>
-
-          <delete dir="${build.dir}/repository" quiet="true"/>
-          <mkdir dir="${build.dir}/repository"/>
-
-          <!-- Stage 1 -->
-
-          <echo message="Performing source code verification..."/>
-            
-          <VerifyCopyrightHeaders Source="${root.dir}"/>
-          <VerifyAuthorTags Source="${root.dir}"/>
-
-          <!-- Stage 2 -->
-
-          <with-target-platform configuration="${configuration.recommended}">
-            <pde-build target="${.target.platform}" feature="org.eclipse.sapphire.everything" build.id="${DSTAMP}" warnings="true"/>
-          </with-target-platform>
-
-          <unzip src="${build.dir}/org.eclipse.sapphire.everything-${DSTAMP}.zip" dest="${build.dir}/repository">
-            <mapper type="regexp" from="^eclipse/(.*)$$" to="\1"/>
-          </unzip>
-
-          <delete file="${build.dir}/org.eclipse.sapphire.everything-${DSTAMP}.zip"/>
-
-          <zip-dirs source.dir="${build.dir}/repository/features" suffix="jar"/>
-
-          <delete>
-            <fileset dir="${build.dir}/repository/features" includes="org.eclipse.sapphire.everything_*.jar"/>
-          </delete>
-
-          <!-- Stage 3 -->
-
-          <echo message="Setting Require-Bundle version constraints..."/>
-
-          <mkdir dir="${build.dir}/repository/temp"/>
-
-          <expand-all source.dir="${build.dir}/repository/plugins" dest.dir="${build.dir}/repository/temp" suffix="jar">
-            <delete file="@{archive.file}"/>
-          </expand-all>
-
-          <with-target-platform configuration="${configuration.min}">
-            <create-inventory eclipse="${.target.platform}" dest="${build.dir}/repository/temp/min-platform-inventory.txt"/>
-          </with-target-platform>
-
-          <with-target-platform configuration="${configuration.max}">
-            <create-inventory eclipse="${.target.platform}" dest="${build.dir}/repository/temp/max-platform-inventory.txt"/>
-          </with-target-platform>
-
-          <set-bundle-version-constraints
-            minPlatformInventory="${build.dir}/repository/temp/min-platform-inventory.txt"
-            targetPlatformInventory="${build.dir}/repository/temp/max-platform-inventory.txt"
-            pluginsDirectory="${build.dir}/repository/temp">
-            <exclude id=".*\.source"/>
-            <rule bundle="org.junit" expr="[M1.M2.M3,5.0.0)"/>
-            <rule bundle="org.objectweb.asm" expr="[4.0.0,6.0.0)"/>
-            <rule bundle="org.eclipse.sapphire*" expr="[M1.M2.M3,T1.T2.T3+1)"/>
-            <rule bundle="*" expr="[M1.M2.M3,T1+1.0.0)"/>
-          </set-bundle-version-constraints>
-
-          <!-- Stage 4 -->
-
-          <echo message="Setting versions of Export-Package entries..."/>
-
-          <set-export-package-version bundles="${build.dir}/repository/temp"/>
-            
-          <zip-dirs source.dir="${build.dir}/repository/temp" dest.dir="${build.dir}/repository/plugins" suffix="jar"/>
-
-          <delete dir="${build.dir}/repository/temp"/>
-            
-          <!-- Stage 5 -->
-            
-          <echo message="Performing repository verification..."/>
-            
-          <VerifyAboutHtml Repository="${build.dir}/repository"/>
-
-          <!-- Stage 6 -->
-            
-          <echo message="Mirroring ASM..."/>
-          
-          <with-target-platform configuration="${configuration.recommended}">
-            <find-eclipse-bundle property=".asm.bundle" eclipse="${.target.platform}" bundle="org.objectweb.asm"/>
-            <copy file="${.asm.bundle}" todir="${build.dir}/repository/plugins"/>
-            <var name=".asm.bundle" unset="true"/>
-          </with-target-platform>
-          
-          <!-- Stage 7 -->
-          
-          <for param="jar">
-            <path>
-              <fileset dir="${build.dir}/repository" includes="**/*.jar"/>
-            </path>
-            <sequential>
-              <condition jar="@{jar}"/>
-              <sign jar="@{jar}"/>
-              <pack jar="@{jar}"/>
-            </sequential>
-          </for>
-
-          <!-- Stage 8 -->
-
-          <echo message="Packaging the repository..."/>
-
-          <property-from-set property=".sapphire.feature">
-            <fileset dir="${build.dir}/repository/features" includes="org.eclipse.sapphire.modeling_*.jar"/>
-          </property-from-set>
-
-          <var name="sapphire.version" unset="true"/>
-          <propertyregex property="sapphire.version" input="${.sapphire.feature}" regexp=".*_([0-9]*.[0-9]*.[0-9]*.[0-9]*).jar" select="\1"/>
-            
-          <var name="sapphire.version.no.qualifier" unset="true"/>
-          <propertyregex property="sapphire.version.no.qualifier" input="${sapphire.version}" regexp="([0-9]*.[0-9]*.[0-9]*).[0-9]*" select="\1"/>
-
-          <copy file="${releng.dir}/site.xml" tofile="${build.dir}/repository/site.xml"/>
-
-          <replace file="${build.dir}/repository/site.xml">
-            <replacefilter token="##version##" value="${sapphire.version}"/>
-          </replace>
-
-          <p2.publish.UpdateSite location="${build.dir}/repository" name="Sapphire ${sapphire.version.no.qualifier}"/>
-
-          <delete file="${build.dir}/repository/site.xml"/>
-
-          <load-build-repository url="file:${build.dir}/repository"/>
-          
-          <gen-repository-landing repository="${build.dir}/repository" name="Sapphire ${sapphire.version}"/>
-
-          <property name="build.repository.completed" value="true"/>
-
-        </then>
-        <else>
-
-          <!-- Determine the version of Sapphire in repository. -->
-
-          <property-from-set property=".sapphire.feature">
-            <fileset dir="${build.dir}/repository/features" includes="org.eclipse.sapphire.modeling_*.jar"/>
-          </property-from-set>
-
-          <var name="sapphire.version" unset="true"/>
-          <propertyregex property="sapphire.version" input="${.sapphire.feature}" regexp=".*_([0-9]*.[0-9]*.[0-9]*.[0-9]*).jar" select="\1"/>
-
-        </else>
-      </if>
-
-    </sequential>
-  </macrodef>
-  
-
-  <macrodef name="VerifyCopyrightHeaders">
-    <attribute name="Source"/>
-    <sequential>
-      <var name=".verify.copyright.failed" unset="true"/>
-      <for param="file">
-        <path>
-          <fileset dir="@{Source}/plugins">
-            <include name="**/*.java"/>
-            <include name="**/*.xml"/>
-            <include name="**/*.sdef"/>
-            <include name="**/*.jj"/>
-            <exclude name="**/.javacc/**"/>
-            <exclude name="**/.apt_generated/**"/>
-            <exclude name="*/build.xml"/>
-          </fileset>
-          <fileset dir="@{Source}/features">
-            <include name="**/*.xml"/>
-            <exclude name="*/build.xml"/>
-          </fileset>
-        </path>
-        <sequential>
-          <var name=".file.content" unset="true"/>
-          <loadfile property=".file.content" srcfile="@{file}"/>
-          <if>
-            <not>
-              <and>
-                <contains string="${.file.content}" substring="copyright" casesensitive="false"/>
-                <contains string="${.file.content}" substring="(c)"/>
-              </and>
-            </not>
-            <then>
-              <var name=".file.relative" unset="true"/>
-              <pathconvert property=".file.relative">
-                <path location="@{file}"/>
-                <map from="@{Source}\" to=""/>
-                <map from="@{Source}/" to=""/>
-                <map from="@{Source}" to=""/>
-              </pathconvert>
-              <echo message="Missing copyright: ${.file.relative}"/>
-              <var name=".verify.copyright.failed" value="true"/>
-            </then>
-          </if>
-        </sequential>
-      </for>
-      <if>
-        <istrue value="${.verify.copyright.failed}"/>
-        <then>
-          <fail message="Found one or more files with missing copyright."/>
-        </then>
-      </if>
-      <var name=".file.content" unset="true"/>
-      <var name=".file.relative" unset="true"/>
-      <var name=".verify.copyright.failed" unset="true"/>
-    </sequential>
-  </macrodef>
-
-
-  <macrodef name="VerifyAuthorTags">
-    <attribute name="Source"/>
-    <sequential>
-      <var name=".verify.author.failed" unset="true"/>
-      <for param="file">
-        <path>
-          <fileset dir="@{Source}/plugins">
-            <include name="**/*.java"/>
-            <exclude name="**/.javacc/**"/>
-            <exclude name="**/.apt_generated/**"/>
-          </fileset>
-        </path>
-        <sequential>
-          <var name=".file.content" unset="true"/>
-          <loadfile property=".file.content" srcfile="@{file}"/>
-          <if>
-            <not>
-              <contains string="${.file.content}" substring="@author" casesensitive="false"/>
-            </not>
-            <then>
-              <var name=".file.relative" unset="true"/>
-              <pathconvert property=".file.relative">
-                <path location="@{file}"/>
-                <map from="@{Source}\" to=""/>
-                <map from="@{Source}/" to=""/>
-                <map from="@{Source}" to=""/>
-              </pathconvert>
-              <echo message="Missing @author tag: ${.file.relative}"/>
-              <var name=".verify.author.failed" value="true"/>
-            </then>
-          </if>
-        </sequential>
-      </for>
-      <if>
-        <istrue value="${.verify.author.failed}"/>
-        <then>
-          <fail message="Found one or more files with missing @author tag."/>
-        </then>
-      </if>
-      <var name=".file.content" unset="true"/>
-      <var name=".file.relative" unset="true"/>
-      <var name=".verify.author.failed" unset="true"/>
-    </sequential>
-  </macrodef>
-  
-  
-  <macrodef name="VerifyAboutHtml">
-    <attribute name="Repository"/>
-    <sequential>
-      <var name=".verify.about.html.failures" unset="true"/>
-      <for param="file">
-        <path>
-          <fileset dir="@{Repository}/plugins">
-            <include name="org.eclipse.sapphire*.jar"/>
-          </fileset>
-        </path>
-        <sequential>
-          <delete dir="${build.dir}/temp" quiet="true"/>
-          <mkdir dir="${build.dir}/temp"/>
-          <unzip src="@{file}" dest="${build.dir}/temp"/>
-          <if>
-            <not>
-              <available file="${build.dir}/temp/about.html"/>
-            </not>
-            <then>
-              <basename file="@{file}" property=".file.relative"/>
-              <if>
-                <isset property=".verify.about.html.failures"/>
-                <then>
-                  <var name=".verify.about.html.failures" value="${.verify.about.html.failures};${.file.relative}"/>
-                </then>
-                <else>
-                  <var name=".verify.about.html.failures" value="${.file.relative}"/>
-                </else>
-              </if>
-              <var name=".file.relative" unset="true"/>
-            </then>
-          </if>
-          <delete dir="${build.dir}/temp"/>
-        </sequential>
-      </for>
-      <if>
-        <isset property=".verify.about.html.failures"/>
-        <then>
-          <echo message="Bundles missing about.html file:"/>
-          <for param="file" list="${.verify.about.html.failures}" delimiter=";">
-            <sequential>
-              <echo message="   @{file}"/>
-            </sequential>
-          </for>
-          <fail message="Found one or more bundles missing about.html file."/>
-        </then>
-      </if>
-      <var name=".verify.about.html.failures" unset="true"/>
-    </sequential>
-  </macrodef>
-
-
-  <!--
-    *************************************************************************************************
-    * Full Build                                                                                    *
-    *************************************************************************************************
-  -->
-
-  <target name="build" depends="build-repository">
-
-    <delete dir="${build.dir}/packages" quiet="true"/>
-    <mkdir dir="${build.dir}/packages"/>
-
-    <zip destfile="${build.dir}/packages/sapphire-repository-${sapphire.version}.zip" filesonly="true">
-      <fileset dir="${build.dir}/repository" excludes=".artifactlock/**/*"/>
-    </zip>
-
-    <zip destfile="${build.dir}/packages/sapphire-samples-${sapphire.version}.zip">
-      <fileset dir="${root.dir}/plugins/org.eclipse.sapphire.samples">
-        <exclude name=".apt_generated/**/*"/>
-        <exclude name=".resources/**/*"/>
-        <exclude name="bin/**/*"/>
-      </fileset>
-    </zip>
-
-  </target>
+  <dirname property="root.dir" file="${ant.file.sapphire}"/>
+  <property name="build.dir" value="${root.dir}/build"/>
+  <property name="releng.dir" value="${root.dir}/releng"/>
 
   
-  <!--
-    *************************************************************************************************
-    * Documentation                                                                                 *
-    *************************************************************************************************
-  -->
+  <loadproperties>
+    <url url="https://www.eclipse.org/sapphire/corundum.properties"/>
+  </loadproperties>
 
-  <target name="export-documentation" depends="build-repository">
-
-    <delete dir="${build.dir}/documentation" quiet="true"/>
-    <mkdir dir="${build.dir}/documentation"/>
+  <delete dir="releng/corundum" quiet="true"/>
+  <get src="${corundum-1}" dest="releng/corundum.zip" usetimestamp="true"/>
+  <unzip src="releng/corundum.zip" dest="releng/corundum"/>
     
-    <install-eclipse dest="${build.dir}/documentation/eclipse" extensions="${iu.sapphire.doc.export}"/>
+  <import file="releng/corundum/corundum.xml"/>
     
-    <stop-help-server eclipse="${build.dir}/documentation/eclipse"/>
+  <import>
+    <fileset dir="releng/corundum/extensions/eclipse.org" includes="*.xml"/>
+  </import>
+  
+  
+  <macrodef name="pre-finalize-repository">
+    <sequential>
+    
+      <echo message="Mirroring ASM..."/>
+          
+      <with-target name="${configuration.recommended}">
+        <find-eclipse-bundle property=".asm.bundle" eclipse="${.target}" bundle="org.objectweb.asm"/>
+        <copy file="${.asm.bundle}" todir="${build.dir}/repository/plugins"/>
+        <var name=".asm.bundle" unset="true"/>
+      </with-target>
+    
+    </sequential>
+  </macrodef>
+  
+
+  <macrodef name="post-build-packages">
+    <sequential>
+    
+      <!-- Samples -->
+    
+      <zip destfile="${build.dir}/packages/sapphire-samples-${version}.zip">
+        <fileset dir="${root.dir}/plugins/org.eclipse.sapphire.samples">
+          <exclude name=".apt_generated/**/*"/>
+          <exclude name=".resources/**/*"/>
+          <exclude name="bin/**/*"/>
+        </fileset>
+      </zip>
+      
+      <!-- Documentation -->
+      
+      <echo message="Building and loading Sapphire Releng Ant tasks..."/>
+    
+      <delete dir="${releng.dir}/tasks/bin" quiet="true"/>
+      <mkdir dir="${releng.dir}/tasks/bin"/>
+    
+      <javac debug="true" destdir="${releng.dir}/tasks/bin" classpath="${ant.home}/lib/ant.jar" includeAntRuntime="false" source="1.8" target="1.8">
+        <src path="${releng.dir}/tasks/src"/>
+      </javac>
+
+      <taskdef resource="org/eclipse/sapphire/releng/library.xml">
+        <classpath>
+          <pathelement location="${releng.dir}/tasks/bin"/>
+          <pathelement location="${releng.dir}/tasks/src"/>
+        </classpath>
+      </taskdef>
+
+      <delete dir="${build.dir}/documentation" quiet="true"/>
+      <mkdir dir="${build.dir}/documentation"/>
+    
+      <install-eclipse dest="${build.dir}/documentation/eclipse" extensions="${iu.sapphire.doc.export}"/>
+    
+      <stop-help-server eclipse="${build.dir}/documentation/eclipse"/>
         
-    <parallel failonany="true">
-      <start-help-server eclipse="${build.dir}/documentation/eclipse" port="65332"/>
-      <sequential>
-        <sleep seconds="30"/>
-        <export-documentation server="http://127.0.0.1:65332" dest="${build.dir}/documentation/exported"/>
-        <stop-help-server eclipse="${build.dir}/documentation/eclipse"/>
-      </sequential>
-    </parallel>
+      <parallel failonany="true">
+        <start-help-server eclipse="${build.dir}/documentation/eclipse" port="65332"/>
+        <sequential>
+          <sleep seconds="30"/>
+          <export-documentation server="http://127.0.0.1:65332" dest="${build.dir}/documentation/exported"/>
+          <stop-help-server eclipse="${build.dir}/documentation/eclipse"/>
+        </sequential>
+      </parallel>
     
-    <zip destfile="${build.dir}/packages/sapphire-documentation-${sapphire.version}.zip">
-      <fileset dir="${build.dir}/documentation/exported" includes="**/*"/>
-    </zip>
+      <zip destfile="${build.dir}/packages/sapphire-documentation-${version}.zip">
+        <fileset dir="${build.dir}/documentation/exported" includes="**/*"/>
+      </zip>
     
-    <delete dir="${build.dir}/documentation" quiet="true"/>
-
-  </target>
+      <delete dir="${build.dir}/documentation" quiet="true"/>
+    
+    </sequential>
+  </macrodef>
   
   
   <macrodef name="start-help-server">
@@ -466,406 +148,6 @@
 
     </sequential>
   </macrodef>
-  
-
-  <!--
-    *************************************************************************************************
-    * Tests                                                                                         *
-    *************************************************************************************************
-  -->
-
-  <target name="run-tests" depends="build-repository">
-
-    <!-- Get ready to run tests. -->
-
-    <property name="tests.working.dir" value="${build.dir}/tests"/>
-    <delete dir="${tests.working.dir}" quiet="true"/>
-    <mkdir dir="${tests.working.dir}"/>
-
-    <install-eclipse dest="${tests.working.dir}/install" extensions="${iu.sapphire.tests.install}"/>
-
-    <!-- Run tests. -->
-
-    <eclipse location="${tests.working.dir}/install" application="org.eclipse.test.uitestapplication" failonerror="false" resultproperty="org.eclipse.test.result">
-      <arg line="-dev bin"/>
-      <arg line="-data ${tests.working.dir}/workspace"/>
-      <arg line="formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,${tests.working.dir}/test-results.xml"/>
-      <arg line="-testPluginName org.eclipse.sapphire.tests"/>
-      <arg line="-className org.eclipse.sapphire.tests.SapphireTestSuite"/>
-      <arg line="-consolelog -debug"/>
-    </eclipse>
-
-    <!-- Collect various test artifacts and copy them to the results directory. -->
-
-    <fail message="JUnit results file not created!">
-      <condition>
-        <not>
-          <available file="${tests.working.dir}/test-results.xml"/>
-        </not>
-      </condition>
-    </fail>
-
-    <junitreport todir="${tests.working.dir}">
-      <fileset dir="${tests.working.dir}" includes="test-results.xml"/>
-      <report todir="${tests.working.dir}" format="noframes"/>
-    </junitreport>
-
-    <delete file="${tests.working.dir}/TESTS-TestSuites.xml"/>
-    <move file="${tests.working.dir}/junit-noframes.html" tofile="${tests.working.dir}/test-results.html"/>
-    
-    <!-- Check if the tests have passed or failed. -->
-
-    <if>
-      <equals arg1="${org.eclipse.test.result}" arg2="0"/>
-      <then>
-        <echo message="All tests have passed."/>
-      </then>
-      <else>
-        <fail message="One or more tests have failed."/>
-      </else>
-    </if>
-
-  </target>
-  
-  
-  <!--
-    *************************************************************************************************
-    * FindBugs                                                                                      *
-    *************************************************************************************************
-  -->
 
   
-  <target name="findbugs" depends="init" unless="skip.findbugs">
-    <findbugs/>
-  </target>
-
-
-  <macrodef name="findbugs">
-    <sequential>
-      
-      <if>
-        <not><isset property="findbugs.output"/></not>
-        <then>
-          <if>
-            <available file="${build.dir}/findbugs"/>
-            <then>
-              <echo message="Found existing findbugs output..."/>
-              <var name="findbugs.output" value="${build.dir}/findbugs"/>
-            </then>
-          </if>
-        </then>
-      </if>
-
-      <if>
-        <not><isset property="findbugs.output"/></not>
-        <then>
-
-          <if>
-            <and>
-              <not><isset property="findbugs.location"/></not>
-              <isset property="env.FINDBUGS"/>
-            </and>
-            <then>
-              <var name="findbugs.location" value="${env.FINDBUGS}"/>
-            </then>
-          </if>
-
-          <if>
-            <not><isset property="findbugs.location"/></not>
-            <then>
-              <fail message="Could not locate FindBugs. Specify either findbugs.location property or FINDBUGS environment variable."/>
-            </then>
-          </if>
-
-          <build-repository/>
-
-          <property name="findbugs.output" value="${build.dir}/findbugs"/>
-
-          <delete dir="${findbugs.output}" quiet="true"/>
-          <mkdir dir="${findbugs.output}"/>
-
-          <taskdef name="findbugs-task" classname="edu.umd.cs.findbugs.anttask.FindBugsTask">
-            <classpath>
-              <fileset dir="${findbugs.location}/lib">
-                <include name="*.jar"/>
-              </fileset>
-            </classpath>
-          </taskdef>
-          
-          <var name=".aux.xml" unset="true"/>
-          <var name=".aux.xml.contribution" unset="true"/>
-
-          <with-target-platform configuration="${configuration.recommended}">
-            <for-each-eclipse-bundle eclipse="${.target.platform}">
-              <if>
-                <available file="${.bundle.location}" type="dir"/>
-                <then>
-                  <pathconvert property=".aux.xml.contribution" pathsep="&lt;/AuxClasspathEntry&gt;&#xA;&lt;AuxClasspathEntry&gt;">
-                    <path>
-                      <fileset dir="${.bundle.location}">
-                        <include name="**/*.jar"/>
-                      </fileset>
-                    </path>
-                  </pathconvert>
-                </then>
-                <else>
-                  <var name=".aux.xml.contribution" value="${.bundle.location}"/>
-                </else>
-              </if>
-              <append property=".aux.xml" value="${.aux.xml.contribution}" separator="&lt;/AuxClasspathEntry&gt;&#xA;&lt;AuxClasspathEntry&gt;"/>
-              <var name=".aux.xml.contribution" unset="true"/>
-            </for-each-eclipse-bundle>
-          </with-target-platform>
-          
-          <pathconvert property=".source.xml" pathsep="&lt;/SrcDir&gt;&#xA;&lt;SrcDir&gt;">
-            <path>
-              <dirset dir="${root.dir}/plugins" includes="*/src"/>
-            </path>
-          </pathconvert>
-
-          <pathconvert property=".jars.xml" pathsep="&lt;/Jar&gt;&#xA;&lt;Jar&gt;">
-            <path>
-              <fileset dir="${build.dir}/repository/plugins">
-                <include name="org.eclipse.sapphire*.jar"/>
-                <exclude name="*.source_*.jar"/>
-                <exclude name="*.nl_re_*.jar"/>
-              </fileset>
-            </path>
-          </pathconvert>
-
-          <echo file="${findbugs.output}/project.xml">
-            &lt;BugCollection>
-              &lt;Project filename="findbugs.project" projectName="Sapphire">
-                &lt;Jar&gt;${.jars.xml}&lt;/Jar&gt;
-                &lt;AuxClasspathEntry&gt;${.aux.xml}&lt;/AuxClasspathEntry&gt;
-                &lt;SrcDir&gt;${.source.xml}&lt;/SrcDir&gt;
-                &lt;SuppressionFilter&gt;
-                  &lt;LastVersion value="-1" relOp="NEQ"/&gt;
-                &lt;/SuppressionFilter&gt;
-              &lt;/Project&gt;
-            &lt;/BugCollection&gt;
-          </echo>
-
-          <var name=".aux.xml" unset="true"/>
-          <var name=".source.xml" unset="true"/>
-          <var name=".jars.xml" unset="true"/>
-
-          <findbugs-task
-            home="${findbugs.location}"
-            projectFile="${findbugs.output}/project.xml"
-            excludeFilter="${root.dir}/findbugs-excludes.xml"
-            output="xml"
-            outputFile="${findbugs.output}/result.xml"
-            timeout="2400000"
-            jvmargs="-Xmx1024m"/>
-
-        </then>
-      </if>
-
-    </sequential>
-  </macrodef>
-
-
-  <target name="clean-findbugs" depends="init">
-
-    <delete dir="${build.dir}/findbugs" quiet="true"/>
-    <var name="findbugs.output" unset="true"/>
-
-  </target>
-
-  
-  <!--
-    *************************************************************************************************
-    * Development Environment                                                                       *
-    *************************************************************************************************
-  -->
-
-  <target name="create-dev-eclipse" depends="build-repository">
-
-    <property name="dev.eclipse.dir" value="${root.dir}/dev-eclipse"/>
-    <install-eclipse dest="${dev.eclipse.dir}" extensions="${iu.sapphire.dev.env}"/>
-
-  </target>
-
-
-  <target name="create-dev-target" depends="build-repository">
-
-    <property name="dev.target.dir" value="${root.dir}/dev-target"/>
-    
-    <if>
-      <isset property="iu.sapphire.dev.target.${configuration.recommended}"/>
-      <then>
-        <propertycopy property=".extensions" from="iu.sapphire.dev.target.${configuration.recommended}" override="true"/>
-      </then>
-      <else>
-        <var name=".extensions" value="${iu.sapphire.dev.target}"/>
-      </else>
-    </if>
-    
-    <install-eclipse dest="${dev.target.dir}" extensions="${.extensions}"/>
-
-    <var name=".extensions" unset="true"/>
-
-  </target>
-
-
-  <!--
-    *************************************************************************************************
-    * Stats                                                                                         *
-    *************************************************************************************************
-  -->
-
-  <target name="stats" depends="init">
-
-    <property name="root" value="plugins"/>
-    <property name="line.count" value="0"/>
-
-    <for param="project.folder">
-      <path>
-        <dirset dir="${root}">
-          <include name="*"/> <!-- not recursive -->
-          <exclude name=".metadata"/>
-        </dirset>
-      </path>
-      <sequential>
-
-        <var name="line.count.project" value="0"/>
-
-        <for param="file">
-          <path>
-            <fileset dir="@{project.folder}">
-              <exclude name="bin/**"/>
-              <exclude name="build/**"/>
-              <exclude name=".javacc/**"/>
-              <exclude name=".resources/**"/>
-              <exclude name=".apt_generated/**"/>
-              <exclude name="**/*.zip"/>
-              <exclude name="**/*.jar"/>
-              <exclude name="**/*.png"/>
-              <exclude name="**/*.gif"/>
-              <exclude name="**/*.jpeg"/>
-              <exclude name="**/*.jpg"/>
-              <exclude name="zipcodes/**"/>
-            </fileset>
-          </path>
-          <sequential>
-            <var name="line.count.file" unset="true"/>
-            <resourcecount property="line.count.file">
-              <tokens>
-                <file file="@{file}"/>
-              </tokens>
-            </resourcecount>
-            <!-- <echo message="@{file} : ${line.count.file}"/> -->
-            <increment property="line.count.project" amount="${line.count.file}"/>
-            <var name="line.count.file" unset="true"/>
-          </sequential>
-        </for>
-
-        <basename property="project.name" file="@{project.folder}"/>
-
-        <echo message="${project.name}: ${line.count.project}"/>
-
-        <increment property="line.count" amount="${line.count.project}"/>
-        <var name="line.count.project" unset="true"/>
-        <var name="project.name" unset="true"/>
-
-      </sequential>
-    </for>
-
-    <echo message="Overall: ${line.count}"/>
-
-  </target>
-
-  <macrodef name="increment">
-    <attribute name="property"/>
-    <attribute name="amount"/>
-    <sequential>
-
-      <propertycopy name=".temp" from="@{property}" override="true"/>
-      <var name="@{property}" unset="true"/>
-      <math result="@{property}" operation="+" operand1="${.temp}" operand2="@{amount}" datatype="long"/>
-      <var name=".temp" unset="true"/>
-
-    </sequential>
-  </macrodef>
-
-
-
-  <!--
-    *************************************************************************************************
-    * Cleanup                                                                                       *
-    *************************************************************************************************
-  -->
-
-  <target name="clean" depends="clean-p2,clean-builder,clean-repository,clean-target-platforms">
-    
-    <delete dir="${build.dir}"/>
-
-  </target>
-
-
-  <target name="clean-repository" depends="init">
-
-    <delete dir="${build.dir}/repository" quiet="true"/>
-    <var name="build.repository.completed" unset="true"/>
-
-  </target>
-
-
-  <target name="clean-target-platforms" depends="init">
-
-    <for-each-configuration>
-      <delete dir="${build.dir}/target-@{configuration}" quiet="true"/>
-      <var name="target-@{configuration}" unset="true"/>
-    </for-each-configuration>
-
-  </target>
-
-
-
-  <!--
-    *************************************************************************************************
-    * Target Platform                                                                               *
-    *************************************************************************************************
-  -->
-
-
-  <macrodef name="create-target-platform">
-    <attribute name="configuration"/>
-    <sequential>
-
-      <if>
-        <not><isset property="target-@{configuration}"/></not>
-        <then>
-
-          <property name="target-@{configuration}" value="${build.dir}/target-@{configuration}"/>
-
-          <if>
-            <not><available file="${build.dir}/target-@{configuration}"/></not>
-            <then>
-              <install-eclipse dest="${build.dir}/target-@{configuration}" configuration="@{configuration}" extensions="${iu.sapphire.build.target}"/>
-            </then>
-          </if>
-
-        </then>
-      </if>
-
-    </sequential>
-  </macrodef>
-
-
-  <macrodef name="with-target-platform">
-    <attribute name="configuration"/>
-    <element name="body" implicit="yes"/>
-    <sequential>
-
-      <create-target-platform configuration="@{configuration}"/>
-      <propertycopy property=".target.platform" from="target-@{configuration}" override="true"/>
-      <body/>
-      <var name=".target.platform" unset="true"/>
-
-    </sequential>
-  </macrodef>
-
-
 </project>
