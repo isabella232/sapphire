@@ -280,6 +280,7 @@ public final class DiagramEditorContextMenuProvider extends ContextMenuProvider
     private boolean isMouseOnEditParts(List<GraphicalEditPart> editParts)
     {
     	Point p = this.editor.getMouseLocation();
+    	p = this.editor.calculateRealMouseLocation(p);
     	for (GraphicalEditPart editPart : editParts)
     	{
     		if (editPart.getFigure().containsPoint(p))
