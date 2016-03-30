@@ -94,18 +94,39 @@ public abstract class ContainerPart<T extends FormComponentPart> extends FormCom
         
         return this.children;
     }
-
+    
     @Override
     protected Status computeValidation()
     {
-        final Status.CompositeStatusFactory factory = Status.factoryForComposite();
-
-        for( SapphirePart child : children().visible() )
+        // Look through child parts in order. Return the first error that's found. If no errors
+        // are found, return the first warning that's found. If no warnings are found, return
+        // an ok status.
+        
+        Status warning = null;
+        
+        for( final SapphirePart child : children().visible() )
         {
-            factory.merge( child.validation() );
+            final Status validation = child.validation();
+            final Status.Severity severity = validation.severity();
+            
+            if( severity == Status.Severity.ERROR )
+            {
+                return validation;
+            }
+            else if( severity == Status.Severity.WARNING && warning == null )
+            {
+                warning = validation;
+            }
         }
         
-        return factory.create();
+        if( warning != null )
+        {
+            return warning;
+        }
+        else
+        {
+            return Status.createOkStatus();
+        }
     }
     
     @Override
