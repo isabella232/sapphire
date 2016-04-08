@@ -14,7 +14,7 @@
 <feature
       id="org.eclipse.sapphire.sdk"
       label="%featureName"
-      version="8.2.4.qualifier"
+      version="8.2.5.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -30,14 +30,14 @@
    </license>
 
    <requires>
-      <import feature="org.eclipse.sapphire" version="8.2.4" match="compatible"/>
-      <import feature="org.eclipse.sapphire.modeling.xml" version="8.2.4" match="compatible"/>
-      <import feature="org.eclipse.sapphire.java" version="8.2.4" match="compatible"/>
-      <import feature="org.eclipse.sapphire.java.jdt" version="8.2.4" match="compatible"/>
-      <import feature="org.eclipse.sapphire.ui" version="8.2.4" match="compatible"/>
-      <import feature="org.eclipse.sapphire.ui.swt.xml.editor" version="8.2.4" match="compatible"/>
-      <import feature="org.eclipse.sapphire.osgi" version="8.2.4" match="compatible"/>
-      <import feature="org.eclipse.sapphire.platform" version="8.2.4" match="compatible"/>
+      <import feature="org.eclipse.sapphire" version="8.2.5" match="compatible"/>
+      <import feature="org.eclipse.sapphire.modeling.xml" version="8.2.5" match="compatible"/>
+      <import feature="org.eclipse.sapphire.java" version="8.2.5" match="compatible"/>
+      <import feature="org.eclipse.sapphire.java.jdt" version="8.2.5" match="compatible"/>
+      <import feature="org.eclipse.sapphire.ui" version="8.2.5" match="compatible"/>
+      <import feature="org.eclipse.sapphire.ui.swt.xml.editor" version="8.2.5" match="compatible"/>
+      <import feature="org.eclipse.sapphire.osgi" version="8.2.5" match="compatible"/>
+      <import feature="org.eclipse.sapphire.platform" version="8.2.5" match="compatible"/>
    </requires>
 
    <plugin

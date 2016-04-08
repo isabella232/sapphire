@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.sapphire.workspace
-Bundle-Version: 8.2.4.qualifier
+Bundle-Version: 8.2.5.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Localization: bundle
 Export-Package: org.eclipse.sapphire.workspace
