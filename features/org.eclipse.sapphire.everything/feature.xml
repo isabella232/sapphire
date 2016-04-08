@@ -14,7 +14,7 @@
 <feature
       id="org.eclipse.sapphire.everything"
       label="Sapphire Build"
-      version="9.0.4.qualifier"
+      version="9.0.5.qualifier"
       provider-name="Eclipse.org - Sapphire">
 
    <includes
