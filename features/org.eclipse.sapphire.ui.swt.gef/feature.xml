@@ -14,7 +14,7 @@
 <feature
       id="org.eclipse.sapphire.ui.swt.gef"
       label="%featureName"
-      version="9.0.5.qualifier"
+      version="9.0.6.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -30,7 +30,7 @@
    </license>
 
    <requires>
-      <import feature="org.eclipse.sapphire.ui" version="9.0.5" match="compatible"/>
+      <import feature="org.eclipse.sapphire.ui" version="9.0.6" match="compatible"/>
    </requires>
 
    <plugin
