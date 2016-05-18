@@ -40,7 +40,7 @@ public final class TestExpr0014 extends TestExpr
     {
         final FunctionContext context = new FunctionContext();
         
-        testForExpectedValue( context, "${ SapphireVersionMatches( '[8.2.5-8.2.6)' ) }", Boolean.TRUE );
+        testForExpectedValue( context, "${ SapphireVersionMatches( '[8.2.6-8.2.7)' ) }", Boolean.TRUE );
         testForExpectedValue( context, "${ SapphireVersionMatches( '[0.5-0.6)' ) }", Boolean.FALSE );
     }
 
