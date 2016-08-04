@@ -15,19 +15,14 @@ package org.eclipse.sapphire.modeling;
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
 
-public class ResourceStoreException
-
-    extends Exception
-    
+public class ResourceStoreException extends Exception
 {
     private static final long serialVersionUID = 1L;
     
-    public ResourceStoreException( final String message,
-                                   final Throwable cause )
+    public ResourceStoreException()
     {
-        super( message, cause );
     }
-
+    
     public ResourceStoreException( final String message )
     {
         super( message );
@@ -38,4 +33,9 @@ public class ResourceStoreException
         super( cause );
     }
     
+    public ResourceStoreException( final String message, final Throwable cause )
+    {
+        super( message, cause );
+    }
+
 }
