@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import org.eclipse.sapphire.Context;
@@ -25,6 +26,8 @@ import org.eclipse.sapphire.Sapphire;
 import org.eclipse.sapphire.modeling.ByteArrayResourceStore;
 import org.eclipse.sapphire.modeling.ResourceStoreException;
 import org.eclipse.sapphire.modeling.Status;
+import org.eclipse.sapphire.modeling.localization.LocalizationService;
+import org.eclipse.sapphire.modeling.localization.StandardLocalizationService;
 import org.eclipse.sapphire.modeling.xml.RootXmlResource;
 import org.eclipse.sapphire.modeling.xml.XmlResourceStore;
 import org.eclipse.sapphire.ui.forms.DialogDef;
@@ -128,20 +131,11 @@ public final class DefinitionLoader
         
         final Resource resource;
         
-        try( InputStream stream = this.context.findResource( name.replace( '.', '/' ) + ".sdef" ) )
+        try
         {
-            if( stream == null )
-            {
-                throw new IllegalArgumentException();
-            }
-            
-            resource = new RootXmlResource( new XmlResourceStore( new DefinitionLoaderResourceStore( stream, this.context ) ) );
+            resource = new RootXmlResource( new XmlResourceStore( new DefinitionLoaderResourceStore( this.context, name ) ) );
         }
         catch( final ResourceStoreException e )
-        {
-            throw new IllegalArgumentException( e );
-        }
-        catch( final IOException e )
         {
             throw new IllegalArgumentException( e );
         }
@@ -376,15 +370,30 @@ public final class DefinitionLoader
     private static final class DefinitionLoaderResourceStore extends ByteArrayResourceStore
     {
         private final Context context;
+        private final String name;
         
-        public DefinitionLoaderResourceStore( final InputStream in, final Context context ) throws ResourceStoreException
+        public DefinitionLoaderResourceStore( final Context context, final String name ) throws ResourceStoreException
         {
-            super( in );
-            
             this.context = context;
+            this.name = name.replace( '.', '/' );
+            
+            try( InputStream stream = this.context.findResource( this.name + ".sdef" ) )
+            {
+                if( stream == null )
+                {
+                    throw new ResourceStoreException();
+                }
+                
+                setContents( stream );
+            }
+            catch( final IOException e )
+            {
+                throw new ResourceStoreException( e );
+            }
         }
 
         @Override
+        
         public <A> A adapt( final Class<A> adapterType )
         {
             if( adapterType == Context.class )
@@ -393,6 +402,43 @@ public final class DefinitionLoader
             }
             
             return super.adapt( adapterType );
+        }
+        
+        @Override
+        
+        protected LocalizationService initLocalizationService( final Locale locale )
+        {
+            return new StandardLocalizationService( locale )
+            {
+                @Override
+                
+                protected boolean load( final Locale locale, final Map<String,String> keyToText )
+                {
+                    String resFilePath = DefinitionLoaderResourceStore.this.name;
+                    final String localeString = locale.toString();
+                    
+                    if( localeString.length() > 0 )
+                    {
+                        resFilePath = resFilePath + "_" + localeString;
+                    }
+                    
+                    resFilePath = resFilePath + ".properties";
+                    
+                    try( InputStream stream = DefinitionLoaderResourceStore.this.context.findResource( resFilePath ) )
+                    {
+                        if( stream != null )
+                        {
+                            return parse( stream, keyToText );
+                        }
+                    }
+                    catch( final IOException e )
+                    {
+                        // Fall through and return false
+                    }
+                    
+                    return false;
+                }
+            };
         }
     }
 
