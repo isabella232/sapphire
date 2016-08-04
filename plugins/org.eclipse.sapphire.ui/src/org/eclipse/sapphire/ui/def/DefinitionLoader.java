@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import org.eclipse.sapphire.Context;
@@ -25,6 +26,8 @@ import org.eclipse.sapphire.Sapphire;
 import org.eclipse.sapphire.modeling.ByteArrayResourceStore;
 import org.eclipse.sapphire.modeling.ResourceStoreException;
 import org.eclipse.sapphire.modeling.Status;
+import org.eclipse.sapphire.modeling.localization.LocalizationService;
+import org.eclipse.sapphire.modeling.localization.StandardLocalizationService;
 import org.eclipse.sapphire.modeling.xml.RootXmlResource;
 import org.eclipse.sapphire.modeling.xml.XmlResourceStore;
 import org.eclipse.sapphire.ui.forms.DialogDef;
@@ -126,33 +129,15 @@ public final class DefinitionLoader
             }
         }
         
-        final InputStream stream = this.context.findResource( name.replace( '.', '/' ) + ".sdef" );
-        
-        if( stream == null )
-        {
-            throw new IllegalArgumentException();
-        }
-        
         final Resource resource;
         
         try
         {
-            try
-            {
-                resource = new RootXmlResource( new XmlResourceStore( new DefinitionLoaderResourceStore( stream, this.context ) ) );
-            }
-            catch( ResourceStoreException e )
-            {
-                throw new IllegalArgumentException( e );
-            }
+            resource = new RootXmlResource( new XmlResourceStore( new DefinitionLoaderResourceStore( this.context, name ) ) );
         }
-        finally
+        catch( final ResourceStoreException e )
         {
-            try
-            {
-                stream.close();
-            }
-            catch( IOException e ) {}
+            throw new IllegalArgumentException( e );
         }
         
         this.sdef = ISapphireUiDef.TYPE.instantiate( resource );
@@ -379,15 +364,41 @@ public final class DefinitionLoader
     private static final class DefinitionLoaderResourceStore extends ByteArrayResourceStore
     {
         private final Context context;
+        private final String name;
         
-        public DefinitionLoaderResourceStore( final InputStream in, final Context context ) throws ResourceStoreException
+        public DefinitionLoaderResourceStore( final Context context, final String name ) throws ResourceStoreException
         {
-            super( in );
-            
             this.context = context;
+            this.name = name.replace( '.', '/' );
+            
+            InputStream stream = null;
+            
+            try
+            {
+                stream = this.context.findResource( this.name + ".sdef" );
+                
+                if( stream == null )
+                {
+                    throw new ResourceStoreException();
+                }
+                
+                setContents( stream );
+            }
+            finally
+            {
+                if( stream != null )
+                {
+                    try
+                    {
+                        stream.close();
+                    }
+                    catch( final IOException e ) {}
+                }
+            }
         }
 
         @Override
+        
         public <A> A adapt( final Class<A> adapterType )
         {
             if( adapterType == Context.class )
@@ -396,6 +407,54 @@ public final class DefinitionLoader
             }
             
             return super.adapt( adapterType );
+        }
+        
+        @Override
+        
+        protected LocalizationService initLocalizationService( final Locale locale )
+        {
+            return new StandardLocalizationService( locale )
+            {
+                @Override
+                
+                protected boolean load( final Locale locale, final Map<String,String> keyToText )
+                {
+                    String resFilePath = DefinitionLoaderResourceStore.this.name;
+                    final String localeString = locale.toString();
+                    
+                    if( localeString.length() > 0 )
+                    {
+                        resFilePath = resFilePath + "_" + localeString;
+                    }
+                    
+                    resFilePath = resFilePath + ".properties";
+                    
+                    InputStream stream = null;
+                    
+                    try
+                    {
+                        stream = DefinitionLoaderResourceStore.this.context.findResource( resFilePath );
+                        
+                        if( stream != null )
+                        {
+                            return parse( stream, keyToText );
+                        }
+                    }
+                    finally
+                    {
+                        if( stream != null )
+                        {
+                            try
+                            {
+                                stream.close();
+                            }
+                            catch( final IOException e ) {}
+                        }
+                    }
+                    
+                    return false;
+                }
+            };
         }
     }
 
