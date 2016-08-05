@@ -18,6 +18,7 @@ import org.eclipse.sapphire.PossibleValues;
 import org.eclipse.sapphire.PossibleValuesService;
 import org.eclipse.sapphire.PropertyDef;
 import org.eclipse.sapphire.ValueProperty;
+import org.eclipse.sapphire.modeling.CapitalizationType;
 import org.eclipse.sapphire.services.ServiceCondition;
 import org.eclipse.sapphire.services.ServiceContext;
 
@@ -34,7 +35,8 @@ public final class StaticPossibleValuesService extends PossibleValuesService
     @Override
     protected void initPossibleValuesService()
     {
-        final PossibleValues a = context( PropertyDef.class ).getAnnotation( PossibleValues.class );
+        final PropertyDef pdef = context( PropertyDef.class );
+        final PossibleValues a = pdef.getAnnotation( PossibleValues.class );
         
         this.values = a.values();
         
@@ -42,7 +44,7 @@ public final class StaticPossibleValuesService extends PossibleValuesService
         
         if( invalidValueMessage.length() > 0 )
         {
-            this.invalidValueMessage = invalidValueMessage;
+            this.invalidValueMessage = pdef.getLocalizationService().text( invalidValueMessage, CapitalizationType.NO_CAPS, false );
         }
         
         this.invalidValueSeverity = a.invalidValueSeverity();
