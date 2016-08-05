@@ -70,7 +70,8 @@ public final class RequiredConstraintValidationService extends ValidationService
         }
         else
         {
-            final String msg = message.format( this.property.definition().getLabel( true, CapitalizationType.FIRST_WORD_ONLY, false ) );
+            String msg = message.format( this.property.definition().getLabel( true, CapitalizationType.NO_CAPS, false ) );
+            msg = this.property.definition().getLocalizationService().transform( msg, CapitalizationType.FIRST_WORD_ONLY, false );
             return Status.createErrorStatus( msg );
         }
     }
