@@ -22,8 +22,10 @@ import org.eclipse.sapphire.PossibleValues;
 import org.eclipse.sapphire.PossibleValuesService;
 import org.eclipse.sapphire.Property;
 import org.eclipse.sapphire.PropertyContentEvent;
+import org.eclipse.sapphire.PropertyDef;
 import org.eclipse.sapphire.PropertyVisitor;
 import org.eclipse.sapphire.Value;
+import org.eclipse.sapphire.modeling.CapitalizationType;
 import org.eclipse.sapphire.modeling.ModelPath;
 import org.eclipse.sapphire.services.ServiceCondition;
 import org.eclipse.sapphire.services.ServiceContext;
@@ -45,8 +47,8 @@ public final class ModelBasedPossibleValuesService extends PossibleValuesService
     {
         final Property property = context( Property.class );
         final Element element = property.element();
-        
-        final PossibleValues a = property.definition().getAnnotation( PossibleValues.class );
+        final PropertyDef pdef = property.definition();
+        final PossibleValues a = pdef.getAnnotation( PossibleValues.class );
         
         this.path = new ModelPath( a.property() );
 
@@ -54,7 +56,7 @@ public final class ModelBasedPossibleValuesService extends PossibleValuesService
         
         if( invalidValueMessage.length() > 0 )
         {
-            this.invalidValueMessage = invalidValueMessage;
+            this.invalidValueMessage = pdef.getLocalizationService().text( invalidValueMessage, CapitalizationType.NO_CAPS, false );
         }
         
         this.invalidValueSeverity = a.invalidValueSeverity();
