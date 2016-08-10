@@ -64,7 +64,7 @@ public abstract class SapphireActionSystemPart implements Disposable
         {
             this.id = def.getId().content();
             
-            final Function labelFunction = FailSafeFunction.create( def.getLabel().content(), Literal.create( String.class ) );
+            final Function labelFunction = FailSafeFunction.create( def.getLabel().localizedContent(), Literal.create( String.class ) );
             
             this.labelFunctionResult = labelFunction.evaluate( this.functionContext );
             
@@ -80,7 +80,7 @@ public abstract class SapphireActionSystemPart implements Disposable
                 }
             );
             
-            final Function toolTipFunction = FailSafeFunction.create( def.getToolTip().content(), Literal.create( String.class ) );
+            final Function toolTipFunction = FailSafeFunction.create( def.getToolTip().localizedContent(), Literal.create( String.class ) );
 
             this.toolTipFunctionResult = toolTipFunction.evaluate( this.functionContext );
 
