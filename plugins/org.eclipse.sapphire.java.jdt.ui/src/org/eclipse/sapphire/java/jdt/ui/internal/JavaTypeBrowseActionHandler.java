@@ -51,7 +51,7 @@ public final class JavaTypeBrowseActionHandler extends BrowseActionHandler
     @Text( "Select {0}" )
     private static LocalizableText dialogTitle;
     
-    @Text( "Java type kind \"{0}\" is not recognized." )
+    @Text( "Java type kind \"{0}\" is not recognized" )
     private static LocalizableText typeKindNotRecognized;
 
     static 

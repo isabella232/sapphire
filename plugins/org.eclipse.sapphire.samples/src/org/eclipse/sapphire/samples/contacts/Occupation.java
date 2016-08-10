@@ -18,10 +18,7 @@ import org.eclipse.sapphire.ElementType;
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
 
-public interface Occupation
-
-    extends Element
-    
+public interface Occupation extends Element
 {
     ElementType TYPE = new ElementType( Occupation.class );
     

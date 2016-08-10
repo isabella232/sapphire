@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+encoding//META-INF/sapphire-extension_ru.properties=UTF-8
+encoding//src/org/eclipse/sapphire/ui/assist/internal/ActionsSectionAssistContributor_ru.properties=UTF-8
+encoding//src/org/eclipse/sapphire/ui/assist/internal/InfoSectionAssistContributor_ru.properties=UTF-8
+encoding//src/org/eclipse/sapphire/ui/assist/internal/ProblemsSectionAssistContributor_ru.properties=UTF-8
+encoding//src/org/eclipse/sapphire/ui/assist/internal/ResetActionsAssistContributor_ru.properties=UTF-8
+encoding//src/org/eclipse/sapphire/ui/assist/internal/RestoreInitialValueActionsAssistContributor_ru.properties=UTF-8
+encoding//src/org/eclipse/sapphire/ui/assist/internal/ShowInSourceActionAssistContributor_ru.properties=UTF-8
+encoding//src/org/eclipse/sapphire/ui/forms/BrowseActionHandler_ru.properties=UTF-8
+encoding//src/org/eclipse/sapphire/ui/forms/swt/internal/PageBookCasePresentation_ru.properties=UTF-8
+encoding//src/org/eclipse/sapphire/ui/forms/swt/internal/RestoreDefaultsActionHandler_ru.properties=UTF-8
