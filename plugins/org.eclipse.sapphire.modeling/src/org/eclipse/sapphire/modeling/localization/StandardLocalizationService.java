@@ -13,6 +13,7 @@ package org.eclipse.sapphire.modeling.localization;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -116,18 +117,7 @@ public abstract class StandardLocalizationService
         
         try
         {
-            try
-            {
-                props.load( in );
-            }
-            finally
-            {
-                try
-                {
-                    in.close();
-                }
-                catch( IOException e ) {}
-            }
+            props.load( new InputStreamReader( in, "UTF-8" ) );
         }
         catch( IOException e )
         {
