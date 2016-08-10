@@ -50,6 +50,7 @@
   <li><a href="#SapphireDialog">SapphireDialog</a></li>
   <li><a href="#SapphirePreferencePage">SapphirePreferencePage</a></li>
   <li><a href="#TextSelectionService">TextSelectionService</a></li>
+  <li><a href="#Value">Value</a></li>
 </ol>
 
 
@@ -326,6 +327,30 @@ available in runnable form in the samples project.</p>
     
     protected abstract String choose();
 }</code></pre>
+
+
+<h2><a name="Value">Value</a></h2>
+
+<p>Value class has been enhanced with two new methods related to localization.</p>
+
+<pre class="source-code"><code><span class="unaffected">public class Value&lt;T> extends Property
+{</span>
+    <span class="javadoc">/**
+     * Returns parsed property content after running the actual property text through the localization service.
+     * 
+     * &lt;p>Equivalent to localizedContent( true )&lt;/p>
+     */</span>
+    
+    public final T localizedContent()
+    
+    <span class="javadoc">/**
+     * Returns parsed property content after running the actual property text through the localization service.
+     * 
+     * @param useDefaultValue indicates whether the default value should be used if property content is null
+     */</span>
+    
+    public final T localizedContent( final boolean useDefaultValue )
+<span class="unaffected">}</span></code></pre>
 
 
 <div class="copyright">Copyright (c) 2016 Oracle<br/>

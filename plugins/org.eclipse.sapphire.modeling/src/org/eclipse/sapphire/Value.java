@@ -135,7 +135,7 @@ public class Value<T> extends Property
             
             if( proceed )
             {
-                final T afterContent = parse( p.decodeKeywords( afterText ) );
+                final T afterContent = parse( afterText );
                 
                 PropertyContentEvent event = null; 
                 
@@ -212,7 +212,7 @@ public class Value<T> extends Property
             
             if( proceed )
             {
-                final T afterContent = parse( p.decodeKeywords( afterText ) );
+                final T afterContent = parse( afterText );
                 
                 PropertyDefaultEvent event = null; 
                 
@@ -248,6 +248,18 @@ public class Value<T> extends Property
         return (ValuePropertyBinding) super.binding();
     }
     
+    @Override
+    public final boolean empty()
+    {
+        synchronized( root() )
+        {
+            init();
+            refreshContent( true );
+            
+            return ( this.text == null );
+        }
+    }
+
     public final String text()
     {
         return text( true );
@@ -274,6 +286,38 @@ public class Value<T> extends Property
             synchronized( this )
             {
                 return this.defaultText;
+            }
+        }
+
+        return null;
+    }
+    
+    public final T content()
+    {
+        return content( true );
+    }
+    
+    public final T content( final boolean useDefaultValue )
+    {
+        init();
+        
+        refreshContent( true );
+        
+        synchronized( this )
+        {
+            if( this.content != null )
+            {
+                return this.content;
+            }
+        }
+        
+        if( useDefaultValue )
+        {
+            refreshDefaultContent( true );
+            
+            synchronized( this )
+            {
+                return this.defaultContent;
             }
         }
 
@@ -310,50 +354,32 @@ public class Value<T> extends Property
         return null;
     }
     
-    public final T content()
+    /**
+     * Returns parsed property content after running the actual property text through the localization service.
+     * 
+     * <p>Equivalent to localizedContent( true )</p>
+     * 
+     * @since 8.3
+     */
+    
+    public final T localizedContent()
     {
-        return content( true );
+        return localizedContent( true );
     }
     
-    public final T content( final boolean useDefaultValue )
+    /**
+     * Returns parsed property content after running the actual property text through the localization service.
+     * 
+     * @param useDefaultValue indicates whether the default value should be used if property content is null
+     * 
+     * @since 8.3
+     */
+    
+    public final T localizedContent( final boolean useDefaultValue )
     {
-        init();
-        
-        refreshContent( true );
-        
-        synchronized( this )
-        {
-            if( this.content != null )
-            {
-                return this.content;
-            }
-        }
-        
-        if( useDefaultValue )
-        {
-            refreshDefaultContent( true );
-            
-            synchronized( this )
-            {
-                return this.defaultContent;
-            }
-        }
-
-        return null;
+        return parse( localized( useDefaultValue ) );
     }
     
-    @Override
-    public final boolean empty()
-    {
-        synchronized( root() )
-        {
-            init();
-            refreshContent( true );
-            
-            return ( this.text == null );
-        }
-    }
-
     public final T getDefaultContent()
     {
         init();
@@ -541,6 +567,7 @@ public class Value<T> extends Property
     }
     
     @Override
+    
     public final String toString()
     {
         final String text = text( false );
@@ -548,6 +575,7 @@ public class Value<T> extends Property
     }
     
     @SuppressWarnings( "unchecked" )
+    
     private T parse( final String str )
     {
         if( str == null )
@@ -556,7 +584,9 @@ public class Value<T> extends Property
         }
         else
         {
-            return (T) service( MasterConversionService.class ).convert( str, definition().getTypeClass() );
+            final ValueProperty p = definition();
+            
+            return (T) service( MasterConversionService.class ).convert( p.decodeKeywords( str ), p.getTypeClass() );
         }
     }
     
