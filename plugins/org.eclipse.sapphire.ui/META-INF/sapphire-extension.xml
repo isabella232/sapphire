@@ -319,7 +319,7 @@
     </action>
     <action>
         <id>Sapphire.Diagram.Print</id>
-        <label>Print</label>
+        <label>print</label>
         <image>org/eclipse/sapphire/ui/actions/Print.gif</image>
         <description>Print the diagram.</description>
         <location>after:Sapphire.Diagram.SaveAsImage</location>

@@ -23,6 +23,8 @@ import org.eclipse.sapphire.modeling.xml.annotations.XmlBinding;
  * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
  */
 
+@Label( standard = "delegated task" )
+
 public interface AssistantTask extends Element
 {
     ElementType TYPE = new ElementType( AssistantTask.class );
@@ -30,7 +32,6 @@ public interface AssistantTask extends Element
     // *** Name ***
     
     @XmlBinding( path = "" )
-    @Label( standard = "name" )
     @Required
 
     ValueProperty PROP_NAME = new ValueProperty( TYPE, "Name" );

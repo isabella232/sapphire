@@ -20,7 +20,6 @@ import org.eclipse.sapphire.PossibleValues;
 import org.eclipse.sapphire.Value;
 import org.eclipse.sapphire.ValueProperty;
 import org.eclipse.sapphire.modeling.annotations.Image;
-import org.eclipse.sapphire.modeling.annotations.Label;
 import org.eclipse.sapphire.modeling.annotations.LongString;
 import org.eclipse.sapphire.modeling.annotations.Required;
 import org.eclipse.sapphire.modeling.annotations.Service;
@@ -42,7 +41,6 @@ public interface Assistant extends Element
     // *** Name ***
     
     @XmlBinding( path = "name" )
-    @Label( standard = "name" )
     @Required
     @Service( impl = AssistantNameValidationService.class )
     @Collation( ignoreCaseDifferences = "true" )
@@ -50,7 +48,7 @@ public interface Assistant extends Element
     @PossibleValues
     ( 
         property = "/Contacts/Name", 
-        invalidValueMessage = "Could not find contact name \"${Name}\" in the repository." 
+        invalidValueMessage = "Could not find contact name \"${Name}\" in the repository" 
     )
 
     ValueProperty PROP_NAME = new ValueProperty( TYPE, "Name" );
@@ -61,7 +59,6 @@ public interface Assistant extends Element
     // *** Notes ***
     
     @XmlBinding( path = "notes" )
-    @Label( standard = "notes" )
     @LongString
 
     ValueProperty PROP_NOTES = new ValueProperty( TYPE, "Notes" );
@@ -73,7 +70,6 @@ public interface Assistant extends Element
     
     @Type( base = AssistantTask.class )
     @XmlListBinding( mappings = @XmlListBinding.Mapping( element = "task", type = AssistantTask.class ) )
-    @Label( standard = "delegated tasks" )
                              
     ListProperty PROP_DELEGATED_TASKS = new ListProperty( TYPE, "DelegatedTasks" );
     

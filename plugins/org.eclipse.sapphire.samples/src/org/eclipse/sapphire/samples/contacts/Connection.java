@@ -19,7 +19,6 @@ import org.eclipse.sapphire.Unique;
 import org.eclipse.sapphire.Value;
 import org.eclipse.sapphire.ValueProperty;
 import org.eclipse.sapphire.modeling.annotations.Image;
-import org.eclipse.sapphire.modeling.annotations.Label;
 import org.eclipse.sapphire.modeling.annotations.Required;
 
 /**
@@ -34,7 +33,6 @@ public interface Connection extends Element
 
     // *** Name ***
     
-    @Label( standard = "name" )
     @Required
     @Unique
     @Collation( ignoreCaseDifferences = "true" )
