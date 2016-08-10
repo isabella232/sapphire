@@ -30,7 +30,6 @@ public interface StudentOccupation extends Occupation
     
     // *** EducationalInstitution ***
     
-    @Label( standard = "educational institution" )
     @Required
     @XmlBinding( path = "educational-institution" )
     
@@ -41,7 +40,6 @@ public interface StudentOccupation extends Occupation
     
     // *** Program ***
     
-    @Label( standard = "program" )
     @Required
     @XmlBinding( path = "program" )
     

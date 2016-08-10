@@ -53,7 +53,6 @@ public interface Contact extends Element
 
     // *** Name ***
     
-    @Label( standard = "name" )
     @Required
     @Unique
     @XmlBinding( path = "@name" )
@@ -65,7 +64,6 @@ public interface Contact extends Element
     
     // *** Category ***
     
-    @Label( standard = "category" )
     @DefaultValue( text = "Personal" )
     @Service( impl = ContactCategoryPossibleValueService.class )
     @XmlBinding( path = "%category" )
@@ -89,7 +87,6 @@ public interface Contact extends Element
     // *** PhoneNumbers ***
     
     @Type( base = PhoneNumber.class )
-    @Label( standard = "phone numbers" )
     @XmlListBinding( path = "phone-numbers", mappings = @XmlListBinding.Mapping( element = "phone-number", type = PhoneNumber.class ) )
                              
     ListProperty PROP_PHONE_NUMBERS = new ListProperty( TYPE, "PhoneNumbers" );
@@ -99,7 +96,6 @@ public interface Contact extends Element
     // *** WebSites ***
     
     @Type( base = WebSite.class )
-    @Label( standard = "web sites" )
     @XmlListBinding( path = "web-sites", mappings = @XmlListBinding.Mapping( element = "web-site", type = WebSite.class ) )
                              
     ListProperty PROP_WEB_SITES = new ListProperty( TYPE, "WebSites" );
@@ -124,7 +120,6 @@ public interface Contact extends Element
     // *** Assistant ***
 
     @Type( base = Assistant.class )
-    @Label( standard = "assistant" )
     @XmlBinding( path = "assistant" )
     
     @Documentation
@@ -138,7 +133,6 @@ public interface Contact extends Element
     
     // *** Connections ***
     
-    @Label( standard = "connections" )
     @Type( base = Connection.class )
     @CustomXmlListBinding( impl = ConnectionsListBinding.class )
                              
@@ -158,8 +152,6 @@ public interface Contact extends Element
             HomemakerOccupation.class 
         }
     )
-    
-    @Label( standard = "primary occupation" )
     
     @XmlElementBinding
     ( 

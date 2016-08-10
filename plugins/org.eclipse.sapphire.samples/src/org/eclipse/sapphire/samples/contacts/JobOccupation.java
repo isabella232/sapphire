@@ -34,7 +34,6 @@ public interface JobOccupation extends Occupation
     
     // *** Employer ***
     
-    @Label( standard = "employer" )
     @Required
     @XmlBinding( path = "employer" )
     
@@ -45,7 +44,6 @@ public interface JobOccupation extends Occupation
     
     // *** Title ***
     
-    @Label( standard = "title" )
     @Required
     @XmlBinding( path = "title" )
     
@@ -56,7 +54,6 @@ public interface JobOccupation extends Occupation
     
     // *** Manager ***
     
-    @Label( standard = "manager" )
     @Service( impl = ManagerNameValidationService.class )
     @XmlBinding( path = "manager" )
     @Collation( ignoreCaseDifferences = "true" )
@@ -64,7 +61,7 @@ public interface JobOccupation extends Occupation
     @PossibleValues
     ( 
         property = "/Contacts/Name", 
-        invalidValueMessage = "Could not find contact name \"${Manager}\" in the repository." 
+        invalidValueMessage = "Could not find contact name \"${Manager}\" in the repository" 
     )
 
     ValueProperty PROP_MANAGER = new ValueProperty( TYPE, "Manager" );

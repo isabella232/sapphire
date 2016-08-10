@@ -24,7 +24,7 @@
     
     <editor-page>
         <id>main</id>
-        <page-header-text>Contact Repository (Sapphire Sample)</page-header-text>
+        <page-header-text>contact repository (Sapphire sample)</page-header-text>
         <initial-selection>contacts</initial-selection>
         <documentation>
             <title>contact repository editor</title>
@@ -32,8 +32,8 @@
         </documentation>
         <action>
             <id>Sample.OpenSapphireWebSite</id>
-            <label>Sapphire Web Site</label>
-            <tooltip>Open Sapphire Web Site (Ctrl+Alt+Shift+S)</tooltip>
+            <label>Sapphire web site</label>
+            <tooltip>open Sapphire web site (Ctrl+Alt+Shift+S)</tooltip>
             <key-binding>CONTROL+ALT+SHIFT+s</key-binding>
             <key-binding-behavior>propagated</key-binding-behavior>
             <image>Web.png</image>
@@ -48,7 +48,6 @@
         <action-handler>
             <action>Sample.OpenSapphireWebSite</action>
             <id>Sample.OpenSapphireWebSite</id>
-            <label>Sapphire Web Site</label>
             <impl>OpenSapphireWebSiteActionHandler</impl>
         </action-handler>
         <root-node>
@@ -79,7 +78,7 @@
                         <section>
                             <label>basic info</label>
                             <documentation>
-                                <title>Basic Info</title>
+                                <title>basic info</title>
                                 <content>This would be the help content for the basic info section.</content>
                             </documentation>
                             <content>
@@ -91,7 +90,7 @@
                         <section>
                             <label>address</label>
                             <documentation>
-                                <title>Address</title>
+                                <title>address</title>
                                 <content>This would be the help content for the address section.</content>
                             </documentation>
                             <content>
