@@ -371,7 +371,6 @@ public class Value<T> extends Property
      * Returns parsed property content after running the actual property text through the localization service.
      * 
      * @param useDefaultValue indicates whether the default value should be used if property content is null
-     * 
      * @since 8.3
      */
     
