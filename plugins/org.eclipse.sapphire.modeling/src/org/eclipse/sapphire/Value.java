@@ -358,6 +358,8 @@ public class Value<T> extends Property
      * Returns parsed property content after running the actual property text through the localization service.
      * 
      * <p>Equivalent to localizedContent( true )</p>
+     * 
+     * @since 8.3 and 9.1
      */
     
     public final T localizedContent()
@@ -369,6 +371,7 @@ public class Value<T> extends Property
      * Returns parsed property content after running the actual property text through the localization service.
      * 
      * @param useDefaultValue indicates whether the default value should be used if property content is null
+     * @since 8.3 and 9.1
      */
     
     public final T localizedContent( final boolean useDefaultValue )
