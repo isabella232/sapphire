@@ -304,6 +304,78 @@ public final class SwtUtil
         runOnDisplayThread( op, PlatformUI.getWorkbench().getDisplay() );
     }
     
+    /**
+     * Runs the provided operation on the display thread. This implementation avoids using Display.syncExec() method if
+     * the current thread is the display thread.
+     * 
+     * @param operation the operation to run
+     * @param display the display that this operation targets
+     * @since 8.3
+     */
+    
+    public static void syncExec( final Runnable operation, final Display display )
+    {
+        if( operation == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        
+        if( display == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        
+        if( display.getThread() == Thread.currentThread() )
+        {
+            operation.run();
+        }
+        else
+        {
+            display.syncExec( operation );
+        }
+    }
+    
+    /**
+     * Runs the provided operation on the display thread. This implementation avoids using Display.syncExec() method if
+     * the current thread is the display thread.
+     * 
+     * <p>This variant of the method uses the workbench display.</p>
+     * 
+     * @param operation the operation to run
+     * @since 8.3
+     */
+    
+    public static void syncExec( final Runnable operation )
+    {
+        if( operation == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        
+        syncExec( operation, PlatformUI.getWorkbench().getDisplay() );
+    }
+    
+    /**
+     * Runs the provided operation asynchronously on the workbench display thread.
+     * 
+     * <p>This a convenience method equivalent to the following invocation:</p>
+     * 
+     * <p><code>PlatformUI.getWorkbench().getDisplay().asyncExec( operation )</code></p>
+     * 
+     * @param operation the operation to run
+     * @since 8.3
+     */
+    
+    public static void asyncExec( final Runnable operation )
+    {
+        if( operation == null )
+        {
+            throw new IllegalArgumentException();
+        }
+        
+        PlatformUI.getWorkbench().getDisplay().asyncExec( operation );
+    }
+    
     public static String describe( final Widget widget )
     {
         return describe( widget, 0 );

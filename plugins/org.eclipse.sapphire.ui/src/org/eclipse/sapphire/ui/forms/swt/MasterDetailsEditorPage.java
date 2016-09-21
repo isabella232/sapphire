@@ -25,6 +25,8 @@ import static org.eclipse.sapphire.ui.forms.swt.GridLayoutUtil.gdhfill;
 import static org.eclipse.sapphire.ui.forms.swt.GridLayoutUtil.gdhhint;
 import static org.eclipse.sapphire.ui.forms.swt.GridLayoutUtil.gdwhint;
 import static org.eclipse.sapphire.ui.forms.swt.GridLayoutUtil.glayout;
+import static org.eclipse.sapphire.ui.forms.swt.SwtUtil.asyncExec;
+import static org.eclipse.sapphire.ui.forms.swt.SwtUtil.syncExec;
 import static org.eclipse.sapphire.ui.util.MiscUtil.findSelectionPostDelete;
 import static org.eclipse.sapphire.util.CollectionsUtil.findPrecedingItem;
 import static org.eclipse.sapphire.util.CollectionsUtil.findTrailingItem;
@@ -642,15 +644,7 @@ public final class MasterDetailsEditorPage extends SapphireEditorFormPage implem
                             if( event instanceof PartVisibilityEvent )
                             {
                                 final MasterDetailsContentNodePart parent = node.getParentNode();
-                                
-                                if( parent == outline.getRoot() )
-                                {
-                                    treeViewer.refresh();
-                                }
-                                else
-                                {
-                                    treeViewer.refresh( parent );
-                                }
+                                syncExec( new TreeViewerRefreshOp( treeViewer, ( parent == outline.getRoot() ? null : parent ) ) );
                             }
                             else
                             {
@@ -658,11 +652,11 @@ public final class MasterDetailsEditorPage extends SapphireEditorFormPage implem
                                 {
                                     if( event instanceof LabelChangedEvent || event instanceof ImageChangedEvent || event instanceof DecorationEvent )
                                     {
-                                        Display.getCurrent().asyncExec( new TreeViewerUpdateJob( treeViewer, node ) );
+                                        asyncExec( new TreeViewerUpdateOp( treeViewer, node ) );
                                     }
                                     else if( event instanceof NodeListEvent )
                                     {
-                                        treeViewer.refresh( node );
+                                        syncExec( new TreeViewerRefreshOp( treeViewer, node ) );
                                     }
                                 }
                             }
@@ -1587,6 +1581,8 @@ public final class MasterDetailsEditorPage extends SapphireEditorFormPage implem
         }
     }
     
+    
+    
     public void dispose() 
     {
         super.dispose();
@@ -2260,13 +2256,12 @@ public final class MasterDetailsEditorPage extends SapphireEditorFormPage implem
         }
     }
     
-    private static final class TreeViewerUpdateJob implements Runnable
+    private static final class TreeViewerUpdateOp implements Runnable
     {
         private final TreeViewer tree;
         private final Object element;
         
-        public TreeViewerUpdateJob( final TreeViewer tree,
-                                    final Object element )
+        public TreeViewerUpdateOp( final TreeViewer tree, final Object element )
         {
             this.tree = tree;
             this.element = element;
@@ -2278,6 +2273,30 @@ public final class MasterDetailsEditorPage extends SapphireEditorFormPage implem
         }
     }
     
+    private static final class TreeViewerRefreshOp implements Runnable
+    {
+        private final TreeViewer tree;
+        private final Object element;
+        
+        public TreeViewerRefreshOp( final TreeViewer tree, final Object element )
+        {
+            this.tree = tree;
+            this.element = element;
+        }
+
+        public void run()
+        {
+            if( this.element == null )
+            {
+                this.tree.refresh();
+            }
+            else
+            {
+                this.tree.refresh( this.element );
+            }
+        }
+    }
+
     private static final class SelectionChangedEventFilter implements Filter<EventDeliveryJob>
     {
         public static SelectionChangedEventFilter INSTANCE = new SelectionChangedEventFilter();
