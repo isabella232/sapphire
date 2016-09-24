@@ -109,7 +109,7 @@ public final class ExportDocumentationTask extends AbstractTask
                     final String href = hrefMatcher.group( 3 );
                     final File hrefFile = new File( destination, href );
                     final File hrefFolder = hrefFile.getParentFile();
-                    final int level = fp.getAbsolutePath().split( "\\\\" ).length - hrefFolder.getAbsolutePath().split( "\\\\" ).length;
+                    final int level = fp.getAbsolutePath().split( "[\\\\/]" ).length - hrefFolder.getAbsolutePath().split( "[\\\\/]" ).length;
                     final StringBuilder relative = new StringBuilder();
                     
                     for( int i = 0; i < level; i++ )
