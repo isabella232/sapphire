@@ -122,6 +122,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Layout;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -135,7 +136,6 @@ import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.forms.widgets.ILayoutExtension;
 import org.eclipse.ui.forms.widgets.SizeCache;
 import org.eclipse.ui.internal.forms.widgets.FormHeading;
-import org.eclipse.ui.internal.forms.widgets.FormUtil;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 /**
@@ -1139,7 +1139,7 @@ public class SapphireDiagramEditor extends GraphicalEditorWithFlyoutPalette impl
 			int width = 0;
 			int height = 0;
 
-			org.eclipse.swt.graphics.Point hsize = headCache.computeSize(FormUtil.getWidthHint(wHint,
+			org.eclipse.swt.graphics.Point hsize = headCache.computeSize(getWidthHint(wHint,
 					header), SWT.DEFAULT);
 			width = Math.max(hsize.x, width);
 			height = hsize.y;
@@ -1150,12 +1150,26 @@ public class SapphireDiagramEditor extends GraphicalEditorWithFlyoutPalette impl
 			if (ignoreBody)
 				bsize = new org.eclipse.swt.graphics.Point(0,0);
 			else
-				bsize = bodyCache.computeSize(FormUtil.getWidthHint(wHint,
+				bsize = bodyCache.computeSize(getWidthHint(wHint,
 					body), SWT.DEFAULT);
 			width = Math.max(bsize.x, width);
 			height += bsize.y;
 			return new org.eclipse.swt.graphics.Point(width, height);
 		}
+		
+	    private boolean isWrapControl(Control c) {
+	        if ((c.getStyle() & SWT.WRAP) != 0)
+	            return true;
+	        if (c instanceof Composite) {
+	            return ((Composite) c).getLayout() instanceof ILayoutExtension;
+	        }
+	        return false;
+	    }
+
+	    private int getWidthHint(int wHint, Control c) {
+	        boolean wrap = isWrapControl(c);
+	        return wrap ? wHint : SWT.DEFAULT;
+	    }
 
 		protected void layout(Composite composite, boolean flushCache) {
 			if (flushCache) {
