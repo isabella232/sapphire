@@ -23,7 +23,7 @@
   
   <import file="releng/ant-library/library.xml"/>
   <import file="releng/tools/build.xml"/>
-	
+    
   <property name="Signing.Library" value="sign-local.xml"/>
   <import file="${Signing.Library}"/>
   
@@ -222,8 +222,8 @@
             <delete file="${build.dir}/repository/site.xml"/>
 
             <load-build-repository url="file:${build.dir}/repository"/>
-          	
-          	<gen-repository-landing repository="${build.dir}/repository" name="Sapphire ${sapphire.version} Repository"/>
+              
+              <gen-repository-landing repository="${build.dir}/repository" name="Sapphire ${sapphire.version} Repository"/>
 
             <property name="build.repository.completed" value="true"/>
 
@@ -924,7 +924,23 @@
               <if>
                 <not><istrue value="${.content.valid}"/></not>
                 <then>
-                  <get src="http://www.eclipse.org/downloads/download.php?file=@{file}&amp;r=1&amp;protocol=http" dest="${downloads}/${.url.checksum}" verbose="true"/>
+                  <trycatch property=".exception">
+                    <try>
+                      <if>
+                        <istrue value="${force.eclipse.org}"/>
+                        <then>
+                          <get src="http://download.eclipse.org@{file}" dest="${downloads}/${.url.checksum}"/>
+                        </then>
+                        <else>
+                          <get src="http://www.eclipse.org/downloads/download.php?file=@{file}&amp;r=1&amp;protocol=http" dest="${downloads}/${.url.checksum}"/>
+                        </else>
+                      </if>
+                    </try>
+                    <catch>
+                      <echo message="Caught: ${.exception}"/>
+                      <get src="http://archive.eclipse.org@{file}" dest="${downloads}/${.url.checksum}"/>
+                    </catch>
+                  </trycatch>
                 </then>
               </if>
               
@@ -956,7 +972,19 @@
     </sequential>
   </macrodef>
   
-	
+  
+  <target name="download-from-eclipse" depends="init">
+  
+    <fail unless="file" message="Must specify property &quot;file&quot;"/>
+  
+    <download-from-eclipse file="${file}" property="destination"/>
+    
+    <echo/>
+    <echo message="Downloaded to ${destination}"/>
+
+  </target>
+  
+  
   <macrodef name="prune-downloads-from-eclipse">
     <sequential>
     
@@ -972,14 +1000,14 @@
             <path>
               <fileset dir="${downloads}">
                 <include name="*"/>
-          	    <exclude name="*.properties"/>
+                  <exclude name="*.properties"/>
               </fileset>
             </path>
             <sequential>
           
               <basename file="@{dfe.file}" property=".dfe.file.name"/>
               <property name=".dfe.file.metadata" value="${downloads}/${.dfe.file.name}.properties"/>
-        	
+            
               <if>
                 <available file="${.dfe.file.metadata}"/>
                 <then>
@@ -988,46 +1016,46 @@
               </if>
               
               <if>
-        	    <isset property=".dfe.metadata.LastUsed"/>
+                <isset property=".dfe.metadata.LastUsed"/>
                 <then>
-            	  
+                  
                   <if>
-              	    <scriptcondition language="javascript">
+                      <scriptcondition language="javascript">
                       <![CDATA[
-              		    var dateParts = project.getProperty( ".dfe.metadata.LastUsed" ).split( "-" );
-              		    
-              		    if( dateParts.length == 3 )
-              		    {
-              		        var lastUsed = new Date( dateParts[ 0 ], dateParts[ 1 ] - 1, dateParts[ 2 ] );
-              		        var today = new Date();
-              		        
-              		        if( today.getTime() - lastUsed.getTime() < ( 30 * 24 * 60 * 60 * 1000 ) )
-              		        {
-              		            self.value = false;
-              		        }
-              		        else
-              		        {
-              		            self.value = true;
+                          var dateParts = project.getProperty( ".dfe.metadata.LastUsed" ).split( "-" );
+                          
+                          if( dateParts.length == 3 )
+                          {
+                              var lastUsed = new Date( dateParts[ 0 ], dateParts[ 1 ] - 1, dateParts[ 2 ] );
+                              var today = new Date();
+                              
+                              if( today.getTime() - lastUsed.getTime() < ( 30 * 24 * 60 * 60 * 1000 ) )
+                              {
+                                  self.value = false;
+                              }
+                              else
+                              {
+                                  self.value = true;
                             }
-              		    }
-              		    else
-              		    {
-              		        self.value = false;
-              	        }
+                          }
+                          else
+                          {
+                              self.value = false;
+                          }
                       ]]>
-              	    </scriptcondition>
-              	    <then>
-              	      <delete file="@{dfe.file}"/>
-              	      <delete file="${.dfe.file.metadata}"/>
-              	    </then>
+                      </scriptcondition>
+                      <then>
+                        <delete file="@{dfe.file}"/>
+                        <delete file="${.dfe.file.metadata}"/>
+                      </then>
                   </if>
-            	  
+                  
                 </then>
                 <else>
                   <propertyfile file="${.dfe.file.metadata}">
                     <entry key="LastUsed" type="date" value="now" pattern="yyyy-MM-dd"/>
                   </propertyfile>
-        	    </else>
+                </else>
               </if>
               
               <var name=".dfe.file.name" unset="true"/>
@@ -1036,7 +1064,7 @@
               
             </sequential>
           </for>
-    	  
+          
         </then>
       </if>
       
