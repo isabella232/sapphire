@@ -18,12 +18,9 @@
   <property name="releng.dir" value="${root.dir}/releng"/>
 
   
-  <loadproperties>
-    <url url="https://www.eclipse.org/sapphire/corundum.properties"/>
-  </loadproperties>
-
   <delete dir="releng/corundum" quiet="true"/>
-  <get src="${corundum-1}" dest="releng/corundum.zip" usetimestamp="true"/>
+  <property name="corundum-url" value="https://hudson.eclipse.org/sapphire/job/Corundum/lastSuccessfulBuild/artifact/corundum.zip"/>
+  <get src="${corundum-url}" dest="releng/corundum.zip" usetimestamp="true"/>
   <unzip src="releng/corundum.zip" dest="releng/corundum"/>
     
   <import file="releng/corundum/corundum.xml"/>
