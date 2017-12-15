@@ -18,7 +18,7 @@ import org.eclipse.sapphire.modeling.annotations.EnumSerialization;
 /**
  * ConversionService implementation for Enum to String conversions.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @SuppressWarnings( "rawtypes" )

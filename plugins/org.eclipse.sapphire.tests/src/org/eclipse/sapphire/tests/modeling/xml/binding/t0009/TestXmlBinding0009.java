@@ -24,7 +24,7 @@ import org.junit.Test;
  * Tests default XML binding. The test is repeated with and without the convention of using 'I' prefix
  * on model element interfaces.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestXmlBinding0009 extends SapphireTestCase

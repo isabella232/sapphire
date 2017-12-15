@@ -23,7 +23,7 @@ import org.junit.Test;
  * Tests removal of non-significant empty XML elements from an implied element property when all content
  * is cleared.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestXmlBinding0008 extends SapphireTestCase

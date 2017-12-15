@@ -42,7 +42,7 @@ import org.eclipse.swt.widgets.Text;
 /**
  * Implements default value overlay and Ctrl+Click navigation in a standard SWT Text widget. 
  * 
- * @author <a href="konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TextOverlayPainter

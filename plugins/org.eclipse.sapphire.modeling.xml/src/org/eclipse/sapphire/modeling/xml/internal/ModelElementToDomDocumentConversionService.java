@@ -21,7 +21,7 @@ import org.w3c.dom.Document;
 /**
  * ConversionService implementation for ModelElement to DOM Document conversions.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ModelElementToDomDocumentConversionService extends ConversionService<ElementImpl,Document>

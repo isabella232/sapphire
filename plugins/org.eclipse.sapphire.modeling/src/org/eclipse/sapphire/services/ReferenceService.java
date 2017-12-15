@@ -16,7 +16,7 @@ import org.eclipse.sapphire.Property;
 import org.eclipse.sapphire.PropertyContentEvent;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class ReferenceService<T> extends DataService<T>

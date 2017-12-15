@@ -32,7 +32,7 @@ import org.eclipse.swt.widgets.Label;
  * Displays the number of characters remaining before the length limit is reached for a text field. Typically placed
  * beneath a text field.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TextCapacityFeedback extends Composite

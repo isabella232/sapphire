@@ -19,7 +19,7 @@ import org.eclipse.sapphire.modeling.el.FunctionResult;
  * Replaces all occurrences of a regular expression pattern with the provided replacement text. The full semantics
  * are specified by Java's {@link String#replaceAll( String, String )} function.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ReplaceFunction extends Function

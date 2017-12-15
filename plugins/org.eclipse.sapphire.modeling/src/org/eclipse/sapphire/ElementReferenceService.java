@@ -43,7 +43,7 @@ import org.eclipse.sapphire.services.ServiceEvent;
  * 
  * <p>A PossibleValuesService implementation is automatically provided when this service is implemented.</p>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class ElementReferenceService extends ReferenceService<Element>

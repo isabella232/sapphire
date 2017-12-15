@@ -28,7 +28,7 @@ import org.eclipse.sapphire.services.ServiceContext;
  * constraints by using the semantical information specified by the @Length annotation or the deprecated
  * @CountConstraint annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @SuppressWarnings( "deprecation" )

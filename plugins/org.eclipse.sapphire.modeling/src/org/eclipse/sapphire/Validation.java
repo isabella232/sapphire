@@ -22,7 +22,7 @@ import org.eclipse.sapphire.modeling.Status;
  * Specifies a validation rule for a property or an element using Sapphire EL. Multiple rules can be specified
  * by using @{@link Validations} container.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @Retention( RetentionPolicy.RUNTIME )

@@ -23,7 +23,7 @@ import org.eclipse.sapphire.modeling.localization.LocalizationSystem;
 import org.eclipse.sapphire.util.ListFactory;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class EnumValueType extends ModelMetadataItem

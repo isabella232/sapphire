@@ -25,7 +25,7 @@ import org.eclipse.sapphire.services.ServiceContext;
  * Creates fact statements about existence requirement on the entity referenced by property's value 
  * by using semantical information specified by @MustExist annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class MustExistFactsService extends FactsService

@@ -18,7 +18,7 @@ import org.eclipse.sapphire.ui.SapphireActionHandler;
 import org.eclipse.ui.PlatformUI;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class HelpActionHandler extends SapphireActionHandler 

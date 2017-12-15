@@ -19,7 +19,7 @@ import org.junit.Test;
 /**
  * Tests reporting of unresolvable namespace usage in element property binding.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestXmlBinding0005 extends SapphireTestCase
