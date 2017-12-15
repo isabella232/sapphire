@@ -27,7 +27,7 @@ import org.eclipse.sapphire.modeling.annotations.BasePathsProviderImpl;
 import org.eclipse.sapphire.modeling.annotations.FileSystemResourceType;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class RelativePathValueValidator

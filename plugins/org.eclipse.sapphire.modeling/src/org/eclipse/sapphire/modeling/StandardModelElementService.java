@@ -51,7 +51,7 @@ import org.eclipse.sapphire.modeling.internal.StaticValuesProvider;
  * StandardModelElementService svc = el.service( StandardModelElementService.class );
  * </code></p>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class StandardModelElementService

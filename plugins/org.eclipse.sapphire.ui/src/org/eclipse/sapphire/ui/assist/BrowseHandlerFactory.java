@@ -14,7 +14,7 @@ package org.eclipse.sapphire.ui.assist;
 import org.eclipse.sapphire.modeling.ValueProperty;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class BrowseHandlerFactory

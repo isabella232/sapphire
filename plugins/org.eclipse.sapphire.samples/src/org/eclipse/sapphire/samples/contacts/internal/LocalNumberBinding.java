@@ -16,7 +16,7 @@ import org.eclipse.sapphire.modeling.xml.IModelElementForXml;
 import org.eclipse.sapphire.modeling.xml.XmlElement;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class LocalNumberBinding

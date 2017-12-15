@@ -21,7 +21,7 @@ import org.eclipse.sapphire.ui.editor.views.masterdetails.MasterDetailsContentNo
 import org.eclipse.swt.widgets.Shell;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class NodeDeleteAction

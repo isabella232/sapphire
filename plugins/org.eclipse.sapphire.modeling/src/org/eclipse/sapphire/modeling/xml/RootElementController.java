@@ -15,7 +15,7 @@ import org.eclipse.sapphire.modeling.ModelElementType;
 import org.w3c.dom.Document;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class RootElementController

@@ -14,7 +14,7 @@ package org.eclipse.sapphire.modeling.xml.schema;
 import javax.xml.namespace.QName;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class XmlElementDefinitionByReference extends XmlElementDefinition

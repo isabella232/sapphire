@@ -30,7 +30,7 @@ import org.eclipse.sapphire.samples.zoo.IStats;
 import org.eclipse.sapphire.samples.zoo.IZooModel;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class Stats

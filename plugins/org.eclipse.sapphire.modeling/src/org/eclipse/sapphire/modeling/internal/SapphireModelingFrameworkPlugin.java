@@ -17,7 +17,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 
 /**
- * @author <a href="konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class SapphireModelingFrameworkPlugin

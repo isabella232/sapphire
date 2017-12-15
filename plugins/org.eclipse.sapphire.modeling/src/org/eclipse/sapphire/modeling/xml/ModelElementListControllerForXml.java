@@ -19,7 +19,7 @@ import java.util.List;
 import org.eclipse.sapphire.modeling.LayeredModelElementListController;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class ModelElementListControllerForXml<T extends IModelElementForXml>

@@ -28,7 +28,7 @@ import org.eclipse.sapphire.modeling.annotations.processor.util.TypeReference;
 import com.sun.mirror.declaration.InterfaceDeclaration;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class GenerateStubProcessor 

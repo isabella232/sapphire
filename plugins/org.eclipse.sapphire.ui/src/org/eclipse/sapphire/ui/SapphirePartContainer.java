@@ -23,7 +23,7 @@ import org.eclipse.sapphire.ui.def.ISapphirePartContainerDef;
 import org.eclipse.sapphire.ui.def.ISapphirePartDef;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class SapphirePartContainer

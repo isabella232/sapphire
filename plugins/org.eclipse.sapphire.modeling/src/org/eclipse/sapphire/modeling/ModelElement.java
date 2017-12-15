@@ -31,7 +31,7 @@ import org.eclipse.sapphire.modeling.extensibility.ServicesExtensionPoint;
 import org.eclipse.sapphire.modeling.internal.SapphireModelingFrameworkPlugin;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class ModelElement

@@ -14,7 +14,7 @@ package org.eclipse.sapphire.modeling;
 import org.eclipse.core.resources.IFile;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public interface IEclipseFileModelStore

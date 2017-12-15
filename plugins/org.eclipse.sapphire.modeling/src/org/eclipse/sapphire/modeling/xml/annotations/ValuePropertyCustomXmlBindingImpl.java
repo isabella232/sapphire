@@ -15,7 +15,7 @@ import org.eclipse.sapphire.modeling.annotations.ValuePropertyCustomBindingImpl;
 import org.eclipse.sapphire.modeling.xml.XmlNode;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class ValuePropertyCustomXmlBindingImpl

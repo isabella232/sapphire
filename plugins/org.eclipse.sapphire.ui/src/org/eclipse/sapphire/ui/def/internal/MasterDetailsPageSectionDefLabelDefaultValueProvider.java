@@ -15,7 +15,7 @@ import org.eclipse.sapphire.modeling.annotations.DefaultValueProviderImpl;
 import org.eclipse.sapphire.ui.def.IMasterDetailsTreeNodeDef;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class MasterDetailsPageSectionDefLabelDefaultValueProvider

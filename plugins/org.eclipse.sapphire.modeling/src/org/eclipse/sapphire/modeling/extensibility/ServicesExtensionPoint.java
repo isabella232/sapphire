@@ -28,7 +28,7 @@ import org.eclipse.sapphire.modeling.internal.SapphireModelingFrameworkPlugin;
 import org.eclipse.sapphire.modeling.util.internal.PluginUtil.InvalidExtensionException;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ServicesExtensionPoint

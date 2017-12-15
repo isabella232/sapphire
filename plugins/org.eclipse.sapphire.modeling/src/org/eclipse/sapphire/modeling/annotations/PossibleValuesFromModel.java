@@ -25,7 +25,7 @@ import org.eclipse.core.runtime.IStatus;
  * <p>Note that this annotation creates an implied DependsOn relationship to the specified 
  * path. It is not necessary to explicitly specify this relationship.</p>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @Retention( RetentionPolicy.RUNTIME )

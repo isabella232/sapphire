@@ -16,7 +16,7 @@ import org.eclipse.sapphire.ui.assist.BrowseHandler;
 import org.eclipse.sapphire.ui.assist.BrowseHandlerFactory;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class PossibleValuesProviderBrowseHandlerFactory 

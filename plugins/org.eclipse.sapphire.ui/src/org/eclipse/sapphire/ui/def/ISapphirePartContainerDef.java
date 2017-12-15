@@ -19,7 +19,7 @@ import org.eclipse.sapphire.modeling.xml.annotations.ListPropertyXmlBinding;
 import org.eclipse.sapphire.modeling.xml.annotations.ListPropertyXmlBindingMapping;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public interface ISapphirePartContainerDef

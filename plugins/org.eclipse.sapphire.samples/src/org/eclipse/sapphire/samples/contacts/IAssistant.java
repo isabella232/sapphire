@@ -32,7 +32,7 @@ import org.eclipse.sapphire.modeling.xml.annotations.XmlBinding;
 import org.eclipse.sapphire.samples.contacts.internal.AssistantNameValidator;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @Image( small = "org.eclipse.sapphire.samples/images/person.png" )

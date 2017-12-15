@@ -23,7 +23,7 @@ import org.eclipse.sapphire.ui.def.internal.PageBookPartDefControlMethodBinding;
 import org.eclipse.sapphire.ui.def.internal.PageBookPartDefControlPropertyBinding;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @Label( standard = "page book" )
