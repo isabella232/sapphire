@@ -24,7 +24,7 @@ import org.eclipse.sapphire.ui.swt.renderer.actions.RelativePathBrowseActionHand
 import org.eclipse.sapphire.util.ReadOnlyListFactory;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class WorkspaceRelativePathBrowseActionHandler extends RelativePathBrowseActionHandler

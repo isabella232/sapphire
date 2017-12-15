@@ -68,7 +68,7 @@ import org.eclipse.sapphire.util.ReadOnlyListFactory;
 import org.eclipse.sapphire.util.ReadOnlyMapFactory;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class MasterDetailsContentNode

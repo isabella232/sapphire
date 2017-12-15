@@ -29,7 +29,7 @@ import org.eclipse.sapphire.tests.modeling.xml.dtd.XmlDtdTestSuite;
 import org.eclipse.sapphire.tests.modeling.xml.xsd.XmlXsdTestSuite;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class XmlBindingTests

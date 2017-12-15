@@ -23,7 +23,7 @@ import org.eclipse.sapphire.tests.modeling.xml.xsd.t0004.TestXmlXsd0004;
 import org.eclipse.sapphire.tests.modeling.xml.xsd.t0005.TestXmlXsd0005;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class XmlXsdTestSuite extends TestCase

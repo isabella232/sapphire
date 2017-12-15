@@ -18,7 +18,7 @@ import java.util.Set;
 import com.sun.mirror.type.PrimitiveType;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class TypeReference

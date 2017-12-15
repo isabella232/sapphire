@@ -33,7 +33,7 @@ import org.eclipse.sapphire.tests.modeling.misc.t0015.TestModelingMisc0015;
 import org.eclipse.sapphire.tests.modeling.misc.t0016.TestModelingMisc0016;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ModelingMiscTests extends TestCase

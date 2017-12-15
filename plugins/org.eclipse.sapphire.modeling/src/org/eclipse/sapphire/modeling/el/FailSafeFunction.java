@@ -17,7 +17,7 @@ import org.eclipse.sapphire.modeling.Value;
  * Function that ensures that the returned value is of specified type and prevents function
  * exceptions from propagating.  
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class FailSafeFunction

@@ -20,7 +20,7 @@ import org.eclipse.sapphire.tests.SapphireTestCase;
  * Tests use of @DependsOn where the property specifying the dependency resides in an implied element property
  * and the specified dependency path traverses through this implied element property.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestModelingMisc0013 extends SapphireTestCase

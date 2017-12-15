@@ -15,7 +15,7 @@ import org.eclipse.sapphire.modeling.DelimitedListBindingImpl;
 import org.eclipse.sapphire.modeling.IModelElement;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class XmlDelimitedListBindingImpl extends DelimitedListBindingImpl

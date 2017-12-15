@@ -33,7 +33,7 @@ import org.eclipse.sapphire.ui.def.IPropertiesViewContributorDef;
 /**
  * @author <a href="mailto:shenxue.zhou@oracle.com">Shenxue Zhou</a>
  * @author <a href="mailto:ling.hao@oracle.com">Ling Hao</a>
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @Label( standard = "diagram editor page" )

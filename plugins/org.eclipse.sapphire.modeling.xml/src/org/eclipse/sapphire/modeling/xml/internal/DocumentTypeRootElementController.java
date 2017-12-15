@@ -27,7 +27,7 @@ import org.w3c.dom.Element;
  * configured via the @XmlDocumentType annotation.
  * 
  * @author <a href="mailto:kamesh.sampath@accenture.com">Kamesh Sampath</a>
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class DocumentTypeRootElementController extends RootElementController {

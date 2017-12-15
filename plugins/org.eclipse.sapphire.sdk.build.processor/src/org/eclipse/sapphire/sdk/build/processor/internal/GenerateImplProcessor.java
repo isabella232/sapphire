@@ -90,7 +90,7 @@ import com.sun.mirror.type.VoidType;
 import com.sun.mirror.util.SourcePosition;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class GenerateImplProcessor extends SapphireAnnotationsProcessor

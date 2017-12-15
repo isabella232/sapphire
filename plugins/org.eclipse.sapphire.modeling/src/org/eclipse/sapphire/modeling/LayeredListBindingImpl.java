@@ -17,7 +17,7 @@ import org.eclipse.sapphire.util.IdentityCache;
 import org.eclipse.sapphire.util.ReadOnlyListFactory;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class LayeredListBindingImpl extends ListBindingImpl

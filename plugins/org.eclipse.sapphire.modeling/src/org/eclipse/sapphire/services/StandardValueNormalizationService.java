@@ -19,7 +19,7 @@ import org.eclipse.sapphire.modeling.annotations.Whitespace;
  * declarative annotations, such as @Whitespace. Can be extended to add further normalization
  * logic to what's provided by the system.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class StandardValueNormalizationService extends ValueNormalizationService

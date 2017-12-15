@@ -21,7 +21,7 @@ import org.eclipse.sapphire.tests.modeling.events.EventLog;
 /**
  * Tests delivery of value property events.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestModelingEvents0001 extends SapphireTestCase

@@ -22,7 +22,7 @@ import org.eclipse.sapphire.tests.SapphireTestCase;
 /**
  * Tests namespace support in XML binding.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestXmlBinding0003 extends SapphireTestCase

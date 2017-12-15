@@ -18,7 +18,7 @@ import org.eclipse.sapphire.services.ValidationAggregationService;
 import org.eclipse.sapphire.services.ValueSerializationMasterService;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class Value<T> extends ModelParticle

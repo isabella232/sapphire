@@ -25,7 +25,7 @@ import org.eclipse.sapphire.workspace.ProjectRelativePath;
  * Creates fact statements about property's relative to the project path requirement by using semantical 
  * information specified by @ProjectRelativePath annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ProjectRelativePathFactsService extends FactsService

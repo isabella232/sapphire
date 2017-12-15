@@ -21,7 +21,7 @@ import org.eclipse.sapphire.services.ImageService;
 /**
  * A function that returns the image associated with the current model element. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ImageFunction extends Function

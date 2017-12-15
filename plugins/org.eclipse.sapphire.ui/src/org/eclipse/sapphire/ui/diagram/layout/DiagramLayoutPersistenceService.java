@@ -31,7 +31,7 @@ import org.eclipse.sapphire.services.Service;
  * </ol>
  * 
  * @author <a href="mailto:shenxue.zhou@oracle.com">Shenxue Zhou</a>
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class DiagramLayoutPersistenceService extends Service

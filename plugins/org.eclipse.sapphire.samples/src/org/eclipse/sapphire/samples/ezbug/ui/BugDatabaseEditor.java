@@ -15,7 +15,7 @@ import org.eclipse.sapphire.samples.ezbug.IBugDatabase;
 import org.eclipse.sapphire.ui.swt.xml.editor.SapphireEditorForXml;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class BugDatabaseEditor extends SapphireEditorForXml

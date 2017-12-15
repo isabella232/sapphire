@@ -30,7 +30,7 @@ import org.eclipse.sapphire.tests.SapphireTestCase;
  *   <li>Failing that, try to select the last item not on the to-be-deleted list.</li>
  * </ol>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class UiMisc0001Test

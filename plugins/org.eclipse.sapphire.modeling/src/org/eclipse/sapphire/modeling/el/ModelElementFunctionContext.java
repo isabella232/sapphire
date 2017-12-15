@@ -25,7 +25,7 @@ import org.eclipse.sapphire.modeling.localization.SourceLanguageLocalizationServ
 import org.eclipse.sapphire.modeling.util.NLS;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class ModelElementFunctionContext extends FunctionContext

@@ -27,7 +27,7 @@ import org.eclipse.sapphire.modeling.util.NLS;
 import org.osgi.framework.Bundle;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class BundleResourceStore
