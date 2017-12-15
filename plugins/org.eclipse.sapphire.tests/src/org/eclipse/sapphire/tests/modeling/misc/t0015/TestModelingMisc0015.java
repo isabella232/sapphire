@@ -19,7 +19,7 @@ import org.eclipse.sapphire.tests.SapphireTestCase;
 /**
  * Tests code generator's handling of properties that have names the same as Java keywords.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestModelingMisc0015 extends SapphireTestCase

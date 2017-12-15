@@ -20,7 +20,7 @@ import org.eclipse.sapphire.tests.SapphireTestCase;
  * Tests service lookup while in presence of concurrent model access that utilizes the same service context. Of particular
  * note is the case where service initialization involves model access. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ServiceLookupConcurrencyTest extends SapphireTestCase

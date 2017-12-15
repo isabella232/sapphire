@@ -25,7 +25,7 @@ import org.eclipse.sapphire.services.ServiceFactory;
  * Creates fact statements about property's absolute path requirement by using semantical information 
  * specified by @AbsolutePath annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class AbsolutePathFactsService extends FactsService

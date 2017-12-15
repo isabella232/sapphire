@@ -21,7 +21,7 @@ import org.eclipse.sapphire.util.MutableReference;
 import org.eclipse.swt.widgets.Display;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class DelayedTasksExecutor

@@ -19,7 +19,7 @@ import org.eclipse.sapphire.tests.SapphireTestCase;
 /**
  * Tests ability to safely access property enablement inside a validation service.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestModelingMisc0017 extends SapphireTestCase

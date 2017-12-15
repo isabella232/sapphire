@@ -37,7 +37,7 @@ import org.eclipse.sapphire.services.ServiceFactory;
 /**
  * Implementation of FileExtensionsService that derives its behavior from @FileExtensions annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class DeclarativeFileExtensionsService extends FileExtensionsService

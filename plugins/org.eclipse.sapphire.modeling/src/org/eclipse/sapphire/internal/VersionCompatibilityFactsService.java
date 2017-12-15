@@ -28,7 +28,7 @@ import org.eclipse.sapphire.services.ServiceFactory;
  * Creates fact statements about property's version compatibility by using semantic information specified
  * by @Since and @VersionCompatibility annotations. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class VersionCompatibilityFactsService extends FactsService

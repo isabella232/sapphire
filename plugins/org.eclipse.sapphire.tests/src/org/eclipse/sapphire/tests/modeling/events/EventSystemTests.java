@@ -22,7 +22,7 @@ import org.eclipse.sapphire.tests.modeling.events.t0004.TestModelingEvents0004;
 import org.eclipse.sapphire.tests.modeling.events.t0005.TestModelingEvents0005;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class EventSystemTests extends TestCase

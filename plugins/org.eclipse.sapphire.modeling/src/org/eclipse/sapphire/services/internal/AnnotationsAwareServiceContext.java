@@ -28,7 +28,7 @@ import org.eclipse.sapphire.services.ServiceContext;
 import org.eclipse.sapphire.services.ServiceFactoryProxy;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  * @author <a href="mailto:rcernich@redhat.com">Rob Cernich</a>
  */
 

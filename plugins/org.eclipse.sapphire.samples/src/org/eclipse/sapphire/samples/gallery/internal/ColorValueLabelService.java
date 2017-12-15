@@ -14,7 +14,7 @@ package org.eclipse.sapphire.samples.gallery.internal;
 import org.eclipse.sapphire.services.ValueLabelService;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ColorValueLabelService extends ValueLabelService

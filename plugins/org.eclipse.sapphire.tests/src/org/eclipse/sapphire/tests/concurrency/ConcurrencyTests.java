@@ -18,7 +18,7 @@ import junit.framework.TestSuite;
 import org.eclipse.sapphire.tests.concurrency.service.ServiceLookupConcurrencyTest;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ConcurrencyTests extends TestCase

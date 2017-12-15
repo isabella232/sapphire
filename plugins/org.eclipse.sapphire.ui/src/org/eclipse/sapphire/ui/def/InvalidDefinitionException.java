@@ -17,7 +17,7 @@ import org.eclipse.sapphire.modeling.util.NLS;
 /**
  * Thrown by DefinitionLoader when attempting to use a definition that has validation errors.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @SuppressWarnings( "serial" )

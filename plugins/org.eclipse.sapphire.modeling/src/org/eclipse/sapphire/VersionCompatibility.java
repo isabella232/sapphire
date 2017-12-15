@@ -30,7 +30,7 @@ import java.lang.annotation.Target;
  * <p><b>Applicability:</b> Properties</p>
  * <p><b>Service:</b> VersionCompatibilityService</p>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @Retention( RetentionPolicy.RUNTIME )

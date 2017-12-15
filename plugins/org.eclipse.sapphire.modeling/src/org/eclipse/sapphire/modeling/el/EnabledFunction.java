@@ -24,7 +24,7 @@ import org.eclipse.sapphire.modeling.util.NLS;
  * Determines if a property is enabled. Can be used either with two arguments (element and property name) or with
  * a single property name argument. In the single argument form, the context element is used.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class EnabledFunction extends Function

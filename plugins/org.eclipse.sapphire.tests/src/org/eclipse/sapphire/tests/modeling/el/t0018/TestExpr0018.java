@@ -25,7 +25,7 @@ import org.eclipse.sapphire.tests.modeling.el.TestExpr;
  * Tests FailSafeFunction function's handling of malformed values. Of particular interest is ability to retrieve malformed text
  * when casting to a string and proper application of model-level and fail-safe defaults.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestExpr0018 extends TestExpr

@@ -23,7 +23,7 @@ import org.eclipse.sapphire.tests.SapphireTestCase;
 /**
  * Tests behavior of ModelElementList when the list property is read-only.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestModelingMisc0008 extends SapphireTestCase

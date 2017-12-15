@@ -23,7 +23,7 @@ import org.eclipse.sapphire.modeling.xml.dtd.DtdParser;
 import org.eclipse.wst.common.uriresolver.internal.provisional.URIResolverPlugin;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @SuppressWarnings( "restriction" )

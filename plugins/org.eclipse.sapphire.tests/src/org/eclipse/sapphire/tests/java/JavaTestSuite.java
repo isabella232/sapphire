@@ -23,7 +23,7 @@ import org.eclipse.sapphire.tests.java.t0004.TestJava0004;
 import org.eclipse.sapphire.tests.java.t0005.TestJava0005;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class JavaTestSuite

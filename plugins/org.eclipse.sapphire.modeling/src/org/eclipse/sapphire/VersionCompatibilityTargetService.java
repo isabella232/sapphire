@@ -26,7 +26,7 @@ import org.eclipse.sapphire.util.HashCodeFactory;
  * element, then the parent property and the parent element, etc. The search continues until version compatibility target 
  * is found or the model root is reached.</p>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class VersionCompatibilityTargetService extends DataService<VersionCompatibilityTargetService.Data>

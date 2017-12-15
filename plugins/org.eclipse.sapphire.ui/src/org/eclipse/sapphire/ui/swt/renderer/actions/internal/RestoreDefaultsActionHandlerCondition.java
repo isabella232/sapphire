@@ -22,7 +22,7 @@ import org.eclipse.sapphire.ui.SectionPart;
 import org.eclipse.sapphire.ui.swt.renderer.actions.internal.RestoreDefaultsActionHandler.PropertyRef;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class RestoreDefaultsActionHandlerCondition extends SapphireCondition 

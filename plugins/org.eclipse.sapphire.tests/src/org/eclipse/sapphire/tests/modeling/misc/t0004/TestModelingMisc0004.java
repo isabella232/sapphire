@@ -20,7 +20,7 @@ import org.eclipse.sapphire.tests.SapphireTestCase;
  * Tests making an existing property read-only when extending from an another model element
  * interface.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestModelingMisc0004

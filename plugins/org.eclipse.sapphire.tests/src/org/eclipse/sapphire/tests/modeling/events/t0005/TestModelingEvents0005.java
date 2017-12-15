@@ -22,7 +22,7 @@ import org.eclipse.sapphire.tests.modeling.events.EventLog;
 /**
  * Tests delivery of PropertyInitializationEvent when property enablement is accessed first.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestModelingEvents0005 extends SapphireTestCase

@@ -31,7 +31,7 @@ import org.eclipse.sapphire.ui.form.editors.masterdetails.MasterDetailsContentNo
  * <p>An implementation of this service is provided with Sapphire. This service is not intended to
  * be implemented by adopters.</p>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ProblemsTraversalService extends DataService<ProblemsTraversalServiceData>

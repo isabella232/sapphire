@@ -21,7 +21,7 @@ import org.eclipse.sapphire.services.ValueLabelService;
 import org.eclipse.sapphire.services.ValueSerializationService;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class EnumValueLabelService extends ValueLabelService

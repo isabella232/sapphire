@@ -20,7 +20,7 @@ import org.eclipse.sapphire.ui.def.SectionDef;
 import org.eclipse.sapphire.ui.form.editors.masterdetails.def.internal.MasterDetailsSectionDefLabelDefaultValueProvider;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @Label( standard = "section" )

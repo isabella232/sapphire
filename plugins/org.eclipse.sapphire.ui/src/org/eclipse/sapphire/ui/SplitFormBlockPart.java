@@ -15,7 +15,7 @@ package org.eclipse.sapphire.ui;
 import org.eclipse.sapphire.ui.def.SplitFormBlockDef;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class SplitFormBlockPart extends FormPart

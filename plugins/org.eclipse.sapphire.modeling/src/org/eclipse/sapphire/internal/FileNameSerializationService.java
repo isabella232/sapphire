@@ -21,7 +21,7 @@ import org.eclipse.sapphire.services.ValueSerializationService;
 /**
  * Implementation of ValueSerializationService for FileName.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class FileNameSerializationService extends ValueSerializationService

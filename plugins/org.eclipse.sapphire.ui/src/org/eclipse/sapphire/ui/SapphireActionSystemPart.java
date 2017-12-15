@@ -36,7 +36,7 @@ import org.eclipse.sapphire.ui.def.ActionSystemPartDef;
 import org.eclipse.sapphire.ui.def.ImageReference;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  * @author <a href="mailto:gregory.amerson@liferay.com">Gregory Amerson</a>
  */
 

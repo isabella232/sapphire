@@ -23,7 +23,7 @@ import org.eclipse.sapphire.tests.SapphireTestCase;
 /**
  * Tests for XmlDelimitedListBindingImpl and DelimitedListBindingImpl. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestXmlBinding0012 extends SapphireTestCase

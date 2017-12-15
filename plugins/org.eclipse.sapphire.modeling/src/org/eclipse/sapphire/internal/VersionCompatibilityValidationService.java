@@ -25,7 +25,7 @@ import org.eclipse.sapphire.services.ValidationService;
  * An abstract implementation of ValidationService that produces a validation error when a property 
  * or an element is not compatible with the version compatibility target. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class VersionCompatibilityValidationService extends ValidationService

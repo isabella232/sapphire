@@ -21,7 +21,7 @@ import org.eclipse.sapphire.services.ImageService;
 import org.eclipse.sapphire.services.ImageServiceData;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ContactImageService extends ImageService

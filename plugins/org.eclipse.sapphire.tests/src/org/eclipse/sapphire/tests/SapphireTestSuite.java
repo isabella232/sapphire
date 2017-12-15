@@ -25,7 +25,7 @@ import org.eclipse.sapphire.tests.unique.UniqueValueTests;
 import org.eclipse.sapphire.tests.workspace.WorkspaceTestSuite;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class SapphireTestSuite extends TestCase

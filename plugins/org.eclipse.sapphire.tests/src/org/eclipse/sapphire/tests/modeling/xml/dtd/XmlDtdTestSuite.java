@@ -22,7 +22,7 @@ import org.eclipse.sapphire.tests.modeling.xml.dtd.t0004.TestEntityRefInAttList;
 import org.eclipse.sapphire.tests.modeling.xml.dtd.t0005.TestCatalogResolution;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class XmlDtdTestSuite extends TestCase

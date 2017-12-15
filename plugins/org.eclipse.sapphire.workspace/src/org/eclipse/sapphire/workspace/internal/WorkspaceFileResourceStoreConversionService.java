@@ -25,7 +25,7 @@ import org.eclipse.sapphire.workspace.WorkspaceFileResourceStore;
  * Implementation of ConversionService that is capable of converting an IFile to a WorkspaceFileResourceStore
  * or a ByteArrayResourceStore.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class WorkspaceFileResourceStoreConversionService extends ConversionService

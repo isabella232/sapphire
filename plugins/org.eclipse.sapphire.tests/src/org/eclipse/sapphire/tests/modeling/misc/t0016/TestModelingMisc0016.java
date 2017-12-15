@@ -19,7 +19,7 @@ import org.eclipse.sapphire.tests.SapphireTestCase;
 /**
  * Tests behavior of IModelElement.enabled( ModelProperty ) method for overridden properties.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestModelingMisc0016 extends SapphireTestCase

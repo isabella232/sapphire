@@ -24,7 +24,7 @@ import org.eclipse.sapphire.tests.SapphireTestCase;
 /**
  * Tests visibility of base element services in a derived element. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestServices0007 extends SapphireTestCase

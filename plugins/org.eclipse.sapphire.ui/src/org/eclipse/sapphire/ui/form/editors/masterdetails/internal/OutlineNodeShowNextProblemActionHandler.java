@@ -32,7 +32,7 @@ import org.eclipse.sapphire.ui.form.editors.masterdetails.MasterDetailsEditorPag
 import org.eclipse.sapphire.ui.form.editors.masterdetails.ProblemsTraversalService;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class OutlineNodeShowNextProblemActionHandler extends SapphireActionHandler

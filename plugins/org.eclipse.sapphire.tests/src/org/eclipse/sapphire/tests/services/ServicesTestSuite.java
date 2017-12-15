@@ -29,7 +29,7 @@ import org.eclipse.sapphire.tests.services.t0011.PreferDefaultValueTests;
 import org.eclipse.sapphire.tests.services.t0012.TestServices0012;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ServicesTestSuite extends TestCase

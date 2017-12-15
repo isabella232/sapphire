@@ -39,7 +39,7 @@ import org.eclipse.sapphire.ui.swt.gef.DiagramRenderingContext;
 import org.eclipse.sapphire.ui.swt.gef.SapphireDiagramEditor;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class DiagramEditorContextMenuProvider extends ContextMenuProvider

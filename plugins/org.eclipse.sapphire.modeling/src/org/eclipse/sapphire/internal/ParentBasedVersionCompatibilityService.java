@@ -25,7 +25,7 @@ import org.eclipse.sapphire.services.ServiceFactory;
  * Implementation of VersionCompatibilityService that derives its behavior from version compatibility of the containing
  * element's parent property.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ParentBasedVersionCompatibilityService extends VersionCompatibilityService

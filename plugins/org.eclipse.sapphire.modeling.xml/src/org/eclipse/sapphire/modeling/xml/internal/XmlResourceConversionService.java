@@ -32,7 +32,7 @@ import org.eclipse.sapphire.services.ServiceFactory;
  * or a Resource. Conversion is only performed if resource store corresponds to a file with "xml" extension or
  * if the context element type has XML binding annotations.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class XmlResourceConversionService extends ConversionService

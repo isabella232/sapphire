@@ -16,7 +16,7 @@ package org.eclipse.sapphire.services;
  * Provides means to extend the behavior of the adapt method in a given context.
  * 
  * @author <a href="mailto:gregory.amerson@liferay.com">Gregory Amerson</a>
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class AdapterService extends Service

@@ -21,7 +21,7 @@ import org.eclipse.sapphire.tests.modeling.el.TestExpr;
  * Tests VersionMatches and SapphireVersionMatches functions along with String to Version type cast and
  * String to VersionConstraint type cast.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestExpr0014 extends TestExpr
