@@ -35,7 +35,7 @@ import org.eclipse.sapphire.ui.swt.graphiti.DiagramRenderingContext;
  * Action handler for Sapphire.Drop action for the map editor. The implementation reads city names
  * from the dropped text file (one line per city name) and adds these cities to the map. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class MapDropActionHandler extends SapphireDiagramActionHandler

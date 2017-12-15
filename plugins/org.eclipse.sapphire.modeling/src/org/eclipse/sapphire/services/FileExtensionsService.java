@@ -26,7 +26,7 @@ import org.eclipse.sapphire.modeling.ModelService;
  * via @FileExtensions annotation.
  * 
  * @since 0.3.1
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class FileExtensionsService extends ModelPropertyService

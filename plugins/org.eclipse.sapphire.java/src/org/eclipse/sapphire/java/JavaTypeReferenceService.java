@@ -14,7 +14,7 @@ package org.eclipse.sapphire.java;
 import org.eclipse.sapphire.modeling.ReferenceService;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class JavaTypeReferenceService

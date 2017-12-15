@@ -12,7 +12,7 @@
 package org.eclipse.sapphire.releng;
 
 /**
- * @author <a href="konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class Operation

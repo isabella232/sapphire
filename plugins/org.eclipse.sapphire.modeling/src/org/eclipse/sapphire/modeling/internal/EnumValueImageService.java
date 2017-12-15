@@ -28,7 +28,7 @@ import org.eclipse.sapphire.modeling.annotations.Image;
 import org.eclipse.sapphire.modeling.serialization.ValueSerializationService;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class EnumValueImageService extends ValueImageService

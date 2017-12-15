@@ -21,7 +21,7 @@ import org.eclipse.sapphire.tests.java.jdt.t0003.TestJavaJdt0003;
 import org.eclipse.sapphire.tests.java.jdt.t0004.TestJavaJdt0004;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class JavaJdtTestSuite

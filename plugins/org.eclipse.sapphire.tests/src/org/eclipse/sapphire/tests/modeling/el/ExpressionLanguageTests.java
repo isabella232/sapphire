@@ -34,7 +34,7 @@ import org.eclipse.sapphire.tests.modeling.el.t0007.TestExpr0007;
 import org.eclipse.sapphire.tests.modeling.el.t0008.TestExpr0008;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ExpressionLanguageTests

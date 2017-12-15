@@ -31,7 +31,7 @@ import org.eclipse.sapphire.modeling.util.NLS;
 import org.eclipse.sapphire.modeling.xml.annotations.XmlListBinding;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class StandardXmlListBindingImpl

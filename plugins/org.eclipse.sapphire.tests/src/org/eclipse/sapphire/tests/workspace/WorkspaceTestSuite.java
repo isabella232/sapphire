@@ -18,7 +18,7 @@ import junit.framework.TestSuite;
 import org.eclipse.sapphire.tests.workspace.t0001.TestWorkspace0001;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class WorkspaceTestSuite

@@ -23,7 +23,7 @@ import org.eclipse.sapphire.ui.SapphireActionGroup;
 /**
  * Temporary class. Do not reference or otherwise use.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 /*

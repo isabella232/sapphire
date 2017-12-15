@@ -21,7 +21,7 @@ import org.eclipse.sapphire.tests.SapphireTestCase;
 /**
  * Tests the @DependsOn annotation where the dependencies are between model elements held in a list.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestModelingMisc0011 extends SapphireTestCase

@@ -25,7 +25,7 @@ import org.eclipse.sapphire.modeling.ModelPropertyService;
  * be implemented by adopters.</p>
  * 
  * @since 0.3.1
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class DependenciesAggregationService extends ModelPropertyService

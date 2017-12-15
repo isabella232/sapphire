@@ -25,7 +25,7 @@ import org.eclipse.sapphire.modeling.ModelPropertyService;
  * specified via @DependsOn annotation.
  * 
  * @since 0.3.1
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class DependenciesService extends ModelPropertyService

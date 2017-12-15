@@ -20,7 +20,7 @@ import org.eclipse.sapphire.modeling.ModelElementType;
 import org.eclipse.sapphire.modeling.annotations.Image;
 
 /**
- * @author <a href="konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class StaticImageService

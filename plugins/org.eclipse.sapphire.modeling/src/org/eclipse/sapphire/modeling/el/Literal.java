@@ -16,7 +16,7 @@ import org.eclipse.sapphire.modeling.CapitalizationType;
 /**
  * A function that always evaluates to the same value. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class Literal

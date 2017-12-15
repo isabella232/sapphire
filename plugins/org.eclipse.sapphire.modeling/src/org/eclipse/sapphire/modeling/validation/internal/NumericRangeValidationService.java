@@ -28,7 +28,7 @@ import org.eclipse.sapphire.modeling.annotations.NumericRange;
 import org.eclipse.sapphire.modeling.util.NLS;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class NumericRangeValidationService<T extends Comparable<T>>

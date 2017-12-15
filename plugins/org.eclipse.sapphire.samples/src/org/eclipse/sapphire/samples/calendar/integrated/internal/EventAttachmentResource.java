@@ -21,7 +21,7 @@ import org.eclipse.sapphire.modeling.ValueBindingImpl;
 import org.eclipse.sapphire.samples.calendar.integrated.IEventAttachment;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class EventAttachmentResource extends Resource

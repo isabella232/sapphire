@@ -25,7 +25,7 @@ import org.eclipse.sapphire.tests.modeling.xml.binding.t0007.TestXmlBinding0007;
 import org.eclipse.sapphire.tests.modeling.xml.binding.t0008.TestXmlBinding0008;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class XmlBindingTestSuite

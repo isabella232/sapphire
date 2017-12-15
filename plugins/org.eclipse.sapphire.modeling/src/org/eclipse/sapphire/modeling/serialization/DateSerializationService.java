@@ -28,7 +28,7 @@ import org.eclipse.sapphire.modeling.ModelProperty;
  * custom Date serialization needs.
  * 
  * @author <a href="marcelo.paternostro@oracle.com">Marcelo Paternostro</a>
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class DateSerializationService extends ValueSerializationService 

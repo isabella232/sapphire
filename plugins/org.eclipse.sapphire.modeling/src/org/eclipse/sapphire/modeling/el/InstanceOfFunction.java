@@ -20,7 +20,7 @@ import org.eclipse.sapphire.modeling.Value;
  * type is the second operand. The type must be a fully-qualified Java class name.
  * 
  * @since 0.3.1
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class InstanceOfFunction

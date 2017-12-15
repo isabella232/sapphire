@@ -23,7 +23,7 @@ import org.eclipse.sapphire.ui.form.editors.masterdetails.def.IMasterDetailsEdit
 import org.eclipse.sapphire.ui.form.editors.masterdetails.state.IMasterDetailsEditorPageState;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class MasterDetailsEditorPagePart

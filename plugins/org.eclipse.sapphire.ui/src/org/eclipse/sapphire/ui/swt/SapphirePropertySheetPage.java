@@ -56,7 +56,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.IPropertySheetPage;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class SapphirePropertySheetPage implements IPropertySheetPage

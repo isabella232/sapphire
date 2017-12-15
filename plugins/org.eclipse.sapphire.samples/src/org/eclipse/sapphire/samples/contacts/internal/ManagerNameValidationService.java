@@ -15,7 +15,7 @@ import org.eclipse.osgi.util.NLS;
 import org.eclipse.sapphire.modeling.Status;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ManagerNameValidationService

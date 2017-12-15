@@ -15,7 +15,7 @@ package org.eclipse.sapphire.modeling;
  * Base class for all model element services. One retrieves a service for a model
  * element by making a IModelElement.service( [type] ) call.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class ModelElementService extends ModelService

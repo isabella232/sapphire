@@ -20,7 +20,7 @@ import org.eclipse.sapphire.tests.SapphireTestCase;
  * Tests the annotation processor's case-insensitivity when looking for property getter and
  * setter methods.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class Misc0003Test
