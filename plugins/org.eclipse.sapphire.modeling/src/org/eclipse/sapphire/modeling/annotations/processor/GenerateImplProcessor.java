@@ -74,7 +74,7 @@ import com.sun.mirror.type.TypeMirror;
 import com.sun.mirror.type.VoidType;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class GenerateImplProcessor 

@@ -33,7 +33,7 @@ import org.eclipse.osgi.util.NLS;
  * the information about the cycles. It also possible to throw an exception when a cycle
  * is detected.</p>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class TopologicalSorter<T>
@@ -300,7 +300,7 @@ public class TopologicalSorter<T>
      * Represents a single object to be sorted to the sorter. Allows the before and after
      * constraints to be specified. 
      * 
-     * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+     * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
      */
 
     public static class Entity
@@ -390,7 +390,7 @@ public class TopologicalSorter<T>
     /**
      * Cycle listener that outputs cycles to the provided PrintStream.
      * 
-     * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+     * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
      */
     
     public static final class PrintStreamCycleListener extends CycleListener
@@ -413,7 +413,7 @@ public class TopologicalSorter<T>
      * Cycle listener that throws CycleException on first cycle. This will abort the sort. The 
      * thrown exception will propagate out to the caller of the sort method.
      * 
-     * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+     * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
      */
     
     public static final class ExceptionCycleListener extends CycleListener
@@ -429,7 +429,7 @@ public class TopologicalSorter<T>
      * An exception that can be thrown to signal presence of a cycle. Can be used by itself
      * or with ExceptionCycleListener.
      * 
-     * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+     * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
      */
     
     public static final class CycleException extends RuntimeException

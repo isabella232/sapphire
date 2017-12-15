@@ -16,7 +16,7 @@ import org.eclipse.sapphire.modeling.ModelElementHandle;
 /**
  * An function that pulls a property from the context. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class RootPropertyAccessFunction

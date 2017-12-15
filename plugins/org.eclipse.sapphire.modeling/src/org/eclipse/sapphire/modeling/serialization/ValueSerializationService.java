@@ -14,7 +14,7 @@ package org.eclipse.sapphire.modeling.serialization;
 import org.eclipse.sapphire.modeling.ModelPropertyService;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class ValueSerializationService

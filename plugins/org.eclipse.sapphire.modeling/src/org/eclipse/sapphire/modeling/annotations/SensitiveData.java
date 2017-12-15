@@ -20,7 +20,7 @@ import java.lang.annotation.Target;
  * Used to tag properties whose values need to be treated in a more secure manner. A typical
  * example of this is a password.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @Retention( RetentionPolicy.RUNTIME )

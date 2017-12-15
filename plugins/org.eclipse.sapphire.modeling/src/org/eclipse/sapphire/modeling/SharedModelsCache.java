@@ -32,7 +32,7 @@ import java.util.Map;
  * <p>The cache will never return a model whose resource reports that it is out of date. Models that are not
  * backed by a resource are never considered to be out of date.</p>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class SharedModelsCache

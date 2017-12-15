@@ -20,7 +20,7 @@ import org.eclipse.sapphire.modeling.ModelPropertyListener;
 /**
  * An function that pulls a property from an element. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class PropertyAccessFunction
