@@ -21,7 +21,7 @@ import org.eclipse.sapphire.modeling.xml.annotations.XmlNamespace;
 import org.eclipse.sapphire.modeling.xml.annotations.XmlNamespaces;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  * @author <a href="mailto:kamesh.sampath@accenture.com">Kamesh Sampath</a> 
  */
 

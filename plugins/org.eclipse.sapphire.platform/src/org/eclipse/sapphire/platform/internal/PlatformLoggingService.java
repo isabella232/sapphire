@@ -20,7 +20,7 @@ import org.eclipse.sapphire.platform.StatusBridge;
 /**
  * Implementation of LoggingService that writes to Eclipse platform log. 
  * 
- * @author <a href="konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class PlatformLoggingService extends LoggingService

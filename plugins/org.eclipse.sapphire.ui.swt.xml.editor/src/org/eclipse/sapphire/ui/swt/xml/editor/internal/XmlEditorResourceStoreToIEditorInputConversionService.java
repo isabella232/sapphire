@@ -18,7 +18,7 @@ import org.eclipse.ui.IEditorInput;
 /**
  * ConversionService implementation for XmlEditorResourceStore to IEditorInput conversions.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class XmlEditorResourceStoreToIEditorInputConversionService extends ConversionService<XmlEditorResourceStore,IEditorInput>

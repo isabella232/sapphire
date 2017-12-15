@@ -18,7 +18,7 @@ import org.eclipse.sapphire.ListenerContext;
 /**
  * An object reference that can be changed after creation. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class MutableReference<T>

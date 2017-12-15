@@ -18,7 +18,7 @@ import org.eclipse.sapphire.PropertyEvent;
 /**
  * Returns the enablement of a property.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class EnabledFunction extends PropertyFunction<Property>

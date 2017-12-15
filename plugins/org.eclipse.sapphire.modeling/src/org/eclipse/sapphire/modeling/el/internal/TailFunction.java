@@ -23,7 +23,7 @@ import org.eclipse.sapphire.modeling.el.FunctionResult;
  *   <li>A fragment length exceeding the length of the input is normalized to the length of the input.</li>
  * </ul>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TailFunction extends Function

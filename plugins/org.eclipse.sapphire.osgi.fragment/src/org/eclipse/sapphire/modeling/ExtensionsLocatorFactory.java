@@ -23,7 +23,7 @@ import org.osgi.framework.FrameworkUtil;
 /**
  * Locates Sapphire extensions in an OSGi system by scanning all bundles.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ExtensionsLocatorFactory extends ExtensionsLocator.Factory

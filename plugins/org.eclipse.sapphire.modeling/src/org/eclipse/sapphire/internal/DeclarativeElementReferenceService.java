@@ -24,7 +24,7 @@ import org.eclipse.sapphire.services.ServiceContext;
  * {@link org.eclipse.sapphire.services.ReferenceService} implementation that derives its behavior 
  * from @{@link ElementReference} annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class DeclarativeElementReferenceService extends ElementReferenceService

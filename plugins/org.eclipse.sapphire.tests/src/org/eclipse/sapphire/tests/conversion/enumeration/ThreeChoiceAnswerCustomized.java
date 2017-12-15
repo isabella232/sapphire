@@ -14,7 +14,7 @@ package org.eclipse.sapphire.tests.conversion.enumeration;
 import org.eclipse.sapphire.modeling.annotations.EnumSerialization;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public enum ThreeChoiceAnswerCustomized

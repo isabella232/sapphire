@@ -22,7 +22,7 @@ import org.junit.Test;
 /**
  * Tests casting between collections and strings.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestExpr0007 extends TestExpr

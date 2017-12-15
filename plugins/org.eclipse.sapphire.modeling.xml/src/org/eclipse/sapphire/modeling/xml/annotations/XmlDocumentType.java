@@ -21,7 +21,7 @@ import java.lang.annotation.Target;
  * systemId &gt; to the XML documents that uses the DTD schema for validation
  * 
  * @author <a href="mailto:kamesh.sampath@accenture.com">Kamesh Sampath</a>
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

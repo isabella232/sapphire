@@ -18,7 +18,7 @@ import org.eclipse.sapphire.modeling.el.FunctionResult;
 /**
  * Encodes text for use as XML element content or an attribute value. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class EncodeToXmlFunction extends Function

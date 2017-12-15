@@ -17,7 +17,7 @@ import java.util.List;
  * Produces the list of file extensions that are allowed for a path value property. Most frequently specified
  * via @FileExtensions annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class FileExtensionsService extends DataService<FileExtensionsServiceData>

@@ -15,7 +15,7 @@ import org.eclipse.sapphire.ui.ISapphirePart;
 import org.eclipse.sapphire.ui.SapphireCondition;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class PropertyEditorCondition extends SapphireCondition

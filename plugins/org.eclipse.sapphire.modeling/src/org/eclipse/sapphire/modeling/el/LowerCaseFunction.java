@@ -15,7 +15,7 @@ package org.eclipse.sapphire.modeling.el;
  * Converts a string to lower case. Can be used either as <nobr>LowerCase( Name )</nobr>
  * or as <nobr>Name.LowerCase()</nobr>.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class LowerCaseFunction extends Function

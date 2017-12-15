@@ -22,7 +22,7 @@ import org.eclipse.sapphire.Text;
 import org.eclipse.sapphire.samples.zipcodes.ZipCodeRepository;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class CityPossibleValuesService extends PossibleValuesService

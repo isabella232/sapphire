@@ -28,7 +28,7 @@ import org.eclipse.sapphire.services.PossibleTypesServiceData;
 /**
  * Implementation of PossibleTypesService using information specified by @Type annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class StandardPossibleTypesService extends PossibleTypesService

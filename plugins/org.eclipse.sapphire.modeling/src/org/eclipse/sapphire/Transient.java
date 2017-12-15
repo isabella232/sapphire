@@ -14,7 +14,7 @@ package org.eclipse.sapphire;
 import static org.eclipse.sapphire.modeling.util.MiscUtil.equal;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class Transient<T> extends Property

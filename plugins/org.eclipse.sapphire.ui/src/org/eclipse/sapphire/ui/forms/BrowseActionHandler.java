@@ -20,7 +20,7 @@ import org.eclipse.sapphire.modeling.EditFailedException;
 import org.eclipse.sapphire.ui.Presentation;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class BrowseActionHandler extends PropertyEditorActionHandler

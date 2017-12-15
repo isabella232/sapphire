@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * In function. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class InFunction extends Function

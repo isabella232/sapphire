@@ -21,7 +21,7 @@ import java.util.Map;
  * adding it to a model (at least not immediately). 
  * 
  * @since 8.1
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ElementData

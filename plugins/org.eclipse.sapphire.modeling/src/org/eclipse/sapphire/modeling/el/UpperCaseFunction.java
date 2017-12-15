@@ -15,7 +15,7 @@ package org.eclipse.sapphire.modeling.el;
  * Converts a string to upper case. Can be used either as <nobr>UpperCase( Name )</nobr>
  * or as <nobr>Name.UpperCase()</nobr>.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class UpperCaseFunction extends Function

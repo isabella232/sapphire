@@ -24,7 +24,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * <p>Used by {@link ListenerContext} to deliver events to listeners. A single {@link JobQueue} can be shared by multiple
  * {@link ListenerContext} instances in order to synchronize event delivery.</p>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class JobQueue<T extends Runnable>

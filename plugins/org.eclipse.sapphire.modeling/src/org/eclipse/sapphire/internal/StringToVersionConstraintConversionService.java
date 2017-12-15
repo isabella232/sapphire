@@ -17,7 +17,7 @@ import org.eclipse.sapphire.VersionConstraint;
 /**
  * ConversionService implementation for String to VersionConstraint conversions.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class StringToVersionConstraintConversionService extends ConversionService<String,VersionConstraint>

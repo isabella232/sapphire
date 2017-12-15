@@ -32,7 +32,7 @@ import org.eclipse.sapphire.services.internal.PropertyInstanceServiceContext;
 /**
  * Represents an instance of a property within an element.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class Property implements Observable

@@ -44,7 +44,7 @@ import org.eclipse.sapphire.util.ListFactory;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  * @author <a href="mailto:gregory.amerson@liferay.com">Gregory Amerson</a>
  */
 

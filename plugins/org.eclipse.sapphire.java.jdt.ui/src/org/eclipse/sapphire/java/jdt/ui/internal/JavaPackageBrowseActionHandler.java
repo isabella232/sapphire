@@ -35,7 +35,7 @@ import org.eclipse.ui.dialogs.SelectionDialog;
 
 /**
  * @author <a href="mailto:andreas.weise@agito-it.de">Andreas Weise</a>
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class JavaPackageBrowseActionHandler extends BrowseActionHandler {

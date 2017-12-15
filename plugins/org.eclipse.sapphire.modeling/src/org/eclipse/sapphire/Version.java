@@ -22,7 +22,7 @@ import org.eclipse.sapphire.util.ListFactory;
  * Represents a version as a sequence of long integers. In string format, it is represented as a dot-separated
  * list of numeric segments, such as "1.2.3" or "5.7.3.2012070310003".
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class Version implements Comparable<Version>

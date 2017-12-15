@@ -23,7 +23,7 @@ import java.lang.annotation.Target;
  * 
  * <p>A PossibleValuesService implementation is automatically provided when this annotation is used.</p>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @Retention( RetentionPolicy.RUNTIME )

@@ -37,7 +37,7 @@ import org.eclipse.sapphire.services.ServiceContext;
 /**
  * Implementation of VersionCompatibilityService that derives its behavior from @VersionCompatibility and @Since annotations.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class DeclarativeVersionCompatibilityService extends VersionCompatibilityService

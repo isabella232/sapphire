@@ -14,7 +14,7 @@ package org.eclipse.sapphire;
 /**
  * Implemented if an object must be disposed when no longer needed.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public interface Disposable

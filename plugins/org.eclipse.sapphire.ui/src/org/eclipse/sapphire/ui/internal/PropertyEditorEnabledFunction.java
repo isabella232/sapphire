@@ -29,7 +29,7 @@ import org.eclipse.sapphire.ui.forms.PropertyEditorPart;
  * Determines if the property associated with the property editor is enabled. Can only be used in the 
  * context of a property editor.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class PropertyEditorEnabledFunction extends Function

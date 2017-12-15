@@ -17,7 +17,7 @@ import org.eclipse.sapphire.services.DataService;
 /**
  * Produces a value to assign to a property when the containing model element is created.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  * @author <a href="mailto:kamesh.sampath@accenture.com">Kamesh Sampath</a>
  */
 

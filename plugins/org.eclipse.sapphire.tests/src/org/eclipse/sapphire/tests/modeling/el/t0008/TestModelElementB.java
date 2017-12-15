@@ -14,7 +14,7 @@ package org.eclipse.sapphire.tests.modeling.el.t0008;
 import org.eclipse.sapphire.ElementType;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public interface TestModelElementB extends TestModelElement

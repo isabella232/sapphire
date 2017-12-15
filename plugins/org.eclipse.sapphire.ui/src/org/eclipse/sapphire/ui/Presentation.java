@@ -18,7 +18,7 @@ import org.eclipse.sapphire.Disposable;
 import org.eclipse.sapphire.Listener;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class Presentation implements Disposable

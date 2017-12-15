@@ -14,7 +14,7 @@ package org.eclipse.sapphire;
 /**
  * Generic filter interface that can be parameterized for different element types.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public interface Filter<E>

@@ -34,7 +34,7 @@ import org.eclipse.sapphire.services.ServiceContext;
 /**
  * {@link RequiredConstraintService} implementation that derives its behavior from @{@link Required} annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class DeclarativeRequiredConstraintService extends RequiredConstraintService

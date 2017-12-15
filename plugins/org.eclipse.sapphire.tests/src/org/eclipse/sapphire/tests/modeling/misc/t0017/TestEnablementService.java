@@ -14,7 +14,7 @@ package org.eclipse.sapphire.tests.modeling.misc.t0017;
 import org.eclipse.sapphire.EnablementService;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestEnablementService extends EnablementService

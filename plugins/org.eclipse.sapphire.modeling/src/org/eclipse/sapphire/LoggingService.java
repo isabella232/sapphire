@@ -17,7 +17,7 @@ import org.eclipse.sapphire.services.Service;
 /**
  * Used to log messages and exceptions relating to system operation.
  * 
- * @author <a href="konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class LoggingService extends Service

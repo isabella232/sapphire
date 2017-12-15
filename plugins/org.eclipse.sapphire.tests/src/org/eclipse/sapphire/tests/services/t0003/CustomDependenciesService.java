@@ -16,7 +16,7 @@ import org.eclipse.sapphire.services.DependenciesService;
 import org.eclipse.sapphire.services.DependenciesServiceData;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class CustomDependenciesService extends DependenciesService

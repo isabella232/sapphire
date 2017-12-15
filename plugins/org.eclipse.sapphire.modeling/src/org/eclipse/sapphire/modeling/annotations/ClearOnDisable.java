@@ -22,7 +22,7 @@ import java.lang.annotation.Target;
  * model and persistent storage, but can make it more difficult for users to return to the
  * prior state as data is erased. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @Retention( RetentionPolicy.RUNTIME )

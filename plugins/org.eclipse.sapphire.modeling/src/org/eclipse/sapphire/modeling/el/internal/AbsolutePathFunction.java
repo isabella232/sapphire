@@ -20,7 +20,7 @@ import org.eclipse.sapphire.services.RelativePathService;
 /**
  * Returns the absolute path of a value for properties with a RelativePathService.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class AbsolutePathFunction extends PropertyFunction<Value<?>>

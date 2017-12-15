@@ -20,7 +20,7 @@ import org.eclipse.sapphire.VersionCompatibilityService;
 import org.eclipse.sapphire.VersionCompatibilityTargetService;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestVersionCompatibilityService extends VersionCompatibilityService
