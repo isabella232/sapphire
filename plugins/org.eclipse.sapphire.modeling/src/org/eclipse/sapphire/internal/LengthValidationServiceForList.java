@@ -29,7 +29,7 @@ import org.eclipse.sapphire.services.ValidationService;
  * An implementation of ValidationService that produces a validation error when a list property's item count
  * is outside of the constraints specified by the @Length annotation or the deprecated @CountConstraint annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @SuppressWarnings( "deprecation" )

@@ -20,7 +20,7 @@ import java.lang.annotation.Target;
  * Specifies how property values should be sorted and matched. If more flexibility is needed,
  * {@link CollationService} can be implemented instead.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @Retention( RetentionPolicy.RUNTIME )

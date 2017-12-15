@@ -15,7 +15,7 @@ package org.eclipse.sapphire;
  * A wrapper for a function result that allows the function caller to select between
  * getting a null or an exception if no data is returned.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class Result<T>

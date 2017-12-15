@@ -22,7 +22,7 @@ import org.eclipse.sapphire.modeling.Status;
  * Specifies the possible values for a property either statically or via a reference into the model. If more
  * flexibility is needed, {@link PossibleValuesService} can be implemented instead.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @Retention( RetentionPolicy.RUNTIME )

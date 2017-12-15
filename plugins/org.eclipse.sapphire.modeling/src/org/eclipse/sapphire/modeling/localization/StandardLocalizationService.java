@@ -21,7 +21,7 @@ import java.util.Properties;
 import org.eclipse.sapphire.modeling.CapitalizationType;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class StandardLocalizationService

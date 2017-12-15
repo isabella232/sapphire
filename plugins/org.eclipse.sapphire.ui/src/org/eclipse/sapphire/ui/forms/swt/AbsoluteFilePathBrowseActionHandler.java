@@ -30,7 +30,7 @@ import org.eclipse.sapphire.ui.forms.BrowseActionHandler;
 import org.eclipse.swt.widgets.FileDialog;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class AbsoluteFilePathBrowseActionHandler extends BrowseActionHandler

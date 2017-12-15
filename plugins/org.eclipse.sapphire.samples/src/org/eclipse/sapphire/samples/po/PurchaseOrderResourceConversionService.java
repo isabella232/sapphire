@@ -25,7 +25,7 @@ import org.eclipse.sapphire.modeling.xml.XmlResourceStore;
  * rather than "xml" and PurchaseOrder element does not have XML binding annotations. The combination of these
  * two factors prevent the framework-provided ConversionService implementations from engaging.</p>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class PurchaseOrderResourceConversionService extends ConversionService<Object,RootXmlResource>

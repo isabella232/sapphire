@@ -21,7 +21,7 @@ import org.eclipse.sapphire.samples.gallery.CustomColor;
 import org.eclipse.sapphire.samples.gallery.IGallery;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ColorPossibleValuesService extends PossibleValuesService

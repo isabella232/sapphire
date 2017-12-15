@@ -19,7 +19,7 @@ import java.lang.annotation.Target;
 /**
  * Specifies text length constraints for a value property or item count constraints for a list property.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  * @since 8.2
  */
 

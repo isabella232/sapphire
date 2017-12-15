@@ -22,7 +22,7 @@ import org.osgi.framework.Bundle;
 /**
  * Tests for DefinitionLoader.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class DefinitionLoaderTests extends SapphireTestCase

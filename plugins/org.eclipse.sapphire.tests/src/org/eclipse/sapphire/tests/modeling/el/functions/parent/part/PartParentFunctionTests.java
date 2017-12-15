@@ -25,7 +25,7 @@ import org.junit.Test;
 /**
  * Tests Parent function for parts.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class PartParentFunctionTests extends TestExpr

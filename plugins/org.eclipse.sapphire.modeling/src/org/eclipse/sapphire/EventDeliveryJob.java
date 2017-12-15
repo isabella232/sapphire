@@ -14,7 +14,7 @@ package org.eclipse.sapphire;
 /**
  * Used by {@link ListenerContext} to deliver an {@link Event} to a {@link Listener} through a {@link JobQueue}.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class EventDeliveryJob implements Runnable

@@ -29,7 +29,7 @@ import org.junit.Test;
 /**
  * Tests handling of XML Schema redefine directive.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestXmlXsd0001 extends SapphireTestCase

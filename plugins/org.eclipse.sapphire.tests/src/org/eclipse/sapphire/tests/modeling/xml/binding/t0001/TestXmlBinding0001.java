@@ -19,7 +19,7 @@ import org.junit.Test;
 /**
  * Tests detection and reporting of missing element name in @XmlElementBinding.Mapping annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestXmlBinding0001 extends SapphireTestCase
