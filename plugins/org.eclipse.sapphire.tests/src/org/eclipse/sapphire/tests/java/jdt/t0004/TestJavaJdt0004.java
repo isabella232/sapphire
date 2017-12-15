@@ -24,7 +24,7 @@ import org.junit.After;
 /**
  * Tests JavaTypeValidationService in context of JdtJavaTypeReferenceService.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestJavaJdt0004 extends TestJava0004

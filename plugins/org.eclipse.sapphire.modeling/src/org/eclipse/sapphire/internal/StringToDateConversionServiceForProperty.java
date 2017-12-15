@@ -28,7 +28,7 @@ import org.eclipse.sapphire.util.ListFactory;
 /**
  * ConversionService implementation for String to Date conversions specified at property level using @Serialization annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class StringToDateConversionServiceForProperty extends ConversionService<String,Date> 

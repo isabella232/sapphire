@@ -22,7 +22,7 @@ import org.eclipse.sapphire.modeling.LongValueKeyword;
 import org.eclipse.sapphire.modeling.ValueKeyword;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ValueProperty extends PropertyDef

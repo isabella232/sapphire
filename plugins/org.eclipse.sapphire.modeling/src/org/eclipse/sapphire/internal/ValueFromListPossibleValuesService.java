@@ -31,7 +31,7 @@ import org.eclipse.sapphire.services.ServiceContext;
  * the sole property in its type, and the element is contained by a list property, and the list property has
  * a PossibleValueService implementation in the property instance context.  
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ValueFromListPossibleValuesService extends PossibleValuesService

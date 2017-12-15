@@ -19,7 +19,7 @@ import java.lang.annotation.Target;
 /**
  * Specifies how whitespace should be handled during value normalization.
  *  
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @Retention( RetentionPolicy.RUNTIME )

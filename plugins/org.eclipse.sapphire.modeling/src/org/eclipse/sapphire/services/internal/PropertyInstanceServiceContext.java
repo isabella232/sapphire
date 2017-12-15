@@ -17,7 +17,7 @@ import org.eclipse.sapphire.ListenerContext;
 import org.eclipse.sapphire.Property;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class PropertyInstanceServiceContext extends PropertyServiceContext

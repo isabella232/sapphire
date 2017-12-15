@@ -27,7 +27,7 @@ import org.eclipse.sapphire.modeling.el.FunctionResult;
  *   <li>An end index that is smaller than the start index is normalized to the start index.</li>
  * </ul>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class FragmentFunction extends Function

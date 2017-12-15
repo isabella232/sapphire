@@ -22,7 +22,7 @@ import org.junit.Test;
 /**
  * Tests operation of FactsService implementations.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestJava0005 extends SapphireTestCase

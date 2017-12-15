@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Function that constructs a list from arbitrary number of operands. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ListFunction extends Function

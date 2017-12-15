@@ -22,7 +22,7 @@ import org.eclipse.sapphire.modeling.annotations.Service;
 import org.eclipse.sapphire.samples.uml.internal.EntityReferenceService;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public interface EntityRef extends Element

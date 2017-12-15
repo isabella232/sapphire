@@ -18,7 +18,7 @@ import org.eclipse.sapphire.ValueProperty;
 import org.eclipse.sapphire.modeling.annotations.NoDuplicates;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public interface TestNoDuplicatesChildElement extends Element

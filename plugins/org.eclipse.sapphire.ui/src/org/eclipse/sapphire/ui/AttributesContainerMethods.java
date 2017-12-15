@@ -15,7 +15,7 @@ import org.eclipse.sapphire.MasterConversionService;
 import org.eclipse.sapphire.ui.AttributesContainer.Attribute;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class AttributesContainerMethods

@@ -15,7 +15,7 @@ package org.eclipse.sapphire.ui.forms.swt.internal;
 import org.eclipse.sapphire.ui.SapphireCondition;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class HelpActionHandlerCondition extends SapphireCondition 

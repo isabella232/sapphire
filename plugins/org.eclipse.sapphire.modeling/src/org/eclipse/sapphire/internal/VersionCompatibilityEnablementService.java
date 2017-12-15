@@ -25,7 +25,7 @@ import org.eclipse.sapphire.services.EnablementServiceData;
  * Implementation of EnablementService that determines property's enablement state based on property's 
  * compatibility with the version compatibility target.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class VersionCompatibilityEnablementService extends EnablementService

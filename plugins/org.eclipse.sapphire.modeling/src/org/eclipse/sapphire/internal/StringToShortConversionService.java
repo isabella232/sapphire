@@ -16,7 +16,7 @@ import org.eclipse.sapphire.ConversionService;
 /**
  * ConversionService implementation for String to Short conversions.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class StringToShortConversionService extends ConversionService<String,Short>

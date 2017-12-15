@@ -52,7 +52,7 @@ import org.eclipse.sapphire.ui.def.ActionHandlerFilterDef;
 import org.eclipse.sapphire.util.Filter;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class DynamicContentProducer implements IHelpContentProducer

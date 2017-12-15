@@ -26,7 +26,7 @@ import org.eclipse.sapphire.ui.SapphireEditorPagePart;
  * properties wired to custom actions, as it allows any EL-enabled facility to integrate with
  * the custom state property.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class StateFunction extends Function

@@ -15,7 +15,7 @@ package org.eclipse.sapphire;
  * Thrown if a ConversionService implementation determines that a given input cannot be converted and no other
  * implementation should be tried.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class ConversionException extends RuntimeException

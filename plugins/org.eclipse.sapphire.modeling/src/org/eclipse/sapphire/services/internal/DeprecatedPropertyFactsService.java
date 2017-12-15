@@ -24,7 +24,7 @@ import org.eclipse.sapphire.services.ServiceContext;
  * Creates fact statements about property's deprecated state by using semantical information specified 
  * by @Deprecated annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class DeprecatedPropertyFactsService extends FactsService

@@ -18,7 +18,7 @@ import org.eclipse.sapphire.modeling.el.FunctionResult;
 /**
  * Tests if a string ends with the specified suffix.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class EndsWithFunction extends Function

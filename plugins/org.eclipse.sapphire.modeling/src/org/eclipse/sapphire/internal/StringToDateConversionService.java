@@ -26,7 +26,7 @@ import org.eclipse.sapphire.ConversionService;
  * ConversionService implementation for String to Date conversions.
  * 
  * @author <a href="marcelo.paternostro@oracle.com">Marcelo Paternostro</a>
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class StringToDateConversionService extends ConversionService<String,Date> 

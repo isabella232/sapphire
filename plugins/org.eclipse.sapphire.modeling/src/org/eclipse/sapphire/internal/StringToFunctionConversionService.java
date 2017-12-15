@@ -19,7 +19,7 @@ import org.eclipse.sapphire.modeling.el.parser.ExpressionLanguageParser;
 /**
  * ConversionService implementation for String to Function conversions.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class StringToFunctionConversionService extends ConversionService<String,Function>

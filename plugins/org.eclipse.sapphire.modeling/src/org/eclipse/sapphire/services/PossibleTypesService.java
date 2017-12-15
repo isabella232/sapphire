@@ -19,7 +19,7 @@ import org.eclipse.sapphire.ElementType;
  * Enumerates the possible child element types for a list or an element property. Each 
  * returned type is required to derive from the property's base type.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class PossibleTypesService extends DataService<PossibleTypesServiceData>

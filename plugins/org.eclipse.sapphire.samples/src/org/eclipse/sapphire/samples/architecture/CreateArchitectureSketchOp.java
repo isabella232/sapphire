@@ -19,7 +19,7 @@ import org.eclipse.sapphire.workspace.CreateWorkspaceFileOp;
 import org.eclipse.sapphire.workspace.WorkspaceFileType;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @WorkspaceFileType( ArchitectureSketch.class )

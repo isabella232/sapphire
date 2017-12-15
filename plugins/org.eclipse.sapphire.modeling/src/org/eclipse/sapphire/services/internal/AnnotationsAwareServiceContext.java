@@ -24,7 +24,7 @@ import org.eclipse.sapphire.util.MapFactory;
 import org.eclipse.sapphire.util.SetFactory;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  * @author <a href="mailto:rcernich@redhat.com">Rob Cernich</a>
  */
 

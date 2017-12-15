@@ -17,7 +17,7 @@ import org.eclipse.sapphire.PropertyContentEvent;
 import org.eclipse.sapphire.modeling.Status;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class ValidationService extends DataService<Status>

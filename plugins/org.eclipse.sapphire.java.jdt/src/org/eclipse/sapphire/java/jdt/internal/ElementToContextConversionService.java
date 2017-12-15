@@ -21,7 +21,7 @@ import org.eclipse.sapphire.Element;
 /**
  * ConversionService implementation for Element to Context conversions when the resource is inside a Java project.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ElementToContextConversionService extends ConversionService<Element,Context>

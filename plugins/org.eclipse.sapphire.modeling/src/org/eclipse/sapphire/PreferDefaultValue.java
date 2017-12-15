@@ -21,7 +21,7 @@ import java.lang.annotation.Target;
  * 
  * <p><b>Applicability:</b> Value Properties</p>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @Retention( RetentionPolicy.RUNTIME )

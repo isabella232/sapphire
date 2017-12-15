@@ -30,7 +30,7 @@ import org.eclipse.sapphire.ui.def.HtmlContentSourceType;
 import org.eclipse.sapphire.ui.def.internal.SapphireHtmlPanelDefSourceBinding;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @Label( standard = "HTML panel" )

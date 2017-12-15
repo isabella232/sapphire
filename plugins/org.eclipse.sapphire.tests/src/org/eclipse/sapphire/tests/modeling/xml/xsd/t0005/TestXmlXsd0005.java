@@ -34,7 +34,7 @@ import org.junit.Test;
  * Tests treatment of namespaces when including a schema. This variant covers the case where included schema
  * defines target namespace.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestXmlXsd0005 extends SapphireTestCase
