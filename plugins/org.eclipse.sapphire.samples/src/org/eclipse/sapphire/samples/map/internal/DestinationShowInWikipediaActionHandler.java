@@ -28,7 +28,7 @@ import org.eclipse.ui.browser.IWorkbenchBrowserSupport;
  * Action handler for Sapphire.Diagram.Node.Default and Sapphire.Samples.Map.Destination.ShowInWikipedia actions 
  * for destination nodes. The implementation opens a browser to the Wikipedia entry for the destination.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class DestinationShowInWikipediaActionHandler extends SapphireDiagramActionHandler

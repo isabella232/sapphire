@@ -18,7 +18,7 @@ import junit.framework.TestSuite;
 import org.eclipse.sapphire.tests.ui.def.t0001.TestUiDef0001;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class UiDefTestSuite

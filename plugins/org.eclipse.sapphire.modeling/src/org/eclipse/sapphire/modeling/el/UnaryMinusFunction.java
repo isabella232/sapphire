@@ -21,7 +21,7 @@ import org.eclipse.sapphire.modeling.util.NLS;
 /**
  * Arithmetic unary minus function. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class UnaryMinusFunction

@@ -21,7 +21,7 @@ import org.eclipse.sapphire.tests.SapphireTestCase;
 /**
  * Tests reporting of unresolvable namespace usage in value property binding.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestXmlBinding0004

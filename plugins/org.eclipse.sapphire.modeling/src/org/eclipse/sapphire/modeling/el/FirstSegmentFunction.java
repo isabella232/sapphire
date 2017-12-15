@@ -20,7 +20,7 @@ import java.util.StringTokenizer;
  * second is a sequence of characters that individually should be treated as
  * valid separators.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class FirstSegmentFunction

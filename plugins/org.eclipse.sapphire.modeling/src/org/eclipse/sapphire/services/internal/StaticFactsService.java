@@ -27,7 +27,7 @@ import org.eclipse.sapphire.services.ServiceFactory;
 /**
  * Creates fact statements about property by using static content specified in @Fact and @Facts annotations.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class StaticFactsService extends FactsService

@@ -23,7 +23,7 @@ import org.eclipse.sapphire.tests.java.jdt.JavaJdtTestCase;
 /**
  * Tests correctness of Java type kind determination of JdtJavaTypeReferenceService.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestJavaJdt0001

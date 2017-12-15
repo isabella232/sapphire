@@ -19,7 +19,7 @@ import org.eclipse.sapphire.tests.SapphireTestCase;
 /**
  * Tests overriding of delegated methods.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestModelingMisc0005

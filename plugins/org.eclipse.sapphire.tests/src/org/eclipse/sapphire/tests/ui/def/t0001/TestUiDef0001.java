@@ -27,7 +27,7 @@ import org.eclipse.sapphire.ui.form.editors.masterdetails.def.IMasterDetailsEdit
 /**
  * Tests class resolution via import statements in the Sapphire UI Definition model.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestUiDef0001

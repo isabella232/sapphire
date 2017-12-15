@@ -22,7 +22,7 @@ import org.eclipse.sapphire.tests.modeling.el.TestExpr;
 /**
  * Tests conditional operator in circumstances when evaluating unused branch would result in errors.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestExpr0004

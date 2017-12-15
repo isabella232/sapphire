@@ -27,7 +27,7 @@ import org.eclipse.sapphire.tests.modeling.el.TestExpr;
 /**
  * Tests Max function.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestExpr0013 extends TestExpr

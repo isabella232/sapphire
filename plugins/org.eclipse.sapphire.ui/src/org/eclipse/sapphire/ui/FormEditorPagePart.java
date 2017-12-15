@@ -22,7 +22,7 @@ import org.eclipse.sapphire.ui.def.FormEditorPageDef;
 import org.eclipse.sapphire.ui.def.ISapphirePartDef;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a> 
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a> 
  */
 
 public final class FormEditorPagePart extends SapphireEditorPagePart

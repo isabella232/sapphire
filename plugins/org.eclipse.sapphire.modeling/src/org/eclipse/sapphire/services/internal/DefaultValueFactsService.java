@@ -27,7 +27,7 @@ import org.eclipse.sapphire.services.ServiceFactory;
  * Creates fact statements about property's default value by using semantical information specified 
  * by DefaultValueService and @DefaultValue annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class DefaultValueFactsService extends FactsService

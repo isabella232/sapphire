@@ -26,7 +26,7 @@ import org.eclipse.sapphire.samples.calendar.AttendeeType;
 import org.eclipse.sapphire.samples.calendar.integrated.internal.AttendeeImageService;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @Service( impl = AttendeeImageService.class )

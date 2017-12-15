@@ -23,7 +23,7 @@ import org.eclipse.sapphire.tests.SapphireTestCase;
 /**
  * Tests DependenciesService and DependenciesAggregationService along with related @DependsOn and @NoDuplicates annotations.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestServices0003

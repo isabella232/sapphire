@@ -51,7 +51,7 @@ import org.eclipse.ui.services.IDisposable;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @SuppressWarnings( { "restriction", "unqualified-field-access", "unchecked" } )

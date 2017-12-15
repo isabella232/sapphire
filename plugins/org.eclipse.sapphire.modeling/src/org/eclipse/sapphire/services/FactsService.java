@@ -20,7 +20,7 @@ import java.util.List;
  * most commonly used as a way to translate machine friendly model annotations into user friendly verbal
  * statements. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class FactsService extends Service

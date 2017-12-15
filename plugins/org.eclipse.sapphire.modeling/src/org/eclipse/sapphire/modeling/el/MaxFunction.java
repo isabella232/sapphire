@@ -21,7 +21,7 @@ import java.util.List;
  * If the the collection is a model element list and the second parameter is not specified, this function
  * will use list entry's first value property for aggregation. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class MaxFunction extends AggregateFunction

@@ -23,7 +23,7 @@ import org.eclipse.sapphire.ui.form.editors.masterdetails.MasterDetailsContentOu
 import org.eclipse.sapphire.ui.form.editors.masterdetails.MasterDetailsEditorPage;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ContactDetailsJumpHandler

@@ -21,7 +21,7 @@ import java.lang.annotation.Target;
  * Defines the location of the XML Schema for a given namespace.
  * 
  * @author <a href="mailto:kamesh.sampath@accenture.com">Kamesh Sampath</a>
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @Retention( RetentionPolicy.RUNTIME )

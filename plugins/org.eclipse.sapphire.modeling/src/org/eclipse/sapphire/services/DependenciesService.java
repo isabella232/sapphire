@@ -19,7 +19,7 @@ import org.eclipse.sapphire.modeling.ModelPath;
  * Produces the set of model paths that point to parts of the model that the property depends on. Most frequently
  * specified via @DependsOn annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class DependenciesService extends DataService<DependenciesServiceData>

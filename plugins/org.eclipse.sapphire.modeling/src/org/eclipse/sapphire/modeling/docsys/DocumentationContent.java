@@ -19,7 +19,7 @@ import org.eclipse.sapphire.modeling.docsys.internal.DocumentationContentParser;
 import org.eclipse.sapphire.modeling.el.parser.internal.TokenMgrError;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class DocumentationContent

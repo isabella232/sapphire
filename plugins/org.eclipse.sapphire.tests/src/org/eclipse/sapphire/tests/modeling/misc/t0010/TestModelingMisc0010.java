@@ -20,7 +20,7 @@ import org.eclipse.sapphire.tests.SapphireTestCase;
  * Tests model element implementation generator with inner class style of type definition
  * where the inner type derives from the outer type.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestModelingMisc0010 extends SapphireTestCase

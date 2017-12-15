@@ -18,7 +18,7 @@ import org.eclipse.sapphire.modeling.IModelElement;
 /**
  * A function that returns the root of the model. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class RootElementFunction

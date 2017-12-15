@@ -21,7 +21,7 @@ import org.eclipse.sapphire.tests.services.t0003.TestServices0003;
 import org.eclipse.sapphire.tests.services.t0004.TestServices0004;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ServicesTestSuite extends TestCase

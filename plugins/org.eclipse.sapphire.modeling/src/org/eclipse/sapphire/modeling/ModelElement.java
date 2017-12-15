@@ -41,7 +41,7 @@ import org.eclipse.sapphire.services.internal.ElementInstanceServiceContext;
 import org.eclipse.sapphire.services.internal.PropertyInstanceServiceContext;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class ModelElement
