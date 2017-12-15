@@ -15,7 +15,7 @@ import org.eclipse.sapphire.Value;
 import org.eclipse.sapphire.services.ReferenceService;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class JavaTypeReferenceService extends ReferenceService<JavaType>

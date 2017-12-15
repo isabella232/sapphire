@@ -19,7 +19,7 @@ import org.w3c.dom.Document;
 /**
  * ConversionService implementation for XmlResource to DOM Document conversions.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class XmlResourceToDomDocumentConversionService extends ConversionService<XmlResource,Document>

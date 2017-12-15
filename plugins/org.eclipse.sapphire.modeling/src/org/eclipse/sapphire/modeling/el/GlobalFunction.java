@@ -16,7 +16,7 @@ import org.eclipse.sapphire.Sapphire;
 /**
  * Returns a map of global objects maintained through {@link Sapphire#global()} API.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class GlobalFunction extends Function

@@ -57,7 +57,7 @@ import org.eclipse.sapphire.util.CollectionsUtil;
 
 /**
  * @author <a href="mailto:shenxue.zhou@oracle.com">Shenxue Zhou</a>
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  * @author <a href="mailto:ling.hao@oracle.com">Ling Hao</a>
  */
 

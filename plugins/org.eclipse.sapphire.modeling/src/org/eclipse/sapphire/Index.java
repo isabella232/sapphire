@@ -28,7 +28,7 @@ import org.eclipse.sapphire.util.SetFactory;
  * 
  * <p>To create an index, use the {@link ElementList#index(ValueProperty)} method.</p>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class Index<T extends Element>

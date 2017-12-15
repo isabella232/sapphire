@@ -19,7 +19,7 @@ import org.eclipse.sapphire.ui.SapphirePart;
 /**
  * Returns the parent of the given part.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class PartParentFunction extends Function

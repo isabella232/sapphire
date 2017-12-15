@@ -16,7 +16,7 @@ import org.eclipse.sapphire.PropertyDef;
 import org.eclipse.sapphire.ui.forms.swt.PropertyEditorPresentation;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class PropertyEditorListener

@@ -23,7 +23,7 @@ import org.junit.Test;
 /**
  * Tests DependenciesService along with the related @DependsOn annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestServices0003 extends SapphireTestCase

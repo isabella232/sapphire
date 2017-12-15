@@ -15,7 +15,7 @@ import org.eclipse.sapphire.samples.map.Location;
 import org.eclipse.sapphire.samples.map.Map;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class MapMethods 

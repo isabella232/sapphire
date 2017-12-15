@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * An implementation of {@link List} that is {@link Observable} using listeners.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ObservableList<E> extends AbstractList<E> implements Observable

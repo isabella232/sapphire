@@ -22,7 +22,7 @@ import org.eclipse.sapphire.modeling.util.MiscUtil;
  * Service for value properties of type Path that enables relative path support. Typically attached to
  * the property using the @Service annotation. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class RelativePathService extends Service

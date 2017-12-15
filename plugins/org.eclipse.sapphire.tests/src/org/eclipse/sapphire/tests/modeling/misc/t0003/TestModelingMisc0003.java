@@ -18,7 +18,7 @@ import org.junit.Test;
  * Tests the annotation processor's case-insensitivity when looking for property getter and
  * setter methods.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestModelingMisc0003 extends SapphireTestCase

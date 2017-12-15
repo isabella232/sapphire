@@ -16,7 +16,7 @@ import org.eclipse.sapphire.ConversionService;
 /**
  * ConversionService implementation for Object to String conversions that uses object's toString() method.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ObjectToStringConversionService extends ConversionService<Object,String>

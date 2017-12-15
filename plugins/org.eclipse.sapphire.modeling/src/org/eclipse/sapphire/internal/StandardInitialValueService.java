@@ -32,7 +32,7 @@ import org.eclipse.sapphire.services.ServiceContext;
 /**
  * Implementation of {@link InitialValueService} that draws the initial value from @{@link InitialValue} annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  * @author <a href="mailto:kamesh.sampath@accenture.com">Kamesh Sampath</a>
  */
 

@@ -15,7 +15,7 @@ import org.eclipse.sapphire.ElementList;
 import org.eclipse.sapphire.ElementReferenceService;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ExternalElementReferenceService extends ElementReferenceService

@@ -17,7 +17,7 @@ import org.eclipse.sapphire.modeling.Status;
 /**
  * Implementation of LoggingService that writes to system error stream. 
  * 
- * @author <a href="konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class StandardLoggingService extends LoggingService

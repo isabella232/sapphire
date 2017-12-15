@@ -33,7 +33,7 @@ import org.eclipse.sapphire.services.ServiceContext;
 /**
  * Implementation of VersionCompatibilityTargetService that derives its behavior from @VersionCompatibilityTarget annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class DeclarativeVersionCompatibilityTargetService extends VersionCompatibilityTargetService

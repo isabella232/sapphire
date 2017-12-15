@@ -17,7 +17,7 @@ import org.eclipse.sapphire.Version;
 /**
  * ConversionService implementation for String to Version conversions.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class StringToVersionConversionService extends ConversionService<String,Version>

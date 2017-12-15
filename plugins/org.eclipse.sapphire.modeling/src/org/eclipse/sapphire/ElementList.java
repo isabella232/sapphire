@@ -31,7 +31,7 @@ import org.eclipse.sapphire.util.EqualsFactory;
 import org.eclipse.sapphire.util.HashCodeFactory;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ElementList<T extends Element> extends Property implements List<T>

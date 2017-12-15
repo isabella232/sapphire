@@ -21,7 +21,7 @@ import java.util.Map;
  * <p>A counter can be created and used directly or through the supplied static methods that work with a collection 
  * of global counters.</p>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class Counter

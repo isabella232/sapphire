@@ -20,7 +20,7 @@ import org.eclipse.sapphire.JobQueue;
 import org.eclipse.sapphire.services.ServiceContext;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class ElementServiceContext extends AnnotationsAwareServiceContext

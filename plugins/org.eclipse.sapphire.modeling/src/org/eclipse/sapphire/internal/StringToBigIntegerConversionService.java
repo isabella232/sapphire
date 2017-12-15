@@ -18,7 +18,7 @@ import org.eclipse.sapphire.ConversionService;
 /**
  * ConversionService implementation for String to BigInteger conversions.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class StringToBigIntegerConversionService extends ConversionService<String,BigInteger>

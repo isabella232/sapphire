@@ -31,7 +31,7 @@ import org.eclipse.sapphire.services.ServiceContext;
 /**
  * Implementation of {@link DefaultValueService} that draws the default value from @{@link DefaultValue} annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class StandardDefaultValueService extends DefaultValueService

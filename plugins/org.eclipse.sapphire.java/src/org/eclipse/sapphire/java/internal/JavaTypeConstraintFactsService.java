@@ -35,7 +35,7 @@ import org.eclipse.sapphire.services.ServiceContext;
  * Creates fact statements about Java type property's constraints by using semantical information 
  * specified by @JavaTypeConstraints annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  * @author <a href="mailto:gregory.amerson@liferay.com">Gregory Amerson</a>
  */
 

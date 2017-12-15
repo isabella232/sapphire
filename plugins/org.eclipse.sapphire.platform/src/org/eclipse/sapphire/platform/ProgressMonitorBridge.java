@@ -17,7 +17,7 @@ import org.eclipse.sapphire.modeling.ProgressMonitor;
 /**
  * Bridges between Sapphire and Eclipse progress monitor API.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ProgressMonitorBridge
