@@ -26,7 +26,7 @@ import org.eclipse.sapphire.modeling.util.DependencySorter;
 import org.eclipse.sapphire.util.ListFactory;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class ServiceContext implements Disposable

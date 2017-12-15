@@ -24,7 +24,7 @@ import org.osgi.framework.Bundle;
 /**
  * Tests resolution of Java type references in the model via StandardJavaTypeReferenceService.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestJava0003 extends SapphireTestCase

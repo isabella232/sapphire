@@ -22,7 +22,7 @@ import org.junit.Test;
 /**
  * Tests association of XML element names with model element types.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class TestXmlBinding0011f extends SapphireTestCase

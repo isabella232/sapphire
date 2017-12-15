@@ -21,7 +21,7 @@ import org.eclipse.ui.IWorkbenchPropertyPage;
 /**
  * A property page implementation that uses Sapphire to display and edit content.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class SapphirePropertyPage extends SapphirePreferencePage implements IWorkbenchPropertyPage

@@ -26,7 +26,7 @@ import org.eclipse.sapphire.samples.map.internal.MapMethods;
 /**
  * @author <a href="mailto:shenxue.zhou@oracle.com">Shenxue Zhou</a>
  * @author <a href="mailto:kamesh.sampath@accenture.com">Kamesh Sampath</a>
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 @XmlBinding( path = "map")

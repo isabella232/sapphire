@@ -23,7 +23,7 @@ import org.eclipse.ui.ide.FileStoreEditorInput;
  * ConversionService implementation for ResourceStore to File conversions via FileStoreEditorInput. Used in the
  * case where an editor is open to a file outside of the workspace.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ResourceStoreToFileConversionService extends ConversionService<ResourceStore,File>

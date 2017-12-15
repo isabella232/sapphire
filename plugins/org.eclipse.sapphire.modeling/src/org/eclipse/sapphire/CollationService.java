@@ -19,7 +19,7 @@ import org.eclipse.sapphire.services.DataService;
  * Provides a comparator that can be used for sorting or matching string values. Most frequently specified
  * via @{@link Collation} annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class CollationService extends DataService<Comparator<String>>

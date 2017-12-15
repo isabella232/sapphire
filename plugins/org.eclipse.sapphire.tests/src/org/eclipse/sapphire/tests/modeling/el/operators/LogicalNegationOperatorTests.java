@@ -16,7 +16,7 @@ import org.junit.Test;
 /**
  * Tests for the logical negation operator.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class LogicalNegationOperatorTests extends AbstractOperatorTests

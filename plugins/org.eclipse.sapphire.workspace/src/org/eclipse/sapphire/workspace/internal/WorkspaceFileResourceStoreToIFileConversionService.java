@@ -18,7 +18,7 @@ import org.eclipse.sapphire.workspace.WorkspaceFileResourceStore;
 /**
  * ConversionService implementation for WorkspaceFileResourceStore to IFile conversions.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class WorkspaceFileResourceStoreToIFileConversionService extends ConversionService<WorkspaceFileResourceStore,IFile>

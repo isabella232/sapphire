@@ -29,7 +29,7 @@ import org.eclipse.sapphire.util.ListFactory;
  * <p>This service is not intended to be implemented by adopters.</p>
  * 
  * @author <a href="mailto:gregory.amerson@liferay.com">Gregory Amerson</a>
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ListSelectionService extends Service

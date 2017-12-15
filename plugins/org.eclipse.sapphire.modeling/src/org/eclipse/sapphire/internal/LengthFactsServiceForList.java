@@ -26,7 +26,7 @@ import org.eclipse.sapphire.services.ServiceContext;
  * An implementation of FactsService that creates fact statements about a list property's item count
  * constraints by using the semantical information specified by the @Length annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class LengthFactsServiceForList extends FactsService

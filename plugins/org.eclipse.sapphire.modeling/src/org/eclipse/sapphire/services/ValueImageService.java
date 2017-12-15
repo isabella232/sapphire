@@ -16,7 +16,7 @@ import org.eclipse.sapphire.ImageData;
 /**
  * Provides the image to use when presenting a given value to the user.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class ValueImageService

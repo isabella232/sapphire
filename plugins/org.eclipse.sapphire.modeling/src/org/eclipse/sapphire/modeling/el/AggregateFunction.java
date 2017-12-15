@@ -28,7 +28,7 @@ import org.eclipse.sapphire.Text;
 import org.eclipse.sapphire.ValueProperty;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class AggregateFunction extends Function

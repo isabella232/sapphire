@@ -20,7 +20,7 @@ import org.eclipse.sapphire.modeling.xml.XmlResource;
 /**
  * ConversionService implementation for ModelElement to XmlElement conversions.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ModelElementToXmlElementConversionService extends ConversionService<ElementImpl,XmlElement>

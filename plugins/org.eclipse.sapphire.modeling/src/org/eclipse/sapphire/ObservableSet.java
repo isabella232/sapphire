@@ -19,7 +19,7 @@ import java.util.Set;
 /**
  * An implementation of {@link Set} that is {@link Observable} using listeners.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ObservableSet<E> implements Set<E>, Observable
