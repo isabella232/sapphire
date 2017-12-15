@@ -31,7 +31,7 @@ import org.eclipse.sapphire.services.ServiceContext;
  * of list member's value property. This service implementation will only activate if the list property has 
  * one possible type, and that type has a single property, and that property is a value property. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ListFromValueCollationService extends CollationService

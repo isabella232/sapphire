@@ -14,7 +14,7 @@ package org.eclipse.sapphire;
 /**
  * The event that's broadcast when the content of a property changes.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class PropertyContentEvent extends PropertyEvent

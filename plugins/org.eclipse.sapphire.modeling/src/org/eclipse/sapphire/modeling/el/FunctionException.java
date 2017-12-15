@@ -18,7 +18,7 @@ import org.eclipse.sapphire.modeling.Status;
 /**
  * Thrown if a function evaluation fails for any reason.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class FunctionException extends RuntimeException

@@ -19,7 +19,7 @@ import org.junit.Test;
 /**
  * Tests MasterConversionService and the various conversions included with Sapphire.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class EnumConversionTests extends SapphireTestCase

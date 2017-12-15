@@ -79,7 +79,7 @@ import org.eclipse.sapphire.services.ValueLabelService;
  *   <li>@Text annotation on the field</li>
  * </ol>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class LocalizableText

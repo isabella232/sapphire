@@ -44,7 +44,7 @@ import org.eclipse.ui.part.FileEditorInput;
 /**
  * @author <a href="mailto:shenxue.zhou@oracle.com">Shenxue Zhou</a>
  * @author <a href="mailto:gregory.amerson@liferay.com">Gregory Amerson</a>
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class ProjectDiagramLayoutPersistenceService extends StandardDiagramLayoutPersistenceService

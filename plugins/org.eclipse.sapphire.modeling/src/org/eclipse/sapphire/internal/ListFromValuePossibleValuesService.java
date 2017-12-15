@@ -34,7 +34,7 @@ import org.eclipse.sapphire.services.ServiceContext;
  * one possible type, and that type has a single property, and that property is a value property,
  * and that value property has a PossibleValuesService implementation in the property metamodel context. 
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ListFromValuePossibleValuesService extends PossibleValuesService

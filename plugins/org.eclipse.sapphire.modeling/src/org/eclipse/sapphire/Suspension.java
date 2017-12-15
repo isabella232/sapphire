@@ -17,7 +17,7 @@ package org.eclipse.sapphire;
  * 
  * <p>For instance, it is used when suspending event delivery from a property. See {@link Property#suspend()}.</p>
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class Suspension implements Disposable, AutoCloseable

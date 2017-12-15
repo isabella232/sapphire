@@ -29,7 +29,7 @@ import org.eclipse.sapphire.util.SetFactory;
 import org.eclipse.sapphire.util.SortedSetFactory;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public abstract class PossibleValuesService extends DataService<Set<String>>

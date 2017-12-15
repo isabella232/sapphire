@@ -19,7 +19,7 @@ import org.eclipse.sapphire.modeling.el.FunctionResult;
  * Determines whether a string matches a regular expression. The full semantics are specified by Java's
  * String.matches() function.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class MatchesFunction extends Function
