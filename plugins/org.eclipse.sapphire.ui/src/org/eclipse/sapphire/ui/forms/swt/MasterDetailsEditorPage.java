@@ -176,7 +176,7 @@ import org.eclipse.ui.progress.WorkbenchJob;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  * @author <a href="mailto:ling.hao@oracle.com">Ling Hao</a>
  * @author <a href="mailto:dmitry.karpenko@onpositive.com">Dmitry Karpenko</a>
  */

@@ -27,7 +27,7 @@ import org.eclipse.sapphire.services.ServiceContext;
  * Creates fact statements about valid file system resource type (file or folder) for property's value 
  * by using semantical information specified by @ValidFileSystemResourceType annotation.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class ValidFileSystemResourceTypeFactsService extends FactsService

@@ -23,7 +23,7 @@ import org.eclipse.sapphire.samples.gallery.internal.RectangleToStringConversion
 import org.eclipse.sapphire.samples.gallery.internal.StringToRectangleConversionService;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public interface ICustomValueGallery extends Element

@@ -31,7 +31,7 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 /**
  * A preference page implementation that uses Sapphire to display and edit content.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public class SapphirePreferencePage extends PreferencePage implements IWorkbenchPreferencePage

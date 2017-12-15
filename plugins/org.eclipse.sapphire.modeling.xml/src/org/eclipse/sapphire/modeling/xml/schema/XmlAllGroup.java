@@ -20,7 +20,7 @@ import javax.xml.namespace.QName;
 import org.w3c.dom.NodeList;
 
 /**
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  * @author <a href="mailto:ling.hao@oracle.com">Ling Hao</a>
  */
 

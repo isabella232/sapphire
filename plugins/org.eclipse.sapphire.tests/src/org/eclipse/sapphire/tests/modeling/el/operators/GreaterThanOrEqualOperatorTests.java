@@ -16,7 +16,7 @@ import org.junit.Test;
 /**
  * Tests for the greater than or equal operator.
  * 
- * @author <a href="mailto:konstantin.komissarchik@oracle.com">Konstantin Komissarchik</a>
+ * @author <a href="mailto:konstantin@komissarchik.net">Konstantin Komissarchik</a>
  */
 
 public final class GreaterThanOrEqualOperatorTests extends AbstractOperatorTests
